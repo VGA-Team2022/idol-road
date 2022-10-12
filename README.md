@@ -12,7 +12,7 @@
 ・コメントを適度に残す <br>
 ・属性(Attribute)の下に変数を定義する <br>
 
-[こちらを参考にしてください]()<br>
+[こちらを参考にしてください](https://github.com/ShinoharaRyuga/test-repository/blob/master/Assets/PlayerController.cs)<br>
 
 ## Issues・Pull requests・Mergeについて
 ・Issuesを作成したらProjectsに追加する  
