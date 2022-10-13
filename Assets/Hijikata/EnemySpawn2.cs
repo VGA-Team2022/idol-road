@@ -29,7 +29,7 @@ public class EnemySpawn2 : MonoBehaviour
         {
             if (_timeReset > _timeInterval) //_timeIntervalを超えるとInstantiateします
             {
-                Instantiate(_enemyPrefub, _spawnPosition, Quaternion.identity); //シリアライズで設定したオブジェクトの場所に出現します
+                Instantiate(_enemyPrefub, _spawnPosition, Quaternion.identity); //シリアライズで設定したX,Yの場所にだします
                 _timeReset = 0f;
             }
         }
