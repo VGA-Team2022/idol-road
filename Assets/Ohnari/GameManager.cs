@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     [Header("倒したファンをカウント")] int _killFunAmount;
     /// <summary>制限時間</summary>
-    float _countTime = 60;
+    [SerializeField] 
+    [Header("制限時間")]float _countTime = 60;
     /// <summary>倒したファンをカウントするプロパティ</summary>
     public int KillFunAmount { get => _killFunAmount; set => _killFunAmount = value; }
     /// <summary>制限時間のプロパティ</summary>
@@ -26,12 +27,6 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         _countTime -= Time.deltaTime;
