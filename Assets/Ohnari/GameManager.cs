@@ -7,13 +7,15 @@ public class GameManager : MonoBehaviour
 {
     /// <summary>ゲームマネージャーのインスタンス</summary>
     public static GameManager instance;
-    [SerializeField]
-    [Header("倒したファンをカウント")] int _killFunAmount;
+    [SerializeField, Header("倒したファンをカウント")]
+    int _killFunAmount;
     /// <summary>制限時間</summary>
-    [SerializeField] 
-    [Header("制限時間")]float _countTime = 60;
+    [SerializeField, Header("制限時間")] 
+    float _countTime = 60;
+    [SerializeField, Header("カウントダウン")]
+    Text _countDownText;
     [SerializeField]
-    [Header("カウントダウン")] Text _countDownText;
+    Button _countStartButton;
     /// <summary>ゲームを始めるか否か</summary>
     bool isStarted;
     /// <summary>倒したファンをカウントするプロパティ</summary>
@@ -37,10 +39,6 @@ public class GameManager : MonoBehaviour
             Debug.LogError($"Text{_countDownText}がないよ");
         }
         isStarted = false;
-    }
-    private void Start()
-    {
-        StartCoroutine(CountDown());
     }
     void Update()
     {
@@ -81,5 +79,9 @@ public class GameManager : MonoBehaviour
     {
         _killFunAmount += kill;
     }
-    
+    /// <summary>ボタンを押すと呼び出されるカウントダウンの機能</summary>
+    public void CountDownButton()
+    {
+        StartCoroutine(CountDown());
+    }   
 }
