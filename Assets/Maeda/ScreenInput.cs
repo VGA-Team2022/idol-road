@@ -4,21 +4,12 @@ using System.IO.Pipes;
 using UnityEngine;
 using static System.Net.Mime.MediaTypeNames;
 
+/// <summary>
+/// フリックの方向やタップかを取得できる
+/// </summary>
+
 public class ScreenInput : MonoBehaviour
 {
-    /// <summary>
-    /// フリックの方向やタップかを取得できる
-    /// </summary>
-    public enum FlickType
-    {
-        None,
-        Tap,
-        Up,
-        Down,
-        Right,
-        Left
-    }
-
     [SerializeField, Tooltip("フリックの判定に必要な操作距離")]
     Vector2 _flickMinRange = new Vector2(0f, 0f);
 
@@ -58,18 +49,17 @@ public class ScreenInput : MonoBehaviour
         //Unity上でのデバック用
         if (UnityEngine.Application.isEditor)
         {
-            //押した、もしくはスワイプした場所を保存
+            //押した場所を保存
             if (Input.GetMouseButtonDown(0))
             {
                 _StartPosition = Input.mousePosition;
-            }
+            }//スワイプした場所を保存
             else if (Input.GetMouseButton(0))
             {
                 _timer += Time.deltaTime;
                 if (_timer > _SwipeTime)
                 {
                     _StartPosition = Input.mousePosition;
-                    _timer = 0f;
                 }
             }
             //離した場所を保存
@@ -163,4 +153,14 @@ public class ScreenInput : MonoBehaviour
     {
         return _flickType;
     }
+}
+
+public enum FlickType
+{
+    None,
+    Tap,
+    Up,
+    Down,
+    Right,
+    Left
 }
