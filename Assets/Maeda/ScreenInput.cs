@@ -44,11 +44,12 @@ public class ScreenInput : MonoBehaviour
             //押した場所を保存
             if (Input.GetMouseButtonDown(0))
             {
+                ResetParameter();
                 _StartPosition = Input.mousePosition;
             }//スワイプした場所を保存
             else if (Input.GetMouseButton(0))
             {
-                    _StartPosition = Input.mousePosition;
+                 _StartPosition = Input.mousePosition;
             }
             //離した場所を保存
             else if (Input.GetMouseButtonUp(0))
@@ -73,6 +74,7 @@ public class ScreenInput : MonoBehaviour
                 {
                     //押した、もしくはスワイプした場所を保存
                     case TouchPhase.Began:
+                        ResetParameter();
                         _StartPosition = touch.position;
                         break;
                     case TouchPhase.Moved:
@@ -119,7 +121,6 @@ public class ScreenInput : MonoBehaviour
                 _flickType = FlickType.Up;
             }
             else { _flickType = FlickType.Down; }
-
         }
     }
 
