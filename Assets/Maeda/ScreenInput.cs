@@ -13,9 +13,6 @@ public class ScreenInput : MonoBehaviour
     [SerializeField, Tooltip("フリックの判定に必要な操作距離")]
     Vector2 _flickMinRange = new Vector2(0f, 0f);
 
-    [SerializeField, Tooltip("スワイプ判定に必要な時間")]
-    float _SwipeTime = 0f;
-
     /// <summary>
     /// 現在のフリック方向などを保存する
     /// </summary>
@@ -30,11 +27,6 @@ public class ScreenInput : MonoBehaviour
     /// 指を離した場所を保存する
     /// </summary>
     Vector2 _EndPosition = new Vector2();
-
-    /// <summary>
-    /// スワイプを判定するためのタイマー
-    /// </summary>
-    float _timer = 0f; 
 
     void Update()
     {
@@ -56,11 +48,7 @@ public class ScreenInput : MonoBehaviour
             }//スワイプした場所を保存
             else if (Input.GetMouseButton(0))
             {
-                _timer += Time.deltaTime;
-                if (_timer > _SwipeTime)
-                {
                     _StartPosition = Input.mousePosition;
-                }
             }
             //離した場所を保存
             else if (Input.GetMouseButtonUp(0))
@@ -88,12 +76,7 @@ public class ScreenInput : MonoBehaviour
                         _StartPosition = touch.position;
                         break;
                     case TouchPhase.Moved:
-                        _timer += Time.deltaTime;
-                        if (_timer > _SwipeTime)
-                        {
-                            _StartPosition = touch.position;
-                            _timer = 0;
-                        }
+                        _StartPosition = touch.position;
                         break;
                     //離した場所を保存
                     case TouchPhase.Ended:
@@ -146,7 +129,6 @@ public class ScreenInput : MonoBehaviour
     private void ResetParameter()
     {
         _flickType = FlickType.None;
-        _timer = 0f;
     }
 
     public FlickType GetFlickType() 

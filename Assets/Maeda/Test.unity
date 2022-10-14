@@ -421,7 +421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flickMinRange: {x: 1.5, y: 1.5}
-  _SwipeTime: 1
+  _SwipeTime: 0.3
 --- !u!4 &927386457
 Transform:
   m_ObjectHideFlags: 0
