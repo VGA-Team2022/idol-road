@@ -100,4 +100,5 @@ MonoBehaviour:
   _currentMoveMethod: 0
   _moveTime: 1
   _minScale: 0.3
-  _explosionEffect: {fileID: 5047219227802861214, guid: 5315674b013e09d4088b189a94135c4c, type: 3}
+  _anim: {fileID: 0}
+  _points: []
