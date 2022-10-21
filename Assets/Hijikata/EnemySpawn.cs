@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
-    [SerializeField, Tooltip("エネミーをいれるところ"), Header("エネミー関係")] 
-    GameObject _enemyPrefub = default;
+    [SerializeField, Tooltip("エネミーをいれるところ"), Header("エネミー関係")]
+    Enemy _enemyPrefub = default;
     [SerializeField, Tooltip("エネミーを出現させたいオブジェクトをいれるところ")]
     GameObject _positionObject = default;
-    [SerializeField, Tooltip("秒数を数える変数(リセットされる)"), Header("時間関係")] 
+    [SerializeField, Header("敵が飛んでいく軌道")]
+    Transform _trajectoryParent = default;
+    [SerializeField, Tooltip("ゲームマネジャー")]
+    GameManager _manager = default;
+    [SerializeField, Tooltip("秒数を数える変数(リセットされる)"), Header("時間関係")]
     float _timeReset = default;
-    [SerializeField, Tooltip("時間を保持しておく変数(リセットされない)")] 
+    [SerializeField, Tooltip("時間を保持しておく変数(リセットされない)")]
     float _time = default;
-    [SerializeField, Tooltip("敵を出現させたい秒数")] 
+    [SerializeField, Tooltip("敵を出現させたい秒数")]
     float _timeInterval = 5f;
-    [SerializeField, Tooltip("ゲーム終了時間")] 
+    [SerializeField, Tooltip("ゲーム終了時間")]
     float _gameFinishTime = 60f;
 
+    //===============================
     /// <summary> tureになるとエネミーが出現するようにするトリガー</summary>
     bool _onEnemy = default;
 
@@ -27,7 +32,7 @@ public class EnemySpawn : MonoBehaviour
 
     void Update()
     {
-        if( _onEnemy == true) //_onEnemyがtrueになると_timeと_timeResetが動き出し、エネミーが湧き出す
+        if (_onEnemy == true) //_onEnemyがtrueになると_timeと_timeResetが動き出し、エネミーが湧き出す
         {
             _time += Time.deltaTime;
             _timeReset += Time.deltaTime;
@@ -36,7 +41,14 @@ public class EnemySpawn : MonoBehaviour
             {
                 if (_timeReset > _timeInterval) //_timeIntervalを超えるとInstantiateします
                 {
-                    Instantiate(_enemyPrefub, _positionObject.transform); //シリアライズで設定したオブジェクトの場所に出現します
+                    if (_manager.CurrentEnemy == null)
+                    {
+                        var enemy = Instantiate(_enemyPrefub, _positionObject.transform); //シリアライズで設定したオブジェクトの場所に出現します
+                        enemy.SetDeadMovePoints(_trajectoryParent);
+                        enemy.AddScore += _manager.KillFun;
+                        _manager.CurrentEnemy = enemy;
+                    }
+
                     _timeReset = 0f;
                 }
             }
