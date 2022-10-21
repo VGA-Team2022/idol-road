@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO.Pipes;
 using UnityEngine;
-using static System.Net.Mime.MediaTypeNames;
+using UnityEngine.UI;
+//using static System.Net.Mime.MediaTypeNames;
 
 /// <summary>
 /// フリックの方向やタップかを取得できる
@@ -12,6 +13,17 @@ public class ScreenInput : MonoBehaviour
 {
     [SerializeField, Tooltip("フリックの判定に必要な操作距離")]
     Vector2 _flickMinRange = new Vector2(0f, 0f);
+
+
+    //勝手に追加
+    //==========================================
+    [SerializeField, Tooltip("audioManager")]
+    SEPlay _sePlay = default;
+    [SerializeField, Tooltip("入力方向を表示するテキスト")]
+    Text _inputText = default;
+    [SerializeField]
+    GameManager _manager = default;
+    //==========================================
 
     /// <summary>
     /// 現在のフリック方向などを保存する
@@ -122,6 +134,16 @@ public class ScreenInput : MonoBehaviour
             }
             else { _flickType = FlickType.Down; }
         }
+
+
+        //勝手に追加
+        if (_manager.CurrentEnemy != null)
+        {
+            _manager.CurrentEnemy.Dead();
+            _sePlay.SEShot(_flickType);
+        }
+       
+        _inputText.text = _flickType.ToString();
     }
 
     /// <summary>

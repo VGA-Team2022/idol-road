@@ -152,7 +152,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &374696537
 GameObject:
@@ -250,7 +250,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 374696537}
+      - m_Target: {fileID: 1420166011}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -447,7 +447,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &619394800
 GameObject:
@@ -558,7 +558,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &835745708
 GameObject:
@@ -589,12 +589,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300609633802189499a4afb059d88918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefub: {fileID: 2191516788519411594, guid: 7dce787b874e28c42a95de84a4442560, type: 3}
+  _enemyPrefub: {fileID: 5968483811882916908, guid: f6d9bfa37d3f5d3439d216c6a0aee987, type: 3}
   _positionObject: {fileID: 1068782016}
   _timeReset: 0
   _time: 0
-  _timeInterval: 5
+  _timeInterval: 1
   _gameFinishTime: 60
+  _trajectoryParent: {fileID: 5039499519867245985, guid: bc1a3faa40214fa4f9ea5edd3e343288, type: 3}
+  _enemy: {fileID: 1060883709, guid: f6d9bfa37d3f5d3439d216c6a0aee987, type: 3}
+  _manager: {fileID: 1301732963}
 --- !u!4 &835745710
 Transform:
   m_ObjectHideFlags: 0
@@ -608,7 +611,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &952340072
 GameObject:
@@ -719,7 +722,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1094142624
 GameObject:
@@ -801,6 +804,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094142624}
   m_CullTransparentMesh: 1
+--- !u!1001 &1121794472
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5039499519867245984, guid: bc1a3faa40214fa4f9ea5edd3e343288, type: 3}
+      propertyPath: m_Name
+      value: DeadEnemyTrajectory
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039499519867245985, guid: bc1a3faa40214fa4f9ea5edd3e343288, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039499519867245985, guid: bc1a3faa40214fa4f9ea5edd3e343288, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039499519867245985, guid: bc1a3faa40214fa4f9ea5edd3e343288, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039499519867245985, guid: bc1a3faa40214fa4f9ea5edd3e343288, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039499519867245985, guid: bc1a3faa40214fa4f9ea5edd3e343288, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039499519867245985, guid: bc1a3faa40214fa4f9ea5edd3e343288, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039499519867245985, guid: bc1a3faa40214fa4f9ea5edd3e343288, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039499519867245985, guid: bc1a3faa40214fa4f9ea5edd3e343288, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039499519867245985, guid: bc1a3faa40214fa4f9ea5edd3e343288, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039499519867245985, guid: bc1a3faa40214fa4f9ea5edd3e343288, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039499519867245985, guid: bc1a3faa40214fa4f9ea5edd3e343288, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bc1a3faa40214fa4f9ea5edd3e343288, type: 3}
 --- !u!1 &1301732962
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,6 +894,7 @@ MonoBehaviour:
   _countTime: 60
   _countDownText: {fileID: 952340074}
   _countStartButton: {fileID: 0}
+  _funCountText: {fileID: 1943650893}
 --- !u!4 &1301732964
 Transform:
   m_ObjectHideFlags: 0
@@ -847,7 +908,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1399403663
 GameObject:
@@ -1037,18 +1098,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1301732963}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: CountDownButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1420166014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1153,7 +1202,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1819196324
 GameObject:
@@ -1253,7 +1302,7 @@ RectTransform:
   - {fileID: 374696538}
   - {fileID: 1943650892}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1383,7 +1432,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1917276897
 MonoBehaviour:
@@ -1398,8 +1447,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flickMinRange: {x: 0, y: 0}
-  _se: {fileID: 1861607329}
-  _text: {fileID: 1399403665}
+  _sePlay: {fileID: 1861607329}
+  _inputText: {fileID: 1399403665}
+  _manager: {fileID: 1301732963}
 --- !u!1 &1943650891
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,19 +1544,19 @@ PrefabInstance:
     - target: {fileID: 6479025330276086632, guid: b9f18d18cce7959429b428c5b25b8ea3, type: 3}
       propertyPath: _seClips.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 3c21a17d5e251fd49b12e8fe1b6696ed, type: 3}
+      objectReference: {fileID: 8300000, guid: c0cfd31530c9ebd48a6973add5101c98, type: 3}
     - target: {fileID: 6479025330276086632, guid: b9f18d18cce7959429b428c5b25b8ea3, type: 3}
       propertyPath: _seClips.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: 484f4c93ca598794fb2e3608454442d5, type: 3}
+      objectReference: {fileID: 8300000, guid: ea8b0aaef5b9522438bc69975542eaae, type: 3}
     - target: {fileID: 6479025330276086632, guid: b9f18d18cce7959429b428c5b25b8ea3, type: 3}
       propertyPath: _seClips.Array.data[2]
       value: 
-      objectReference: {fileID: 8300000, guid: b39adcd8a403c8a4c94b198541c9473e, type: 3}
+      objectReference: {fileID: 8300000, guid: 28bac05b1e599a944b50747aec002338, type: 3}
     - target: {fileID: 6479025330276086632, guid: b9f18d18cce7959429b428c5b25b8ea3, type: 3}
       propertyPath: _seClips.Array.data[3]
       value: 
-      objectReference: {fileID: 8300000, guid: ea74a2a697401eb469514f3d7af37120, type: 3}
+      objectReference: {fileID: 8300000, guid: d4d2517e08d548f4ba628a30ac7e1df6, type: 3}
     - target: {fileID: 6479025330276086633, guid: b9f18d18cce7959429b428c5b25b8ea3, type: 3}
       propertyPath: m_RootOrder
       value: 4

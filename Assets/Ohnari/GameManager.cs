@@ -14,14 +14,19 @@ public class GameManager : MonoBehaviour
     float _countTime = 60;
     [SerializeField, Header("カウントダウン")]
     Text _countDownText;
-    [SerializeField]
-    Button _countStartButton;
+    [SerializeField, Header("倒した敵を表示するテキスト")]
+    Text _funCountText;
+    /// <summary>現在対象の敵 </summary>
+    Enemy _currentEnemy = default;
     /// <summary>ゲームを始めるか否か</summary>
     bool isStarted;
     /// <summary>倒したファンをカウントするプロパティ</summary>
     public int KillFunAmount { get => _killFunAmount; set => _killFunAmount = value; }
     /// <summary>制限時間のプロパティ</summary>
     public float CountTime { get => _countTime; set => _countTime = value; }
+    /// <summary>現在対象の敵 </summary>
+    public Enemy CurrentEnemy { get => _currentEnemy; set => _currentEnemy = value; }
+
     private void Awake()
     {
         //シーン遷移してもオブジェクトが破壊されないようにする。
@@ -49,9 +54,7 @@ public class GameManager : MonoBehaviour
             {
                 _countTime = 0;
             }
-            Debug.Log("ゲームが始まった");
         }
-        
     }
     /// <summary>カウントダウンコルーチン</summary>
     private IEnumerator CountDown()
@@ -78,6 +81,7 @@ public class GameManager : MonoBehaviour
     public void KillFun(int kill)
     {
         _killFunAmount += kill;
+        _funCountText.text = _killFunAmount.ToString();
     }
     /// <summary>ボタンを押すと呼び出されるカウントダウンの機能</summary>
     public void CountDownButton()
