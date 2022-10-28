@@ -16,6 +16,10 @@ public class GameManager : MonoBehaviour
     Text _countDownText;
     [SerializeField, Header("倒した敵を表示するテキスト")]
     Text _funCountText;
+
+    [SerializeField]
+    StageScroller _stageScroller = default;
+
     /// <summary>現在対象の敵 </summary>
     Enemy _currentEnemy = default;
     /// <summary>ゲームを始めるか否か</summary>
@@ -26,6 +30,7 @@ public class GameManager : MonoBehaviour
     public float CountTime { get => _countTime; set => _countTime = value; }
     /// <summary>現在対象の敵 </summary>
     public Enemy CurrentEnemy { get => _currentEnemy; set => _currentEnemy = value; }
+    public StageScroller Scroller { get => _stageScroller;  }
 
     private void Awake()
     {
@@ -82,6 +87,7 @@ public class GameManager : MonoBehaviour
     {
         _killFunAmount += kill;
         _funCountText.text = _killFunAmount.ToString();
+        Debug.Log("hit");
     }
     /// <summary>ボタンを押すと呼び出されるカウントダウンの機能</summary>
     public void CountDownButton()

@@ -22,12 +22,20 @@ public class Enemy : MonoBehaviour
     Vector3[] _deadMovePoints = default;
     /// <summary>スコアを増やすAction </summary>
     event Action<int> _addScore = default;
+    /// <summary>倒されたらステージスクロールを開始する </summary>
+    event Action _stageScroll = default;
 
     /// <summary>スコアを増やすAction </summary>
     public event Action<int> AddScore
     {
         add { _addScore += value; }
         remove { _addScore -= value; }
+    }
+
+    public event Action StageScroll
+    {
+        add {_stageScroll += value; }
+        remove { _stageScroll -= value; }
     }
 
     private void Update()
@@ -52,13 +60,20 @@ public class Enemy : MonoBehaviour
         {
             transform.DOJump(_deadMovePoints[_deadMovePoints.Length - 1], jumpPower: 1f, numJumps: 1, duration: _moveTime)
                 .SetDelay(EXPLOSION_DELAY)
+                .OnComplete(() => _addScore.Invoke(_addScoreValue))
                 .OnComplete(() => Destroy(gameObject));
         }
 
         //大きさ調整
-        transform.DOScale(new Vector3(_minScale, _minScale, _minScale),_moveTime)
+        transform.DOScale(new Vector3(_minScale, _minScale, _minScale), _moveTime)
             .SetDelay(EXPLOSION_DELAY)
-            .OnComplete(() => _addScore.Invoke(_addScoreValue));
+            .OnComplete(() => _stageScroll?.Invoke());
+
+        //回転
+        transform.DOLocalRotate(new Vector3(0, 0, 360f), 0.1f, RotateMode.FastBeyond360)
+            .SetDelay(EXPLOSION_DELAY)
+            .SetEase(Ease.Linear)
+            .SetLoops(-1, LoopType.Restart);
     }
 
     /// <summary>倒された時の処理 </summary>
