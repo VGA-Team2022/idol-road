@@ -14,6 +14,7 @@
 ・属性(Attribute)の下に変数を定義する <br>
 
 [こちらを参考にしてください](https://github.com/ShinoharaRyuga/test-repository/blob/master/Assets/PlayerController.cs)<br>
+[クラス図](https://drive.google.com/drive/u/0/folders/1O4vFe9TOdMstvEsSIDMWFox7GTb-Nw73)
 
 ## Issues・Pull requests・Mergeについて
 ・Issuesを作成したらProjectsに追加する  
