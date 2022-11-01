@@ -1,8 +1,9 @@
 # このリポジトリについて
 ## 企画書・仕様書・スケジュール
 [企画書](https://drive.google.com/file/d/14G4DWLP3txkfoHvntm0dhb7QqjufA5uG/view) <br>
-[仕様書]() <br>
-[スケジュール]() <br>
+[仕様書概要](https://docs.google.com/spreadsheets/d/1wML1Vh02129pDP05RoIM4TkOHNcf2uz_/edit#gid=808293660) <br>
+[仕様書](https://docs.google.com/spreadsheets/d/1FAagF6nKZKZE3hG78oxwmmTXFhUbjzq6/edit#gid=280938392) <br>
+[α版スケジュール](https://docs.google.com/presentation/d/1ow_-hXHRjGXJRUTUF8pRT9znLzuYwnjh/edit#slide=id.p9) <br>
 
 ## 命名規則・コーディング規約
 ・メンバー変数はアンダーバー( _ )をつけて小文字から始める <br>
