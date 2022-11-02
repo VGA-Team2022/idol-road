@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _duration: 1
-  _jumpPower: 2.5
+  _jumpPower: 3
   _liveTime: 3
 --- !u!212 &7703148911629082944
 SpriteRenderer:

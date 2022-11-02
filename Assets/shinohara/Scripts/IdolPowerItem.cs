@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using DG.Tweening;
 
@@ -11,12 +12,23 @@ public class IdolPowerItem : MonoBehaviour
     [SerializeField, Header("表示時間")]
     float _liveTime = 3f;
 
+    event Action _scrollStart = default;
+
+    public event Action ScrollStart
+    {
+        add { _scrollStart += value; }
+        remove { _scrollStart += value; }
+    }
+
     /// <summary>移動処理 </summary>
     /// <param name="targetPoint">到着位置</param>
-    public void Move(Vector3 targetPoint)
+    /// /// <param name="scrollStart">移動処理が終了したらスクロールさせる</param>
+    public void Move(Vector3 targetPoint, Action scrollStart)
     {
         transform.DOJump(targetPoint, jumpPower: _jumpPower, numJumps: 1, duration: _duration)
-            .OnComplete(() => Destroy(gameObject, _liveTime));
+            .OnComplete(() => scrollStart.Invoke());
+
+        Destroy(gameObject, _liveTime);
     }
 
     //TODO:アイテム効果の追加
