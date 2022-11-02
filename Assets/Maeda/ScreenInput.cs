@@ -136,8 +136,8 @@ public class ScreenInput : MonoBehaviour
         }
 
 
-        //Ÿè‚É’Ç‰Á
-        if (_manager.CurrentEnemy != null)
+        //ƒ^ƒbƒv‚Ì‚Í”ò‚Î‚È‚¢
+        if (_manager.CurrentEnemy != null || _flickType != FlickType.Tap)
         {
             _manager.CurrentEnemy.Dead();
             _sePlay.SEShot(_flickType);
