@@ -44,7 +44,8 @@ public class GameManager : MonoBehaviour
     public StageScroller Scroller { get => _stageScroller;  }
     /// <summary>ゲームフラグのプロパティ</summary>
     public bool GameEnd { get => _gameEnd; set => _gameEnd = value; }
-
+    /// <summary>アイドルタイムフラグのプロパティ</summary>
+    public bool IsIdleTime { get => _isIdleTime; }
     private void Awake()
     {
         if(_countDownText ==null)
