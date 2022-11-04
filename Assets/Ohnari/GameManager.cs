@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
-    /// <summary>ゲームマネージャーのインスタンス</summary>
-    public static GameManager instance;
     [SerializeField, Header("倒したファンをカウント")]
     int _killFunAmount;
+    [SerializeField, Header("アイドルパワー")]
+    int _idlePower;
+    [SerializeField, Header("Maxアイドルパワー")]
+    int _maxIdlePower = 100;
+    [SerializeField, Header("アイドルのHp")]
+    int _idleHp;
+    [SerializeField, Header("アイドルのMaxHp")]
+    int _maxIdleHp;
     /// <summary>制限時間</summary>
     [SerializeField, Header("制限時間")] 
     float _countTime = 60;
@@ -16,43 +23,46 @@ public class GameManager : MonoBehaviour
     Text _countDownText;
     [SerializeField, Header("倒した敵を表示するテキスト")]
     Text _funCountText;
-
     [SerializeField]
     StageScroller _stageScroller = default;
-
     /// <summary>現在対象の敵 </summary>
     Enemy _currentEnemy = default;
     /// <summary>ゲームを始めるか否か</summary>
-    bool isStarted;
+    bool _isStarted;
+    /// <summary>アイドルタイムの判定をするBool型</summary>
+    bool _isIdleTime;
+    /// <summary>ゲームが終わったか否か</summary>
+    bool _isGameEnd;
+    /// <summary>ゲームが終わったか否か</summary>
+    bool _gameEnd;
     /// <summary>倒したファンをカウントするプロパティ</summary>
     public int KillFunAmount { get => _killFunAmount; set => _killFunAmount = value; }
     /// <summary>制限時間のプロパティ</summary>
     public float CountTime { get => _countTime; set => _countTime = value; }
-    /// <summary>現在対象の敵 </summary>
+    /// <summary>現在対象の敵</summary>
     public Enemy CurrentEnemy { get => _currentEnemy; set => _currentEnemy = value; }
     public StageScroller Scroller { get => _stageScroller;  }
-
+    /// <summary>ゲームフラグのプロパティ</summary>
+    public bool GameEnd { get => _gameEnd; set => _gameEnd = value; }
+    /// <summary>アイドルタイムフラグのプロパティ</summary>
+    public bool IsIdleTime { get => _isIdleTime; }
     private void Awake()
     {
-        //シーン遷移してもオブジェクトが破壊されないようにする。
-        if(instance ==null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
         if(_countDownText ==null)
         {
             Debug.LogError($"Text{_countDownText}がないよ");
-        }
-        isStarted = false;
+        }        
+    }
+    private void Start()
+    {
+        _isStarted = false;
+        _isIdleTime = false;
+        _gameEnd = false;
+        _idleHp = _maxIdlePower;
     }
     void Update()
     {
-        if(isStarted)
+        if(_isStarted)
         {
             _countTime -= Time.deltaTime;
             if (_countTime <= 0)
@@ -77,7 +87,7 @@ public class GameManager : MonoBehaviour
                 _countDownText.text = "Start!";
                 yield return new WaitForSeconds(1.0f);
                 _countDownText.gameObject.SetActive(false);
-                isStarted = true;
+                _isStarted = true;
             }
             yield return null;
         }
@@ -94,4 +104,22 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(CountDown());
     }   
+    /// <summary>アイドルパワーが増加する関数</summary>
+    public void IncreseIdlePower(int power)
+    {
+        _idlePower += power;
+    }
+    /// <summary>アイドルタイムを判断するための関数</summary>
+    public void IdleTime()
+    {
+        if(_idlePower<_maxIdlePower)
+        {
+            _isIdleTime = false;
+        }
+        else if(_idlePower>=_maxIdlePower)
+        {
+            _isIdleTime = true;
+            _idlePower = 0;
+        }    
+    }
 }
