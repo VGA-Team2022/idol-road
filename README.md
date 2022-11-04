@@ -1,8 +1,10 @@
 # このリポジトリについて
 ## 企画書・仕様書・スケジュール
 [企画書](https://drive.google.com/file/d/14G4DWLP3txkfoHvntm0dhb7QqjufA5uG/view) <br>
-[仕様書]() <br>
-[スケジュール]() <br>
+[仕様書概要](https://docs.google.com/spreadsheets/d/1wML1Vh02129pDP05RoIM4TkOHNcf2uz_/edit#gid=808293660) <br>
+[仕様書](https://docs.google.com/spreadsheets/d/1FAagF6nKZKZE3hG78oxwmmTXFhUbjzq6/edit#gid=280938392) <br>
+[α版スケジュール](https://docs.google.com/presentation/d/1ow_-hXHRjGXJRUTUF8pRT9znLzuYwnjh/edit#slide=id.p9) <br>
+[10月 30日 議事録](https://docs.google.com/document/d/1bWFCfdCLvmpM6Y0Qf6VshojMl8w7Dh6n/edit)
 
 ## 命名規則・コーディング規約
 ・メンバー変数はアンダーバー( _ )をつけて小文字から始める <br>
@@ -13,11 +15,12 @@
 ・属性(Attribute)の下に変数を定義する <br>
 
 [こちらを参考にしてください](https://github.com/ShinoharaRyuga/test-repository/blob/master/Assets/PlayerController.cs)<br>
+[クラス図](https://drive.google.com/drive/u/0/folders/1O4vFe9TOdMstvEsSIDMWFox7GTb-Nw73)
 
 ## Issues・Pull requests・Mergeについて
 ・Issuesを作成したらProjectsに追加する  
 ・Margeは基本的に篠原が行います。（Pull requestsまでで大丈夫です）<br>
-・作業を開始する前に必ずdevelopブランチからプルをしてください。（現在は**proto_develop**ブランチからプルをする）<br>
+・作業を開始する前に必ずdevelopブランチからプルをしてください。<br>
 ・Issueのcloseに関しては篠原が担当するので基本的にはcloseしないでください。（Issueの作成はしてもらって大丈夫です）<br>
 ・Pull requests作成時にPull requests, commits, Issuesをひとまとまりにする　↓以下画像 イメージ
 

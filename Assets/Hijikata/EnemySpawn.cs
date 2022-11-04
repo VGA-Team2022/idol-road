@@ -21,7 +21,6 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField, Tooltip("ゲーム終了時間")]
     float _gameFinishTime = 60f;
 
-    //===============================
     /// <summary> tureになるとエネミーが出現するようにするトリガー</summary>
     bool _onEnemy = default;
 
@@ -46,7 +45,9 @@ public class EnemySpawn : MonoBehaviour
                         var enemy = Instantiate(_enemyPrefub, _positionObject.transform); //シリアライズで設定したオブジェクトの場所に出現します
                         enemy.SetDeadMovePoints(_trajectoryParent);
                         enemy.AddScore += _manager.KillFun;
+                        enemy.StageScroll += _manager.Scroller.ScrollOperation;
                         _manager.CurrentEnemy = enemy;
+                        _manager.Scroller.ScrollOperation();
                     }
 
                     _timeReset = 0f;
