@@ -13,6 +13,7 @@ public class NormalEnemy : MonoBehaviour
 
     /// <summary>とりあえずボタンで判定確認できるようにするもの</summary>
     bool _knockDownEnemy;
+    bool _flickJudge;
 
     Rigidbody _rb;
     void Start()
@@ -21,10 +22,12 @@ public class NormalEnemy : MonoBehaviour
         _rb.AddForce(_enemySpped);　//ファンを前に動かす（仮）
 
         _knockDownEnemy = false;
+        _flickJudge = true;
     }
     /// <summary> リズム判定するもの</summary>
     void Update()
     {
+        FlickNum();
         if(_knockDownEnemy) 
         {
             _time -= Time.deltaTime;
@@ -47,6 +50,18 @@ public class NormalEnemy : MonoBehaviour
         }
     }
 
+    private void FlickNum()
+    {
+        if(_flickJudge)
+        {
+            for (int i = 0; i < 1; i++)
+            {
+                FlickType _num = (FlickType)Random.Range(2, 5);
+                Debug.Log(_num);
+            }
+            _flickJudge = false;
+        }
+    }
     public void DebugOnBottom()
     {
         _knockDownEnemy = true;
