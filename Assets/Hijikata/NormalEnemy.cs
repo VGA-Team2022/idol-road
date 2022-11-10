@@ -6,16 +6,20 @@ public class NormalEnemy : MonoBehaviour
 {
     [SerializeField, Tooltip("ファンが動く方向"),Header("ファン関係")]
     Vector3 _enemySpped;
+    [SerializeField, Tooltip("ファンサを要求する数")]
+    int _fansaNum = 1;
     [SerializeField, Tooltip("リズム判定をするための時間(デバッグ用)"), Header("リズム関係")]
     float _time = default;
     [SerializeField, Tooltip("リズム判定の秒数")]
     float _perfect, _good, _bad , _out;
+
 
     /// <summary>とりあえずボタンで判定確認できるようにするもの</summary>
     bool _knockDownEnemy;
     bool _flickJudge;
 
     Rigidbody _rb;
+    List<FlickType> _flickType = new List<FlickType>();
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -54,10 +58,10 @@ public class NormalEnemy : MonoBehaviour
     {
         if(_flickJudge)
         {
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < _fansaNum; i++)　//壁のファンとかのために念のためfor文で何回もとれるように設定(仮)
             {
-                FlickType _num = (FlickType)Random.Range(2, 5);
-                Debug.Log(_num);
+                _flickType.Add((FlickType)Random.Range(2, 5)); //ScreenInputで参照する予定
+                Debug.Log(_flickType[i]);
             }
             _flickJudge = false;
         }
