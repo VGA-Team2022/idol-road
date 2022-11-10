@@ -4,18 +4,10 @@ using UnityEngine;
 
 public class ResultManager 
 {
-    private static ResultManager _instance;
-    public ResultManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new ResultManager();
-            }
-            return _instance;
-        }
-    }
+    private static ResultManager _instance = new ResultManager();
+    public static ResultManager Instance => _instance;
+        
+    
 
     //アクションを成功度別に格納
     private int _countBad;
