@@ -25,6 +25,8 @@ public class ScreenInput : MonoBehaviour
     GameManager _manager = default;
     [SerializeField]
     ResultManager _resultManager = default;
+    [SerializeField]
+    SuperIdolTime _superIdolTime = default;
     //==========================================
 
     /// <summary>
@@ -148,6 +150,7 @@ public class ScreenInput : MonoBehaviour
         if (_manager.IsIdleTime == true && _flickType == FlickType.Tap)
         {
             _resultManager.CountGreat++;
+            _superIdolTime.GaugeCount++;
         }
 
         _inputText.text = _flickType.ToString();
