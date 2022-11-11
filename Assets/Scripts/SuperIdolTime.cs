@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 
 
@@ -12,6 +13,8 @@ public class SuperIdolTime : MonoBehaviour
     [SerializeField]
     private int _gaugeCountMax = 10;
     [SerializeField]
+    private float _gaugePlusTime = 0.5f;
+    [SerializeField]
     private Image _imageGauge = default;
     [SerializeField]
     private GameManager _manager = default;
@@ -20,6 +23,7 @@ public class SuperIdolTime : MonoBehaviour
     private int _gaugeCount = 0;
     /// <summary></summary>
     private float _gaugeLength = 0;
+    
 
     /// <summary>ゲージの最大値</summary>
     public int GaugeCountMax
@@ -37,7 +41,10 @@ public class SuperIdolTime : MonoBehaviour
             _gaugeCount = value;
             _gaugeLength = (float)_gaugeCount / _gaugeCountMax;
             if (_imageGauge != null) {
-                _imageGauge.fillAmount = _gaugeLength;
+                //ネットで調べて参考にした、ゲージの値をなめらかに変える処理
+                var sequence = DOTween.Sequence();
+                sequence.Append(_imageGauge.DOFillAmount(_gaugeLength, _gaugePlusTime));
+                //GaugeAdvance(_gaugeLength);
             }
             if(_gaugeLength > 1)
             {
@@ -57,12 +64,22 @@ public class SuperIdolTime : MonoBehaviour
     void Update()
     {
         //デバッグ用
-        //if (Input.GetButtonDown("Fire1"))
-        //{
-        //    GaugeCount++;
-        //}
+        if (Input.GetButtonDown("Fire1"))
+        {
+            GaugeCount++;
+        }
     }
-    
+    /// <summary>
+    /// 鈴木先生のサンプルを参照した、ゲージの値をなめらかに変える関数
+    /// </summary>
+    /// <param name="value"></param>
+    void GaugeAdvance(float value)
+    {
+        DOTween.To(() => _imageGauge.fillAmount,
+            x => _imageGauge.fillAmount = x,
+            value,
+            _gaugePlusTime);
+    }
     public void EndSuperIdolTime()
     {
 
