@@ -13,9 +13,10 @@ public class ItemGenerator : MonoBehaviour
     Transform _itemParentObj = default;
     [SerializeField, Header("生成元プレハブ")] 
     IdolPowerItem _itemPrefab = default;
-
+    [SerializeField, Header("ゲームマネージャー")]
+    GameManager _gameManager = default;
     /// <summary>生成されたアイテム </summary>
-    IdolPowerItem _generateItme = default;
+    IdolPowerItem _generateItem = default;
     float _time = 0f;
     /// <summary>生成をするかどうか </summary>
     bool _isGenerate = false;
@@ -41,20 +42,21 @@ public class ItemGenerator : MonoBehaviour
         
         if (direction == GenerateDirection.Right)
         {
-            _generateItme = Instantiate(_itemPrefab, _rightPoints[0].position, Quaternion.identity);
-            _generateItme.Move(_rightPoints[1].position, SetItemParent);
+            _generateItem = Instantiate(_itemPrefab, _rightPoints[0].position, Quaternion.identity);
+            _generateItem.GameManager = _gameManager;
+            _generateItem.Move(_rightPoints[1].position, SetItemParent);
         }
         else 
         {
-            _generateItme = Instantiate(_itemPrefab, _leftPoints[0].position, Quaternion.identity);
-            _generateItme.Move(_leftPoints[1].position, SetItemParent);
+            _generateItem = Instantiate(_itemPrefab, _leftPoints[0].position, Quaternion.identity);
+            _generateItem.Move(_leftPoints[1].position, SetItemParent);
         }
     }
 
     /// <summary>アイテムをスクロールさせるためにステージの子オブジェクトにする </summary>
     void SetItemParent()
     {
-        _generateItme.transform.SetParent(_itemParentObj, true);
+        _generateItem.transform.SetParent(_itemParentObj, true);
     }
 
     /// <summary>ジェネレーターを起動、停止させる関数 </summary>

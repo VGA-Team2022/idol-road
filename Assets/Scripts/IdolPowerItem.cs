@@ -5,15 +5,21 @@ using DG.Tweening;
 /// <summary>アイドルパワーを増減させるアイテムのクラス</summary>
 public class IdolPowerItem : MonoBehaviour
 {
+    [SerializeField, Header("アイテム取得時に増減する値")]
+    int _getAmount = 0;
     [SerializeField, Header("移動にかかる時間")]
     float _duration = 2f;
     [SerializeField, Header("軌道の高さ")]
     float _jumpPower = 4f;
     [SerializeField, Header("表示時間")]
     float _liveTime = 3f;
-
+    private GameManager _gameManager;
     event Action _scrollStart = default;
-
+    /// <summary>ゲームマネージャーのプロパティ</summary>
+    public GameManager GameManager { get => _gameManager; set => _gameManager = value; }
+    private void Start()
+    {
+    }
     public event Action ScrollStart
     {
         add { _scrollStart += value; }
@@ -32,4 +38,9 @@ public class IdolPowerItem : MonoBehaviour
     }
 
     //TODO:アイテム効果の追加
+    /// <summary>アイテム取得時</summary>
+    public void GetItem()
+    {
+        _gameManager.IdlePower += _getAmount;
+    }
 }
