@@ -15,6 +15,8 @@ public class IdolPowerItem : MonoBehaviour
     float _liveTime = 3f;
     private GameManager _gameManager;
     event Action _scrollStart = default;
+    /// <summary>ゲームマネージャーのプロパティ</summary>
+    public GameManager GameManager { get => _gameManager; set => _gameManager = value; }
     private void Start()
     {
     }
@@ -39,7 +41,6 @@ public class IdolPowerItem : MonoBehaviour
     /// <summary>アイテム取得時</summary>
     public void GetItem()
     {
-        _gameManager = new GameManager();
         _gameManager.IdlePower += _getAmount;
     }
 }
