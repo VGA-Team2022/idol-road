@@ -32,8 +32,6 @@ public class GameManager : MonoBehaviour
     /// <summary>アイドルタイムの判定をするBool型</summary>
     bool _isIdleTime;
     /// <summary>ゲームが終わったか否か</summary>
-    bool _isGameEnd;
-    /// <summary>ゲームが終わったか否か</summary>
     bool _gameEnd;
     /// <summary>倒したファンをカウントするプロパティ</summary>
     public int KillFunAmount { get => _killFunAmount; set => _killFunAmount = value; }
