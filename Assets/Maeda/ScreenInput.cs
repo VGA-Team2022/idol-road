@@ -144,9 +144,10 @@ public class ScreenInput : MonoBehaviour
             _manager.CurrentEnemy.Dead();
             _sePlay.SEShot(_flickType);
         }
-        if (_manager.IsIdleTime == true && _flickType == FlickType.Tap)
-        {  
 
+        if (_manager.IsIdleTime == true && _flickType == FlickType.Tap)
+        {
+            _resultManager.CountGreat++;
         }
 
         _inputText.text = _flickType.ToString();

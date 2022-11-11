@@ -18,4 +18,8 @@ public class SuperIdolTime : MonoBehaviour
         
     }
     
+    public void EndSuperIdolTime()
+    {
+
+    }
 }
