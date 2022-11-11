@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerObj: {fileID: 341819834}
-  _scrollSpeed: 0.01
+  _scrollSpeed: 0.02
 --- !u!65 &341819839
 BoxCollider:
   m_ObjectHideFlags: 0
