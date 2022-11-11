@@ -3297,7 +3297,7 @@ MonoBehaviour:
   _manager: {fileID: 1891141608}
   _timeReset: 0
   _time: 0
-  _timeInterval: 7
+  _timeInterval: 7.68
   _gameFinishTime: 180
 --- !u!4 &173030987
 Transform:
@@ -5854,7 +5854,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1873700274}
+      - m_Target: {fileID: 732586854}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: PlayAndStopSound
         m_Mode: 1
@@ -8050,6 +8050,10 @@ MonoBehaviour:
     acbFile: CueSheet_test.acb
     awbFile: CueSheet_test.awb
     loaderStatus: 0
+  - name: CueSheet_IDOL_1104
+    acbFile: CueSheet_IDOL_1104.acb
+    awbFile: CueSheet_IDOL_1104.awb
+    loaderStatus: 0
   dspBusSetting: 
   dontDestroyOnLoad: 0
   dontRemoveExistsCueSheet: 0
@@ -8066,6 +8070,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1227974289}
+  - {fileID: 732586853}
   - {fileID: 1873700273}
   m_Father: {fileID: 0}
   m_RootOrder: 24
@@ -14878,6 +14883,84 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &732586852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 732586853}
+  - component: {fileID: 732586855}
+  - component: {fileID: 732586854}
+  m_Layer: 0
+  m_Name: Click_BPM125(CriAtomSource)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &732586853
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732586852}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 383246032}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &732586854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732586852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8d9910608a72c4fa7271ded3514709, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &732586855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732586852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _freezeOrientation: 0
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
+  _use3dRandomization: 0
+  _randomPositionListMaxLength: 0
+  randomize3dConfig:
+    followsOriginalSource: 0
+    calculationType: 0
+    calculationParameters:
+    - 0
+    - 0
+    - 0
+  _cueName: Click_BPM125
+  _cueSheet: CueSheet_IDOL_1104
 --- !u!1 &736450863
 GameObject:
   m_ObjectHideFlags: 0
@@ -40563,7 +40646,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 383246032}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1873700274
 MonoBehaviour:
@@ -40898,7 +40981,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 16, y: 400}
-  m_SizeDelta: {x: 400, y: 50}
+  m_SizeDelta: {x: 450, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1890192325
 MonoBehaviour:
@@ -40920,7 +41003,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30D5\u30A1\u30F3\u751F\u6210\u9593\u9694 7\u79D2"
+  m_text: "\u30D5\u30A1\u30F3\u751F\u6210\u9593\u9694 7.68\u79D2"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ca71834d2e88f144ebe94776cd543204, type: 2}
   m_sharedMaterial: {fileID: 9142180944433247935, guid: ca71834d2e88f144ebe94776cd543204, type: 2}
@@ -41027,6 +41110,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _killFunAmount: 0
+  _idlePower: 0
+  _maxIdlePower: 100
+  _idleHp: 0
+  _maxIdleHp: 0
   _countTime: 60
   _countDownText: {fileID: 1295911097}
   _funCountText: {fileID: 1366405485}
@@ -45275,7 +45362,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BPM 135
+  m_text: BPM 125
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
