@@ -37,6 +37,10 @@ public class GameManager : MonoBehaviour
     bool _gameEnd;
     /// <summary>倒したファンをカウントするプロパティ</summary>
     public int KillFunAmount { get => _killFunAmount; set => _killFunAmount = value; }
+    /// <summary>アイドルパワーのプロパティ</summary>
+    public int IdlePower { get => _idlePower; set => _idlePower = value; }
+    /// <summary>アイドルMaxPowerのプロパティ</summary>
+    public int MaxIdleHp { get => _maxIdleHp; set => _maxIdleHp = value; }
     /// <summary>制限時間のプロパティ</summary>
     public float CountTime { get => _countTime; set => _countTime = value; }
     /// <summary>現在対象の敵</summary>
@@ -58,7 +62,7 @@ public class GameManager : MonoBehaviour
         _isStarted = false;
         _isIdleTime = false;
         _gameEnd = false;
-        _idleHp = _maxIdlePower;
+        _idleHp = _maxIdleHp;
     }
     void Update()
     {

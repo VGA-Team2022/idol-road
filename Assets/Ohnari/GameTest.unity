@@ -153,8 +153,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _killFunAmount: 0
+  _idlePower: 0
+  _maxIdlePower: 100
+  _idleHp: 0
+  _maxIdleHp: 0
   _countTime: 60
   _countDownText: {fileID: 529704698}
+  _funCountText: {fileID: 0}
+  _stageScroller: {fileID: 0}
 --- !u!4 &259808728
 Transform:
   m_ObjectHideFlags: 0
