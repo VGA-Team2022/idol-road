@@ -7,30 +7,66 @@ using UnityEngine;
 /// </summary>
 public class PlayerMotion : MonoBehaviour
 {
-    /// <summary>PlayerControllerの変数 </summary>
-    PlayerController controller;
+    [SerializeField , Tooltip("アイドルのモーション絵")]
+    Sprite[] _sprites;
 
-    /// <summary> PlayerControllerでシリアライズした値を格納させるための変数</summary>
-    float _newScroolSpeed ;
+    [SerializeField, Tooltip("モーションを続ける時間")]
+    float _motionTime = 3;
+
+    [SerializeField , Tooltip("入力を送ってくれる")]
+    private ScreenInput _screenInput;
+
+    private SpriteRenderer _spriteRenderer;
+
+    private FlickType _flickType = FlickType.None;
+
+    private bool _gameStop = false;
+
+    private float _timer = 0;
 
     void Start()
     {
-        // アサインされてるプレイヤースクリプトを持ってくる（PlayerController.csを動かすのに必須)
-        controller = GetComponent<PlayerController>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
-        // PlayerControllerにシリアライズした値を格納。
-        _newScroolSpeed = controller.ScrollSpeed;
+    private void Update()
+    {
+        if (_gameStop) { return; }
+
+        FlickType flickType = _screenInput.GetFlickType();
+
+        if (_flickType != flickType && flickType != FlickType.None && flickType != FlickType.Tap)
+        {
+            int index = (int)flickType;
+
+            //indexが合わないかも
+            _spriteRenderer.sprite = _sprites[index];
+
+            _flickType = flickType;
+
+            _timer = 0;
+        }
+        else if(_flickType != FlickType.None)
+        {
+            _timer += Time.deltaTime;
+            if (_timer > _motionTime) 
+            {
+                _flickType = FlickType.None;
+                _spriteRenderer.sprite = _sprites[0];
+                _timer = 0;
+            }
+        }
     }
 
     // 動きを止めたい時にこの関数を外部に持ってこれるようにメソッド構築
     public void StopMotion()
     {
-        controller.ScrollSpeed = 0;
+        _gameStop = true;
     }
 
     // 動きを再開たい時にこの関数を外部に持ってこれるようにメソッド構築
     public void ResumeMotion()
     {
-        controller.ScrollSpeed = _newScroolSpeed;
+        _gameStop = false;
     }
 }
