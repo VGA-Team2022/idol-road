@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using UnityEngine;
+using System.Collections.Generic;
 
 /// <summary>エネミーを管理するクラス </summary>
 public class Enemy : MonoBehaviour
@@ -10,6 +11,8 @@ public class Enemy : MonoBehaviour
 
     [SerializeField, Header("現在の移動方法")]
     MoveMethod _currentMoveMethod = MoveMethod.Path;
+    [SerializeField, Tooltip("ファンサを要求する数")]
+    int _fansaNum = 1;
     [SerializeField, Header("倒した時のスコア")]
     int _addScoreValue = 1;
     [SerializeField, Header("移動にかかる時間"), Range(0.1f, 10f)]
@@ -20,6 +23,7 @@ public class Enemy : MonoBehaviour
     GameObject _explosionEffect = default;
     /// <summary>倒された時の吹き飛ぶ軌道を構成するポイントの配列 </summary>
     Vector3[] _deadMovePoints = default;
+    public FlickType _flickTypeEnemy;
     /// <summary>スコアを増やすAction </summary>
     event Action<int> _addScore = default;
     /// <summary>倒されたらステージスクロールを開始する </summary>
@@ -37,7 +41,6 @@ public class Enemy : MonoBehaviour
         add {_stageScroll += value; }
         remove { _stageScroll -= value; }
     }
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.D))
@@ -93,6 +96,11 @@ public class Enemy : MonoBehaviour
         {
             _deadMovePoints[i] = pointParent.GetChild(i).position;
         }
+    }
+    public void FlickNum()
+    {
+        var rnd = new System.Random();
+        _flickTypeEnemy = (FlickType)rnd.Next(2, 5); //ScreenInputで参照する予定
     }
 
     /// <summary>移動方法 </summary>

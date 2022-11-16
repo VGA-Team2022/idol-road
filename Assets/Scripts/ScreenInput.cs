@@ -143,8 +143,13 @@ public class ScreenInput : MonoBehaviour
         //ƒ^ƒbƒv‚ÌŽž‚Í”ò‚Î‚È‚¢
         if (_manager.CurrentEnemy != null && _flickType != FlickType.Tap)
         {
-            _manager.CurrentEnemy.Dead();
-            _sePlay.SEShot(_flickType);
+            FlickJuge();
+            Debug.Log(_manager.CurrentEnemy._flickTypeEnemy);
+            if(_flickType == _manager.CurrentEnemy._flickTypeEnemy)
+            {
+                _manager.CurrentEnemy.Dead();
+                _sePlay.SEShot(_flickType);
+            }
         }
 
         if (_manager.IsIdleTime == true && _flickType == FlickType.Tap)
@@ -167,6 +172,11 @@ public class ScreenInput : MonoBehaviour
     public FlickType GetFlickType() 
     {
         return _flickType;
+    }
+
+    public void FlickJuge()
+    {
+        _manager.CurrentEnemy.FlickNum();
     }
 }
 
