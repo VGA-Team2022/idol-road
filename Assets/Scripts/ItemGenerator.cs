@@ -32,7 +32,7 @@ public class ItemGenerator : MonoBehaviour
                 Generate();
                 _time = 0f;
             }
-        }
+        }    
     }
 
     /// <summary>ƒAƒCƒeƒ€‚ğ¶¬‚·‚é </summary>
