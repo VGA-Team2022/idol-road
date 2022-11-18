@@ -176,10 +176,10 @@ public class ScreenInput : MonoBehaviour
 
 public enum FlickType
 {
-    None,
-    Tap,
-    Up,
-    Down,
-    Right,
-    Left
+    None = 0,
+    Up = 1,
+    Down = 2,
+    Right = 3,
+    Left = 4,
+    Tap = 5
 }
