@@ -12,10 +12,30 @@ public class SuperIdolTime : MonoBehaviour
     /// <summary>スーパーアイドルタイム中のゲージがマックスになるまでの回数</summary>
     [SerializeField]
     private int _gaugeCountMax = 10;
+    /// <summary>スーパーアイドルタイムの持続時間</summary>
+    [SerializeField]
+    private float _timeEndSuperIdolTime = 15;
+    /// <summary>スーパーアイドルタイムの経過時間</summary>
+    [SerializeField]
+    private float _elapsed = 0;
+    /// <summary>一タップで溜まるゲージの変化にかかる時間</summary>
     [SerializeField]
     private float _gaugePlusTime = 0.5f;
     [SerializeField]
+    private float _imageLange = 5.62f;
+    /// <summary>時間が過ぎているかの判定</summary>
+    [SerializeField]
+    private bool _isGaugeMax = false;
+    /// <summary>ゲージが溜まりきっているかの判定</summary>
+    [SerializeField]
+    private bool _isTimeMax = false;
+    [SerializeField,Tooltip("ゲージの画像")]
     private Image _imageGauge = default;
+    [SerializeField, Tooltip("爆発の画像")]
+    private Image _imageExplosion = default;
+    [SerializeField]
+    private GameObject _gaugeObject = default;
+    /// <summary> ゲームマネージャー</summary>
     [SerializeField]
     private GameManager _manager = default;
 
@@ -32,7 +52,7 @@ public class SuperIdolTime : MonoBehaviour
         set => _gaugeCountMax = value;
     }
 
-    /// <summary>！！！ScreenInputクラスで呼び出すこと！！！</summary>
+    /// <summary>ゲージを増加させる</summary>
     public int GaugeCount
     {
         get => _gaugeCount;
@@ -49,6 +69,7 @@ public class SuperIdolTime : MonoBehaviour
             if(_gaugeLength > 1)
             {
                 _gaugeLength = 1;
+                _isGaugeMax = true;
                 //Debug.Log("Full");
             }
             //Debug.Log($"max:{_gaugeCountMax},count:{_gaugeCount},gauge:{_gaugeLength}");
@@ -57,7 +78,7 @@ public class SuperIdolTime : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -68,7 +89,25 @@ public class SuperIdolTime : MonoBehaviour
         {
             GaugeCount++;
         }
+        if(_isGaugeMax && _isTimeMax)
+        {
+            EndSuperIdolTime();
+            _isGaugeMax= false;
+            _gaugeCount = 0;
+        }
     }
+
+    private void FixedUpdate()
+    {
+        _elapsed += Time.deltaTime;
+        if(_elapsed > _timeEndSuperIdolTime)
+        {
+            _isTimeMax = true;
+            Debug.Log("終了");
+        }
+        Debug.Log($"{(int)_elapsed}秒");
+    }
+
     /// <summary>
     /// 鈴木先生のサンプルを参照した、ゲージの値をなめらかに変える関数
     /// </summary>
@@ -82,6 +121,10 @@ public class SuperIdolTime : MonoBehaviour
     }
     public void EndSuperIdolTime()
     {
-
+        var sequence = DOTween.Sequence();
+        sequence.Append(_imageExplosion.transform.DOScale(new Vector3(_imageLange, _imageLange, _imageLange), 0.5f))
+                .Append(_imageExplosion.transform.DOScale(Vector3.zero, 1f));
+        Debug.Log("bakuhatu");
+        _gaugeObject.SetActive(false);
     }
 }
