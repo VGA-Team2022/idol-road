@@ -29,10 +29,10 @@ public class GameManager : MonoBehaviour
     Text _funCountText;
     [SerializeField]
     StageScroller _stageScroller = default;
-    [SerializeField]
-    Image [] _illustChange = default;
-    [SerializeField, Header("表示させるキャンバス")]
-    Canvas _canvas;
+    [SerializeField,Header("キャラが透明になっていく経過を管理するクラス")]
+    FadeColor _fadeColor;
+    [SerializeField,Header("コンボが続いたときに表示させるSprite")]
+    GameObject _comboSpriteChara = default;
     /// <summary>現在対象の敵 </summary>
     Enemy _currentEnemy = default;
     /// <summary>ゲームを始めるか否か</summary>
@@ -150,10 +150,7 @@ public class GameManager : MonoBehaviour
     /// <summary>イラストを表示させる関数</summary>
     public void IllustDisPlay()
     {
-        int i = UnityEngine.Random.Range(0, _illustChange.Length);
-        int x = UnityEngine.Random.Range(-400, 400);
-        int y = UnityEngine.Random.Range(-200, 190);
-        Image obj = Instantiate(_illustChange[i], new Vector2(x, y), Quaternion.identity);
-        obj.transform.SetParent(_canvas.transform, false);
+        GameObject obj = Instantiate(_comboSpriteChara, transform);
+        Destroy(obj, _fadeColor.Span);
     }
 }
