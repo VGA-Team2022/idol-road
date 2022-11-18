@@ -16,8 +16,12 @@ public class EnemySpawn : MonoBehaviour
     float _timeReset = default;
     [SerializeField, Tooltip("時間を保持しておく変数(リセットされない)")]
     float _time = default;
+    [SerializeField, Header("最初の敵を生成するまで遅れ")]
+    float _firstDelayTime = 7f;
+    [SerializeField, Header("各生成のオフセット")]
+    float _generateOffset = default;
     [SerializeField, Tooltip("敵を出現させたい秒数")]
-    float _timeInterval = 5f;
+    float _timeInterval = 1f;
     [SerializeField, Tooltip("ゲーム終了時間")]
     float _gameFinishTime = 60f;
 
@@ -27,6 +31,7 @@ public class EnemySpawn : MonoBehaviour
     private void Start()
     {
         _onEnemy = false;　//エネミーが最初から湧き出さないためにbool型の変数を使い、出現を管理する。
+        _time += _firstDelayTime;
     }
 
     void Update()
@@ -50,7 +55,7 @@ public class EnemySpawn : MonoBehaviour
                         _manager.Scroller.ScrollOperation();
                     }
 
-                    _timeReset = 0f;
+                    _timeReset = 0 + _generateOffset;
                 }
             }
         }
