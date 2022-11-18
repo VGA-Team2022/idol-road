@@ -16,22 +16,17 @@ public class NormalEnemy : MonoBehaviour
 
     /// <summary>とりあえずボタンで判定確認できるようにするもの</summary>
     bool _knockDownEnemy;
-    bool _flickJudge;
 
     Rigidbody _rb;
-    List<FlickType> _flickType = new List<FlickType>();
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _rb.AddForce(_enemySpped);　//ファンを前に動かす（仮）
-
         _knockDownEnemy = false;
-        _flickJudge = true;
     }
     /// <summary> リズム判定するもの</summary>
     void Update()
     {
-        FlickNum();
         if(_knockDownEnemy) 
         {
             _time -= Time.deltaTime;
@@ -51,19 +46,6 @@ public class NormalEnemy : MonoBehaviour
             {
                 Debug.Log($"bad { _time:F1}");
             }
-        }
-    }
-
-    private void FlickNum()
-    {
-        if(_flickJudge)
-        {
-            for (int i = 0; i < _fansaNum; i++)　//壁のファンとかのために念のためfor文で何回もとれるように設定(仮)
-            {
-                _flickType.Add((FlickType)Random.Range(2, 5)); //ScreenInputで参照する予定
-                Debug.Log(_flickType[i]);
-            }
-            _flickJudge = false;
         }
     }
     public void DebugOnBottom()

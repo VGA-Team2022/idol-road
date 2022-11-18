@@ -143,8 +143,12 @@ public class ScreenInput : MonoBehaviour
         //タップの時は飛ばない
         if (_manager.CurrentEnemy != null && _flickType != FlickType.Tap)
         {
-            _manager.CurrentEnemy.Dead();
-            _sePlay.SEShot(_flickType);
+            if(_flickType == _manager.CurrentEnemy._flickTypeEnemy) ///フリックした方向がファンサと同様なら吹っ飛ぶ
+            {
+                _manager.CurrentEnemy.JugeTime();//飛んだときの秒数と判定を決めるもの
+                _manager.CurrentEnemy.Dead();
+                _sePlay.SEShot(_flickType);
+            }
         }
 
         if (_manager.IsIdleTime == true && _flickType == FlickType.Tap)

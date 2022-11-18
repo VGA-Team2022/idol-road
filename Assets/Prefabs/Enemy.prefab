@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5968483811882916910}
   - component: {fileID: 5968483811882916911}
   - component: {fileID: 1060883709}
+  - component: {fileID: 336802384846892835}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -98,7 +99,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentMoveMethod: 0
+  _enemySpped: {x: 0, y: 0, z: -10}
+  _fansaNum: 1
+  _time: 4
+  _perfect: 0.5
+  _good: 2
+  _bad: 4
+  _out: 0
   _addScoreValue: 1
   _moveTime: 1
   _minScale: 0.1
   _explosionEffect: {fileID: 5047219227802861214, guid: 5315674b013e09d4088b189a94135c4c, type: 3}
+  _flickTypeEnemy: 0
+--- !u!54 &336802384846892835
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5968483811882916908}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
