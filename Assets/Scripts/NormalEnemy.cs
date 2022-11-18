@@ -18,12 +18,10 @@ public class NormalEnemy : MonoBehaviour
     bool _knockDownEnemy;
 
     Rigidbody _rb;
-    List<FlickType> _flickType = new List<FlickType>();
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _rb.AddForce(_enemySpped);　//ファンを前に動かす（仮）
-
         _knockDownEnemy = false;
     }
     /// <summary> リズム判定するもの</summary>

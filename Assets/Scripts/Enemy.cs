@@ -11,8 +11,14 @@ public class Enemy : MonoBehaviour
 
     [SerializeField, Header("現在の移動方法")]
     MoveMethod _currentMoveMethod = MoveMethod.Path;
+    [SerializeField, Tooltip("ファンが動く方向"), Header("ファン関係")]
+    Vector3 _enemySpped;
     [SerializeField, Tooltip("ファンサを要求する数")]
     int _fansaNum = 1;
+    [SerializeField, Tooltip("リズム判定をするための時間(デバッグ用)"), Header("リズム関係")]
+    float _time = default;
+    [SerializeField, Tooltip("リズム判定の秒数")]
+    float _perfect, _good, _bad, _out;
     [SerializeField, Header("倒した時のスコア")]
     int _addScoreValue = 1;
     [SerializeField, Header("移動にかかる時間"), Range(0.1f, 10f)]
@@ -28,6 +34,8 @@ public class Enemy : MonoBehaviour
     event Action<int> _addScore = default;
     /// <summary>倒されたらステージスクロールを開始する </summary>
     event Action _stageScroll = default;
+    Rigidbody _rb;
+
 
     /// <summary>スコアを増やすAction </summary>
     public event Action<int> AddScore
@@ -41,12 +49,22 @@ public class Enemy : MonoBehaviour
         add {_stageScroll += value; }
         remove { _stageScroll -= value; }
     }
+    private void Start()
+    {
+        for(int i = 0; i < _fansaNum; i++)
+        {
+            FlickNum(); //ランダムでフリック方向を取得する
+        }
+        _rb = GetComponent<Rigidbody>();
+        _rb.AddForce(_enemySpped);　//ファンを前に動かす（仮)
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.D))
         {
             Dead();
         }
+        _time -= Time.deltaTime;// リズム判定用
     }
 
     /// <summary> 吹き飛ぶ演出（移動） </summary>
@@ -97,10 +115,33 @@ public class Enemy : MonoBehaviour
             _deadMovePoints[i] = pointParent.GetChild(i).position;
         }
     }
+    /// <summary>Flickする方向をランダムに取得する</summary>
     public void FlickNum()
     {
         var rnd = new System.Random();
-        _flickTypeEnemy = (FlickType)rnd.Next(2, 5); //ScreenInputで参照する予定
+        _flickTypeEnemy = (FlickType)rnd.Next(2, 5);
+        Debug.Log(_flickTypeEnemy);
+    }
+
+    /// <summary>リズム判定用</summary>
+    public void JugeTime()
+    {
+        if (_time <= _out)
+        {
+            Debug.Log("out");
+        }
+        else if (_time <= _perfect)
+        {
+            Debug.Log($"perfect { _time:F1}");
+        }
+        else if (_time <= _good)
+        {
+            Debug.Log($"good { _time:F1}");
+        }
+        else if (_time <= _bad)
+        {
+            Debug.Log($"bad { _time:F1}");
+        }
     }
 
     /// <summary>移動方法 </summary>
