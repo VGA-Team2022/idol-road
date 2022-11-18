@@ -540,7 +540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e75af4f5526a15468c908588f33c0c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: Proto_Bg
+  _sceneName: "\u03B1GameScene"
 --- !u!61 &393602315
 BoxCollider2D:
   m_ObjectHideFlags: 0
