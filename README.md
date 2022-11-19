@@ -21,7 +21,8 @@
 ・Issuesを作成したらProjectsに追加する  
 ・Margeは基本的に篠原が行います。（Pull requestsまでで大丈夫です）<br>
 ・作業を開始する前に必ずdevelopブランチからプルをしてください。<br>
-・Issueのcloseに関しては篠原が担当するので基本的にはcloseしないでください。（Issueの作成はしてもらって大丈夫です）<br>
+・Issueのcloseに関しては篠原が担当するので基本的にはcloseしないでください。<br>
+（Issueの作成はしてもらって大丈夫です）<br>
 ・Pull requests作成時にPull requests, commits, Issuesをひとまとまりにする　↓以下画像 イメージ
 
 ![githubイメージ画像](https://user-images.githubusercontent.com/86392648/178971064-3bb6d023-1e97-45d7-83ba-3d87d4eec8ec.png)
@@ -48,3 +49,6 @@ Assetsフォルダの直下に以下フォルダを作成しました。
 
 **・Scene**  
 　実際にゲームで使用するシーンを入れて下さい。
+ 
+**・Scripts**<br>
+   &ensp; 機能ごとにフォルダ分けされているので適切なフォルダに入れて下さい。 
