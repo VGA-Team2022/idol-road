@@ -1,8 +1,8 @@
 using System;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
-
 /// <summary>エネミーを管理するクラス </summary>
 public class Enemy : MonoBehaviour
 {
@@ -27,6 +27,8 @@ public class Enemy : MonoBehaviour
     float _minScale = 0.3f;
     [SerializeField, Tooltip("爆発エフェクト")]
     GameObject _explosionEffect = default;
+    [SerializeField, Tooltip("フリック方向を表示するテキスト")]
+    Text _flickDirtext = default;
     /// <summary>倒された時の吹き飛ぶ軌道を構成するポイントの配列 </summary>
     Vector3[] _deadMovePoints = default;
     public FlickType _flickTypeEnemy;
@@ -56,7 +58,7 @@ public class Enemy : MonoBehaviour
             FlickNum(); //ランダムでフリック方向を取得する
         }
         _rb = GetComponent<Rigidbody>();
-        _rb.AddForce(_enemySpped);　//ファンを前に動かす（仮)
+        _rb.AddForce(_enemySpped); //ファンを前に動かす（仮)
     }
     private void Update()
     {
@@ -119,10 +121,10 @@ public class Enemy : MonoBehaviour
     public void FlickNum()
     {
         var rnd = new System.Random();
-        _flickTypeEnemy = (FlickType)rnd.Next(2, 5);
+        _flickTypeEnemy = (FlickType)rnd.Next(2, 5);        
         Debug.Log(_flickTypeEnemy);
+        _flickDirtext.text = _flickTypeEnemy.ToString();
     }
-
     /// <summary>リズム判定用</summary>
     public void JugeTime()
     {
