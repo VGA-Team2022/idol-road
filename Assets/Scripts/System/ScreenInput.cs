@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.IO.Pipes;
 using UnityEngine;
 using UnityEngine.UI;
 //using static System.Net.Mime.MediaTypeNames;
@@ -16,8 +13,8 @@ public class ScreenInput : MonoBehaviour
 
     [SerializeField, Tooltip("フリックの判定に必要な操作距離")]
     Vector2 _flickMinRange = new Vector2(0f, 0f);
-    [SerializeField, Tooltip("衝突するレイヤー")]
-    LayerMask _hitLayerMask = default;
+    [SerializeField, Tooltip("アイテム取得のレイヤー")]
+    LayerMask _itemHitLayer = default;
 
 
     //勝手に追加
@@ -129,7 +126,7 @@ public class ScreenInput : MonoBehaviour
 
             //アイテム取得処理
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            var hit = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction, MAX_RAY_RANGE, _hitLayerMask);
+            var hit = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction, MAX_RAY_RANGE, _itemHitLayer);
 
             if (hit.collider != null)   //アイテムを取得
             {   
