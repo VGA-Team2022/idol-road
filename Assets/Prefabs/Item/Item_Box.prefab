@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3483378706168573389}
   - component: {fileID: 7703148911629082944}
   - component: {fileID: 7703148911629083006}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Item_Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b931a29fc482f74f8b19bbaf9411efb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _duration: 1
+  _getAmount: 10
+  _duration: 3
   _jumpPower: 3
   _liveTime: 3
 --- !u!212 &7703148911629082944

@@ -3291,12 +3291,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300609633802189499a4afb059d88918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefub: {fileID: 1060883709, guid: f6d9bfa37d3f5d3439d216c6a0aee987, type: 3}
+  _enemyPrefub: {fileID: 5463000761991422479, guid: d1ff13771a885e54581b8367a3f81248, type: 3}
   _positionObject: {fileID: 872674006}
   _trajectoryParent: {fileID: 1118246677}
   _manager: {fileID: 1891141608}
   _timeReset: 0
   _time: 0
+  _firstDelayTime: 7
+  _generateOffset: 0
   _timeInterval: 4
   _gameFinishTime: 180
 --- !u!4 &173030987
@@ -7072,6 +7074,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9016a18c1b9be341998469f497cbb51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sprites: []
+  _motionTime: 3
+  _screenInput: {fileID: 0}
 --- !u!1 &345965395
 GameObject:
   m_ObjectHideFlags: 0
@@ -18243,7 +18248,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 872674006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 5}
+  m_LocalPosition: {x: 0, y: 0.5, z: 1.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30552,6 +30557,7 @@ MonoBehaviour:
   _sePlay: {fileID: 1112567710}
   _inputText: {fileID: 1480874704}
   _manager: {fileID: 1891141608}
+  _superIdolTime: {fileID: 0}
 --- !u!4 &1398434000
 Transform:
   m_ObjectHideFlags: 0
@@ -40401,10 +40407,14 @@ MonoBehaviour:
   _maxIdlePower: 100
   _idleHp: 0
   _maxIdleHp: 0
+  _comboAmount: 0
+  _comboIllustChange: 5
   _countTime: 60
   _countDownText: {fileID: 1295911097}
   _funCountText: {fileID: 1366405485}
   _stageScroller: {fileID: 1300616553}
+  _fadeColor: {fileID: 0}
+  _comboSpriteChara: {fileID: 0}
 --- !u!4 &1891141609
 Transform:
   m_ObjectHideFlags: 0
@@ -44877,7 +44887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &4546472410543436518
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -44958,6 +44968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemySpped: {x: 0, y: 0, z: -5}
+  _fansaNum: 1
   _time: 4
   _perfect: 0.5
   _good: 2

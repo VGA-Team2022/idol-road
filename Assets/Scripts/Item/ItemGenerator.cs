@@ -32,7 +32,7 @@ public class ItemGenerator : MonoBehaviour
                 Generate();
                 _time = 0f;
             }
-        }
+        }    
     }
 
     /// <summary>ƒAƒCƒeƒ€‚ğ¶¬‚·‚é </summary>
@@ -49,6 +49,7 @@ public class ItemGenerator : MonoBehaviour
         else 
         {
             _generateItem = Instantiate(_itemPrefab, _leftPoints[0].position, Quaternion.identity);
+            _generateItem.GameManager = _gameManager;
             _generateItem.Move(_leftPoints[1].position, SetItemParent);
         }
     }

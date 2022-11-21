@@ -16,6 +16,10 @@ public class GameManager : MonoBehaviour
     int _idleHp;
     [SerializeField, Header("アイドルのMaxHp")]
     int _maxIdleHp;
+    [SerializeField, Header("コンボを数える変数")]
+    int _comboAmount;
+    [SerializeField, Header("イラストが変わるタイミング")]
+    int _comboIllustChange = 5;
     /// <summary>制限時間</summary>
     [SerializeField, Header("制限時間")] 
     float _countTime = 60;
@@ -25,6 +29,10 @@ public class GameManager : MonoBehaviour
     Text _funCountText;
     [SerializeField]
     StageScroller _stageScroller = default;
+    [SerializeField,Header("キャラが透明になっていく経過を管理するクラス")]
+    FadeColor _fadeColor;
+    [SerializeField,Header("コンボが続いたときに表示させるSprite")]
+    GameObject _comboSpriteChara = default;
     /// <summary>現在対象の敵 </summary>
     Enemy _currentEnemy = default;
     /// <summary>ゲームを始めるか否か</summary>
@@ -39,6 +47,8 @@ public class GameManager : MonoBehaviour
     public int IdlePower { get => _idlePower; set => _idlePower = value; }
     /// <summary>アイドルMaxPowerのプロパティ</summary>
     public int MaxIdleHp { get => _maxIdleHp; set => _maxIdleHp = value; }
+    /// <summary>コンボ数を管理するプロパティ</summary>
+    public int ComboAmount { get => _comboAmount; set => _comboAmount = value; }
     /// <summary>制限時間のプロパティ</summary>
     public float CountTime { get => _countTime; set => _countTime = value; }
     /// <summary>現在対象の敵</summary>
@@ -123,5 +133,22 @@ public class GameManager : MonoBehaviour
             _isIdleTime = true;
             _idlePower = 0;
         }    
+    }
+    /// <summary>コンボ数を管理する関数</summary>
+    public void ComboAmountTotal()
+    {
+        _comboAmount++;
+        if(_comboAmount == _comboIllustChange)
+        {
+            IllustDisPlay();
+            _comboIllustChange += 5;
+        }
+        Debug.Log(_comboAmount);
+    }
+    /// <summary>イラストを表示させる関数</summary>
+    public void IllustDisPlay()
+    {
+        GameObject obj = Instantiate(_comboSpriteChara, transform);
+        Destroy(obj, _fadeColor.Span);
     }
 }
