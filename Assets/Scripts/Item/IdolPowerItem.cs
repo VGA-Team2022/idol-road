@@ -17,14 +17,6 @@ public class IdolPowerItem : MonoBehaviour
     event Action _scrollStart = default;
     /// <summary>ゲームマネージャーのプロパティ</summary>
     public GameManager GameManager { get => _gameManager; set => _gameManager = value; }
-    private void Start()
-    {
-    }
-    public event Action ScrollStart
-    {
-        add { _scrollStart += value; }
-        remove { _scrollStart += value; }
-    }
 
     /// <summary>移動処理 </summary>
     /// <param name="targetPoint">到着位置</param>
@@ -32,9 +24,7 @@ public class IdolPowerItem : MonoBehaviour
     public void Move(Vector3 targetPoint, Action scrollStart)
     {
         transform.DOJump(targetPoint, jumpPower: _jumpPower, numJumps: 1, duration: _duration)
-            .OnComplete(() => scrollStart.Invoke());
-
-        Destroy(gameObject, _liveTime);
+            .OnComplete(() => Destroy(this.gameObject));
     }
 
     //TODO:アイテム効果の追加
@@ -42,5 +32,6 @@ public class IdolPowerItem : MonoBehaviour
     public void GetItem()
     {
         _gameManager.IdlePower += _getAmount;
+        Destroy(gameObject);
     }
 }

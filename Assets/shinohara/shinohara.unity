@@ -3286,7 +3286,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 173030985}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 300609633802189499a4afb059d88918, type: 3}
   m_Name: 
@@ -3297,6 +3297,8 @@ MonoBehaviour:
   _manager: {fileID: 1891141608}
   _timeReset: 0
   _time: 0
+  _firstDelayTime: 7
+  _generateOffset: 0
   _timeInterval: 7.68
   _gameFinishTime: 180
 --- !u!4 &173030987
@@ -7175,6 +7177,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9016a18c1b9be341998469f497cbb51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sprites: []
+  _motionTime: 3
+  _screenInput: {fileID: 0}
 --- !u!1 &345965395
 GameObject:
   m_ObjectHideFlags: 0
@@ -30961,9 +30966,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flickMinRange: {x: 0, y: 0}
+  _hitLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   _sePlay: {fileID: 1112567710}
   _inputText: {fileID: 1480874704}
   _manager: {fileID: 1891141608}
+  _superIdolTime: {fileID: 0}
 --- !u!4 &1398434000
 Transform:
   m_ObjectHideFlags: 0
@@ -41114,10 +41123,14 @@ MonoBehaviour:
   _maxIdlePower: 100
   _idleHp: 0
   _maxIdleHp: 0
+  _comboAmount: 0
+  _comboIllustChange: 5
   _countTime: 60
   _countDownText: {fileID: 1295911097}
   _funCountText: {fileID: 1366405485}
   _stageScroller: {fileID: 1300616553}
+  _fadeColor: {fileID: 0}
+  _comboSpriteChara: {fileID: 0}
 --- !u!4 &1891141609
 Transform:
   m_ObjectHideFlags: 0
@@ -41267,9 +41280,10 @@ MonoBehaviour:
   _leftPoints:
   - {fileID: 1815547934}
   - {fileID: 875862741}
-  _generateTime: 7
+  _generateTime: 5
   _itemParentObj: {fileID: 2133845757}
   _itemPrefab: {fileID: 3483378706168573389, guid: 06d8e374f4f99fb41a6e792b315f9548, type: 3}
+  _gameManager: {fileID: 1891141608}
 --- !u!1 &1919512737
 GameObject:
   m_ObjectHideFlags: 0
