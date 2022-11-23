@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>SEを再生するクラス </summary>
 public class SEPlay : MonoBehaviour
 {
-    [SerializeField, Header("入力で鳴らすSE"), FlickSENames(new string[] { "上入力時", "下入力時", "左入力時", "右入力時" })]
+    [SerializeField, Header("入力で鳴らすSE"), ElementNames(new string[] { "上入力時", "下入力時", "左入力時", "右入力時" })]
     AudioClip[] _seClips = default;
     /// <summary>音を鳴らすコンポーネント</summary>
     AudioSource _audio => GetComponent<AudioSource>();

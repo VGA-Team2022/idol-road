@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7703148911629082944}
   - component: {fileID: 7703148911629083006}
   m_Layer: 6
-  m_Name: Item_Box
+  m_Name: Money
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b931a29fc482f74f8b19bbaf9411efb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _getAmount: 10
+  _getAmount: -10
   _duration: 3
   _jumpPower: 3
   _liveTime: 3
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ec6b144760e878d4c90179b3ad04da0a, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
