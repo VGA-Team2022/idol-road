@@ -12,11 +12,11 @@ public class ResultManager
     //アクションを成功度別に格納
     private int _countBad;
     private int _countGood;
-    private int _countGreat;
+    private int _countPerfect;
     //ゴール地点までの距離
     private float _distance;
-    //スーパーアイドルタイムの発生回数
-    private int _countSuperIdleTime;
+    //スーパーアイドルタイム中のタップ回数
+    private int _countSuperIdleTimePerfect;
     public int CountBad
     {
         get => _countBad;
@@ -27,10 +27,10 @@ public class ResultManager
         get => _countGood; 
         set => _countGood = value;
     }
-    public int CountGreat
+    public int CountPerfect
     {
-        get => _countGreat;
-        set => _countGreat = value;
+        get => _countPerfect;
+        set => _countPerfect = value;
     }
     public float Distance
     {
@@ -38,9 +38,9 @@ public class ResultManager
         set => _distance = value;
     }
 
-    public int CountSuperIdleTime
+    public int CountSuperIdleTimePerfect
     {
-        get => _countSuperIdleTime; 
-        set => _countSuperIdleTime = value;
+        get => _countSuperIdleTimePerfect; 
+        set => _countSuperIdleTimePerfect = value;
     }
 }
