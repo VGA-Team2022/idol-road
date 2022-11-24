@@ -27,8 +27,8 @@ public class Enemy : MonoBehaviour
     float _minScale = 0.3f;
     [SerializeField, Tooltip("爆発エフェクト")]
     GameObject _explosionEffect = default;
-    [SerializeField, Tooltip("フリック方向を表示するテキスト")]
-    Text _flickDirtext = default;
+    [SerializeField]
+    EnemySpawn _enemySpawn = default;
     /// <summary>倒された時の吹き飛ぶ軌道を構成するポイントの配列 </summary>
     Vector3[] _deadMovePoints = default;
     public FlickType _flickTypeEnemy;
@@ -37,8 +37,8 @@ public class Enemy : MonoBehaviour
     /// <summary>倒されたらステージスクロールを開始する </summary>
     event Action _stageScroll = default;
     Rigidbody _rb;
-
-
+    /// <summary>敵が倒れた際にかかるDoTweenでの動きの時間のプロパティ</summary>
+    public float MoveTime { get => _moveTime; set => _moveTime = value; }
     /// <summary>スコアを増やすAction </summary>
     public event Action<int> AddScore
     {
@@ -123,7 +123,6 @@ public class Enemy : MonoBehaviour
         var rnd = new System.Random();
         _flickTypeEnemy = (FlickType)rnd.Next(2, 5);        
         Debug.Log(_flickTypeEnemy);
-        _flickDirtext.text = _flickTypeEnemy.ToString();
     }
     /// <summary>リズム判定用</summary>
     public void JugeTime()
