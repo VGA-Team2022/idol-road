@@ -3,71 +3,94 @@ using UnityEngine;
 /// <summary>アイテムを生成するクラス</summary>
 public class ItemGenerator : MonoBehaviour
 {
+    [Tooltip("値が高ければ高いほど出現します")]
+    [SerializeField, Header("各アイテムの出現確率"), ElementNames(new string[] { "ぬいぐるみ", "花束", "プレゼント", "お金" }), Range(0f, 10f)]
+    float[] _itemWeights = default;
+    [SerializeField, Header("生成間隔")]
+    float _generateTime = 5f;
     [SerializeField, Header("右生成位置・到着位置")]
     Transform[] _rightPoints = default;
     [SerializeField, Header("左生成位置・到着位置")]
     Transform[] _leftPoints = default;
-    [SerializeField, Header("生成間隔")]
-    float _generateTime = 5f;
-    [SerializeField, Header("アイテムを親オブジェクト")]
-    Transform _itemParentObj = default;
-    [SerializeField, Header("生成元プレハブ")] 
-    IdolPowerItem _itemPrefab = default;
     [SerializeField, Header("ゲームマネージャー")]
     GameManager _gameManager = default;
-    /// <summary>生成されたアイテム </summary>
-    IdolPowerItem _generateItem = default;
-    float _time = 0f;
+    [SerializeField, Header("生成するアイテム"), ElementNames(new string[] { "ぬいぐるみ", "花束", "プレゼント", "お金" })]
+    IdolPowerItem[] _items = default;
+
+    /// <summary>重みの総和 </summary>
+    float _totalWeight = 0f;
+
+    float _timer = 0f;
     /// <summary>生成をするかどうか </summary>
     bool _isGenerate = false;
+
+    private void Start()
+    {   
+        foreach (var weight in _itemWeights)    //重みの総和を計算する
+        {
+            _totalWeight += weight;
+        }
+    }
 
     private void Update()
     {
         if (_isGenerate)
         {
-            _time += Time.deltaTime;
+            _timer += Time.deltaTime;
 
-            if (_generateTime <= _time)
+            if (_generateTime <= _timer)
             {
                 Generate();
-                _time = 0f;
+                _timer = 0f;
             }
-        }    
+        }
     }
 
     /// <summary>アイテムを生成する </summary>
     void Generate()
     {
-        var direction = (GenerateDirection)Random.Range(0, 2);
-        
+        var direction = (GenerateDirection)Random.Range(0, System.Enum.GetNames(typeof(GenerateDirection)).Length);
+
         if (direction == GenerateDirection.Right)
         {
-            _generateItem = Instantiate(_itemPrefab, _rightPoints[0].position, Quaternion.identity);
-            _generateItem.GameManager = _gameManager;
-            _generateItem.Move(_rightPoints[1].position, SetItemParent);
+            var item = Instantiate(_items[GetSelectItemIndex()], _rightPoints[0].position, Quaternion.identity);
+            item.GameManager = _gameManager;
+            item.Move(_rightPoints[1].position);
         }
-        else 
+        else
         {
-            _generateItem = Instantiate(_itemPrefab, _leftPoints[0].position, Quaternion.identity);
-            _generateItem.Move(_leftPoints[1].position, SetItemParent);
+            var item = Instantiate(_items[GetSelectItemIndex()], _leftPoints[0].position, Quaternion.identity);
+            item.GameManager = _gameManager;
+            item.Move(_leftPoints[1].position);
         }
+
+        AudioManager.Instance.PlaySE(15);
     }
 
-    /// <summary>アイテムをスクロールさせるためにステージの子オブジェクトにする </summary>
-    void SetItemParent()
+    /// <summary>生成するアイテムの添え字を取得する </summary>
+    /// <returns>生成するアイテムの添え字</returns>
+    int GetSelectItemIndex()
     {
-        _generateItem.transform.SetParent(_itemParentObj, true);
+        var rand = Random.Range(0, _totalWeight); 
+        var currnetWeight = 0f;     //現在の重さ
+
+        for (var i = 0; i < _itemWeights.Length; i++)   // 乱数値が属する要素を先頭から順に選択
+        {
+            currnetWeight += _itemWeights[i];   // 現在要素までの重みの総和を求める
+
+            if (rand < currnetWeight)   // 乱数値が現在要素の範囲内かチェック
+            {
+                return i;
+            }
+        }
+
+        return _itemWeights.Length - 1;     // 乱数値が重みの総和以上なら末尾要素とする
     }
 
     /// <summary>ジェネレーターを起動、停止させる関数 </summary>
     public void GeneratorOperation()
     {
         _isGenerate = !_isGenerate;
-
-        if (!_isGenerate)
-        {
-            _time = 0f;
-        }
     }
 
     public enum GenerateDirection

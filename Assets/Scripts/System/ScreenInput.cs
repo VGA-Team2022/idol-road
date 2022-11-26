@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.IO.Pipes;
 using UnityEngine;
 using UnityEngine.UI;
 //using static System.Net.Mime.MediaTypeNames;
@@ -11,8 +8,13 @@ using UnityEngine.UI;
 
 public class ScreenInput : MonoBehaviour
 {
+    /// <summary>レイの最大範囲 </summary>
+    const float MAX_RAY_RANGE = 10f;
+
     [SerializeField, Tooltip("フリックの判定に必要な操作距離")]
     Vector2 _flickMinRange = new Vector2(0f, 0f);
+    [SerializeField, Tooltip("アイテム取得のレイヤー")]
+    LayerMask _itemHitLayer = default;
 
 
     //勝手に追加
@@ -121,6 +123,16 @@ public class ScreenInput : MonoBehaviour
         if (flickVector.x <= _flickMinRange.x && flickVector.y <= _flickMinRange.y)
         {
             _flickType = FlickType.Tap;
+
+            //アイテム取得処理
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            var hit = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction, MAX_RAY_RANGE, _itemHitLayer);
+
+            if (hit.collider != null)   //アイテムを取得
+            {   
+                var item = hit.collider.GetComponent<IdolPowerItem>();
+                item.GetItem();
+            }
         }
         else if (flickVector.x > flickVector.y)
         {
@@ -153,7 +165,7 @@ public class ScreenInput : MonoBehaviour
 
         if (_manager.IsIdleTime == true && _flickType == FlickType.Tap)
         {
-            _resultManager.CountGreat++;
+            _resultManager.CountPerfect++;
             _superIdolTime.GaugeCount++;
         }
 

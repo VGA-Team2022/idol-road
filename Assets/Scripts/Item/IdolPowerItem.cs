@@ -11,30 +11,18 @@ public class IdolPowerItem : MonoBehaviour
     float _duration = 2f;
     [SerializeField, Header("軌道の高さ")]
     float _jumpPower = 4f;
-    [SerializeField, Header("表示時間")]
-    float _liveTime = 3f;
     private GameManager _gameManager;
     event Action _scrollStart = default;
     /// <summary>ゲームマネージャーのプロパティ</summary>
     public GameManager GameManager { get => _gameManager; set => _gameManager = value; }
-    private void Start()
-    {
-    }
-    public event Action ScrollStart
-    {
-        add { _scrollStart += value; }
-        remove { _scrollStart += value; }
-    }
 
     /// <summary>移動処理 </summary>
     /// <param name="targetPoint">到着位置</param>
     /// /// <param name="scrollStart">移動処理が終了したらスクロールさせる</param>
-    public void Move(Vector3 targetPoint, Action scrollStart)
+    public void Move(Vector3 targetPoint)
     {
         transform.DOJump(targetPoint, jumpPower: _jumpPower, numJumps: 1, duration: _duration)
-            .OnComplete(() => scrollStart.Invoke());
-
-        Destroy(gameObject, _liveTime);
+            .OnComplete(() => Destroy(this.gameObject));
     }
 
     //TODO:アイテム効果の追加
@@ -42,5 +30,7 @@ public class IdolPowerItem : MonoBehaviour
     public void GetItem()
     {
         _gameManager.IdlePower += _getAmount;
+        AudioManager.Instance.PlaySE(16);
+        Destroy(gameObject);
     }
 }

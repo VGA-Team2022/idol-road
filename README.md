@@ -3,8 +3,8 @@
 [企画書](https://drive.google.com/file/d/14G4DWLP3txkfoHvntm0dhb7QqjufA5uG/view) <br>
 [仕様書概要](https://docs.google.com/spreadsheets/d/1wML1Vh02129pDP05RoIM4TkOHNcf2uz_/edit#gid=808293660) <br>
 [仕様書](https://docs.google.com/spreadsheets/d/1FAagF6nKZKZE3hG78oxwmmTXFhUbjzq6/edit#gid=280938392) <br>
-[α版スケジュール](https://docs.google.com/presentation/d/1ow_-hXHRjGXJRUTUF8pRT9znLzuYwnjh/edit#slide=id.p9) <br>
-[10月 30日 議事録](https://docs.google.com/document/d/1bWFCfdCLvmpM6Y0Qf6VshojMl8w7Dh6n/edit)
+[スケジュール](https://docs.google.com/presentation/d/1ow_-hXHRjGXJRUTUF8pRT9znLzuYwnjh/edit#slide=id.p9) <br>
+[ガントチャート](https://lamact.github.io/react-issue-ganttchart/?giturl=https%3A%2F%2Fgithub.com%2FVGA-Team2022%2Fidol-road&labels=&assignee=)
 
 ## 命名規則・コーディング規約
 ・メンバー変数はアンダーバー( _ )をつけて小文字から始める <br>
@@ -21,7 +21,8 @@
 ・Issuesを作成したらProjectsに追加する  
 ・Margeは基本的に篠原が行います。（Pull requestsまでで大丈夫です）<br>
 ・作業を開始する前に必ずdevelopブランチからプルをしてください。<br>
-・Issueのcloseに関しては篠原が担当するので基本的にはcloseしないでください。（Issueの作成はしてもらって大丈夫です）<br>
+・Issueのcloseに関しては篠原が担当するので基本的にはcloseしないでください。<br>
+（Issueの作成はしてもらって大丈夫です）<br>
 ・Pull requests作成時にPull requests, commits, Issuesをひとまとまりにする　↓以下画像 イメージ
 
 ![githubイメージ画像](https://user-images.githubusercontent.com/86392648/178971064-3bb6d023-1e97-45d7-83ba-3d87d4eec8ec.png)
@@ -48,3 +49,6 @@ Assetsフォルダの直下に以下フォルダを作成しました。
 
 **・Scene**  
 　実際にゲームで使用するシーンを入れて下さい。
+ 
+**・Scripts**<br>
+   &ensp; 機能ごとにフォルダ分けされているので適切なフォルダに入れて下さい。 
