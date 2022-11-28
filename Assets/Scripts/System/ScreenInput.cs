@@ -29,6 +29,10 @@ public class ScreenInput : MonoBehaviour
     ResultManager _resultManager = default;
     [SerializeField]
     SuperIdolTime _superIdolTime = default;
+    [SerializeField]
+    EnemySpawn _enemySpawn = default;
+    [SerializeField]
+    Enemy _enemy = default;
     //==========================================
 
     /// <summary>
@@ -159,6 +163,7 @@ public class ScreenInput : MonoBehaviour
             {
                 _manager.CurrentEnemy.JugeTime();//”ò‚ñ‚¾‚Æ‚«‚Ì•b”‚Æ”»’è‚ğŒˆ‚ß‚é‚à‚Ì
                 _manager.CurrentEnemy.Dead();
+                _enemySpawn.InGameOnEnemy();
                 _sePlay.SEShot(_flickType);
             }
         }
@@ -171,7 +176,6 @@ public class ScreenInput : MonoBehaviour
 
         _inputText.text = _flickType.ToString();
     }
-
     /// <summary>
     /// •Ï”‚Ì‰Šú‰»—p
     /// </summary>
