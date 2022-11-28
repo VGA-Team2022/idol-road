@@ -123,6 +123,56 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &125221549
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 125221551}
+  - component: {fileID: 125221550}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &125221550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125221549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8c66c13bb73e72468d381c7eefd7e30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bad_to_Excellent: 0
+  _perfect_to_Perfect: 40
+  _perfect_to_Excellent: 30
+  _debugCount: 25
+  _randomPerfectCount: 50
+  _isDebug: 0
+--- !u!4 &125221551
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125221549}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.5051374, y: -28.691902, z: 198.41493}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &338689447
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,6 +437,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flickMinRange: {x: 0, y: 0}
+  _itemHitLayer:
+    serializedVersion: 2
+    m_Bits: 0
   _sePlay: {fileID: 0}
   _inputText: {fileID: 1085280068}
   _manager: {fileID: 734091685}
@@ -398,7 +451,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 734091682}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ebe380a8cb143c4d9725ba4f6450c27, type: 3}
   m_Name: 
@@ -431,10 +484,14 @@ MonoBehaviour:
   _maxIdlePower: 100
   _idleHp: 0
   _maxIdleHp: 0
+  _comboAmount: 0
+  _comboIllustChange: 5
   _countTime: 60
   _countDownText: {fileID: 477536470}
   _funCountText: {fileID: 0}
   _stageScroller: {fileID: 0}
+  _fadeColor: {fileID: 0}
+  _comboSpriteChara: {fileID: 0}
 --- !u!4 &734091686
 Transform:
   m_ObjectHideFlags: 0

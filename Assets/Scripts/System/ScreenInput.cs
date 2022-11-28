@@ -170,7 +170,7 @@ public class ScreenInput : MonoBehaviour
 
         if (_manager.IsIdleTime == true && _flickType == FlickType.Tap)
         {
-            _resultManager.CountGreat++;
+            _resultManager.CountPerfect++;
             _superIdolTime.GaugeCount++;
         }
 
