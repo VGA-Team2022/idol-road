@@ -163,7 +163,6 @@ public class ScreenInput : MonoBehaviour
             {
                 _manager.CurrentEnemy.JugeTime();//”ò‚ñ‚¾‚Æ‚«‚Ì•b”‚Æ”»’è‚ğŒˆ‚ß‚é‚à‚Ì
                 _manager.CurrentEnemy.Dead();
-                _enemySpawn.InGameOnEnemy();
                 _sePlay.SEShot(_flickType);
             }
         }
