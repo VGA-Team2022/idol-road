@@ -15,47 +15,56 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField, Tooltip("秒数を数える変数(リセットされる)"), Header("時間関係")]
     float _timeReset = default;
     [SerializeField, Tooltip("時間を保持しておく変数(リセットされない)")]
-    float _time = default;
+    float _gameTime = default;
     [SerializeField, Header("最初の敵を生成するまで遅れ")]
-    float _firstDelayTime = 7f;
+    float _firstDelayTime = 7.68f;
     [SerializeField, Header("各生成のオフセット")]
     float _generateOffset = default;
-    [SerializeField, Tooltip("敵を出現させたい秒数")]
-    float _timeInterval = 1f;
+    [Tooltip("敵を出現させたい秒数")]
+    float[] _timeInterval = new float[4]{ 7.68f, 5.76f, 3.84f, 1.92f };
+    [Tooltip("random変数")]
+    int _i = 0;
     [SerializeField, Tooltip("ゲーム終了時間")]
     float _gameFinishTime = 60f;
-
     /// <summary> tureになるとエネミーが出現するようにするトリガー</summary>
+    [SerializeField]
     bool _onEnemy = default;
-
+    /// <summary>スタートフラグ</summary>
+    bool _isStart = default;
     private void Start()
     {
         _onEnemy = false;　//エネミーが最初から湧き出さないためにbool型の変数を使い、出現を管理する。
-        _time += _firstDelayTime;
+        _isStart = false;
+        _i = Random.Range(0,_timeInterval.Length);
+        Debug.Log(_timeInterval[_i]);
     }
 
     void Update()
     {
-        if (_onEnemy == true) //_onEnemyがtrueになると_timeと_timeResetが動き出し、エネミーが湧き出す
+        if (_isStart == true)
         {
-            _time += Time.deltaTime;
-            _timeReset += Time.deltaTime;
-
-            if (_time < _gameFinishTime) //ゲーム時間を超えるとspawnスポーンしないように
-            {
-                if (_timeReset > _timeInterval) //_timeIntervalを超えるとInstantiateします
+            _gameTime += Time.deltaTime;
+            if (_onEnemy == true) //_onEnemyがtrueになると_timeと_timeResetが動き出し、エネミーが湧き出す
+            {  
+                _timeReset += Time.deltaTime;
+                if (_gameTime < _gameFinishTime) //ゲーム時間を超えるとspawnスポーンしないように
                 {
-                    if (_manager.CurrentEnemy == null)
+                    if (_timeReset >= _timeInterval[_i]) //_timeIntervalを超えるとInstantiateします
                     {
-                        var enemy = Instantiate(_enemyPrefub, _positionObject.transform); //シリアライズで設定したオブジェクトの場所に出現します
-                        enemy.SetDeadMovePoints(_trajectoryParent);
-                        enemy.AddScore += _manager.KillFun;
-                        enemy.StageScroll += _manager.Scroller.ScrollOperation;
-                        _manager.CurrentEnemy = enemy;
-                        _manager.Scroller.ScrollOperation();
+                        if (_manager.CurrentEnemy == null)
+                        {
+                            var enemy = Instantiate(_enemyPrefub, _positionObject.transform); //シリアライズで設定したオブジェクトの場所に出現します
+                            enemy.SetDeadMovePoints(_trajectoryParent);
+                            enemy.AddScore += _manager.KillFun;
+                            enemy.StageScroll += _manager.Scroller.ScrollOperation;
+                            _manager.CurrentEnemy = enemy;
+                            _manager.Scroller.ScrollOperation();
+                            _onEnemy = false;//ここでFalseにしないと生成管理の時間が進んでしまう
+                            _i = Random.Range(0, _timeInterval.Length);
+                            Debug.Log(_timeInterval[_i]);
+                        }
+                        _timeReset = 0 + _generateOffset;
                     }
-
-                    _timeReset = 0 + _generateOffset;
                 }
             }
         }
@@ -68,6 +77,19 @@ public class EnemySpawn : MonoBehaviour
     public void OnEnemy()
     {
         _onEnemy = true;
+        _isStart = true;
+    }
+    /// <summary>プレイ中の生成フラグを管理する関数</summary>
+    public void InGameOnEnemy()
+    {
+        StartCoroutine(OnEnemyCoroutine());
+    }
+    /// <summary>Enemyの生成フラグを1秒後にtrueにする関数</summary>
+    public IEnumerator OnEnemyCoroutine()
+    {
+        yield return new WaitForSeconds(1.0f);
+        _onEnemy = true;
+        yield return null;
     }
 
     /// <summary>
@@ -79,7 +101,7 @@ public class EnemySpawn : MonoBehaviour
     {
         _onEnemy = false;
 
-        _time = 0;
+        _gameTime = 0;
         _timeReset = 0;
     }
 }

@@ -29,6 +29,10 @@ public class ScreenInput : MonoBehaviour
     ResultManager _resultManager = default;
     [SerializeField]
     SuperIdolTime _superIdolTime = default;
+    [SerializeField]
+    EnemySpawn _enemySpawn = default;
+    [SerializeField]
+    Enemy _enemy = default;
     //==========================================
 
     /// <summary>
@@ -155,26 +159,23 @@ public class ScreenInput : MonoBehaviour
         //タップの時は飛ばない
         if (_manager.CurrentEnemy != null && _flickType != FlickType.Tap)
         {
-            if(_flickType == _manager.CurrentEnemy._flickTypeEnemy) ///フリックした方向がファンサと同様なら吹っ飛ぶ. outなら吹っ飛ばず消えていく
+            if(_flickType == _manager.CurrentEnemy._flickTypeEnemy) ///フリックした方向がファンサと同様なら吹っ飛ぶ
             {
                 _manager.CurrentEnemy.JugeTime();//飛んだときの秒数と判定を決めるもの
-                if(_manager.CurrentEnemy._isOut == false)//判定がoutだった場合判定を取らないようにするフラグ
-                {
-                    _manager.CurrentEnemy.Dead();
-                    _sePlay.SEShot(_flickType);
-                }
+                _manager.CurrentEnemy.Dead();
+                _enemySpawn.InGameOnEnemy();
+                _sePlay.SEShot(_flickType);
             }
         }
 
         if (_manager.IsIdleTime == true && _flickType == FlickType.Tap)
         {
-            _resultManager.CountGreat++;
+            _resultManager.CountPerfect++;
             _superIdolTime.GaugeCount++;
         }
 
         _inputText.text = _flickType.ToString();
     }
-
     /// <summary>
     /// 変数の初期化用
     /// </summary>
