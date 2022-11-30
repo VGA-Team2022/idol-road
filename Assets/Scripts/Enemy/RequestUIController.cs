@@ -1,13 +1,12 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>ファンサイラストと吹き出しイラストを変更するクラス </summary>
 public class RequestUIController : MonoBehaviour
 {
     [SerializeField, Header("吹き出しを表示するImage")]
-    Image _requestWindow = default;
+    SpriteRenderer _requestWindow = default;
     [SerializeField, Header("ファンサ要求を表示するImage")]
-    Image _requestImage = default;
+    SpriteRenderer _requestContent = default;
     [Tooltip("添え字 0=BAD, 1=GOOD, 2=PERFECT")]
     [SerializeField, Header("評価別吹き出しイラスト"), ElementNames(new string[] { "BAD", "GOOD", "PERFECT" })]
     Sprite[] _requestWindowSprites = default;
@@ -38,16 +37,16 @@ public class RequestUIController : MonoBehaviour
         switch (request)
         {
             case FlickType.Up:      //ポーズ
-                _requestImage.sprite = _requestSprites[0];
+                _requestContent.sprite = _requestSprites[0];
                 break;
             case FlickType.Right:   //ウィンク
-                _requestImage.sprite = _requestSprites[1];
+                _requestContent.sprite = _requestSprites[1];
                 break;
             case FlickType.Down:    //投げキス
-                _requestImage.sprite = _requestSprites[2];
+                _requestContent.sprite = _requestSprites[2];
                 break;
             case FlickType.Left:    //サイン
-                _requestImage.sprite = _requestSprites[3];
+                _requestContent.sprite = _requestSprites[3];
                 break;
         }
     }
