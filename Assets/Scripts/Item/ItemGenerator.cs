@@ -64,7 +64,7 @@ public class ItemGenerator : MonoBehaviour
             item.Move(_leftPoints[1].position);
         }
 
-        AudioManager.Instance.PlaySE(15);
+        AudioManager.Instance.PlaySE(15, 0.5f);
     }
 
     /// <summary>¶¬‚·‚éƒAƒCƒeƒ€‚Ì“Y‚¦š‚ğæ“¾‚·‚é </summary>
