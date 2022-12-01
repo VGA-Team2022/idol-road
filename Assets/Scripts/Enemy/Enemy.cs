@@ -1,9 +1,7 @@
 using System;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
-using System.Collections.Generic;
-using System.Collections;
+
 /// <summary>エネミーを管理するクラス </summary>
 public class Enemy : MonoBehaviour
 {
@@ -30,8 +28,8 @@ public class Enemy : MonoBehaviour
     float _minScale = 0.3f;
     [SerializeField, Tooltip("爆発エフェクト")]
     GameObject _explosionEffect = default;
-    [SerializeField]
-    EnemySpawn _enemySpawn = default;
+    [SerializeField, Tooltip("ファンサ")]
+    RequestUIController _requestUIController = null;
     /// <summary>倒された時の吹き飛ぶ軌道を構成するポイントの配列 </summary>
     Vector3[] _deadMovePoints = default;
     /// <summary>FlickTypeを保存させておく変数 </summary>
@@ -71,10 +69,6 @@ public class Enemy : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            Dead();
-        }
         _time -= Time.deltaTime;// リズム判定用
 
         if(_time <= _out) //_outを超えたら飛ばないようにboolで管理
@@ -82,6 +76,8 @@ public class Enemy : MonoBehaviour
             _isOut = true;
             StartFade();
         }
+
+        UpdateRequestWindow();  //吹き出しを更新
     }
 
     /// <summary> 吹き飛ぶ演出（移動） </summary>
@@ -114,12 +110,29 @@ public class Enemy : MonoBehaviour
             .SetLoops(-1, LoopType.Restart);
     }
 
+    /// <summary>時間によって吹き出しのイラストを変更する </summary>
+    private void UpdateRequestWindow()
+    {
+        if (_time <= _perfect)
+        {
+            _requestUIController.ChangeRequestWindow(TimingResult.Perfect);
+        }
+        else if (_time <= _good)
+        {
+            _requestUIController.ChangeRequestWindow(TimingResult.Good);
+        }
+        else if (_time <= _bad)
+        {
+            _requestUIController.ChangeRequestWindow(TimingResult.Bad);
+        }
+    }
+
     void StartFade()
     {
         _sr.color -= new Color(0, 0, 0, _fadedSpeed); //徐々に透明度を下げていく
         if(_sr.color.a <= 0)//透明になったら消す
         {
-            Debug.Log("out");
+            _stageScroll?.Invoke();
             Destroy(gameObject);
         }
     }
@@ -145,8 +158,8 @@ public class Enemy : MonoBehaviour
     public void FlickNum()
     {
         var rnd = new System.Random();
-        _flickTypeEnemy = (FlickType)rnd.Next(2, 5);        
-        Debug.Log(_flickTypeEnemy);
+        _flickTypeEnemy = (FlickType)rnd.Next(2, 5);
+        _requestUIController.ChangeRequestImage(_flickTypeEnemy);
     }
     /// <summary>リズム判定用</summary>
     public void JugeTime()
