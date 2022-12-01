@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5968483811882916908}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 368, y: 302.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -101,6 +101,7 @@ MonoBehaviour:
   _currentMoveMethod: 0
   _enemySpped: {x: 0, y: 0, z: -10}
   _fansaNum: 1
+  _fadedSpeed: 0.02
   _time: 4
   _perfect: 0.5
   _good: 2
@@ -112,6 +113,7 @@ MonoBehaviour:
   _explosionEffect: {fileID: 5047219227802861214, guid: 5315674b013e09d4088b189a94135c4c, type: 3}
   _enemySpawn: {fileID: 0}
   _flickTypeEnemy: 0
+  _isOut: 0
 --- !u!54 &336802384846892835
 Rigidbody:
   m_ObjectHideFlags: 0

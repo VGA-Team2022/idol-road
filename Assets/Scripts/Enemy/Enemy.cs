@@ -3,6 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Collections;
 /// <summary>エネミーを管理するクラス </summary>
 public class Enemy : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class Enemy : MonoBehaviour
     Vector3 _enemySpped;
     [SerializeField, Tooltip("ファンサを要求する数")]
     int _fansaNum = 1;
+    [SerializeField, Tooltip("ファンがoutになったときの透明になる速度")]
+    float _fadedSpeed = 0.01f;
     [SerializeField, Tooltip("リズム判定をするための時間(デバッグ用)"), Header("リズム関係")]
     float _time = default;
     [SerializeField, Tooltip("リズム判定の秒数")]
@@ -31,12 +34,16 @@ public class Enemy : MonoBehaviour
     EnemySpawn _enemySpawn = default;
     /// <summary>倒された時の吹き飛ぶ軌道を構成するポイントの配列 </summary>
     Vector3[] _deadMovePoints = default;
+    /// <summary>FlickTypeを保存させておく変数 </summary>
     public FlickType _flickTypeEnemy;
+    /// <summary>アウトがどうかの判定をするフラグ</summary>
+    public bool _isOut;
     /// <summary>スコアを増やすAction </summary>
     event Action<int> _addScore = default;
     /// <summary>倒されたらステージスクロールを開始する </summary>
     event Action _stageScroll = default;
     Rigidbody _rb;
+    SpriteRenderer _sr;
     /// <summary>敵が倒れた際にかかるDoTweenでの動きの時間のプロパティ</summary>
     public float MoveTime { get => _moveTime; set => _moveTime = value; }
     /// <summary>スコアを増やすAction </summary>
@@ -57,8 +64,10 @@ public class Enemy : MonoBehaviour
         {
             FlickNum(); //ランダムでフリック方向を取得する
         }
+        _sr = GetComponent<SpriteRenderer>();
         _rb = GetComponent<Rigidbody>();
         _rb.AddForce(_enemySpped); //ファンを前に動かす（仮)
+        _isOut = false;
     }
     private void Update()
     {
@@ -67,6 +76,12 @@ public class Enemy : MonoBehaviour
             Dead();
         }
         _time -= Time.deltaTime;// リズム判定用
+
+        if(_time <= _out) //_outを超えたら飛ばないようにboolで管理
+        {
+            _isOut = true;
+            StartFade();
+        }
     }
 
     /// <summary> 吹き飛ぶ演出（移動） </summary>
@@ -99,6 +114,15 @@ public class Enemy : MonoBehaviour
             .SetLoops(-1, LoopType.Restart);
     }
 
+    void StartFade()
+    {
+        _sr.color -= new Color(0, 0, 0, _fadedSpeed); //徐々に透明度を下げていく
+        if(_sr.color.a <= 0)//透明になったら消す
+        {
+            Debug.Log("out");
+            Destroy(gameObject);
+        }
+    }
     /// <summary>倒された時の処理 </summary>
     public void Dead()
     {
