@@ -21,7 +21,7 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField, Header("各生成のオフセット")]
     float _generateOffset = default;
     [Tooltip("敵を出現させたい秒数")]
-    float[] _timeInterval = new float[4]{ 7.68f, 5.76f, 3.84f, 1.92f };
+    float[] _timeInterval = new float[4] { 7.68f, 5.76f, 3.84f, 1.92f };
     [Tooltip("random変数")]
     int _i = 0;
     [SerializeField, Tooltip("ゲーム終了時間")]
@@ -35,36 +35,37 @@ public class EnemySpawn : MonoBehaviour
     {
         _onEnemy = false;　//エネミーが最初から湧き出さないためにbool型の変数を使い、出現を管理する。
         _isStart = false;
-        _i = Random.Range(0,_timeInterval.Length);
+        _i = Random.Range(0, _timeInterval.Length);
         Debug.Log(_timeInterval[_i]);
     }
 
     void Update()
     {
-        if (_isStart == true)
+        if (_isStart == true && _gameTime < _gameFinishTime)//ゲーム時間を超えるとspawnスポーンしないように
         {
             _gameTime += Time.deltaTime;
-            if (_onEnemy == true) //_onEnemyがtrueになると_timeと_timeResetが動き出し、エネミーが湧き出す
-            {  
+
+            //_onEnemyがtrueになると_timeと_timeResetが動き出し、エネミーが湧き出す
+            //ここにボス戦のフラグをorで入れたい
+            if (_onEnemy == true && _manager.CurrentEnemy == null) 
+            {
                 _timeReset += Time.deltaTime;
-                if (_gameTime < _gameFinishTime) //ゲーム時間を超えるとspawnスポーンしないように
+
+                if (_timeReset >= _timeInterval[_i]) //_timeIntervalを超えるとInstantiateします
                 {
-                    if (_timeReset >= _timeInterval[_i]) //_timeIntervalを超えるとInstantiateします
-                    {
-                        if (_manager.CurrentEnemy == null)
-                        {
-                            var enemy = Instantiate(_enemyPrefub, _positionObject.transform); //シリアライズで設定したオブジェクトの場所に出現します
-                            enemy.SetDeadMovePoints(_trajectoryParent);
-                            enemy.AddScore += _manager.KillFun;
-                            enemy.StageScroll += _manager.Scroller.ScrollOperation;
-                            _manager.CurrentEnemy = enemy;
-                            _manager.Scroller.ScrollOperation();
-                            _onEnemy = false;//ここでFalseにしないと生成管理の時間が進んでしまう
-                            _i = Random.Range(0, _timeInterval.Length);
-                            Debug.Log(_timeInterval[_i]);
-                        }
-                        _timeReset = 0 + _generateOffset;
-                    }
+                    //if (_manager.CurrentEnemy == null)
+                    //{
+                    var enemy = Instantiate(_enemyPrefub, _positionObject.transform); //シリアライズで設定したオブジェクトの場所に出現します
+                    enemy.SetDeadMovePoints(_trajectoryParent);
+                    enemy.AddScore += _manager.KillFun;
+                    enemy.StageScroll += _manager.Scroller.ScrollOperation;
+                    _manager.CurrentEnemy = enemy;
+                    _manager.Scroller.ScrollOperation();
+                    //_onEnemy = false;//ここでFalseにしないと生成管理の時間が進んでしまう
+                    _i = Random.Range(0, _timeInterval.Length);
+                    Debug.Log(_timeInterval[_i]);
+                    //}
+                    _timeReset = 0 + _generateOffset;
                 }
             }
         }
