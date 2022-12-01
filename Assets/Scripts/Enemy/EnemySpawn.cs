@@ -57,8 +57,11 @@ public class EnemySpawn : MonoBehaviour
                     //{
                     var enemy = Instantiate(_enemyPrefub, _positionObject.transform); //シリアライズで設定したオブジェクトの場所に出現します
                     enemy.SetDeadMovePoints(_trajectoryParent);
+                    //イベントを登録
                     enemy.AddScore += _manager.KillFun;
                     enemy.StageScroll += _manager.Scroller.ScrollOperation;
+                    enemy.GiveDamage += _manager.GetDamage;
+
                     _manager.CurrentEnemy = enemy;
                     _manager.Scroller.ScrollOperation();
                     //_onEnemy = false;//ここでFalseにしないと生成管理の時間が進んでしまう
