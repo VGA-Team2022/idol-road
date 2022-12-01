@@ -11,6 +11,8 @@ public class AudioManager : MonoBehaviour
     CriAtomSource _bgmSource = default;
     [SerializeField, Header("SE")]
     CriAtomSource _seSource = default;
+    [SerializeField, Header("Voice")]
+    CriAtomSource _voiceSource = default;
 
     /// <summary>再生中のBGMを管理するディクショナリ key=キューID, value=状態</summary>
     Dictionary<int, CriAtomExPlayback> _playingBGMs = new Dictionary<int, CriAtomExPlayback>();
@@ -42,6 +44,15 @@ public class AudioManager : MonoBehaviour
         _seSource.Play(cueID);
 
        // _seSource.SetAisacControl();  AISACコントロール
+    }
+
+    /// <summary>ボイスを再生する </summary>
+    /// <param name="cueID">再生したいボイスのID</param>
+    /// <param name="volume">音量</param>
+    public void PlayVoice(int cueID, float volume = 1f)
+    {
+        ChangeVoiceVolume(volume);  //音量を調整する
+        _voiceSource.Play(cueID);
     }
 
     /// <summary>BGNを再生する </summary>
@@ -114,6 +125,13 @@ public class AudioManager : MonoBehaviour
     public void ChangeSEVolume(float volume)
     {
         _seSource.volume = volume;
+    }
+
+    /// <summary>Voiceの音量を調整する</summary>
+    /// <param name="volume">音量</param>
+    public void ChangeVoiceVolume(float volume)
+    {
+        _voiceSource.volume = volume;
     }
 
     /// <summary>BGMの再生を一時停止する</summary>
