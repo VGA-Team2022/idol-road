@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
     bool _isStarted;
     /// <summary>アイドルタイムの判定をするBool型</summary>
     bool _isIdleTime;
+    /// <summary>ボス戦が始まっているか否か</summary>
+    bool _bossTime;
     /// <summary>ゲームが終わったか否か</summary>
     bool _gameEnd;
     /// <summary>ゲーム開始からの経過時間 </summary>
@@ -63,6 +65,8 @@ public class GameManager : MonoBehaviour
     /// <summary>現在対象の敵</summary>
     public Enemy CurrentEnemy { get => _currentEnemy; set => _currentEnemy = value; }
     public StageScroller Scroller { get => _stageScroller; }
+    /// <summary>ボス戦フラグのプロパティ</summary>
+    public bool BossTime { get => _bossTime; set => _bossTime = value; }
     /// <summary>ゲームフラグのプロパティ</summary>
     public bool GameEnd { get => _gameEnd; set => _gameEnd = value; }
     /// <summary>アイドルタイムフラグのプロパティ</summary>
