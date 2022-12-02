@@ -114,6 +114,7 @@ MonoBehaviour:
   _minScale: 0.1
   _explosionEffect: {fileID: 5047219227802861214, guid: 5315674b013e09d4088b189a94135c4c, type: 3}
   _requestUIController: {fileID: 7277948641732065839}
+  _spriteChange: {fileID: -3143044023716922937}
   _flickTypeEnemy: 0
   _isOut: 0
 --- !u!54 &336802384846892835
