@@ -33,6 +33,7 @@ public class EnemySpawn : MonoBehaviour
 
     void Update()
     {
+        //アイドルタイム中も出さないようにする
         if (_manager.Started && !_manager.GameEnd)
         {
             //ファンがいない場合に生成する。ボス戦は例外で連続で出す
