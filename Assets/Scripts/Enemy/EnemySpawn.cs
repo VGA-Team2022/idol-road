@@ -6,6 +6,8 @@ public class EnemySpawn : MonoBehaviour
 {
     [SerializeField, Tooltip("エネミーをいれるところ"), Header("エネミー関係")]
     Enemy _enemyPrefub = default;
+    [SerializeField, Tooltip("スプライトを出現するたびに変えるクラス")]
+    SpriteChange _spriteChange = default;
     [SerializeField, Tooltip("エネミーを出現させたいオブジェクトをいれるところ")]
     GameObject _positionObject = default;
     [SerializeField, Header("敵が飛んでいく軌道")]
@@ -61,7 +63,7 @@ public class EnemySpawn : MonoBehaviour
                     enemy.AddScore += _manager.KillFun;
                     enemy.StageScroll += _manager.Scroller.ScrollOperation;
                     enemy.GiveDamage += _manager.GetDamage;
-
+                    _spriteChange.EnemyRandomMethod();
                     _manager.CurrentEnemy = enemy;
                     _manager.Scroller.ScrollOperation();
                     //_onEnemy = false;//ここでFalseにしないと生成管理の時間が進んでしまう
