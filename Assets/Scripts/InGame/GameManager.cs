@@ -115,9 +115,9 @@ public class GameManager : MonoBehaviour
         {
             _elapsedTime += Time.deltaTime;
 
-            if (!_bossBattle && _bossTime <= Math.Abs(_countTime - _elapsedTime)) 
+            if (!_bossBattle && _bossTime >= Math.Abs(_countTime - _elapsedTime)) 
             {
-                
+                _bossBattle = true;
             }
             else if (_countTime <= _elapsedTime)
             {
@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
     /// <summary>カウントダウンコルーチン</summary>
     private IEnumerator CountDown()
     {
-        yield return new WaitForSeconds(1.0f);
+        //yield return new WaitForSeconds(1.0f);
         for (int i = 3; i >= 0; i--)
         {
             if (i > 0)
