@@ -199,12 +199,13 @@ public class GameManager : MonoBehaviour
 
             if (0 <= _idleHp)
             {
+                Debug.Log("Œ¸‚ç‚·");
                 _onReduceHpUI?.Invoke(_idleHp);
             }
-            else
+
+            if (_idleHp <= 0)
             {
                 Debug.Log("Ž¸”s");
-                return;
             }
         }
     }

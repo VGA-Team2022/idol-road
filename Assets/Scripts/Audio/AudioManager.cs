@@ -11,6 +11,8 @@ public class AudioManager : MonoBehaviour
     CriAtomSource _bgmSource = default;
     [SerializeField, Header("SE")]
     CriAtomSource _seSource = default;
+    [SerializeField, Header("Voice")]
+    CriAtomSource _voiceSource = default;
 
     /// <summary>再生中のBGMを管理するディクショナリ key=キューID, value=状態</summary>
     Dictionary<int, CriAtomExPlayback> _playingBGMs = new Dictionary<int, CriAtomExPlayback>();
@@ -40,6 +42,17 @@ public class AudioManager : MonoBehaviour
     {
         ChangeSEVolume(volume);  //音量を調整する
         _seSource.Play(cueID);
+
+       // _seSource.SetAisacControl();  AISACコントロール
+    }
+
+    /// <summary>ボイスを再生する </summary>
+    /// <param name="cueID">再生したいボイスのID</param>
+    /// <param name="volume">音量</param>
+    public void PlayVoice(int cueID, float volume = 1f)
+    {
+        ChangeVoiceVolume(volume);  //音量を調整する
+        _voiceSource.Play(cueID);
     }
 
     /// <summary>BGNを再生する </summary>
@@ -52,13 +65,13 @@ public class AudioManager : MonoBehaviour
         if (_playingBGMs.ContainsKey(cueID))    //既に再生中
         {
             StopBGM(cueID);            //一度再生を止める
-            var bgm= _bgmSource.Play(cueID);     //再度再生を開始する
-            _playingBGMs.Add(cueID, bgm); 
+            var bgm = _bgmSource.Play(cueID);     //再度再生を開始する
+            _playingBGMs.Add(cueID, bgm);
             return;
         }
 
         var playBGM = _bgmSource.Play(cueID);
-        _playingBGMs.Add(cueID, playBGM); 　//ディクショナリに追加
+        _playingBGMs.Add(cueID, playBGM);  //ディクショナリに追加
     }
 
     /// <summary>BGMを止める </summary>
@@ -77,6 +90,29 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>ファンサを行った時SEを再生する </summary>
+    /// <param name="flickType">ファンサ</param>
+    /// <param name="volum">音量</param>
+    public void PlayRequestSE(FlickType flickType, float volum = 1f)
+    {
+        switch (flickType)
+        {
+            case FlickType.Up:  //ポーズ
+                PlaySE(3, volum);
+                break;          //ウィンク
+            case FlickType.Right:
+                PlaySE(5, volum);
+                break;          //投げキス
+            case FlickType.Down:
+                PlaySE(1, volum);
+                break;          //サイン
+            case FlickType.Left:
+                PlaySE(4, volum);
+                break;
+                    
+        }
+    }
+
     /// <summary>全てのBGM音量を調整する</summary>
     /// <param name="volume">音量</param>
     public void ChangeBGMVolume(float volume)
@@ -89,6 +125,13 @@ public class AudioManager : MonoBehaviour
     public void ChangeSEVolume(float volume)
     {
         _seSource.volume = volume;
+    }
+
+    /// <summary>Voiceの音量を調整する</summary>
+    /// <param name="volume">音量</param>
+    public void ChangeVoiceVolume(float volume)
+    {
+        _voiceSource.volume = volume;
     }
 
     /// <summary>BGMの再生を一時停止する</summary>

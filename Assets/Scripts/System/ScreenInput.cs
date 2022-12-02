@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-//using static System.Net.Mime.MediaTypeNames;
 
 /// <summary>
 /// フリックの方向やタップかを取得できる
@@ -9,18 +8,12 @@ using UnityEngine.UI;
 public class ScreenInput : MonoBehaviour
 {
     /// <summary>レイの最大範囲 </summary>
-    const float MAX_RAY_RANGE = 10f;
+    const float MAX_RAY_RANGE = 30f;
 
     [SerializeField, Tooltip("フリックの判定に必要な操作距離")]
     Vector2 _flickMinRange = new Vector2(0f, 0f);
-    [SerializeField, Tooltip("アイテム取得のレイヤー")]
+    [SerializeField, Tooltip("アイテムのレイヤー")]
     LayerMask _itemHitLayer = default;
-
-
-    //勝手に追加
-    //==========================================
-    [SerializeField, Tooltip("audioManager")]
-    SEPlay _sePlay = default;
     [SerializeField, Tooltip("入力方向を表示するテキスト")]
     Text _inputText = default;
     [SerializeField]
@@ -29,12 +22,7 @@ public class ScreenInput : MonoBehaviour
     ResultManager _resultManager = default;
     [SerializeField]
     SuperIdolTime _superIdolTime = default;
-    [SerializeField]
-    EnemySpawn _enemySpawn = default;
-    [SerializeField]
-    Enemy _enemy = default;
-    //==========================================
-
+ 
     /// <summary>
     /// 現在のフリック方向などを保存する
     /// </summary>
@@ -161,9 +149,9 @@ public class ScreenInput : MonoBehaviour
         {
             if(_flickType == _manager.CurrentEnemy._flickTypeEnemy) ///フリックした方向がファンサと同様なら吹っ飛ぶ
             {
+                AudioManager.Instance.PlayRequestSE(_flickType);
                 _manager.CurrentEnemy.JugeTime();//飛んだときの秒数と判定を決めるもの
                 _manager.CurrentEnemy.Dead();
-                _sePlay.SEShot(_flickType);
             }
         }
 

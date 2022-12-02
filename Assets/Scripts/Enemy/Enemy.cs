@@ -40,6 +40,9 @@ public class Enemy : MonoBehaviour
     event Action<int> _addScore = default;
     /// <summary>倒されたらステージスクロールを開始する </summary>
     event Action _stageScroll = default;
+    /// <summary>ダメージを与える（プレイヤーの体力を減らす）</summary>
+    event Action<int> _giveDamage = default;
+
     Rigidbody _rb;
     SpriteRenderer _sr;
     /// <summary>敵が倒れた際にかかるDoTweenでの動きの時間のプロパティ</summary>
@@ -51,14 +54,24 @@ public class Enemy : MonoBehaviour
         remove { _addScore -= value; }
     }
 
+    /// <summary>倒されたらステージスクロールを開始する </summary>
     public event Action StageScroll
     {
-        add {_stageScroll += value; }
+        add { _stageScroll += value; }
         remove { _stageScroll -= value; }
     }
+
+    /// <summary>ダメージを与える（プレイヤーの体力を減らす）</summary>
+    public event Action<int> GiveDamage
+    {
+        add { _giveDamage += value; }
+        remove { _giveDamage -= value; }
+    }
+
+
     private void Start()
     {
-        for(int i = 0; i < _fansaNum; i++)
+        for (int i = 0; i < _fansaNum; i++)
         {
             FlickNum(); //ランダムでフリック方向を取得する
         }
@@ -71,7 +84,7 @@ public class Enemy : MonoBehaviour
     {
         _time -= Time.deltaTime;// リズム判定用
 
-        if(_time <= _out) //_outを超えたら飛ばないようにboolで管理
+        if (_time <= _out) //_outを超えたら飛ばないようにboolで管理
         {
             _isOut = true;
             StartFade();
@@ -130,8 +143,9 @@ public class Enemy : MonoBehaviour
     void StartFade()
     {
         _sr.color -= new Color(0, 0, 0, _fadedSpeed); //徐々に透明度を下げていく
-        if(_sr.color.a <= 0)//透明になったら消す
+        if (_sr.color.a <= 0)//透明になったら消す
         {
+            _giveDamage?.Invoke(_fansaNum);
             _stageScroll?.Invoke();
             Destroy(gameObject);
         }
@@ -140,6 +154,7 @@ public class Enemy : MonoBehaviour
     public void Dead()
     {
         Instantiate(_explosionEffect, transform.position, Quaternion.identity);     //爆発エフェクトを生成
+        AudioManager.Instance.PlaySE(6, 0.1f);
         DeadMove();
     }
 
@@ -170,15 +185,18 @@ public class Enemy : MonoBehaviour
         }
         else if (_time <= _perfect)
         {
-            Debug.Log($"perfect { _time:F1}");
+            Debug.Log($"perfect {_time:F1}");
+            ResultManager.Instance.CountPerfect++;
         }
         else if (_time <= _good)
         {
-            Debug.Log($"good { _time:F1}");
+            Debug.Log($"good {_time:F1}");
+            ResultManager.Instance.CountGood++;
         }
         else if (_time <= _bad)
         {
-            Debug.Log($"bad { _time:F1}");
+            Debug.Log($"bad {_time:F1}");
+            ResultManager.Instance.CountBad++;
         }
     }
 
