@@ -30,8 +30,12 @@ public class Enemy : MonoBehaviour
     GameObject _explosionEffect = default;
     [SerializeField, Tooltip("ファンサ")]
     RequestUIController _requestUIController = null;
+    [SerializeField, Tooltip("敵のスプライトを管理するクラスの変数")]
+    SpriteChange _spriteChange = default;
     /// <summary>倒された時の吹き飛ぶ軌道を構成するポイントの配列 </summary>
     Vector3[] _deadMovePoints = default;
+    /// <summary>敵の死亡フラグ</summary>
+    bool _isdead = default;
     /// <summary>FlickTypeを保存させておく変数 </summary>
     public FlickType _flickTypeEnemy;
     /// <summary>アウトがどうかの判定をするフラグ</summary>
@@ -78,13 +82,16 @@ public class Enemy : MonoBehaviour
         _sr = GetComponent<SpriteRenderer>();
         _rb = GetComponent<Rigidbody>();
         _rb.AddForce(_enemySpped); //ファンを前に動かす（仮)
+        _spriteChange.EnemyRandomMethod();
         _isOut = false;
     }
     private void Update()
     {
-        _time -= Time.deltaTime;// リズム判定用
+        
+            _time -= Time.deltaTime;// リズム判定用
+        
 
-        if (_time <= _out) //_outを超えたら飛ばないようにboolで管理
+        if (_time <= _out&& !_isdead) //_outを超えたら飛ばないようにboolで管理
         {
             _isOut = true;
             StartFade();
@@ -156,6 +163,7 @@ public class Enemy : MonoBehaviour
         Instantiate(_explosionEffect, transform.position, Quaternion.identity);     //爆発エフェクトを生成
         AudioManager.Instance.PlaySE(6, 0.1f);
         DeadMove();
+        _isdead = true;
     }
 
     /// <summary>倒された時の軌道のポイントを取得する </summary>

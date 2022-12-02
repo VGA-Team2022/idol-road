@@ -61,7 +61,6 @@ public class EnemySpawn : MonoBehaviour
                     enemy.AddScore += _manager.KillFun;
                     enemy.StageScroll += _manager.Scroller.ScrollOperation;
                     enemy.GiveDamage += _manager.GetDamage;
-
                     _manager.CurrentEnemy = enemy;
                     _manager.Scroller.ScrollOperation();
                     //_onEnemy = false;//‚±‚±‚ÅFalse‚É‚µ‚È‚¢‚Æ¶¬ŠÇ—‚ÌŠÔ‚ªi‚ñ‚Å‚µ‚Ü‚¤
