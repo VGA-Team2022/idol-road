@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     /// <summary>制限時間</summary>
     [SerializeField, Header("制限時間")]
     float _countTime = 60;
+    [SerializeField, Header("制限時間")]
+    float _bossTime = 30;
     [SerializeField, Header("カウントダウン")]
     Text _countDownText;
     [SerializeField, Header("倒した敵を表示するテキスト")]
@@ -47,11 +49,13 @@ public class GameManager : MonoBehaviour
     /// <summary>アイドルタイムの判定をするBool型</summary>
     bool _isIdleTime;
     /// <summary>ボス戦が始まっているか否か</summary>
-    bool _bossTime;
+    bool _bossBattle;
     /// <summary>ゲームが終わったか否か</summary>
     bool _gameEnd;
     /// <summary>ゲーム開始からの経過時間 </summary>
     float _elapsedTime = 0f;
+    /// <summary>ボス戦フラグのプロパティ</summary>
+    public bool Started { get => _isStarted; set => _isStarted = value; }
     /// <summary>倒したファンをカウントするプロパティ</summary>
     public int KillFunAmount { get => _killFunAmount; set => _killFunAmount = value; }
     /// <summary>アイドルパワーのプロパティ</summary>
@@ -66,7 +70,7 @@ public class GameManager : MonoBehaviour
     public Enemy CurrentEnemy { get => _currentEnemy; set => _currentEnemy = value; }
     public StageScroller Scroller { get => _stageScroller; }
     /// <summary>ボス戦フラグのプロパティ</summary>
-    public bool BossTime { get => _bossTime; set => _bossTime = value; }
+    public bool BossBattle { get => _bossBattle; set => _bossBattle = value; }
     /// <summary>ゲームフラグのプロパティ</summary>
     public bool GameEnd { get => _gameEnd; set => _gameEnd = value; }
     /// <summary>アイドルタイムフラグのプロパティ</summary>
@@ -111,7 +115,11 @@ public class GameManager : MonoBehaviour
         {
             _elapsedTime += Time.deltaTime;
 
-            if (_countTime <= _elapsedTime)
+            if (!_bossBattle && _bossTime <= Math.Abs(_countTime - _elapsedTime)) 
+            {
+                
+            }
+            else if (_countTime <= _elapsedTime)
             {
                 _countTime = 0;
             }
@@ -133,6 +141,7 @@ public class GameManager : MonoBehaviour
                 _countDownText.text = "Start!";
                 yield return new WaitForSeconds(1.0f);
                 _countDownText.gameObject.SetActive(false);
+                _stageScroller.ScrollOperation();
                 _isStarted = true;
             }
             yield return null;
