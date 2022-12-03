@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,8 @@ public class InGameUIController : MonoBehaviour
     GridLayoutGroup _hpUIParent = default;
     [SerializeField, Header("HPUIのプレハブ")]
     Image _hpPrefab = default;
+    [SerializeField, Header("コンボ数を表示するテキスト")]
+    TMP_Text _comboText = default;
     /// <summary>現在の表示しているHpUIの配列</summary>
     Image[] _currentHpUIArray = default;
     GameManager _gameManager => GetComponent<GameManager>();
@@ -32,11 +35,8 @@ public class InGameUIController : MonoBehaviour
         //関数を登録
         _gameManager.OnReduceHpUI += ReduseHpUI;
         _gameManager.OnChangeIdolPowerGauge += ChangeIdolPowerGauge;
-    }
-
-    private void Update()
-    {
-        _goalSlider.value = _gameManager.ElapsedTime;   //ゴールまでの距離をUIに表示する
+        _gameManager.OnUpdateComboText += UpdateComboText;
+        _gameManager.OnUpdateGoalDistanceUI += UpdateGoalDistanceUI;
     }
 
     /// <summary>HPUIを生成し配列に追加する </summary>
@@ -65,5 +65,17 @@ public class InGameUIController : MonoBehaviour
     void ChangeIdolPowerGauge(int value)
     {
         _idolPowerGauge.value = value;
+    }
+
+    /// <summary>ゴールまでの距離を表示するUIを更新する</summary>
+    void UpdateGoalDistanceUI(float elapsedTime)
+    {
+        _goalSlider.value = elapsedTime;   //ゴールまでの距離をUIに表示する
+    }
+
+    /// <summary>コンボ数を表示するテキストを更新する </summary>
+    void UpdateComboText(int comboCount)
+    {
+        _comboText.text = comboCount.ToString();
     }
 }
