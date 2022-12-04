@@ -9,8 +9,6 @@ using System.Net;
 
 public class SuperIdolTime : MonoBehaviour
 {
-    [SerializeField,Tooltip("ゲームマネージャー")]
-    private GameManager _manager = default;
     [SerializeField,Tooltip("スーパーアイドルタイム中のゲージがマックスになるまでの回数")]
     private int _gaugeCountMax = 10;
     [SerializeField,Tooltip("スーパーアイドルタイムの持続時間")]
@@ -32,6 +30,8 @@ public class SuperIdolTime : MonoBehaviour
     private Image _imageGauge = default;
     [SerializeField, Tooltip("爆発の画像")]
     private Image _imageExplosion = default;
+    [SerializeField, Tooltip("フェード用のパネル")]
+    private Image _fadePanel = default;
     [SerializeField,Tooltip("スーパーアイドルタイム画面のUIの親オブジェクト")]
     private GameObject _superIdolTimeObject = default;
     [SerializeField, Tooltip("通常画面のCanvas")]
@@ -49,7 +49,6 @@ public class SuperIdolTime : MonoBehaviour
     private bool isUpEnemy = false;
     /// <summary> 入力受付判定</summary>
     private bool isSuperIdolTime = false;
-
     /// <summary>ゲージの最大値</summary>
     public int GaugeCountMax
     {
@@ -77,7 +76,7 @@ public class SuperIdolTime : MonoBehaviour
     {
         _videoPlayer.gameObject.SetActive(true);
         _videoPlayer.Play();
-        //_normalCanvas.gameObject.SetActive(false);
+        _normalCanvas.gameObject.SetActive(false);
         _normalPlayer.gameObject.SetActive(false);
     }
 
@@ -133,17 +132,18 @@ public class SuperIdolTime : MonoBehaviour
         var sequence = DOTween.Sequence();
         sequence.Append(_imageExplosion.transform.DOScale(new Vector3(_imageLange, _imageLange, _imageLange), 0.5f))
                 .Append(_imageExplosion.transform.DOScale(Vector3.zero, 1f))
+                .Append(_fadePanel.DOFade(1,0.5f))
                 .OnComplete(() => { SwitchDisplayObject(); });
         isSuperIdolTime = false;
         //後ろのファンを飛ばす
+        this.gameObject.SetActive(false);
     }
     public void SwitchDisplayObject()
     {
-        //fade処理
-
         _normalCanvas.SetActive(true);
         _normalPlayer.SetActive(true);
         _superIdolTimeObject.SetActive(false);
+        _fadePanel.DOFade(0, 0.25f);
     }
     public void GaugeIncrease()
     {
