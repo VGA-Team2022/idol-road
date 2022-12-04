@@ -6,7 +6,12 @@ public class ResultSwitcher : MonoBehaviour
 {
     ResultManager _result;
 
-    public ResultSwitcherScriptableObject resultSwitcherValues;
+    [SerializeField, Tooltip("Excellent(良)以上なるためのBad判定の数の許容値")]
+    private int _bad_to_Excellent = 0;
+    [SerializeField, Tooltip("Perfect(神)に昇格するために必要なPerfectの数")]
+    private int _perfect_to_Perfect = 10;
+    [SerializeField, Tooltip("Good(普通)からExcellent(良)に昇格するために必要なPerfectの数")]
+    private int _perfect_to_Excellent = 10;
 
     [SerializeField, Tooltip("デバッグする判定数")]
     private int _debugCount = 25;
@@ -14,11 +19,14 @@ public class ResultSwitcher : MonoBehaviour
     private int _randomPerfectCount = 50;
     [SerializeField]
     private bool _isDebug = false;
+
+    [SerializeField]
+    ResultUIController _resultUIController = default;
     // Start is called before the first frame update
     void Start()
     {
         _result = ResultManager.Instance;
-        
+        JudgeResult();
     }
 
     // Update is called once per frame
@@ -40,21 +48,21 @@ public class ResultSwitcher : MonoBehaviour
     {
         var perfects = _result.CountPerfect + _result.CountSuperIdleTimePerfect;
         //BadがあるときGood(普通)スタート
-        if (_result.CountBad > resultSwitcherValues._bad_to_Excellent)
+        if (_result.CountBad > _bad_to_Excellent)
         {
             //Good(普通)
-            if (perfects < resultSwitcherValues._perfect_to_Excellent)
+            if (perfects < _perfect_to_Excellent)
             {
                 ResultGood();
             }
             //パーフェクトが閾値より多ければPerfect(神)　昇格
-            else if (perfects >= resultSwitcherValues._perfect_to_Perfect)
+            else if (perfects >= _perfect_to_Perfect)
             {
                 ResultPerfect();
                 Debug.Log("昇格");
             }
             //Excellent(良)　昇格
-            else if (perfects < resultSwitcherValues._perfect_to_Perfect && perfects >= resultSwitcherValues._perfect_to_Excellent)
+            else if (perfects < _perfect_to_Perfect && perfects >= _perfect_to_Excellent)
             {
                 ResultExcellent();
                 Debug.Log("昇格");
@@ -62,7 +70,7 @@ public class ResultSwitcher : MonoBehaviour
             
         }
         //BadがないときExcellent(良)スタート
-        else if (_result.CountBad <= resultSwitcherValues._bad_to_Excellent)
+        else if (_result.CountBad <= _bad_to_Excellent)
         {
             //GoodがないならPerfect(神)
             if (_result.CountGood == 0)
@@ -73,13 +81,13 @@ public class ResultSwitcher : MonoBehaviour
             else if (_result.CountGood > 0)
             {
                 //パーフェクトが閾値より多ければPerfect(神) 昇格
-                if(perfects >= resultSwitcherValues._perfect_to_Perfect)
+                if(perfects >= _perfect_to_Perfect)
                 {
                     ResultPerfect();
                     Debug.Log("昇格");
                 }
                 //少なければExcellent(良)
-                else if(perfects < resultSwitcherValues._perfect_to_Perfect)
+                else if(perfects < _perfect_to_Perfect)
                 {
                     ResultExcellent();
                 }
@@ -100,21 +108,33 @@ public class ResultSwitcher : MonoBehaviour
     public void ResultBad()
     {
         Debug.Log("Bad 悪");
+        _resultUIController.ChangeResultImage(Result.Bad);
     }
     //普通
     public void ResultGood()
     {
         Debug.Log("Good 普通");
+        _resultUIController.ChangeResultImage(Result.Good);
     }
     //良
     public void ResultExcellent()
     {
         Debug.Log("Excellent 良");
+        _resultUIController.ChangeResultImage(Result.Excellent);
     }
     //神　全良
     public void ResultPerfect()
     {
         Debug.Log("Perfect 神");
+        _resultUIController.ChangeResultImage(Result.Perfect);
     }
+}
+
+public enum Result
+{
+    Perfect,
+    Excellent,
+    Good,
+    Bad
 }
 
