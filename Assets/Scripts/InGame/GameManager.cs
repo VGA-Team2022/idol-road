@@ -1,185 +1,96 @@
 using System;
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
-/// <summary>インゲームを管理するクラス </summary>
-[RequireComponent(typeof(InGameUIController))]
+/// <summary>インゲームを管理するクラス ステートパターン使用</summary>
 public class GameManager : MonoBehaviour
 {
-    [SerializeField, Header("倒したファンをカウント")]
-    int _killFunAmount;
-    [SerializeField, Header("アイドルパワー")]
-    int _idlePower;
+    /// <summary>イラストが変わるタイミング</summary>
+    const int ADD_COMBO_ILLUST_CCHANGE = 5;
+
+    /// <summary>スタート状態 </summary>
+    GameStart _startState => new GameStart();
+    /// <summary>プレイ状態 </summary>
+    Playing _playingState => new Playing();
+    /// <summary>アイドルタイム状態 </summary>
+    IdleTime _idleTimeState => new IdleTime();
+    /// <summary>ボス状態状態 </summary>
+    BossTime _bossTimeState => new BossTime();
+    /// <summary>ゲーム終了状態 </summary>
+    GameEnd _gameEndState => new GameEnd();
+
     [SerializeField, Header("Maxアイドルパワー")]
     int _maxIdlePower = 100;
-    [SerializeField, Header("アイドルのHp")]
-    int _idleHp;
     [SerializeField, Header("アイドルのMaxHp")]
-    int _maxIdleHp;
-    [SerializeField, Header("コンボを数える変数")]
-    int _comboAmount;
-    [SerializeField, Header("イラストが変わるタイミング")]
-    int _comboIllustChange = 5;
-    /// <summary>制限時間</summary>
+    int _maxIdleHp = 5;
     [SerializeField, Header("制限時間")]
-    float _countTime = 60;
-    [SerializeField, Header("制限時間")]
+    float _gameTime = 60;
+    [SerializeField, Header("ボスステージが始まる時間")]
     float _bossTime = 30;
-    [SerializeField, Header("カウントダウン")]
-    Text _countDownText;
-    [SerializeField, Header("倒した敵を表示するテキスト")]
-    Text _funCountText;
-    [SerializeField]
+    [SerializeField, Header("スクロールさせるオブジェクト")]
     StageScroller _stageScroller = default;
-    [SerializeField, Header("キャラが透明になっていく経過を管理するクラス")]
-    FadeColor _fadeColor;
-    [SerializeField, Header("コンボが続いたときに表示させるSprite")]
-    GameObject _comboSpriteChara = default;
+    [SerializeField, Tooltip("InGameUIの更新を行うクラス")]
+    InGameUIController _uiController = default;
+    [SerializeField, Tooltip("敵を生成するクラス")]
+    EnemySpawn _enemySpawner = default;
     /// <summary>現在対象の敵 </summary>
     Enemy _currentEnemy = default;
-
-    /// <summary>表示しているHpUIを減らす処理を行う </summary>
-    event Action<int> _onReduceHpUI = default;
-    /// <summary>アイドルパワーゲージの値を増減させる処理を行う </summary>
-    event Action<int> _onChangeIdolPowerGauge = default;
-
-    /// <summary>ゲームを始めるか否か</summary>
-    bool _isStarted;
-    /// <summary>アイドルタイムの判定をするBool型</summary>
-    bool _isIdleTime;
-    /// <summary>ボス戦が始まっているか否か</summary>
-    bool _bossBattle;
-    /// <summary>ゲームが終わったか否か</summary>
-    bool _gameEnd;
+    /// <summary>現在のゲーム状態</summary>
+    IState _currentGameState = null;
+    /// <summary>現在の体力 </summary>
+    int _idleHp;
+    /// <summary>現在のアイドルパワー </summary>
+    int _idlePower;
+    /// <summary>コンボを数える変数 </summary>
+    int _comboAmount;
+    /// <summary>次にコンボイラストを表示するカウント</summary>
+    int _nextComboCount = ADD_COMBO_ILLUST_CCHANGE;
     /// <summary>ゲーム開始からの経過時間 </summary>
     float _elapsedTime = 0f;
-    /// <summary>ボス戦フラグのプロパティ</summary>
-    public bool Started { get => _isStarted; set => _isStarted = value; }
-    /// <summary>倒したファンをカウントするプロパティ</summary>
-    public int KillFunAmount { get => _killFunAmount; set => _killFunAmount = value; }
-    /// <summary>アイドルパワーのプロパティ</summary>
-    public int IdlePower { get => _idlePower; set => _idlePower = value; }
-    /// <summary>アイドルMaxPowerのプロパティ</summary>
-    public int MaxIdleHp { get => _maxIdleHp; set => _maxIdleHp = value; }
-    /// <summary>コンボ数を管理するプロパティ</summary>
-    public int ComboAmount { get => _comboAmount; set => _comboAmount = value; }
-    /// <summary>制限時間のプロパティ</summary>
-    public float CountTime { get => _countTime; }
+
     /// <summary>現在対象の敵</summary>
     public Enemy CurrentEnemy { get => _currentEnemy; set => _currentEnemy = value; }
+    /// <summary>スクロールさせるオブジェクト</summary>
     public StageScroller Scroller { get => _stageScroller; }
-    /// <summary>ボス戦フラグのプロパティ</summary>
-    public bool BossBattle { get => _bossBattle; set => _bossBattle = value; }
-    /// <summary>ゲームフラグのプロパティ</summary>
-    public bool GameEnd { get => _gameEnd; set => _gameEnd = value; }
-    /// <summary>アイドルタイムフラグのプロパティ</summary>
-    public bool IsIdleTime { get => _isIdleTime; }
+    /// <summary>敵を生成するクラス</summary>
+    public EnemySpawn EnemySpawner { get => _enemySpawner; }
+    /// <summary>アイドルパワーのプロパティ</summary>
+    public int IdlePower { get => _idlePower; set => _idlePower = value; }
+    /// <summary>現在のゲーム状態 </summary>
+    public IState CurrentGameState { get => _currentGameState; }
 
-    /// <summary>ゲーム開始からの経過時間</summary>
-    public float ElapsedTime { get => _elapsedTime; }
-    public int MaxIdlePower { get => _maxIdlePower; }
-
-    /// <summary>表示しているHpUIを減らす処理を行う </summary>
-    public event Action<int> OnReduceHpUI
+    void Start()
     {
-        add { _onReduceHpUI += value; }
-        remove { _onReduceHpUI -= value; }
-    }
-
-    /// <summary>アイドルパワーゲージの値を増減させる処理を行う </summary>
-    public event Action<int> OnChangeIdolPowerGauge
-    {
-        add { _onChangeIdolPowerGauge += value; }
-        remove { _onChangeIdolPowerGauge -= value; }
-    }
-
-
-    private void Awake()
-    {
-        if (_countDownText == null)
-        {
-            Debug.LogError($"Text{_countDownText}がないよ");
-        }
-    }
-    private void Start()
-    {
-        _isStarted = false;
-        _isIdleTime = false;
-        _gameEnd = false;
         _idleHp = _maxIdleHp;
+        _currentGameState = _startState;
+        _currentGameState.OnEnter(this, null);
+        _uiController.InitializeInGameUI(_maxIdleHp, _gameTime, _maxIdlePower); //UIの初期化処理
     }
+
     void Update()
     {
-        if (_isStarted)
+        if (_currentGameState is not GameStart && _currentGameState is not GameEnd) //時間経過のUIを更新する
         {
             _elapsedTime += Time.deltaTime;
+            _uiController.UpdateGoalDistanceUI(_elapsedTime);
+        }
 
-            if (!_bossBattle && _bossTime <= Math.Abs(_countTime - _elapsedTime)) 
-            {
-                
-            }
-            else if (_countTime <= _elapsedTime)
-            {
-                _countTime = 0;
-            }
-        }
-    }
-    /// <summary>カウントダウンコルーチン</summary>
-    private IEnumerator CountDown()
-    {
-        yield return new WaitForSeconds(1.0f);
-        for (int i = 3; i >= 0; i--)
+        if (_bossTime >= Math.Abs(_gameTime - _elapsedTime))    //ボスステージを開始
         {
-            if (i > 0)
-            {
-                _countDownText.text = i.ToString();
-                yield return new WaitForSeconds(1.0f);
-            }
-            else if (i == 0)
-            {
-                _countDownText.text = "Start!";
-                yield return new WaitForSeconds(1.0f);
-                _countDownText.gameObject.SetActive(false);
-                _stageScroller.ScrollOperation();
-                _isStarted = true;
-            }
-            yield return null;
+            ChangeGameState(_bossTimeState);
         }
-    }
-    /// <summary>ファンを倒した数を数える関数</summary>
-    public void KillFun(int kill)
-    {
-        _killFunAmount += kill;
-        _funCountText.text = _killFunAmount.ToString();
-        Debug.Log("hit");
-    }
-    /// <summary>ボタンを押すと呼び出されるカウントダウンの機能</summary>
-    public void CountDownButton()
-    {
-        StartCoroutine(CountDown());
     }
 
     /// <summary>アイドルパワーが増加する関数</summary>
     public void IncreseIdlePower(int power)
     {
         _idlePower += power;
-        _onChangeIdolPowerGauge?.Invoke(_idlePower);
-        IdleTime();
-    }
+        _uiController.UpdateIdolPowerGauge(_idlePower);
 
-    /// <summary>アイドルタイムを判断するための関数</summary>
-    public void IdleTime()
-    {
-        if (_idlePower < _maxIdlePower)
+        if (_maxIdlePower <= _idlePower)    //スーパーアイドルタイムを発動
         {
-            _isIdleTime = false;
-        }
-        else if (_idlePower >= _maxIdlePower)
-        {
-            _isIdleTime = true;
             _idlePower = 0;
-            _onChangeIdolPowerGauge?.Invoke(_idlePower);
+            _uiController.UpdateIdolPowerGauge(_idlePower);
+            ChangeGameState(_idleTimeState);
         }
     }
 
@@ -187,39 +98,45 @@ public class GameManager : MonoBehaviour
     public void ComboAmountTotal()
     {
         _comboAmount++;
-        if (_comboAmount == _comboIllustChange)
-        {
-            IllustDisPlay();
-            _comboIllustChange += 5;
-        }
-        Debug.Log(_comboAmount);
-    }
+        _uiController.UpdateComboText(_comboAmount);    //UIを更新
 
-    /// <summary>イラストを表示させる関数</summary>
-    public void IllustDisPlay()
-    {
-        GameObject obj = Instantiate(_comboSpriteChara, transform);
-        Destroy(obj, _fadeColor.Span);
+        if (_comboAmount == _nextComboCount)    //コンボイラストを表示
+        {
+            _uiController.PlayComboAnimation();
+            _nextComboCount += ADD_COMBO_ILLUST_CCHANGE;
+        }
     }
 
     /// <summary>体力を減らす </summary>
     /// <param name="damage">HPが減る量</param>
     public void GetDamage(int damage)
     {
+        _comboAmount = 0;
+        _uiController.UpdateComboText(_comboAmount);   //コンボUIを更新
+
         for (var i = 0; i < damage; i++)    //HPUIを減らす為に回す
         {
             _idleHp -= 1;
 
             if (0 <= _idleHp)
             {
-                Debug.Log("減らす");
-                _onReduceHpUI?.Invoke(_idleHp);
+                _uiController.UpdateHpUI(_idleHp); //HPUIを更新
             }
 
-            if (_idleHp <= 0)
+            if (_idleHp <= 0)   //ゲームオーバー
             {
-                Debug.Log("失敗");
+                ChangeGameState(_gameEndState); //ゲーム終了状態に遷移
+                return;
             }
         }
+    }
+
+    /// <summary>ゲーム状態を切り替える </summary>
+    /// <param name="nextState">次の状態</param>
+    public void ChangeGameState(IState nextState)
+    {
+        _currentGameState.OnExit(this, nextState);
+        nextState.OnEnter(this, _currentGameState);
+        _currentGameState = nextState;
     }
 }
