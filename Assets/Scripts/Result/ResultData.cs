@@ -5,4 +5,23 @@ using UnityEngine;
 public class ResultData : ScriptableObject
 {
     //TODO:ŠeğŒ‚Å‚Ìbad”,good”,perfect”‚Ì‚µ‚«‚¢’l‚ğ’è‹`‚·‚é
+
+    [SerializeField, Header("Perfect‚É‚È‚éğŒ")]
+    int _badP;
+    [SerializeField]
+    int _goodP;
+    [SerializeField]
+    int _perfectP;
+    [SerializeField, Header("Good‚É‚È‚éğŒ")]
+    int _badG;
+    [SerializeField]
+    int _goodG;
+    [SerializeField]
+    int _perfectG;
+    [SerializeField, Header("Bad‚É‚È‚éğŒ")]
+    int _badB;
+    [SerializeField]
+    int _goodB;
+    [SerializeField]
+    int _perfectB;
 }

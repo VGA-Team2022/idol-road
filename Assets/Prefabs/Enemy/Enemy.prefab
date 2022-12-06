@@ -102,7 +102,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentMoveMethod: 0
   _enemySpped: {x: 0, y: 0, z: -10}
+  _trajectoryParent:
+  - {fileID: 5039499519867245985, guid: 2d33b4343f350624e8d45b8342a5ecc0, type: 3}
+  - {fileID: 5039499519867245985, guid: bc1a3faa40214fa4f9ea5edd3e343288, type: 3}
+  - {fileID: 3999133208081142267, guid: 4a614fba76412ed4c9316ac91bfa1267, type: 3}
   _fansaNum: 1
+  _jugdeLength: 1
   _fadedSpeed: 0.05
   _time: 4
   _perfect: 0.5
