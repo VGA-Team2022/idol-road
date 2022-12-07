@@ -4,11 +4,11 @@ using UnityEngine.UI;
 /// <summary>リザルトシーンのUIを管理・更新するクラス</summary>
 public class ResultUIController : MonoBehaviour
 {
-    [SerializeField, Header("背景")]
+    [SerializeField, Header("背景(キャラクター)")]
     Image _backGround = default;
 
     /// <summary>0=神 1=良 2=普通 3=悪 </summary>
-    [SerializeField, Header("評価別背景"), ElementNames(new string[] {"神", "良", "普通", "悪"})]
+    [SerializeField, Header("評価別背景(キャラクター)"), ElementNames(new string[] {"神", "良", "普通", "悪"})]
     Sprite[] _backGroundSprites = default;
 
     /// <summary>結果によって背景を変更する </summary>
