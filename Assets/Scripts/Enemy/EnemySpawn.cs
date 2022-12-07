@@ -34,19 +34,20 @@ public class EnemySpawn : MonoBehaviour
     void Update()
     {
         //アイドルタイム中も出さないようにする
-        if (_manager.Started && !_manager.GameEnd)
-        {
+       // if (_manager.Started && !_manager.GameEnd)
+       // {
             //ファンがいない場合に生成する。ボス戦は例外で連続で出す
-            if (_manager.CurrentEnemy == null || _manager.BossBattle) 
+            if (_manager.CurrentEnemy == null) 
             {
                 _timeReset += Time.deltaTime;
 
                 if (_timeReset >= _timeInterval[_i]) //_timeIntervalを超えるとInstantiateします
                 {
                     var enemy = Instantiate(_enemyPrefub, _positionObject.transform); //シリアライズで設定したオブジェクトの場所に出現します
-                    enemy.SetDeadMovePoints(_trajectoryParent);
+                enemy.SetUp();
+                 //   enemy.SetDeadMovePoints(_trajectoryParent);
                     //イベントを登録
-                    enemy.AddScore += _manager.KillFun;
+                    //enemy.AddScore += _manager.KillFun;
                     enemy.StageScroll += _manager.Scroller.ScrollOperation;
                     enemy.GiveDamage += _manager.GetDamage;
                     _manager.CurrentEnemy = enemy;
@@ -56,7 +57,7 @@ public class EnemySpawn : MonoBehaviour
                     _timeReset = 0 + _generateOffset;
                 }
             }
-        }
+        //}
     }
 
     /// <summary>

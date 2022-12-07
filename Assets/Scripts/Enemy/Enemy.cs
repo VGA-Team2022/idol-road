@@ -78,15 +78,13 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        // _rb.AddForce(-transform.forward * _enemySpped); //ファンを前に移動させる
+        _rb.AddForce(-transform.forward * _enemySpped); //ファンを前に移動させる
         _spriteChange.EnemyRandomMethod(_sr);
         _time = _resultTimes[_resultTimeIndex];
     }
 
     private void Update()
     {
-
-
         if (!_isdead)
         {
             _time -= Time.deltaTime;// リズム判定用
@@ -96,24 +94,6 @@ public class Enemy : MonoBehaviour
                 _resultTimeIndex++;
                 UpdateCurrentResult();
             }
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            JugeTime(FlickType.Left);
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            JugeTime(FlickType.Right);
-        }
-        else if (Input.GetKeyDown(KeyCode.W))
-        {
-            JugeTime(FlickType.Up);
-        }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            JugeTime(FlickType.Down);
         }
     }
 
@@ -133,9 +113,7 @@ public class Enemy : MonoBehaviour
                 break;
             case TimingResult.Perfect:
                 _currentResult = TimingResult.Out;
-                Debug.Log(_time);
-                _sr.DOFade(endValue: 0, duration: _fadedSpeed)
-                          .OnComplete(OutMove);
+                _sr.DOFade(endValue: 0, duration: _fadedSpeed).OnComplete(OutEffect);
                 _isdead = true;
                 break;
         }
@@ -143,8 +121,38 @@ public class Enemy : MonoBehaviour
         _requestUIController.ChangeRequestWindow(_currentResult);
     }
 
+    /// <summary>ファンサを決める</summary>
+    void FlickNum()
+    {
+        var rnd = UnityEngine.Random.Range(1, 5);
+        _flickTypeEnemy = (FlickType)rnd;
+        _requestUIController.ChangeRequestImage(_flickTypeEnemy);
+    }
+
+
+    /// <summary>評価によって倒された時の移動方法を変更する </summary>
+    void SelectDeadEffect()
+    {
+        switch (_currentResult)
+        {
+            case TimingResult.Bad:
+                BadEffect();
+                break;
+            case TimingResult.Good:
+                Instantiate(_explosionEffect, transform.position, Quaternion.identity);     //爆発エフェクトを生成
+                AudioManager.Instance.PlaySE(6, 0.1f);
+                DeadEffect();
+                break;
+            case TimingResult.Perfect:
+                Instantiate(_explosionEffect, transform.position, Quaternion.identity);
+                AudioManager.Instance.PlaySE(6, 0.1f);
+                DeadEffect();
+                break;
+        }
+    }
+
     /// <summary> Bad, Out以外で使用する吹き飛び演出 </summary>
-    void DeadMove()
+    void DeadEffect()
     {
         //移動処理
         transform.DOPath(path: _deadMovePoints, duration: _deadMoveTime, pathType: PathType.CatmullRom)
@@ -165,30 +173,31 @@ public class Enemy : MonoBehaviour
     }
 
     /// <summary>評価BadのときのEnemyの動き</summary>
-    void BadMove()
+    void BadEffect()
     {
         //横移動
         transform.DOMoveX(-3, _deadMoveTime)
             .SetDelay(EXPLOSION_DELAY)
-            //動ききってから消えるパターン
-         //   .OnComplete(()=>_sr.DOFade(endValue:0,duration:2.0f))
-            .OnComplete(() => _stageScroll?.Invoke())
-            .OnComplete(() => Destroy(gameObject));
+            .OnComplete(DeadProcess);
+        //.OnComplete(() =>
+        //{
+        //    _sr.DOFade(endValue: 0, duration: 2.0f).OnComplete(DeadProcess);
+        //});
 
         //透明になりながら消えていくパターン
         _sr.DOFade(endValue: 0, duration: 2.0f);
-        _isdead = true;
-
-        //スケールをいじる
-        /*transform.DOScale(new Vector3(0.5f, 0.5f, 0.5f), _moveTime)
-            .SetDelay(EXPLOSION_DELAY)
-            .OnComplete(() => _stageScroll?.Invoke());*/
     }
 
     /// <summary>out時のの処理</summary>
-    void OutMove()
+    void OutEffect()
     {
         _giveDamage?.Invoke(_fansaNum); //ダメージを与える
+        DeadProcess();
+    }
+
+    /// <summary>死亡時の共通処理</summary>
+    void DeadProcess()
+    {
         _stageScroll?.Invoke();         //ステージスクロールを行う
         Destroy(gameObject);
     }
@@ -196,46 +205,34 @@ public class Enemy : MonoBehaviour
     /// <summary>倒された時の処理 </summary>
     public void Dead()
     {
-        Instantiate(_explosionEffect, transform.position, Quaternion.identity);     //爆発エフェクトを生成
-        DeadMove();
-        _isdead = true;
-        AudioManager.Instance.PlaySE(6, 0.1f);
-    }
+        if (_isdead) { return; }
 
-    /// <summary>Flickする方向をランダムに取得する</summary>
-    public void FlickNum()
-    {
-        var rnd = UnityEngine.Random.Range(1, 5);
-        _flickTypeEnemy = (FlickType)rnd;
-        _requestUIController.ChangeRequestImage(_flickTypeEnemy);
+        _isdead = true;
+        _requestUIController.gameObject.SetActive(false);
+        SelectDeadEffect();
     }
 
     /// <summary>判定別の処理を行う</summary>
     public void JugeTime(FlickType playInput)
     {
-        if (_flickTypeEnemy != playInput) { return; }
+        if (_flickTypeEnemy != playInput || _isdead) { return; }
 
-        if (!_isdead)
+        switch (_currentResult)
         {
-            switch (_currentResult)
-            {
-                case TimingResult.Perfect:
-                    Dead();
-                    ResultManager.Instance.CountPerfect++;
-                    break;
-                case TimingResult.Good:
-                    Dead();
-                    ResultManager.Instance.CountGood++;
-                    break;
-                case TimingResult.Bad:
-                    BadMove();
-                    ResultManager.Instance.CountBad++;
-                    break;
-            }
+            case TimingResult.Perfect:
+                ResultManager.Instance.CountPerfect++;
+                break;
+            case TimingResult.Good:
+                ResultManager.Instance.CountGood++;
+                break;
+            case TimingResult.Bad:
+                ResultManager.Instance.CountBad++;
+                break;
         }
 
-       
+        Dead();
     }
+
     /// <summary>生成時の初期化処理 </summary>
     public void SetUp()
     {
