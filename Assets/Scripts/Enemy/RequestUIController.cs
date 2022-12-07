@@ -20,6 +20,7 @@ public class RequestUIController : MonoBehaviour
         switch (result)
         {
             case TimingResult.Bad:
+                gameObject.SetActive(true);
                 _requestWindow.sprite = _requestWindowSprites[0];
                 break;
             case TimingResult.Good:
@@ -27,6 +28,9 @@ public class RequestUIController : MonoBehaviour
                 break;
             case TimingResult.Perfect:
                 _requestWindow.sprite = _requestWindowSprites[2];
+                break;
+            case TimingResult.Out:
+                gameObject.SetActive(false);
                 break;
         }
     }
@@ -55,6 +59,7 @@ public class RequestUIController : MonoBehaviour
 /// <summary>ファンを吹き飛ばしたタイミングの評価</summary>
 public enum TimingResult
 {
+    None,
     Bad,
     Good,
     Perfect,

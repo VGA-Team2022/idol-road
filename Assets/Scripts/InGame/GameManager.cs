@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     [SerializeField, Tooltip("InGameUIの更新を行うクラス")]
     InGameUIController _uiController = default;
     [SerializeField, Tooltip("敵を生成するクラス")]
-    EnemySpawn _enemySpawner = default;
+    EnemySpawner _enemySpawner = default;
     /// <summary>現在対象の敵 </summary>
     Enemy _currentEnemy = default;
     /// <summary>現在のゲーム状態</summary>
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
     /// <summary>スクロールさせるオブジェクト</summary>
     public StageScroller Scroller { get => _stageScroller; }
     /// <summary>敵を生成するクラス</summary>
-    public EnemySpawn EnemySpawner { get => _enemySpawner; }
+    public EnemySpawner EnemyGenerator { get => _enemySpawner; }
     /// <summary>アイドルパワーのプロパティ</summary>
     public int IdlePower { get => _idlePower; set => _idlePower = value; }
     /// <summary>現在のゲーム状態 </summary>
@@ -95,9 +95,17 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>コンボ数を管理する関数</summary>
-    public void ComboAmountTotal()
+    public void ComboAmountTotal(TimingResult result)
     {
-        _comboAmount++;
+        if (result == TimingResult.Out || result == TimingResult.Bad)
+        {
+            _comboAmount = 0;
+        }
+        else
+        {
+            _comboAmount++;
+        }
+
         _uiController.UpdateComboText(_comboAmount);    //UIを更新
 
         if (_comboAmount == _nextComboCount)    //コンボイラストを表示
@@ -111,9 +119,6 @@ public class GameManager : MonoBehaviour
     /// <param name="damage">HPが減る量</param>
     public void GetDamage(int damage)
     {
-        _comboAmount = 0;
-        _uiController.UpdateComboText(_comboAmount);   //コンボUIを更新
-
         for (var i = 0; i < damage; i++)    //HPUIを減らす為に回す
         {
             _idleHp -= 1;
