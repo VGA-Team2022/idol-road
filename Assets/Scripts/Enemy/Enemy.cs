@@ -49,7 +49,10 @@ public class Enemy : MonoBehaviour
     event Action _stageScroll = default;
     /// <summary>ダメージを与える（プレイヤーの体力を減らす）</summary>
     event Action<int> _giveDamage = default;
+    /// <summary>コンボ数を増やす処理 </summay>
+    event Action<TimingResult> _addComboCount = default;
 
+#region
     Rigidbody _rb => GetComponent<Rigidbody>();
     SpriteRenderer _sr => GetComponent<SpriteRenderer>();
     /// <summary>敵のスプライトを管理するクラスの変数 </summary>
@@ -75,6 +78,15 @@ public class Enemy : MonoBehaviour
         add { _giveDamage += value; }
         remove { _giveDamage -= value; }
     }
+
+    /// <summary>コンボ数を増やす処理 </summay>
+    public event Action<TimingResult> AddComboCount
+    {
+        add { _addComboCount += value; }
+        remove { _addComboCount -= value; }
+    }
+
+#endregion
 
     private void Start()
     {
@@ -114,6 +126,7 @@ public class Enemy : MonoBehaviour
             case TimingResult.Perfect:
                 _currentResult = TimingResult.Out;
                 _sr.DOFade(endValue: 0, duration: _fadedSpeed).OnComplete(OutEffect);
+                _addComboCount?.Invoke(_currentResult);
                 _isdead = true;
                 break;
         }
@@ -185,7 +198,7 @@ public class Enemy : MonoBehaviour
         //});
 
         //透明になりながら消えていくパターン
-        _sr.DOFade(endValue: 0, duration: 2.0f);
+        _sr.DOFade(endValue: 0, duration: 2.0f).OnComplete(() => _giveDamage?.Invoke(_fansaNum));
     }
 
     /// <summary>out時のの処理</summary>
@@ -230,6 +243,7 @@ public class Enemy : MonoBehaviour
                 break;
         }
 
+        _addComboCount?.Invoke(_currentResult);
         Dead();
     }
 

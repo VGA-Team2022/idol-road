@@ -150,7 +150,7 @@ public class ScreenInput : MonoBehaviour
             //if(_flickType == _manager.CurrentEnemy.FlickTypeEnemy) ///フリックした方向がファンサと同様なら吹っ飛ぶ
             //{
             //    AudioManager.Instance.PlayRequestSE(_flickType);
-            //    _manager.CurrentEnemy.JugeTime();//飛んだときの秒数と判定を決めるもの
+                _manager.CurrentEnemy.JugeTime(_flickType);//飛んだときの秒数と判定を決めるもの
             //    _manager.CurrentEnemy.Dead();
             //}
         }
