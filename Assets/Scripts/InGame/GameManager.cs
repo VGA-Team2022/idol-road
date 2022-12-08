@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>インゲームを管理するクラス ステートパターン使用</summary>
@@ -38,6 +39,8 @@ public class GameManager : MonoBehaviour
     Enemy _currentEnemy = default;
     /// <summary>現在のゲーム状態</summary>
     IState _currentGameState = null;
+    /// <summary>ステージに表示されている敵のリスト</summary>
+    List<Enemy> _enemies = new List<Enemy>();
     /// <summary>現在の体力 </summary>
     int _idleHp;
     /// <summary>現在のアイドルパワー </summary>
@@ -49,6 +52,7 @@ public class GameManager : MonoBehaviour
     /// <summary>ゲーム開始からの経過時間 </summary>
     float _elapsedTime = 0f;
 
+#region
     /// <summary>現在対象の敵</summary>
     public Enemy CurrentEnemy { get => _currentEnemy; set => _currentEnemy = value; }
     /// <summary>スクロールさせるオブジェクト</summary>
@@ -59,7 +63,11 @@ public class GameManager : MonoBehaviour
     public int IdlePower { get => _idlePower; set => _idlePower = value; }
     /// <summary>現在のゲーム状態 </summary>
     public IState CurrentGameState { get => _currentGameState; }
+    /// <summary>フェードを行うクラス</summary>
     public FadeController FadeCanvas { get => _fadeController; }
+    /// <summary>ステージに表示されている敵のリスト</summary>
+    public List<Enemy> Enemies { get => _enemies; }
+#endregion
 
     void Start()
     {
@@ -146,5 +154,19 @@ public class GameManager : MonoBehaviour
         _currentGameState.OnExit(this, nextState);
         nextState.OnEnter(this, _currentGameState);
         _currentGameState = nextState;
+    }
+
+    /// <summary>生成された敵をリストに追加</summary>
+    /// <param name="enemy">追加する敵</param>
+    public void AddEnemy(Enemy enemy)
+    {
+        _enemies.Add(enemy);
+    }
+
+    /// <summary>倒された敵をリストから削除する</summary>
+    /// <param name="enemy">削除する敵</param>
+    public void RemoveEnemy(Enemy enemy)
+    {
+        _enemies.Remove(enemy);
     }
 }
