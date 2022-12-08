@@ -1,27 +1,27 @@
 using UnityEngine;
 
 /// <summary>リザルト条件の情報を持つScriptableObjectを作成するクラス</summary>
-[CreateAssetMenu(fileName = "Data",menuName ="ScriptableObjects/ResultSwitcherScriptableObject",order =1)]
+[CreateAssetMenu(fileName = "ResultData",menuName ="ScriptableObjects/ResultSwitcherScriptableObject",order = 0)]
 public class ResultData : ScriptableObject
 {
     //TODO:各条件でのbad数,good数,perfect数のしきい値を定義する
 
     [SerializeField, Header("Perfectになる条件")]
-    int _badP;
+    public int _badP;
     [SerializeField]
-    int _goodP;
+    public int _goodP;
     [SerializeField]
-    int _perfectP;
+    public int _perfectP;
+    [SerializeField, Header("Excellent")]
+    public int _badE;
+    [SerializeField]
+    public int _goodE;
     [SerializeField, Header("Goodになる条件")]
-    int _badG;
-    [SerializeField]
-    int _goodG;
-    [SerializeField]
-    int _perfectG;
+    public int _badG;
     [SerializeField, Header("Badになる条件")]
-    int _badB;
+    public int _badB;
+    [SerializeField, Header("リザルトが変わる特別条件")]
+    public int _specialExsellent;
     [SerializeField]
-    int _goodB;
-    [SerializeField]
-    int _perfectB;
+    public int _spesialPerfect;
 }
