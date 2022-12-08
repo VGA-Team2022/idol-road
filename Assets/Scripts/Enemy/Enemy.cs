@@ -43,8 +43,6 @@ public class Enemy : MonoBehaviour
     bool _isdead = false;
     /// <summary>評価変更用変数</summary>
     float _time = 0f;
-    /// <summary>スコアを増やすAction </summary>
-    event Action<int> _addScore = default;
     /// <summary>倒されたらステージスクロールを開始する </summary>
     event Action _stageScroll = default;
     /// <summary>ダメージを与える（プレイヤーの体力を減らす）</summary>
@@ -57,13 +55,6 @@ public class Enemy : MonoBehaviour
     SpriteRenderer _sr => GetComponent<SpriteRenderer>();
     /// <summary>敵のスプライトを管理するクラスの変数 </summary>
     SpriteChange _spriteChange => GetComponent<SpriteChange>();
-
-    /// <summary>スコアを増やすAction </summary>
-    public event Action<int> AddScore
-    {
-        add { _addScore += value; }
-        remove { _addScore -= value; }
-    }
 
     /// <summary>倒されたらステージスクロールを開始する </summary>
     public event Action StageScroll

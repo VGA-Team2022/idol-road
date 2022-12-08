@@ -8,15 +8,15 @@ public class GameManager : MonoBehaviour
     const int ADD_COMBO_ILLUST_CCHANGE = 5;
 
     /// <summary>スタート状態 </summary>
-    GameStart _startState => new GameStart();
+    public static GameStart _startState => new GameStart();
     /// <summary>プレイ状態 </summary>
-    Playing _playingState => new Playing();
+    public static Playing _playingState => new Playing();
     /// <summary>アイドルタイム状態 </summary>
-    IdleTime _idleTimeState => new IdleTime();
+    public static IdleTime _idleTimeState => new IdleTime();
     /// <summary>ボス状態状態 </summary>
-    BossTime _bossTimeState => new BossTime();
+    public static BossTime _bossTimeState => new BossTime();
     /// <summary>ゲーム終了状態 </summary>
-    GameEnd _gameEndState => new GameEnd();
+    public static GameEnd _gameEndState => new GameEnd();
 
     [SerializeField, Header("Maxアイドルパワー")]
     int _maxIdlePower = 100;
@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     float _bossTime = 30;
     [SerializeField, Header("スクロールさせるオブジェクト")]
     StageScroller _stageScroller = default;
+    [SerializeField, Tooltip("フェードを行うクラス")]
+    FadeController _fadeController = default;
     [SerializeField, Tooltip("InGameUIの更新を行うクラス")]
     InGameUIController _uiController = default;
     [SerializeField, Tooltip("敵を生成するクラス")]
@@ -57,6 +59,7 @@ public class GameManager : MonoBehaviour
     public int IdlePower { get => _idlePower; set => _idlePower = value; }
     /// <summary>現在のゲーム状態 </summary>
     public IState CurrentGameState { get => _currentGameState; }
+    public FadeController FadeCanvas { get => _fadeController; }
 
     void Start()
     {

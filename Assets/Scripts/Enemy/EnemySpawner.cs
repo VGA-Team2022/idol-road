@@ -20,11 +20,12 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         _timeIntervalIndex = Random.Range(0, _timeInterval.Length);
+        _generateTimer = -_timeInterval[3]; //Å‰‚Ì‚İ2•bŠÔ’x‰„‚ğ‚³‚¹‚é
     }
 
     void Update()
     {
-        if (_manager.CurrentEnemy == null)
+        if (_manager.CurrentGameState is Playing || _manager.CurrentGameState is BossTime)
         {
             _generateTimer += Time.deltaTime;
 

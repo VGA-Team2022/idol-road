@@ -6,6 +6,11 @@ using DG.Tweening;
 /// <summary>フェード関連の処理を行うクラス</summary>
 public class FadeController : MonoBehaviour
 {
+    /// <summary>α値の最大値 </summary>
+    const float MAX_α_VALUE = 1f;
+    /// <summary>α値の最小値 </summary>
+    const float MIN_α_VALUE = 0f;
+
     [SerializeField, Header("フェードインにかかる時間")]
     float _fadeInTime = 0f;
     [SerializeField, Header("フェードアウトにかかる時間")]
@@ -15,21 +20,17 @@ public class FadeController : MonoBehaviour
 
     /// <summary>フェードインを行う処理</summary>
     /// <param name="action">フェードイン終了時処理</param>
-    public bool FadeIn(Action action = null)
+    public void FadeIn(Action action = null)
     {
-        _panel.DOFade(1f, _fadeInTime)
+        _panel.DOFade(MAX_α_VALUE, _fadeInTime)
             .OnComplete(() => action?.Invoke());
-
-        return true;
     }
 
     /// <summary>フェードアウトを行う処理</summary>
     /// <param name="action">フェードアウト終了時処理</param>
-    public bool FadeOut(Action action = null)
+    public void FadeOut(Action action = null)
     {
-        _panel?.DOFade(0f, _fadeOutTime)
+        _panel?.DOFade(MIN_α_VALUE, _fadeOutTime)
             .OnComplete(() => action?.Invoke());
-
-        return true;
     }
 }
