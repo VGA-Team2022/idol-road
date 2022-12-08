@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5968483811882916910}
-  - component: {fileID: 5968483811882916911}
   - component: {fileID: 1060883709}
-  - component: {fileID: 336802384846892835}
   - component: {fileID: -3143044023716922937}
+  - component: {fileID: 5968483811882916911}
+  - component: {fileID: 336802384846892835}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -36,6 +36,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1060883709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5968483811882916908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e230a272d83991498961b02d2f21dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemySpped: 5
+  _fadedSpeed: 1.5
+  _resultTimes:
+  - 6
+  - 4
+  - 2
+  - 0.5
+  - 0
+  _addScoreValue: 1
+  _deadMoveTime: 2
+  _minScale: 0.1
+  _explosionEffect: {fileID: 5047219227802861214, guid: 5315674b013e09d4088b189a94135c4c, type: 3}
+  _requestUIController: {fileID: 7277948641732065839}
+  _trajectoryParent:
+  - {fileID: 5039499519867245985, guid: 2d33b4343f350624e8d45b8342a5ecc0, type: 3}
+  - {fileID: 5039499519867245985, guid: bc1a3faa40214fa4f9ea5edd3e343288, type: 3}
+  - {fileID: 3999133208081142267, guid: 4a614fba76412ed4c9316ac91bfa1267, type: 3}
+--- !u!114 &-3143044023716922937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5968483811882916908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd19fe8c53476d24198de22380d71e7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _normalEnemys:
+  - {fileID: 21300000, guid: 09918c91bcc977d4789c8ef27a8aa673, type: 3}
+  - {fileID: 21300000, guid: dd4dd3e9ece2d3048a803acaa55c52a1, type: 3}
+  - {fileID: 21300000, guid: 429a333402e609e439e297986472530a, type: 3}
+  - {fileID: 21300000, guid: a0bd740dc83771f40ae382c9e09465bd, type: 3}
+  - {fileID: 21300000, guid: 4c143ebb91169ab42bc655a3e26dc7a7, type: 3}
 --- !u!212 &5968483811882916911
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -88,40 +135,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1060883709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5968483811882916908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e230a272d83991498961b02d2f21dac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentMoveMethod: 0
-  _enemySpped: {x: 0, y: 0, z: -10}
-  _trajectoryParent:
-  - {fileID: 5039499519867245985, guid: 2d33b4343f350624e8d45b8342a5ecc0, type: 3}
-  - {fileID: 5039499519867245985, guid: bc1a3faa40214fa4f9ea5edd3e343288, type: 3}
-  - {fileID: 3999133208081142267, guid: 4a614fba76412ed4c9316ac91bfa1267, type: 3}
-  _fansaNum: 1
-  _jugdeLength: 1
-  _fadedSpeed: 0.05
-  _time: 4
-  _perfect: 0.5
-  _good: 2
-  _bad: 4
-  _out: 0
-  _addScoreValue: 1
-  _moveTime: 1
-  _minScale: 0.1
-  _explosionEffect: {fileID: 5047219227802861214, guid: 5315674b013e09d4088b189a94135c4c, type: 3}
-  _requestUIController: {fileID: 7277948641732065839}
-  _spriteChange: {fileID: -3143044023716922937}
-  _flickTypeEnemy: 0
-  _isOut: 0
 --- !u!54 &336802384846892835
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -138,24 +151,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &-3143044023716922937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5968483811882916908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd19fe8c53476d24198de22380d71e7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _normalEnemys:
-  - {fileID: 21300000, guid: 09918c91bcc977d4789c8ef27a8aa673, type: 3}
-  - {fileID: 21300000, guid: dd4dd3e9ece2d3048a803acaa55c52a1, type: 3}
-  - {fileID: 21300000, guid: 429a333402e609e439e297986472530a, type: 3}
-  - {fileID: 21300000, guid: a0bd740dc83771f40ae382c9e09465bd, type: 3}
-  - {fileID: 21300000, guid: 4c143ebb91169ab42bc655a3e26dc7a7, type: 3}
 --- !u!1001 &1866035362427135112
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -210,6 +205,10 @@ PrefabInstance:
     - target: {fileID: 2263534891915938486, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
       propertyPath: m_Name
       value: RequestWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263534891915938486, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}

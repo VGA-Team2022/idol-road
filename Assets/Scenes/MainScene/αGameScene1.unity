@@ -1162,17 +1162,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &70523343 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 587714610366235794, guid: 333de39ddbc53194599f4fa1aa420e0d, type: 3}
-  m_PrefabInstance: {fileID: 1930919782}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &87719543
 GameObject:
   m_ObjectHideFlags: 0
@@ -5996,17 +5985,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &353927765 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 587714612298976613, guid: 333de39ddbc53194599f4fa1aa420e0d, type: 3}
-  m_PrefabInstance: {fileID: 1930919782}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &354488341
 GameObject:
   m_ObjectHideFlags: 0
@@ -11100,17 +11078,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &615486473 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 587714610597963012, guid: 333de39ddbc53194599f4fa1aa420e0d, type: 3}
-  m_PrefabInstance: {fileID: 1930919782}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &616604382
 GameObject:
   m_ObjectHideFlags: 0
@@ -20619,6 +20586,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1084394683 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8852329367556294715, guid: 333de39ddbc53194599f4fa1aa420e0d, type: 3}
+  m_PrefabInstance: {fileID: 1930919782}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 125c8f56a9422c04cbbc879b748798cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1084914769 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1415453749020358169, guid: 38394c7e5dd2fd5418d674a2410b4263, type: 3}
@@ -20640,7 +20618,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1090293135}
   - component: {fileID: 1090293134}
-  - component: {fileID: 1090293136}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -20660,19 +20637,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1735335aea5c2694e8465a5297b7f329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _killFunAmount: 0
-  _idlePower: 0
   _maxIdlePower: 100
-  _idleHp: 5
   _maxIdleHp: 5
-  _comboAmount: 0
-  _comboIllustChange: 5
-  _countTime: 60
-  _countDownText: {fileID: 1776784911}
-  _funCountText: {fileID: 844217159}
+  _gameTime: 60
+  _bossTime: 30
   _stageScroller: {fileID: 2145833677}
-  _fadeColor: {fileID: 3115480812075189170, guid: 9b0e5da3ee02a5845a81a9b8a5551120, type: 3}
-  _comboSpriteChara: {fileID: 4700086392627478024, guid: 261f102de9047714980e958ef6269606, type: 3}
+  _uiController: {fileID: 1084394683}
+  _enemySpawner: {fileID: 1084914769}
 --- !u!4 &1090293135
 Transform:
   m_ObjectHideFlags: 0
@@ -20688,22 +20659,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1090293136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1090293133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 125c8f56a9422c04cbbc879b748798cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _goalSlider: {fileID: 353927765}
-  _idolPowerGauge: {fileID: 615486473}
-  _hpUIParent: {fileID: 70523343}
-  _hpPrefab: {fileID: 8451664795510223368, guid: 25937646bde21ea4f8545197f391f84f, type: 3}
 --- !u!1 &1093476959
 GameObject:
   m_ObjectHideFlags: 0
