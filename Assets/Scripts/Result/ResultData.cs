@@ -16,8 +16,6 @@ public class ResultData : ScriptableObject
     public int _badE;
     [SerializeField]
     public int _goodE;
-    [SerializeField]
-    public int _perfectE;
     [SerializeField, Header("Good‚É‚È‚éğŒ")]
     public int _badG;
     [SerializeField, Header("Bad‚É‚È‚éğŒ")]
