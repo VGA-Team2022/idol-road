@@ -12,16 +12,14 @@ public class ResultData : ScriptableObject
     public int _goodP;
     [SerializeField]
     public int _perfectP;
+    [SerializeField, Header("Excellent")]
+    public int _badE;
+    [SerializeField]
+    public int _goodE;
+    [SerializeField]
+    public int _perfectE;
     [SerializeField, Header("Good‚É‚È‚éğŒ")]
     public int _badG;
-    [SerializeField]
-    public int _goodG;
-    [SerializeField]
-    public int _perfectG;
     [SerializeField, Header("Bad‚É‚È‚éğŒ")]
     public int _badB;
-    [SerializeField]
-    public int _goodB;
-    [SerializeField]
-    public int _perfectB;
 }
