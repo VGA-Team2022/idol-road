@@ -20,4 +20,8 @@ public class ResultData : ScriptableObject
     public int _badG;
     [SerializeField, Header("Bad‚É‚È‚éğŒ")]
     public int _badB;
+    [SerializeField, Header("ƒŠƒUƒ‹ƒg‚ª•Ï‚í‚é“Á•ÊğŒ")]
+    public int _specialExsellent;
+    [SerializeField]
+    public int _spesialPerfect;
 }
