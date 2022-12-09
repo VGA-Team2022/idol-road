@@ -1,20 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+/// <summary>タイトルシーンの処理を管理するクラス </summary>
 public class TitleManager : MonoBehaviour
 {
-    [SerializeField] 
+    [SerializeField, Tooltip("フェードを行うクラス")] 
     FadeController _fadeController = default;
-    [SerializeField]
-    string _sceneName = "";
+    [SerializeField, Tooltip("遷移先のシーン名")]
+    string _nextSceneName = "";
 
-    void Start()
+    private void Update()
     {
-        _fadeController.gameObject.SetActive(false);
-    }
-    public void GameSceneState()
-    {
-        _fadeController.FadeIn(() => SceneManager.LoadScene(_sceneName));
+        if (Input.GetMouseButtonDown(0))    //タップ
+        {
+            _fadeController.FadeOut(() => SceneManager.LoadScene(_nextSceneName));   //フェードを開始する
+        }
     }
 }
