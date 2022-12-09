@@ -32,15 +32,18 @@ public class ResultUIController : MonoBehaviour
         {
             case Result.Bad:
                 _backGround.sprite = _backGroundSprites[3];
+                _resultValueText[0].text = "Result:Bad";
                 break;
             case Result.Good:
                 _backGround.sprite = _backGroundSprites[2];
+                _resultValueText[0].text = "Result:Good";
                 break;
             case Result.Excellent:
                 _backGround.sprite = _backGroundSprites[1];
                 break;
             case Result.Perfect:
                 _backGround.sprite = _backGroundSprites[0];
+                _resultValueText[0].text = "Result:Perfect";
                 break;
         }
     }
@@ -49,7 +52,8 @@ public class ResultUIController : MonoBehaviour
     {
         
         int count = 0;
-        //_resultValueText[0
+        yield return new WaitForSeconds(_showResultSpan);
+        _resultValueText[0].gameObject.SetActive(true);
         yield return new WaitForSeconds(_showResultSpan);
         _resultValueText[1].gameObject.SetActive(true);
         DOTween.To(() => count, (r) => count = r, /*_result.CountBad*/50, _increseTime)
