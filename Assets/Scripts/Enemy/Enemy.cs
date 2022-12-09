@@ -82,7 +82,6 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         _rb.AddForce(-transform.forward * _enemySpped); //ファンを前に移動させる
-        _spriteChange.EnemyRandomMethod(_sr);
         _time = _resultTimes[_resultTimeIndex];
     }
 
@@ -239,16 +238,17 @@ public class Enemy : MonoBehaviour
     }
 
     /// <summary>生成時の初期化処理 </summary>
-    public void SetUp(GameManager manager)
+    public void SetUp(IState istate)
     {
         var points = transform;     //一時的に軌道の親オブジェクトを保持する為の変数
 
         FlickNum(); //ランダムでフリック方向を取得する
 
-        if(manager.CurrentGameState is BossTime) 
+        if(istate is BossTime) 
         {
-            
+            _spriteChange.EnemyBossMethod(_sr);
         }
+        else { _spriteChange.EnemyRandomMethod(_sr); }
 
         switch (_flickTypeEnemy)    //各ファンサで吹き飛ぶ方向を決める
         {

@@ -34,7 +34,7 @@ public class EnemySpawner : MonoBehaviour
             if (_generateTimer >= _timeInterval[_timeIntervalIndex]) //_timeIntervalを超えるとInstantiateします
             {
                 var enemy = Instantiate(_enemyPrefub, _positionObject.transform); //シリアライズで設定したオブジェクトの場所に出現します
-                enemy.SetUp(_manager);
+                enemy.SetUp(_manager.CurrentGameState);
 
                 //イベントを登録
                 enemy.AddComboCount += _manager.ComboAmountTotal;
