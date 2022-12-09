@@ -10,8 +10,19 @@ public class FadeManager2 : MonoBehaviour
 
     [SerializeField] float _fadeSpeed;
 
+    
+
+    [SerializeField] FadeMode _fadeMode;
+
     Color _color;
 
+    ButtonFuncs _buttonFuncs;
+
+    //  public GameObject FadeObj { get; private set; }
+
+    //  public float FadeSpeed { get { return _fadeSpeed; } set { _fadeSpeed = value; } }
+
+    public FadeMode Mode { get; set; }
     void Start()
     {
         SettingFadeColor();
@@ -28,42 +39,65 @@ public class FadeManager2 : MonoBehaviour
     /// </summary>
     public void SettingFadeColor()
     {
-        _fadeObj.GetComponent<Image>().color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+        if (_fadeMode == FadeMode.OutMode)
+        {
+            _fadeObj.GetComponent<Image>().color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+            StartCoroutine(FadeOutMethod());
+        }
+        if (_fadeMode == FadeMode.InMode)
+        {
+            _fadeObj.GetComponent<Image>().color = _fadeObj.GetComponent<Image>().color - new Color32(0, 0, 0, (byte)_fadeSpeed);
+            StartCoroutine(FadeInMethod());
+        }
+       
     }
 
     /// <summary>
     /// フェードアウト処理のメソッド
     /// </summary>
-    public void FadeOutMethod()
+    public IEnumerator FadeOutMethod()
     {
-        // deltaTimeで徐々に加算
-        _fadeSpeed += Time.deltaTime * _fadeSpeed;
+        for (int i = 0; i < 255; i++)
+        {
+            // アルファ値にdeltaTimeで減算した値を代入
+            _fadeObj.GetComponent<Image>().color = _fadeObj.GetComponent<Image>().color + new Color32(0, 0, 0, 1);
 
-        // シリアライズした値を徐々に加算
-       // _fadeSpeed++;
-       
-        // アルファ値に加算した値を代入
-        _fadeObj.GetComponent<Image>().color = new Color(0.0f, 0.0f, 0.0f, _fadeSpeed);
+            yield return new WaitForSeconds(0.001f);
+        }
+
+        yield return ChangeScene(_buttonFuncs.NextScene);
     }
 
     /// <summary>
     /// フェードイン処理のメソッド
     /// </summary>
-    public void FadeInMethod()
+    public IEnumerator FadeInMethod()
     {
-        // deltaTimeで徐々に減算
-        _fadeSpeed -= Time.deltaTime;
+        for (int i = 0; i < 255 ; i++)
+        {
+            // アルファ値にdeltaTimeで減算した値を代入
+            _fadeObj.GetComponent<Image>().color = _fadeObj.GetComponent<Image>().color - new Color32(0, 0, 0, 1);
 
-        // アルファ値にdeltaTimeで減算した値を代入
-        _fadeObj.GetComponent<Image>().color = new Color(0.0f, 0.0f, 0.0f, _fadeSpeed);
+            yield return new WaitForSeconds(0.001f);
+        }
+
+            
     }
+
 
     /// <summary>
     ///  シーンチェンジ処理のメソッド
     /// </summary>
     /// <param name="sceneName">遷移するシーン名</param>
-    public void ChangeScene(string sceneName)
+    public IEnumerator ChangeScene(string sceneName)
     {
+        yield return new WaitForSeconds(5.0f);
         SceneManager.LoadScene(sceneName);
     }
+}
+
+public enum FadeMode
+{
+    InMode,
+    OutMode
 }
