@@ -8,10 +8,17 @@ public class TitleManager : MonoBehaviour
     FadeController _fadeController = default;
     [SerializeField, Tooltip("遷移先のシーン名")]
     string _nextSceneName = "";
+    /// <summary>入力を受け取るかどうか </summary>
+    bool _isInput = false;
+
+    private void Start()
+    {
+        _fadeController.FadeIn(() => _isInput = true);
+    }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))    //タップ
+        if (Input.GetMouseButtonDown(0) && _isInput)    //タップ
         {
             _fadeController.FadeOut(() => SceneManager.LoadScene(_nextSceneName));   //フェードを開始する
         }
