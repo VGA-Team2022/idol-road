@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 
 /// <summary>エネミーを管理するクラス </summary>
-[RequireComponent(typeof(Rigidbody), typeof(SpriteRenderer), typeof(SpriteChange))]
+[RequireComponent(typeof(Rigidbody), typeof(SpriteRenderer), typeof(EnemySpriteChange))]
 public class Enemy : MonoBehaviour
 {
     /// <summary>吹き飛ぶまでの遅延 </summary>
@@ -54,7 +54,7 @@ public class Enemy : MonoBehaviour
     Rigidbody _rb => GetComponent<Rigidbody>();
     SpriteRenderer _sr => GetComponent<SpriteRenderer>();
     /// <summary>敵のスプライトを管理するクラスの変数 </summary>
-    SpriteChange _spriteChange => GetComponent<SpriteChange>();
+    EnemySpriteChange _spriteChange => GetComponent<EnemySpriteChange>();
 
     /// <summary>倒されたらステージスクロールを開始する </summary>
     public event Action StageScroll
@@ -239,12 +239,16 @@ public class Enemy : MonoBehaviour
     }
 
     /// <summary>生成時の初期化処理 </summary>
-    public void SetUp()
+    public void SetUp(GameManager manager)
     {
         var points = transform;     //一時的に軌道の親オブジェクトを保持する為の変数
 
         FlickNum(); //ランダムでフリック方向を取得する
 
+        if(manager.CurrentGameState is BossTime) 
+        {
+            
+        }
 
         switch (_flickTypeEnemy)    //各ファンサで吹き飛ぶ方向を決める
         {
