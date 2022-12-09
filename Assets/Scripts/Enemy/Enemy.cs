@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     /// <summary>吹き飛ぶまでの遅延 </summary>
     const float EXPLOSION_DELAY = 0.3f;
 
+#region private SerializeField
+
     [SerializeField, Header("向かってくる速度"), Range(1, 50)]
     float _enemySpped;
     [SerializeField, Header("透明になるまでにかかる時間")]
@@ -29,6 +31,10 @@ public class Enemy : MonoBehaviour
     [SerializeField, Tooltip("飛ぶ方向 0=left 1=right 2=up・Down"), ElementNames(new string[] { "Left", "Right", "Up・Down" })]
     Transform[] _trajectoryParent = default;
 
+#endregion
+
+#region private
+
     /// <summary>倒された時の吹き飛ぶ軌道を構成するポイントの配列 </summary>
     Vector3[] _deadMovePoints = default;
     /// <summary>FlickTypeを保存させておく変数 </summary>
@@ -43,14 +49,23 @@ public class Enemy : MonoBehaviour
     bool _isdead = false;
     /// <summary>評価変更用変数</summary>
     float _time = 0f;
+
+    #endregion
+
+#region event Action
+
     /// <summary>倒されたらステージスクロールを開始する </summary>
     event Action _stageScroll = default;
     /// <summary>ダメージを与える（プレイヤーの体力を減らす）</summary>
     event Action<int> _giveDamage = default;
     /// <summary>コンボ数を増やす処理 </summay>
     event Action<TimingResult> _addComboCount = default;
+    /// <summary>敵が死んだらリストから消える処理 </summay>
+    event Action<Enemy> _disapperEnemies  = default;
 
-#region
+    #endregion
+
+    #region property
     Rigidbody _rb => GetComponent<Rigidbody>();
     SpriteRenderer _sr => GetComponent<SpriteRenderer>();
     /// <summary>敵のスプライトを管理するクラスの変数 </summary>
@@ -77,7 +92,14 @@ public class Enemy : MonoBehaviour
         remove { _addComboCount -= value; }
     }
 
-#endregion
+    /// <summary>敵が死んだらリストから消える処理 </summay>
+    public event Action<Enemy> DisapperEnemies
+    {
+        add { _disapperEnemies += value; }
+        remove { _disapperEnemies -= value;}
+    }
+
+    #endregion
 
     private void Start()
     {
@@ -235,6 +257,7 @@ public class Enemy : MonoBehaviour
 
         _addComboCount?.Invoke(_currentResult);
         Dead();
+        _disapperEnemies?.Invoke(this);
     }
 
     /// <summary>生成時の初期化処理 </summary>

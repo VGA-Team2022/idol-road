@@ -3,12 +3,19 @@ using UnityEngine;
 /// <summary>ファンを生成するクラス </summary>
 public class EnemySpawner : MonoBehaviour
 {
+#region private SerializeField
+
     [SerializeField, Tooltip("プレハブ")]
     Enemy _enemyPrefub = default;
     [SerializeField, Tooltip("スポーン地点")]
-    GameObject _positionObject = default;
+     GameObject _positionObject = default;  // 1つのポジションにEnemyをスポーン
     [SerializeField, Tooltip("ゲームマネジャー")]
     GameManager _manager = default;
+
+#endregion
+
+#region private
+
     [Tooltip("敵を出現させたい秒数")]
     float[] _timeInterval = new float[4] { 7.68f, 5.76f, 3.84f, 1.92f };
     [Tooltip("ボス戦で敵を出現させたい秒数")]
@@ -19,6 +26,7 @@ public class EnemySpawner : MonoBehaviour
     /// <summary>秒数を数える変数</summary>
     float _generateTimer = 0;
 
+#endregion
     private void Start()
     {
         _timeIntervalIndex = Random.Range(0, _timeInterval.Length);
@@ -34,15 +42,21 @@ public class EnemySpawner : MonoBehaviour
             if (_generateTimer >= _timeInterval[_timeIntervalIndex]) //_timeIntervalを超えるとInstantiateします
             {
                 var enemy = Instantiate(_enemyPrefub, _positionObject.transform); //シリアライズで設定したオブジェクトの場所に出現します
+
+                _manager.Enemies.Add(enemy);
+
                 enemy.SetUp(_manager.CurrentGameState);
 
                 //イベントを登録
                 enemy.AddComboCount += _manager.ComboAmountTotal;
                 enemy.StageScroll += _manager.Scroller.ScrollOperation;
                 enemy.GiveDamage += _manager.GetDamage;
+                enemy.DisapperEnemies += _manager.RemoveEnemy;
+
 
                 _manager.CurrentEnemy = enemy;
                 _manager.Scroller.ScrollOperation();    //ステージスクロールを止める
+                _manager.Enemies.Add(enemy);
                 _timeIntervalIndex = Random.Range(0, _timeInterval.Length);     //次の生成間隔を決める
                 _generateTimer = 0;
             }
