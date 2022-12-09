@@ -21441,7 +21441,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyPrefub: {fileID: 1060883709, guid: f6d9bfa37d3f5d3439d216c6a0aee987, type: 3}
-  _positionObject: {fileID: 2105092912}
+  _positionObjects:
+  - {fileID: 2105092912}
+  - {fileID: 1471791367}
+  - {fileID: 851278992}
   _manager: {fileID: 1090293134}
 --- !u!4 &1084914770
 Transform:
