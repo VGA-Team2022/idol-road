@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6742015527086477078
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6742015527086477077}
+  - component: {fileID: 6742015527086477076}
+  m_Layer: 0
+  m_Name: SuperIdolTimeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6742015527086477077
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6742015527086477078}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 687.3058, y: 326.78235, z: 664.41693}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6742015527086477076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6742015527086477078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ebe380a8cb143c4d9725ba4f6450c27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gaugeCountMax: 10
+  _timeEndSuperIdolTime: 15
+  _elapsed: 0
+  _gaugePlusTime: 0.5
+  _imageLange: 5.62
+  _isGaugeMax: 0
+  _isTimeMax: 0
+  _imageGauge: {fileID: 0}
+  _imageExplosion: {fileID: 0}
+  _fadePanel: {fileID: 0}
+  _superIdolTimeObject: {fileID: 0}
+  _backGroundPanel: {fileID: 0}
+  _normalCanvas: {fileID: 0}
+  _normalPlayer: {fileID: 0}
+  _BackDownFans: {fileID: 0}
+  _downFansValue: 0.3
+  _BackMiddleFans: {fileID: 0}
+  _middleFansValue: 0.6
+  _BackUpFans: {fileID: 0}
+  _upFansValue: 0.9
+  _videoPlayer: {fileID: 0}
