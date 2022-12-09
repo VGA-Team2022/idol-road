@@ -55,6 +55,8 @@ public class SuperIdolTime : MonoBehaviour
     private float _upFansValue = 0.3f;
     [SerializeField, Tooltip("背景に流すビデオのプレーヤー")]
     private VideoPlayer _videoPlayer = default;
+    [SerializeField,Tooltip("キラキラのエフェクト")]
+    private ParticleSystem _shiningParticle = default;
     /// <summary>スーパーアイドルタイム中のタップされた回数</summary>
     private int _gaugeCount = 0;
     /// <summary>ゲージの溜まり具合</summary>
@@ -206,6 +208,7 @@ public class SuperIdolTime : MonoBehaviour
         isSuperIdolTime = true;
         _videoPlayer.gameObject.SetActive(false);
         _backGroundPanel.gameObject.SetActive(true);
+        _shiningParticle.Play();
         //Debug.Log("endvideo");
     }
 }
