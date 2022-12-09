@@ -11,6 +11,8 @@ public class EnemySpawner : MonoBehaviour
     GameManager _manager = default;
     [Tooltip("敵を出現させたい秒数")]
     float[] _timeInterval = new float[4] { 7.68f, 5.76f, 3.84f, 1.92f };
+    [Tooltip("ボス戦で敵を出現させたい秒数")]
+    float[] _bossTimeInterval = new float[4] { 6.4f, 4.8f, 3.2f, 1.6f };
 
     /// <summary>生成間隔を決める添え字</summary>
     int _timeIntervalIndex = 0;
@@ -32,7 +34,7 @@ public class EnemySpawner : MonoBehaviour
             if (_generateTimer >= _timeInterval[_timeIntervalIndex]) //_timeIntervalを超えるとInstantiateします
             {
                 var enemy = Instantiate(_enemyPrefub, _positionObject.transform); //シリアライズで設定したオブジェクトの場所に出現します
-                enemy.SetUp();
+                enemy.SetUp(_manager.CurrentGameState);
 
                 //イベントを登録
                 enemy.AddComboCount += _manager.ComboAmountTotal;

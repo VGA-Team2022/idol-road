@@ -34,7 +34,7 @@ public class TapAct : MonoBehaviour
 
     IEnumerator DelayChange()
     {
-        yield return new WaitForSeconds(5.0f);
+        yield return null;
 
         _fadeManager2.ChangeScene(_sceneName);
     }
