@@ -29,7 +29,7 @@ public class IdolPowerItem : MonoBehaviour
     /// <summary>ƒAƒCƒeƒ€Žæ“¾Žž</summary>
     public void GetItem()
     {
-        _gameManager.IdlePower += _getAmount;
+        _gameManager.IncreseIdlePower(_getAmount);
         AudioManager.Instance.PlaySE(16, 0.5f);
         Destroy(gameObject);
     }

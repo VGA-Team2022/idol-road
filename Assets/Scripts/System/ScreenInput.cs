@@ -147,19 +147,19 @@ public class ScreenInput : MonoBehaviour
         //タップの時は飛ばない
         if (_manager.CurrentEnemy != null && _flickType != FlickType.Tap)
         {
-            if(_flickType == _manager.CurrentEnemy._flickTypeEnemy) ///フリックした方向がファンサと同様なら吹っ飛ぶ
-            {
-                AudioManager.Instance.PlayRequestSE(_flickType);
-                _manager.CurrentEnemy.JugeTime();//飛んだときの秒数と判定を決めるもの
-                _manager.CurrentEnemy.Dead();
-            }
+            //if(_flickType == _manager.CurrentEnemy.FlickTypeEnemy) ///フリックした方向がファンサと同様なら吹っ飛ぶ
+            //{
+            //    AudioManager.Instance.PlayRequestSE(_flickType);
+                _manager.CurrentEnemy.JugeTime(_flickType);//飛んだときの秒数と判定を決めるもの
+            //    _manager.CurrentEnemy.Dead();
+            //}
         }
 
-        if (_manager.IsIdleTime == true && _flickType == FlickType.Tap)
-        {
-            _resultManager.CountPerfect++;
-            _superIdolTime.GaugeCount++;
-        }
+        //if (_manager.IsIdleTime == true && _flickType == FlickType.Tap)
+        //{
+        //    _resultManager.CountPerfect++;
+        //    _superIdolTime.GaugeCount++;
+        //}
 
         _inputText.text = _flickType.ToString();
     }
