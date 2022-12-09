@@ -8,7 +8,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField, Tooltip("プレハブ")]
     Enemy _enemyPrefub = default;
     [SerializeField, Tooltip("スポーン地点")]
-     GameObject _positionObject = default;  // 1つのポジションにEnemyをスポーン
+    GameObject[] _positionObjects = default;
+    // GameObject _positionObject = default;  // 1つのポジションにEnemyをスポーン
     [SerializeField, Tooltip("ゲームマネジャー")]
     GameManager _manager = default;
 
@@ -25,12 +26,15 @@ public class EnemySpawner : MonoBehaviour
     int _timeIntervalIndex = 0;
     /// <summary>秒数を数える変数</summary>
     float _generateTimer = 0;
+    /// <summary>最初または次の敵の発生位置を決める添え字変数</summary>
+    int _positionCount = 0; // 0なら真ん中、1なら右、2なら左
 
 #endregion
     private void Start()
     {
         _timeIntervalIndex = Random.Range(0, _timeInterval.Length);
         _generateTimer = -_timeInterval[3]; //最初のみ2秒間遅延をさせる
+        
     }
 
     void Update()
@@ -41,8 +45,9 @@ public class EnemySpawner : MonoBehaviour
 
             if (_generateTimer >= _timeInterval[_timeIntervalIndex]) //_timeIntervalを超えるとInstantiateします
             {
-                var enemy = Instantiate(_enemyPrefub, _positionObject.transform); //シリアライズで設定したオブジェクトの場所に出現します
-
+                
+                var enemy = Instantiate(_enemyPrefub, _positionObjects[_positionCount].transform); //シリアライズで設定したオブジェクトの場所に出現します(最初は真ん中の位置に)
+                
                 _manager.Enemies.Add(enemy);
 
                 enemy.SetUp(_manager.CurrentGameState);
@@ -58,6 +63,11 @@ public class EnemySpawner : MonoBehaviour
                 _manager.Scroller.ScrollOperation();    //ステージスクロールを止める
                 _manager.Enemies.Add(enemy);
                 _timeIntervalIndex = Random.Range(0, _timeInterval.Length);     //次の生成間隔を決める
+                _positionCount += 1;
+                if (_positionCount == 2)
+                {
+                    _positionCount= 0;
+                }
                 _generateTimer = 0;
             }
         }
