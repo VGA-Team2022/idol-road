@@ -6,7 +6,7 @@ public class GameStart :  IState
     public void OnEnter(GameManager manager, IState previousState)
     {
         Debug.Log("ƒQ[ƒ€ŠJŽnó‘Ô‚É‘JˆÚ‚µ‚½"); 
-        manager.FadeCanvas.FadeOut(() => manager.ChangeGameState(GameManager._playingState));
+        manager.FadeCanvas.FadeIn(() => manager.ChangeGameState(GameManager._playingState));
     }
 
     public void OnExit(GameManager manager, IState nextState)

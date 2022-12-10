@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 500e308bb9f9fdf488e72e2f3bff473f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nextSceneName: "\u03B1GameScene1"
+  _nextSceneName: InGame
   _stageImage: {fileID: 1061867713}
   _fadeController: {fileID: 346481679}
   _stageSprites:
