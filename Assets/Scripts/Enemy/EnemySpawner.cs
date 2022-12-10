@@ -6,7 +6,7 @@ public class EnemySpawner : MonoBehaviour
     #region private SerializeField
 
     [SerializeField, Tooltip("プレハブ")]
-    Enemy _enemyPrefub = default;
+    EnemyBase[] _enemyPrefubs = default;
 
     [ElementNames(new string[] { "中央", "右側", "左側" })]
     [SerializeField, Tooltip("0=中央 1=右側 2=左側")]
@@ -48,7 +48,7 @@ public class EnemySpawner : MonoBehaviour
             if (_generateTimer >= _timeInterval[_timeIntervalIndex]) //_timeIntervalを超えるとInstantiateします
             {
                 
-                var enemy = Instantiate(_enemyPrefub, _spawnPoints[_positionCount].transform); //シリアライズで設定したオブジェクトの場所に出現します(最初は真ん中の位置に)
+                var enemy = Instantiate(_enemyPrefubs[0], _spawnPoints[_positionCount].transform); //シリアライズで設定したオブジェクトの場所に出現します(最初は真ん中の位置に)
                 _manager.AddEnemy(enemy);
                 enemy.SetUp(_manager.CurrentGameState);
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-/// <summary></summary>
+/// <summary>敵のイラストを変更する</summary>
 public class EnemySpriteChange : MonoBehaviour
 {
     [SerializeField, Tooltip("通常ファンのスプライトを管理する変数")]
