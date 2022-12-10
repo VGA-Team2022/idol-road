@@ -85,15 +85,9 @@ public class GameManager : MonoBehaviour
             _uiController.UpdateGoalDistanceUI(_elapsedTime);
         }
 
-        if (_bossTime >= Math.Abs(_gameTime - _elapsedTime) && _currentGameState is not BossTime)    //ボスステージを開始
+        if (_bossTime >= Math.Abs(_gameTime - _elapsedTime) && _currentGameState is not BossTime　&& _currentGameState is not GameEnd)    //ボスステージを開始
         {
             ChangeGameState(_bossTimeState);
-        }
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            //Debug.Log(_enemies.Count);
-            Debug.Log(_currentGameState);
         }
     }
 
@@ -162,18 +156,30 @@ public class GameManager : MonoBehaviour
         _currentGameState = nextState;
     }
 
+    /// <summary>Enemy.csに登録するステージスクロール処理</summary>
+    public void StageScroll()
+    {
+        if (_enemies.Count <= 0)    //ファンがいなくなったらスクロールを開始する
+        {
+            _stageScroller.ScrollOperation();
+        }
+    }
+
+    /// <summary>生成されたファンをリストに追加する </summary>
+    /// <param name="enemy">追加するファン</param>
     public void AddEnemy(Enemy enemy)
     {
-        if (_enemies.Count <= 0)
+        if (_enemies.Count <= 0)    //ステージにファンが出現
         {
             _currentEnemy = enemy;
+            _stageScroller.ScrollOperation();
         }
 
         _enemies.Add(enemy);    
     }
 
-    /// <summary>倒された敵をリストから削除する</summary>
-    /// <param name="enemy">削除する敵</param>
+    /// <summary>倒されたファンをリストから削除する</summary>
+    /// <param name="enemy">削除するファン</param>
     public void RemoveEnemy(Enemy enemy)
     {
         _enemies.Remove(enemy);

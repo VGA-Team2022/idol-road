@@ -20763,7 +20763,7 @@ MonoBehaviour:
   _maxIdlePower: 100
   _maxIdleHp: 5
   _gameTime: 60
-  _bossTime: 55
+  _bossTime: 30
   _stageScroller: {fileID: 2145833677}
   _fadeController: {fileID: 1253044104}
   _uiController: {fileID: 1084394683}

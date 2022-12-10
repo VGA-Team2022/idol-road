@@ -54,11 +54,10 @@ public class EnemySpawner : MonoBehaviour
 
                 //イベントを登録
                 enemy.AddComboCount += _manager.ComboAmountTotal;
-                enemy.StageScroll += _manager.Scroller.ScrollOperation;
+                enemy.StageScroll += _manager.StageScroll;
                 enemy.GiveDamage += _manager.GetDamage;
                 enemy.DisapperEnemies += _manager.RemoveEnemy;
 
-                _manager.Scroller.ScrollOperation();    //ステージスクロールを止める
                 _timeIntervalIndex = Random.Range(0, _timeInterval.Length);     //次の生成間隔を決める
 
                 _positionCount += 1;
