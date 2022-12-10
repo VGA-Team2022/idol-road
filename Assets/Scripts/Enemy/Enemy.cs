@@ -139,6 +139,7 @@ public class Enemy : MonoBehaviour
                 _currentResult = TimingResult.Out;
                 _sr.DOFade(endValue: 0, duration: _fadedSpeed).OnComplete(OutEffect);
                 _addComboCount?.Invoke(_currentResult);
+                _disapperEnemies?.Invoke(this);
                 _isdead = true;
                 break;
         }

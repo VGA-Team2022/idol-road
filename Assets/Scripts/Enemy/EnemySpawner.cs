@@ -49,9 +49,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 
                 var enemy = Instantiate(_enemyPrefub, _spawnPoints[_positionCount].transform); //シリアライズで設定したオブジェクトの場所に出現します(最初は真ん中の位置に)
-                
-                _manager.Enemies.Add(enemy);
-
+                _manager.AddEnemy(enemy);
                 enemy.SetUp(_manager.CurrentGameState);
 
                 //イベントを登録
@@ -60,13 +58,11 @@ public class EnemySpawner : MonoBehaviour
                 enemy.GiveDamage += _manager.GetDamage;
                 enemy.DisapperEnemies += _manager.RemoveEnemy;
 
-
-                _manager.CurrentEnemy = enemy;
                 _manager.Scroller.ScrollOperation();    //ステージスクロールを止める
-                _manager.Enemies.Add(enemy);
                 _timeIntervalIndex = Random.Range(0, _timeInterval.Length);     //次の生成間隔を決める
+
                 _positionCount += 1;
-                if (_positionCount == 2)
+                if (_positionCount == 3)
                 {
                     _positionCount= 0;
                 }
