@@ -28,7 +28,6 @@ public class FadeController : MonoBehaviour
             .OnComplete(() =>
             {
                 action?.Invoke();
-                gameObject.SetActive(false);
             });
     }
 
@@ -42,7 +41,6 @@ public class FadeController : MonoBehaviour
             .OnComplete(() =>
             {
                 action?.Invoke();
-                gameObject.SetActive(false);
             });
     }
 }

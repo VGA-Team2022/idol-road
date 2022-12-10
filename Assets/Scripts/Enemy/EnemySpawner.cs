@@ -3,13 +3,15 @@ using UnityEngine;
 /// <summary>ファンを生成するクラス </summary>
 public class EnemySpawner : MonoBehaviour
 {
-#region private SerializeField
+    #region private SerializeField
 
     [SerializeField, Tooltip("プレハブ")]
     Enemy _enemyPrefub = default;
-    [SerializeField, Tooltip("スポーン地点")]
-    GameObject[] _positionObjects = default;
-    // GameObject _positionObject = default;  // 1つのポジションにEnemyをスポーン
+
+    [ElementNames(new string[] { "中央", "右側", "左側" })]
+    [SerializeField, Tooltip("0=中央 1=右側 2=左側")]
+    Transform[] _spawnPoints = default;
+
     [SerializeField, Tooltip("ゲームマネジャー")]
     GameManager _manager = default;
 
@@ -46,7 +48,7 @@ public class EnemySpawner : MonoBehaviour
             if (_generateTimer >= _timeInterval[_timeIntervalIndex]) //_timeIntervalを超えるとInstantiateします
             {
                 
-                var enemy = Instantiate(_enemyPrefub, _positionObjects[_positionCount].transform); //シリアライズで設定したオブジェクトの場所に出現します(最初は真ん中の位置に)
+                var enemy = Instantiate(_enemyPrefub, _spawnPoints[_positionCount].transform); //シリアライズで設定したオブジェクトの場所に出現します(最初は真ん中の位置に)
                 
                 _manager.Enemies.Add(enemy);
 
