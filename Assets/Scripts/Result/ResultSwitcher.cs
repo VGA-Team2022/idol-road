@@ -75,6 +75,11 @@ public class ResultSwitcher : MonoBehaviour
     /// </summary>
     private void JudgeResult()
     {
+        if (_result.CountMiss >= _resultData._missCount)
+        {
+            ResultBad();
+        }
+
         if (_score >= _resultData._superPerfectScore)
         {
             ResultSuperPerfect();
@@ -83,13 +88,9 @@ public class ResultSwitcher : MonoBehaviour
         {
             ResultPerfect();
         }
-        else if(_score >= _resultData._goodScore)
+        else 
         { 
             ResultGood();
-        }
-        else //ã‹L‚É‚ ‚Ä‚Í‚Ü‚ç‚È‚©‚Á‚½ê‡Å’á•ÛØ‚Ìbad
-        {
-            ResultBad();
         }
     } 
     //Game Over

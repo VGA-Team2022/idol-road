@@ -12,4 +12,6 @@ public class ResultData : ScriptableObject
     public int _perfectScore;
     [SerializeField, Header("Good‚É‚È‚éğŒ")]
     public int _goodScore;
+    [SerializeField , Header("Bad‚É‚È‚éMiss‚Ì‰ñ”")]
+    public int _missCount;
 }
