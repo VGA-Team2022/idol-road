@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 /// <summary>インゲームを管理するクラス ステートパターン使用</summary>
 public class GameManager : MonoBehaviour
@@ -35,6 +36,8 @@ public class GameManager : MonoBehaviour
     InGameUIController _uiController = default;
     [SerializeField, Tooltip("敵を生成するクラス")]
     EnemySpawner _enemySpawner = default;
+    [SerializeField, Tooltip("Warningプレハブ")]
+    PlayableDirector _warningTape = default;
     /// <summary>現在対象の敵 </summary>
     Enemy _currentEnemy = default;
     /// <summary>現在のゲーム状態</summary>
@@ -53,20 +56,17 @@ public class GameManager : MonoBehaviour
     float _elapsedTime = 0f;
 
 #region
+    /// <summary>現在のゲーム状態 </summary>
+    public IState CurrentGameState { get => _currentGameState; }
     /// <summary>現在対象の敵</summary>
     public Enemy CurrentEnemy { get => _currentEnemy; set => _currentEnemy = value; }
     /// <summary>スクロールさせるオブジェクト</summary>
     public StageScroller Scroller { get => _stageScroller; }
     /// <summary>敵を生成するクラス</summary>
     public EnemySpawner EnemyGenerator { get => _enemySpawner; }
-    /// <summary>アイドルパワーのプロパティ</summary>
-    public int IdlePower { get => _idlePower; set => _idlePower = value; }
-    /// <summary>現在のゲーム状態 </summary>
-    public IState CurrentGameState { get => _currentGameState; }
     /// <summary>フェードを行うクラス</summary>
     public FadeController FadeCanvas { get => _fadeController; }
-    /// <summary>ステージに表示されている敵のリスト</summary>
-    public List<Enemy> Enemies { get => _enemies; }
+    public PlayableDirector WarningTape { get => _warningTape; }
 #endregion
 
     void Start()
@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
             _uiController.UpdateGoalDistanceUI(_elapsedTime);
         }
 
-        if (_bossTime >= Math.Abs(_gameTime - _elapsedTime))    //ボスステージを開始
+        if (_bossTime >= Math.Abs(_gameTime - _elapsedTime) && _currentGameState is not BossTime　&& _currentGameState is not GameEnd)    //ボスステージを開始
         {
             ChangeGameState(_bossTimeState);
         }
@@ -156,17 +156,37 @@ public class GameManager : MonoBehaviour
         _currentGameState = nextState;
     }
 
-    /// <summary>生成された敵をリストに追加</summary>
-    /// <param name="enemy">追加する敵</param>
-    public void AddEnemy(Enemy enemy)
+    /// <summary>Enemy.csに登録するステージスクロール処理</summary>
+    public void StageScroll()
     {
-        _enemies.Add(enemy);
+        if (_enemies.Count <= 0)    //ファンがいなくなったらスクロールを開始する
+        {
+            _stageScroller.ScrollOperation();
+        }
     }
 
-    /// <summary>倒された敵をリストから削除する</summary>
-    /// <param name="enemy">削除する敵</param>
+    /// <summary>生成されたファンをリストに追加する </summary>
+    /// <param name="enemy">追加するファン</param>
+    public void AddEnemy(Enemy enemy)
+    {
+        if (_enemies.Count <= 0)    //ステージにファンが出現
+        {
+            _currentEnemy = enemy;
+            _stageScroller.ScrollOperation();
+        }
+
+        _enemies.Add(enemy);    
+    }
+
+    /// <summary>倒されたファンをリストから削除する</summary>
+    /// <param name="enemy">削除するファン</param>
     public void RemoveEnemy(Enemy enemy)
     {
         _enemies.Remove(enemy);
+
+        if (1 <= _enemies.Count)
+        {
+            _currentEnemy = _enemies[0];
+        }
     }
 }

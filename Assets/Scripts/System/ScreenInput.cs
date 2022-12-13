@@ -1,10 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// フリックの方向やタップかを取得できる
-/// </summary>
-
+/// <summary> フリックの方向やタップかを取得できる</summary>
 public class ScreenInput : MonoBehaviour
 {
     /// <summary>レイの最大範囲 </summary>
@@ -14,12 +11,8 @@ public class ScreenInput : MonoBehaviour
     Vector2 _flickMinRange = new Vector2(0f, 0f);
     [SerializeField, Tooltip("アイテムのレイヤー")]
     LayerMask _itemHitLayer = default;
-    [SerializeField, Tooltip("入力方向を表示するテキスト")]
-    Text _inputText = default;
     [SerializeField]
     GameManager _manager = default;
-    [SerializeField]
-    ResultManager _resultManager = default;
     [SerializeField]
     SuperIdolTime _superIdolTime = default;
  
@@ -147,12 +140,7 @@ public class ScreenInput : MonoBehaviour
         //タップの時は飛ばない
         if (_manager.CurrentEnemy != null && _flickType != FlickType.Tap)
         {
-            //if(_flickType == _manager.CurrentEnemy.FlickTypeEnemy) ///フリックした方向がファンサと同様なら吹っ飛ぶ
-            //{
-            //    AudioManager.Instance.PlayRequestSE(_flickType);
-                _manager.CurrentEnemy.JugeTime(_flickType);//飛んだときの秒数と判定を決めるもの
-            //    _manager.CurrentEnemy.Dead();
-            //}
+             _manager.CurrentEnemy.JugeTime(_flickType);//飛んだときの秒数と判定を決めるもの
         }
 
         //if (_manager.IsIdleTime == true && _flickType == FlickType.Tap)
@@ -160,12 +148,9 @@ public class ScreenInput : MonoBehaviour
         //    _resultManager.CountPerfect++;
         //    _superIdolTime.GaugeCount++;
         //}
-
-        _inputText.text = _flickType.ToString();
     }
-    /// <summary>
-    /// 変数の初期化用
-    /// </summary>
+
+    /// <summary> 変数の初期化用 </summary>
     private void ResetParameter()
     {
         _flickType = FlickType.None;
