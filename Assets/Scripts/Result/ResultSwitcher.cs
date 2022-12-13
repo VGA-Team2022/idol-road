@@ -10,16 +10,24 @@ public class ResultSwitcher : MonoBehaviour
     ResultUIController _resultUIController = default;
     [SerializeField, Tooltip("難易度別のScritableObjectのDataの名前を入れる"),Header("上からEasy,Normal,Hardで")]
     string[] _modeNameData;
+    [SerializeField, Header("それぞれの判定から得られるスコア")]
+    int _perfect;
+    [SerializeField]
+    int _good , _bad ;
     [SerializeField,Header("デバッグ用")]
     private bool _isDebug = false;
     [SerializeField, Tooltip("難易度を判定してResoursecで読み込む物をかえる")]
     bool _isEasy, _isNormal, _isHard;
     ResultData _resultData;
     ResultManager _result;
+    int _score;
     void Start()
     {
+        _score = 0;
         _result = ResultManager.Instance;
         JudgeMode();
+        ScoreCalculation();
+        JudgeResult();
     }
 
     void Update()
@@ -50,36 +58,39 @@ public class ResultSwitcher : MonoBehaviour
             _resultData = Resources.Load<ResultData>(_modeNameData[2]);
         }
     }
-    public void JudgeResult()
+
+    /// <summary>
+    /// スコアの合計値を計算する
+    /// </summary>
+    private void ScoreCalculation() 
     {
-        if (_result.CountBad >= _resultData._badB) //GameOver
+        //判定それぞれのスコア値×判定した数
+        _score += _perfect * _result.CountPerfect;
+        _score += _good * _result.CountGood;
+        _score += _bad * _result.CountBad;
+    }
+
+    /// <summary>
+    /// スコアの値から結果を判定する
+    /// </summary>
+    private void JudgeResult()
+    {
+        if (_result.CountMiss >= _resultData._missCount)
         {
             ResultBad();
         }
-        else if(_result.CountPerfect >= _resultData._perfectP && _result.CountGood == _resultData._goodP && _result.CountBad == _resultData._badP) //すべてPerfectだった場合
+
+        if (_score >= _resultData._superPerfectScore)
+        {
+            ResultSuperPerfect();
+        }
+        else if(_score >= _resultData._perfectScore)
         {
             ResultPerfect();
         }
-        else if(_result.CountGood >= _resultData._goodE && _result.CountBad == _resultData._badE)//Badが0でありGoodが１つでもあった場合(Excellent)
+        else 
         { 
-            ResultExcellent();
-        }
-        else if(_result.CountBad <= _resultData._badB)//上記にあてはまらなかった場合最低保証のGood
-        {
-            if(_result.CountPerfect >= _resultData._spesialPerfect)//特定のPerfectを超えていた場合Perfect判定にする
-            {
-                ResultPerfect();
-                Debug.Log("SpecialPerfect");
-            }
-            else if(_result.CountPerfect >= _resultData._specialExsellent)//特定のPerfectを超えて場合Excellent判定にする
-            {
-                ResultExcellent();
-                Debug.Log("SpesialExcellent");
-            }
-            else
-            {
-                ResultGood();
-            }
+            ResultGood();
         }
     } 
     //Game Over
@@ -95,23 +106,23 @@ public class ResultSwitcher : MonoBehaviour
         _resultUIController.ChangeResultImage(Result.Good);
     }
     //良
-    public void ResultExcellent()
-    {
-        Debug.Log("Excellent 良");
-        _resultUIController.ChangeResultImage(Result.Excellent);
-    }
-    //神　全良
     public void ResultPerfect()
     {
         Debug.Log("Perfect 神");
         _resultUIController.ChangeResultImage(Result.Perfect);
     }
+    //神　全良
+    public void ResultSuperPerfect()
+    {
+        Debug.Log("SuperPerfect 全能神");
+        _resultUIController.ChangeResultImage(Result.SuperPerfect);
+    }
 }
 
 public enum Result
 {
+    SuperPerfect,
     Perfect,
-    Excellent,
     Good,
     Bad
 }
