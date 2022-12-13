@@ -38,10 +38,10 @@ public class ResultUIController : MonoBehaviour
                 _backGround.sprite = _backGroundSprites[2];
                 _resultValueText[0].text = "Result:Good";
                 break;
-            case Result.Excellent:
+            case Result.Perfect:
                 _backGround.sprite = _backGroundSprites[1];
                 break;
-            case Result.Perfect:
+            case Result.SuperPerfect:
                 _backGround.sprite = _backGroundSprites[0];
                 _resultValueText[0].text = "Result:Perfect";
                 break;
