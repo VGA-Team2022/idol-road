@@ -26,8 +26,8 @@ public class NormalEnemy : EnemyBase
             .OnComplete(() => Destroy(gameObject));
 
         //透明になりながら消えていくパターン
-        _sr.DOFade(endValue: 0, duration: 2.0f).OnComplete(GiveDamageRun);
-
+        Array.ForEach(EnemySprites, s => s.GetComponent<SpriteRenderer>().DOFade(endValue: 0, duration: 2.0f).OnComplete(GiveDamageRun));
+        
         StageScrollRun();        //ステージスクロールを行う
     }
 

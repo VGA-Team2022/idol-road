@@ -16,6 +16,8 @@ public abstract class EnemyBase : MonoBehaviour
     float[] _resultTimes = default;
     [SerializeField, Tooltip("ファンサを更新するクラス")]
     RequestUIController[] _requestUIArray = null;
+    [SerializeField, Tooltip("イラストを管理するクラス")]
+    EnemySpriteChange[] _enemySprites = null;
     [SerializeField, Tooltip("爆発エフェクト")]
     protected GameObject _explosionEffect = default;
 
@@ -72,11 +74,11 @@ public abstract class EnemyBase : MonoBehaviour
         remove { _disapperEnemies -= value; }
     }
 
-    protected SpriteRenderer _sr => GetComponent<SpriteRenderer>();
     Rigidbody _rb => GetComponent<Rigidbody>();
-    EnemySpriteChange _spriteChange => GetComponent<EnemySpriteChange>();
 
-#endregion
+    protected EnemySpriteChange[] EnemySprites { get => _enemySprites; }
+
+    #endregion
 
     private void Start()
     {
@@ -131,7 +133,9 @@ public abstract class EnemyBase : MonoBehaviour
                 break;
             case TimingResult.Perfect:
                 _currentResult = TimingResult.Out;
-                _sr.DOFade(endValue: 0, duration: _fadedSpeed).OnComplete(OutEffect);
+                Array.ForEach(_enemySprites, s => 
+                s.GetComponent<SpriteRenderer>().DOFade(endValue: 0, duration: _fadedSpeed).OnComplete(() => Destroy(gameObject)));
+                _giveDamage?.Invoke(_requestArray.Length);
                 _addComboCount?.Invoke(_currentResult);
                 _disapperEnemies?.Invoke(this);
                 _isdead = true;
@@ -220,9 +224,12 @@ public abstract class EnemyBase : MonoBehaviour
 
         if (currentGameState is BossTime)
         {
-            _spriteChange.EnemyBossMethod(_sr);
+            Array.ForEach(_enemySprites, e => e.EnemyBossMethod(e.gameObject.GetComponent<SpriteRenderer>()));
         }
-        else { _spriteChange.EnemyRandomMethod(_sr); }
+        else 
+        {
+            Array.ForEach(_enemySprites, e => e.EnemyRandomMethod(e.gameObject.GetComponent<SpriteRenderer>())); 
+        }
 
         //各ファンごとに行いたい処理があればoverrideする
     }

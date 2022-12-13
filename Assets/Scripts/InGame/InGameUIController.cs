@@ -5,7 +5,7 @@ using UnityEngine.UI;
 /// <summary>ゲームシーンで使用するUIの管理するクラス </summary>
 public class InGameUIController : MonoBehaviour
 {
-    [SerializeField, Header("コンボ時に表示するイラストの順番"), ElementNames(new string[] {"1", "2", "3"})]
+    [SerializeField, Header("コンボ時に表示するイラストの順番"), ElementNames(new string[] {"1", "2", "3", "4"})]
     Sprite[] _comboSprites = default;
     [SerializeField, Tooltip("ゴールまでの距離を表示するスライダー")]
     Slider _goalSlider = default;
