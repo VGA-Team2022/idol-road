@@ -71,7 +71,7 @@ public class ResultUIController : MonoBehaviour
         yield return new WaitForSeconds(_scoreResultSpan);
         _resultValueText[4].gameObject.SetActive(true);
         DOTween.To(() => _countScore, (r) => _countScore = r,/*_reSwitch.Score*/1000, _increseTime)
-             .OnUpdate(() => _resultValueText[4].text = $"Score:{ /*_result.CountPerfect */_countScore}");
+             .OnUpdate(() => _resultValueText[4].text = $"Score:{ /*_reSwitch.Score */_countScore}");
         yield return null;
     }
 }
