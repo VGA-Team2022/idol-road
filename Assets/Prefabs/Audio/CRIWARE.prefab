@@ -114,16 +114,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acfFile: IDOLROAD1104.acf
   cueSheets:
-  - name: BGM_CueSheet_IDOL_1129
-    acbFile: BGM_CueSheet_IDOL_1129.acb
+  - name: BGM_CueSheet_IDOL_1206
+    acbFile: BGM_CueSheet_IDOL_1206.acb
     awbFile: 
     loaderStatus: 0
-  - name: SE_CueSheet_IDOL_1129
-    acbFile: SE_CueSheet_IDOL_1129.acb
+  - name: SE_CueSheet_IDOL_1206
+    acbFile: SE_CueSheet_IDOL_1206.acb
     awbFile: 
     loaderStatus: 0
-  - name: Voice_CueSheet_IDOL_1129
-    acbFile: Voice_CueSheet_IDOL_1129.acb
+  - name: Voice_CueSheet_IDOL_1206
+    acbFile: Voice_CueSheet_IDOL_1206.acb
     awbFile: 
     loaderStatus: 0
   dspBusSetting: 

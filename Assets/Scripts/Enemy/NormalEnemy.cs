@@ -1,55 +1,99 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using DG.Tweening;
 
-public class NormalEnemy : MonoBehaviour
+/// <summary>通常ファンの処理を行うクラス</summary>
+public class NormalEnemy : EnemyBase
 {
-    [SerializeField, Tooltip("ファンが動く方向"),Header("ファン関係")]
-    Vector3 _enemySpped;
-    [SerializeField, Tooltip("ファンサを要求する数")]
-    int _fansaNum = 1;
-    [SerializeField, Tooltip("リズム判定をするための時間(デバッグ用)"), Header("リズム関係")]
-    float _time = default;
-    [SerializeField, Tooltip("リズム判定の秒数")]
-    float _perfect, _good, _bad , _out;
+    /// <summary>吹き飛ぶまでの遅延 </summary>
+    const float EXPLOSION_DELAY = 0.3f;
 
+    [SerializeField, Header("吹き飛ばしている時間"), Range(0.1f, 10f)]
+    float _deadMoveTime = 1f;
+    [SerializeField, Header("吹き飛んだ時のサイズ"), Range(0.1f, 1f)]
+    float _minScale = 0.3f;
+    [SerializeField, Tooltip("飛ぶ方向 0=left 1=right 2=up・Down"), ElementNames(new string[] { "Left", "Right", "Up・Down" })]
+    Transform[] _trajectoryParent = default;
 
-    /// <summary>とりあえずボタンで判定確認できるようにするもの</summary>
-    bool _knockDownEnemy;
+    /// <summary>倒された時の吹き飛ぶ軌道を構成するポイントの配列 </summary>
+    Vector3[] _deadMovePoints = default;
 
-    Rigidbody _rb;
-    void Start()
+    protected override void BadEffect()
     {
-        _rb = GetComponent<Rigidbody>();
-        _rb.AddForce(_enemySpped);　//ファンを前に動かす（仮）
-        _knockDownEnemy = false;
+        //横移動
+        transform.DOMoveX(-3, _deadMoveTime)
+            .SetDelay(EXPLOSION_DELAY)
+            .OnComplete(() => Destroy(gameObject));
+
+        //透明になりながら消えていくパターン
+        Array.ForEach(EnemySprites, s => s.GetComponent<SpriteRenderer>().DOFade(endValue: 0, duration: 2.0f).OnComplete(GiveDamageRun));
+        
+        StageScrollRun();        //ステージスクロールを行う
     }
-    /// <summary> リズム判定するもの</summary>
-    void Update()
+
+    protected override void GoodEffect()
     {
-        if(_knockDownEnemy) 
+        var sequence = DOTween.Sequence();
+
+        sequence.Append(transform.DOPath(path: _deadMovePoints, duration: _deadMoveTime, pathType: PathType.CatmullRom))
+            .Join(transform.DOScale(new Vector3(_minScale, _minScale, _minScale), _deadMoveTime))
+            .SetDelay(EXPLOSION_DELAY)
+            .OnComplete(() => Destroy(gameObject));
+
+        //回転 無限ループを行う為
+        transform.DOLocalRotate(new Vector3(0, 0, 360f), 0.1f, RotateMode.FastBeyond360)
+            .SetDelay(EXPLOSION_DELAY)
+            .SetEase(Ease.Linear)
+            .SetLoops(-1, LoopType.Restart);
+    }
+
+    protected override void OutEffect()
+    {
+        GiveDamageRun(); //ダメージを与える
+        Destroy(gameObject);
+    }
+
+    protected override void PerfactEffect()
+    {
+        var sequence = DOTween.Sequence();
+
+        sequence.Append(transform.DOPath(path: _deadMovePoints, duration: _deadMoveTime, pathType: PathType.CatmullRom))
+            .Join(transform.DOScale(new Vector3(_minScale, _minScale, _minScale), _deadMoveTime))
+            .SetDelay(EXPLOSION_DELAY)
+            .OnComplete(() => Destroy(gameObject));
+
+        //回転 無限ループを行う為
+        transform.DOLocalRotate(new Vector3(0, 0, 360f), 0.1f, RotateMode.FastBeyond360)
+            .SetDelay(EXPLOSION_DELAY)
+            .SetEase(Ease.Linear)
+            .SetLoops(-1, LoopType.Restart);
+    }
+
+    public override void SetUp(IState currentGameState)
+    {
+        base.SetUp(currentGameState);
+
+        var points = transform;     //一時的に軌道の親オブジェクトを保持する為の変数
+
+        switch (_currentRequest)    //各ファンサで吹き飛ぶ方向を決める
         {
-            _time -= Time.deltaTime;
-            if(_time <= _out)
-            {
-                Debug.Log("out");
-            }
-            else if (_time <= _perfect)
-            {
-                Debug.Log($"perfect { _time:F1}");
-            }
-            else if(_time <= _good)
-            {
-                Debug.Log($"good { _time:F1}");
-            }
-            else if(_time <= _bad)
-            {
-                Debug.Log($"bad { _time:F1}");
-            }
+            case FlickType.Left:
+                points = _trajectoryParent[0];
+                break;
+            case FlickType.Right:
+                points = _trajectoryParent[1];
+                break;
+            case FlickType.Up:
+            case FlickType.Down:
+                points = _trajectoryParent[2];
+                break;
         }
-    }
-    public void DebugOnBottom()
-    {
-        _knockDownEnemy = true;
+
+        _deadMovePoints = new Vector3[points.childCount - 1];
+
+        for (var i = 0; i < _deadMovePoints.Length; i++)
+        {
+            _deadMovePoints[i] = points.GetChild(i).position;
+        }
     }
 }
