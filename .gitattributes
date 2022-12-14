@@ -3,3 +3,4 @@
 *.acf filter=lfs diff=lfs merge=lfs -text
 *.acb filter=lfs diff=lfs merge=lfs -text
 *.awb filter=lfs diff=lfs merge=lfs -text
+*.mp4 filter=lfs diff=lfs merge=lfs -text

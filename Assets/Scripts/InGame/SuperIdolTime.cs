@@ -33,14 +33,20 @@ public class SuperIdolTime : MonoBehaviour
     private Image _imageExplosion = default;
     [SerializeField, Tooltip("フェード用のパネル")]
     private Image _fadePanel = default;
-    [SerializeField,Tooltip("スーパーアイドルタイム画面のUIの親オブジェクト")]
-    private GameObject _superIdolTimeObject = default;
+    [SerializeField,Tooltip("スーパーアイドルタイムの後面のUI")]
+    private GameObject _superIdolTimeBackUI = default;
+    [SerializeField, Tooltip("スーパーアイドルタイムの前面のUI")]
+    private GameObject _superIdolTimeFrontUI = default;
     [SerializeField, Tooltip("スーパーアイドルタイム画面の背景絵")]
     private GameObject _backGroundPanel = default;
     [SerializeField, Tooltip("通常画面のCanvas")]
     private GameObject _normalCanvas = default;
     [SerializeField,Tooltip("通常時のプレイヤー")]
-    private GameObject _normalPlayer = default;
+    private GameObject _normalPlayer = default; 
+    [SerializeField, Tooltip("通常時の道路(BackGround)")]
+    private GameObject _normalRoad = default;
+    [SerializeField, Tooltip("通常時の道路脇のファン(StageObject)")]
+    private GameObject _normalFan = default;
     [SerializeField, Tooltip("ゲージに合わせて出てくるファンの下段")]
     private GameObject _BackDownFans = default;
     [SerializeField, Tooltip("下段のファンが出てくる値")]
@@ -55,6 +61,8 @@ public class SuperIdolTime : MonoBehaviour
     private float _upFansValue = 0.3f;
     [SerializeField, Tooltip("背景に流すビデオのプレーヤー")]
     private VideoPlayer _videoPlayer = default;
+    [SerializeField, Tooltip("踊っているアイドルのプレーヤー")]
+    private VideoPlayer _danceIdolPlayer = default;
     [SerializeField,Tooltip("キラキラのエフェクト")]
     private ParticleSystem _shiningParticle = default;
     /// <summary>スーパーアイドルタイム中のタップされた回数</summary>
@@ -93,8 +101,10 @@ public class SuperIdolTime : MonoBehaviour
     {
         _videoPlayer.gameObject.SetActive(true);
         _videoPlayer.Play();
-        _normalCanvas.gameObject.SetActive(false);
-        _normalPlayer.gameObject.SetActive(false);
+        _normalCanvas.SetActive(false);
+        _normalPlayer.SetActive(false);
+        _normalRoad.SetActive(false);
+        _normalFan.SetActive(false);
     }
 
     // Update is called once per frame
@@ -162,7 +172,12 @@ public class SuperIdolTime : MonoBehaviour
     {
         _normalCanvas.SetActive(true);
         _normalPlayer.SetActive(true);
-        _superIdolTimeObject.SetActive(false);
+        _normalRoad.SetActive(true);
+        _normalFan.SetActive(true);
+        _superIdolTimeBackUI.SetActive(false);
+        _superIdolTimeFrontUI.SetActive(false);
+        _shiningParticle.gameObject.SetActive(false);
+        _danceIdolPlayer.gameObject.SetActive(false);
         _fadePanel.DOFade(0, 0.25f);
     }
     public void GaugeIncrease()
@@ -204,10 +219,14 @@ public class SuperIdolTime : MonoBehaviour
     }
     private void EndVideo(VideoPlayer vp)
     {
-        _superIdolTimeObject.SetActive(true);
+        _superIdolTimeBackUI.SetActive(true);
+        _superIdolTimeFrontUI.SetActive(true);
         isSuperIdolTime = true;
         _videoPlayer.gameObject.SetActive(false);
+        _danceIdolPlayer.gameObject.SetActive(true);
+        _danceIdolPlayer.Play();
         _backGroundPanel.gameObject.SetActive(true);
+        _shiningParticle.gameObject.SetActive(true);
         _shiningParticle.Play();
         //Debug.Log("endvideo");
     }
