@@ -39,11 +39,11 @@ public class GameManager : MonoBehaviour
     [SerializeField, Tooltip("Warningプレハブ")]
     PlayableDirector _warningTape = default;
     /// <summary>現在対象の敵 </summary>
-    Enemy _currentEnemy = default;
+    EnemyBase _currentEnemy = default;
     /// <summary>現在のゲーム状態</summary>
     IState _currentGameState = null;
     /// <summary>ステージに表示されている敵のリスト</summary>
-    List<Enemy> _enemies = new List<Enemy>();
+    List<EnemyBase> _enemies = new List<EnemyBase>();
     /// <summary>現在の体力 </summary>
     int _idleHp;
     /// <summary>現在のアイドルパワー </summary>
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     /// <summary>現在のゲーム状態 </summary>
     public IState CurrentGameState { get => _currentGameState; }
     /// <summary>現在対象の敵</summary>
-    public Enemy CurrentEnemy { get => _currentEnemy; set => _currentEnemy = value; }
+    public EnemyBase CurrentEnemy { get => _currentEnemy; set => _currentEnemy = value; }
     /// <summary>スクロールさせるオブジェクト</summary>
     public StageScroller Scroller { get => _stageScroller; }
     /// <summary>敵を生成するクラス</summary>
@@ -167,7 +167,7 @@ public class GameManager : MonoBehaviour
 
     /// <summary>生成されたファンをリストに追加する </summary>
     /// <param name="enemy">追加するファン</param>
-    public void AddEnemy(Enemy enemy)
+    public void AddEnemy(EnemyBase enemy)
     {
         if (_enemies.Count <= 0)    //ステージにファンが出現
         {
@@ -180,7 +180,7 @@ public class GameManager : MonoBehaviour
 
     /// <summary>倒されたファンをリストから削除する</summary>
     /// <param name="enemy">削除するファン</param>
-    public void RemoveEnemy(Enemy enemy)
+    public void RemoveEnemy(EnemyBase enemy)
     {
         _enemies.Remove(enemy);
 
