@@ -3,7 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 
 /// <summary>ファン(敵)の基底クラス </summary>
-[RequireComponent(typeof(Rigidbody), typeof(SpriteRenderer), typeof(EnemySpriteChange))]
+[RequireComponent(typeof(Rigidbody), typeof(SpriteRenderer))]
 public abstract class EnemyBase : MonoBehaviour
 {
 #region

@@ -15,13 +15,12 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField, Tooltip("ゲームマネジャー")]
     GameManager _manager = default;
 
-#endregion
+    #endregion
 
-#region private
-
-    [Tooltip("敵を出現させたい秒数")]
+    #region private
+    /// <summary>敵を出現させたい秒数 0=7.68f 1=5.76f 2=3.84f 3=1.92f</summary>
     float[] _timeInterval = new float[4] { 7.68f, 5.76f, 3.84f, 1.92f };
-    [Tooltip("ボス戦で敵を出現させたい秒数")]
+    /// <summary>ボス戦で敵を出現させたい秒数 0=7.6.4f 1=5.4.8f 2=3.2f 3=1.6f</summary>
     float[] _bossTimeInterval = new float[4] { 6.4f, 4.8f, 3.2f, 1.6f };
 
     /// <summary>生成間隔を決める添え字</summary>
@@ -48,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
             if (_generateTimer >= _timeInterval[_timeIntervalIndex]) //_timeIntervalを超えるとInstantiateします
             {
                 
-                var enemy = Instantiate(_enemyPrefubs[1], _spawnPoints[_positionCount].transform); //シリアライズで設定したオブジェクトの場所に出現します(最初は真ん中の位置に)
+                var enemy = Instantiate(_enemyPrefubs[GetEnemyIndex()], _spawnPoints[_positionCount].transform); //シリアライズで設定したオブジェクトの場所に出現します(最初は真ん中の位置に)
                 _manager.AddEnemy(enemy);
                 enemy.SetUp(_manager.CurrentGameState);
 
@@ -70,6 +69,8 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    /// <summary>生成するファンを決める（添え字を決める）</summary>
+    /// <returns>生成するファンの添え字</returns>
     int GetEnemyIndex()
     {
         var index = Random.Range(0, _enemyPrefubs.Length);
