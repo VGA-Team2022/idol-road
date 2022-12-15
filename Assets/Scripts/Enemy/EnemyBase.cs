@@ -8,7 +8,7 @@ public abstract class EnemyBase : MonoBehaviour
 {
 #region
     [SerializeField, Header("向かってくる速度"), Range(1, 50)]
-    float _enemySpped;
+    protected float _enemySpped;
     [SerializeField, Header("透明になるまでにかかる時間")]
     float _fadedSpeed = 1;
     [ElementNames(new string[] { "合計時間", "Bad", "Good", "Perfect", "Out" })]
@@ -74,29 +74,23 @@ public abstract class EnemyBase : MonoBehaviour
         remove { _disapperEnemies -= value; }
     }
 
-    Rigidbody _rb => GetComponent<Rigidbody>();
+    protected Rigidbody _rb => GetComponent<Rigidbody>();
 
     protected EnemySpriteChange[] EnemySprites { get => _enemySprites; }
 
     #endregion
 
-    private void Start()
+    void Start()
     {
         _rb.AddForce(-transform.forward * _enemySpped); //ファンを前に移動させる
         _time = _resultTimes[_resultTimeIndex];
     }
 
-    private void Update()
+    void Update()
     {
         if (!_isdead)
         {
-            _time -= Time.deltaTime;// リズム判定用
-
-            if (_time <= _resultTimes[_resultTimeIndex + 1])    //吹き飛び時の評価を更新する
-            {
-                _resultTimeIndex++;
-                UpdateCurrentResult();
-            }
+            UpdateResultTime();
         }
     }
 
@@ -143,19 +137,6 @@ public abstract class EnemyBase : MonoBehaviour
         }
 
         Array.ForEach(_requestUIArray, r => r.ChangeRequestWindow(_currentResult));
-    }
-
-    /// <summary>ファンサを決める</summary>
-    void FlickNum()
-    {
-        for (var i = 0; i < _requestUIArray.Length; i++)
-        {
-            var rnd = UnityEngine.Random.Range(1, 5);
-            _requestArray[i] = (FlickType)rnd;
-            _requestUIArray[i].ChangeRequestImage((FlickType)rnd);
-        }
-
-        _currentRequest = _requestArray[0];
     }
 
     /// <summary>評価によって倒された時の移動方法を変更する </summary>
@@ -213,13 +194,38 @@ public abstract class EnemyBase : MonoBehaviour
         _giveDamage?.Invoke(_requestArray.Length);
     }
 
+    /// <summary>判定に使用する経過時間を計測する </summary>
+    protected void UpdateResultTime()
+    {
+        _time -= Time.deltaTime;// リズム判定用
+
+        if (_time <= _resultTimes[_resultTimeIndex + 1])    //吹き飛び時の評価を更新する
+        {
+            _resultTimeIndex++;
+            UpdateCurrentResult();
+        }
+    }
+
+    /// <summary>ファンサを決める</summary>
+    protected void FlickNum()
+    {
+        _requestArray = new FlickType[_requestUIArray.Length];
+
+        for (var i = 0; i < _requestUIArray.Length; i++)
+        {
+            var rnd = UnityEngine.Random.Range(1, 5);
+            _requestArray[i] = (FlickType)rnd;
+            _requestUIArray[i].ChangeRequestImage((FlickType)rnd);
+        }
+
+        _currentRequest = _requestArray[0];
+    }
+
 
     /// <summary>生成時の初期化処理 </summary>
     /// <param name="istate">現在のゲームの状態</param>
     public virtual void SetUp(IState currentGameState)
     {
-        _requestArray = new FlickType[_requestUIArray.Length];
-
         FlickNum(); //ランダムでフリック方向を取得する
 
         if (currentGameState is BossTime)

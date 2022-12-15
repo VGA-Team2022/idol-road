@@ -8,6 +8,7 @@ public class BossTime : IState
     {
         manager.WarningTape.gameObject.SetActive(true);
         manager.WarningTape.stopped += WarningTapeAnimEnd;
+        manager.EnemyGenerator.SpawnBossEnemy();
     }
 
     public void OnExit(GameManager manager, IState nextState)
