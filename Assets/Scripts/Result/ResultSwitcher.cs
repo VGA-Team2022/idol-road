@@ -20,7 +20,9 @@ public class ResultSwitcher : MonoBehaviour
     bool _isEasy, _isNormal, _isHard;
     ResultData _resultData;
     ResultManager _result;
+    [SerializeField,Tooltip("合計スコア")]
     int _score;
+    public int Score { get => _score; set => _score = value; }
     void Start()
     {
         _score = 0;
