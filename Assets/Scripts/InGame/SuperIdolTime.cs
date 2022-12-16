@@ -223,8 +223,8 @@ public class SuperIdolTime : MonoBehaviour
         _superIdolTimeFrontUI.SetActive(true);
         isSuperIdolTime = true;
         _videoPlayer.gameObject.SetActive(false);
-        _danceIdolPlayer.gameObject.SetActive(true);
-        _danceIdolPlayer.Play();
+      //  _danceIdolPlayer.gameObject.SetActive(true);
+     //   _danceIdolPlayer.Play();
         _backGroundPanel.gameObject.SetActive(true);
         _shiningParticle.gameObject.SetActive(true);
         _shiningParticle.Play();

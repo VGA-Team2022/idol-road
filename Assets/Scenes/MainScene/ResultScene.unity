@@ -680,4 +680,4 @@ MonoBehaviour:
   _countGood: 0
   _countPerfect: 0
   _countScore: 0
-  _reSwitch: {fileID: 0}
+  _reSwitch: {fileID: 2106405866}
