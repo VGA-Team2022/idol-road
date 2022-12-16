@@ -23,7 +23,7 @@ public class BossEnemy : EnemyBase
 
     private void Start()
     {
-       
+        _time = _resultTimes[_resultTimeIndex];
     }
 
     private void Update()
@@ -87,9 +87,9 @@ public class BossEnemy : EnemyBase
     /// <summary>移動を開始する</summary>
     public void MoveStart()
     {
-        Debug.Log("Hello");
         _rb.AddForce(-transform.forward * _enemySpped); //ファンを前に移動させる
-        _isMove = false;
+        _isMove = true;
         FlickNum(); //ランダムでフリック方向を取得する
+        _requestUIArray[0].gameObject.SetActive(true);
     }
 }
