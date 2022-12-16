@@ -24,6 +24,7 @@ public class ResultSwitcher : MonoBehaviour
     [SerializeField,Tooltip("合計スコア")]
     int _score;
     public int Score { get => _score; set => _score = value; }
+ 
     void Start()
     {
         _isEasy = true;
@@ -32,6 +33,8 @@ public class ResultSwitcher : MonoBehaviour
         JudgeMode();
         ScoreCalculation();
         JudgeResult();
+
+        AudioManager.Instance.PlayVoice(18);
     }
 
     void Update()
