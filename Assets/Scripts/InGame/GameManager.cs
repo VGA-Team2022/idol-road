@@ -217,4 +217,11 @@ public class GameManager : MonoBehaviour
             _currentEnemy = _enemies[0];
         }
     }
+
+    /// <summary>ƒQ[ƒ€ƒNƒŠƒA‚Ìˆ—</summary>
+    public void GameClear()
+    {
+        ChangeGameState(_gameEndState);
+        _stageScroller.ScrollOperation();
+    }
 }
