@@ -45,6 +45,7 @@ public class StageSelectController : MonoBehaviour
 
         if (selectButton == _currentSelectedButton)     //選択ゲームシーンに遷移する
         {
+            AudioManager.Instance.PlaySE(7);
             _fadeController.FadeOut(() => SceneManager.LoadScene(_nextSceneName));
         }
         else
@@ -52,6 +53,7 @@ public class StageSelectController : MonoBehaviour
             //ステージを選択する
             _currentSelectedButton = selectButton;
             _stageImage.sprite = _stageSprites[index];
+            AudioManager.Instance.PlaySE(32);
         }
     }
 }

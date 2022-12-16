@@ -5,7 +5,7 @@ public class Playing : IState
 {
     public void OnEnter(GameManager manager, IState previousState)
     {
-        
+       
     }
 
     public void OnExit(GameManager manager, IState nextState)

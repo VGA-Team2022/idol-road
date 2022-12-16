@@ -149,15 +149,16 @@ public abstract class EnemyBase : MonoBehaviour
         {
             case TimingResult.Bad:
                 BadEffect();
+                AudioManager.Instance.PlaySE(2, 0.5f);
                 break;
             case TimingResult.Good:
                 Instantiate(_explosionEffect, transform.position, Quaternion.identity);     //爆発エフェクトを生成
-                AudioManager.Instance.PlaySE(6, 0.1f);
+                AudioManager.Instance.PlaySE(6, 0.7f);
                 GoodEffect();
                 break;
             case TimingResult.Perfect:
                 Instantiate(_explosionEffect, transform.position, Quaternion.identity);
-                AudioManager.Instance.PlaySE(6, 0.1f);
+                AudioManager.Instance.PlaySE(6, 0.7f);
                 PerfactEffect();
                 break;
         }

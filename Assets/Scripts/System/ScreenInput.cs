@@ -141,6 +141,7 @@ public class ScreenInput : MonoBehaviour
         if (_manager.CurrentEnemy != null && _flickType != FlickType.Tap)
         {
              _manager.CurrentEnemy.JugeTime(_flickType);//”ò‚ñ‚¾‚Æ‚«‚Ì•b”‚Æ”»’è‚ğŒˆ‚ß‚é‚à‚Ì
+            AudioManager.Instance.PlayRequestSE(_flickType);
         }
 
         //if (_manager.IsIdleTime == true && _flickType == FlickType.Tap)

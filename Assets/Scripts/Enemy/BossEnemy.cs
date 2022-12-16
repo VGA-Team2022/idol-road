@@ -54,6 +54,8 @@ public class BossEnemy : EnemyBase
         //透明になりながら消えていくパターン
         Array.ForEach(EnemySprites, s => s.GetComponent<SpriteRenderer>()
         .DOFade(endValue: 0, duration: 2.0f).OnComplete(GiveDamageRun));
+
+        AudioManager.Instance.PlayVoice(8);
     }
 
     protected override void GoodEffect()
@@ -64,12 +66,15 @@ public class BossEnemy : EnemyBase
         _bossSprite.transform.DOLocalRotate(new Vector3(0, 0, 360f), 0.1f, RotateMode.FastBeyond360)
             .SetEase(Ease.Linear)
             .SetLoops(-1, LoopType.Restart);
+
+        AudioManager.Instance.PlayVoice(1);
     }
 
     protected override void OutEffect()
     {
         GiveDamageRun(); //ダメージを与える
         Destroy(gameObject);
+        AudioManager.Instance.PlayVoice(8);
     }
 
     protected override void PerfactEffect()
@@ -80,6 +85,8 @@ public class BossEnemy : EnemyBase
         _bossSprite.transform.DOLocalRotate(new Vector3(0, 0, 360f), 0.1f, RotateMode.FastBeyond360)
             .SetEase(Ease.Linear)
             .SetLoops(-1, LoopType.Restart);
+
+        AudioManager.Instance.PlayVoice(1);
     }
 
     /// <summary>移動を開始する</summary>
