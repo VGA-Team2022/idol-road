@@ -47,11 +47,11 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        if (_manager.CurrentGameState is Playing || _manager.CurrentGameState is BossTime)
+        if (_isGenerate)
         {
             _generateTimer += Time.deltaTime;
 
-            if (_generateTimer >= _timeInterval[_timeIntervalIndex] && _isGenerate) //_timeIntervalを超えるとInstantiateします
+            if (_generateTimer >= _timeInterval[_timeIntervalIndex]) //_timeIntervalを超えるとInstantiateします
             {
 
                 var enemy = Instantiate(_enemyPrefubs[GetEnemyIndex()], _spawnPoints[_positionCount].transform); //シリアライズで設定したオブジェクトの場所に出現します(最初は真ん中の位置に)
@@ -76,6 +76,11 @@ public class EnemySpawner : MonoBehaviour
                 _generateTimer = 0;
             }
         }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            Debug.Log(_isGenerate);
+        }
     }
 
     /// <summary>生成するファンを決める（添え字を決める）</summary>
@@ -91,18 +96,20 @@ public class EnemySpawner : MonoBehaviour
     {
         _isGenerate = false;
        
-        var boss = Instantiate(_enemyPrefubs[2], _bossSpawnPoint);
+        var go = Instantiate(_enemyPrefubs[2], _bossSpawnPoint);
 
-        if (boss is not BossEnemy)  //キャストできなければ何もしない
+        if (go is not BossEnemy)  //キャストできなければ何もしない
         {
             return;
         }
 
-        _manager.StartBossMove += ((BossEnemy)boss).MoveStart;
+        var boss = ((BossEnemy)go);
+        _manager.StartBossMove += boss.MoveStart;
+        boss.GameClear += _manager.GameClear;
+        _manager.AddEnemy(boss);
 
-        var sr = boss.GetComponent<SpriteRenderer>();
-        sr.color = new Color(1f, 1f, 1f, 0f);
-        sr.DOFade(1f, 2f)
+        boss.BossSprite.color = new Color(1f, 1f, 1f, 0f);
+        boss.BossSprite.DOFade(1f, 2f)
             .SetDelay(5f)
             .OnComplete(() => _isGenerate = true);
     }

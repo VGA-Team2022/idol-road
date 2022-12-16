@@ -14,7 +14,7 @@ public class BossTime : IState
 
     public void OnExit(GameManager manager, IState nextState)
     {
-        
+        manager.EnemyGenerator.IsGenerate = false;
     }
 
     public void OnUpdate(GameManager manager)
