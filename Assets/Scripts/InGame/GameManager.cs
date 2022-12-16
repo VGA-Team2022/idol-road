@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
     EnemySpawner _enemySpawner = default;
     [SerializeField, Tooltip("Warningプレハブ")]
     PlayableDirector _warningTape = default;
+    [SerializeField]
+    SuperIdolTime _superIdolTime = default;
     /// <summary>現在対象の敵 </summary>
     EnemyBase _currentEnemy = default;
     /// <summary>現在のゲーム状態</summary>
@@ -58,6 +60,8 @@ public class GameManager : MonoBehaviour
     bool _isBossMove = false;
 
     bool _isBoss = false;
+    /// <summary>経過時間を計測するかどうか</summary>
+    bool _isTimer = true;
     /// <summary>ボスの移動を開始する処理</summary>
     event Action _startBossMove = default;
 
@@ -73,6 +77,8 @@ public class GameManager : MonoBehaviour
     /// <summary>フェードを行うクラス</summary>
     public FadeController FadeCanvas { get => _fadeController; }
     public PlayableDirector WarningTape { get => _warningTape; }
+    /// <summary>経過時間を計測するかどうか</summary>
+    public bool IsTimer { get => _isTimer; set => _isTimer = value; }
 
     /// <summary>ボスの移動を開始する処理</summary>
     public event Action StartBossMove
@@ -93,7 +99,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (_currentGameState is not GameStart && _currentGameState is not GameEnd) //時間経過のUIを更新する
+        if (_currentGameState is not GameStart && _currentGameState is not GameEnd && _isTimer) //時間経過のUIを更新する
         {
             _elapsedTime += Time.deltaTime;
             _uiController.UpdateGoalDistanceUI(_elapsedTime);
@@ -110,12 +116,17 @@ public class GameManager : MonoBehaviour
             _isBoss = true;
         }
 
-        if (_gameTime - _elapsedTime <= 20 && !_isBossMove)    //制限時間が0になったらボスを移動させる
+        if (_gameTime - _elapsedTime <= 0 && !_isBossMove)    //制限時間が0になったらボスを移動させる
         {
             Debug.Log("移動開始");
             _enemySpawner.IsGenerate = false;
             _startBossMove?.Invoke();
             _isBossMove = true;
+        }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            IncreseIdlePower(100);
         }
     }
 
@@ -123,13 +134,22 @@ public class GameManager : MonoBehaviour
     public void IncreseIdlePower(int power)
     {
         _idlePower += power;
-        _uiController.UpdateIdolPowerGauge(_idlePower);
+        _isTimer = false;
+        // _uiController.UpdateIdolPowerGauge(_idlePower);
 
         if (_maxIdlePower <= _idlePower)    //スーパーアイドルタイムを発動
         {
-            _idlePower = 0;
-            _uiController.UpdateIdolPowerGauge(_idlePower);
-            ChangeGameState(_idleTimeState);
+            _fadeController.FadeOut(() =>
+            {
+                _superIdolTime.gameObject.SetActive(true);
+
+                _fadeController.FadeIn(() =>
+                {
+                    _idlePower = 0;
+                    _uiController.UpdateIdolPowerGauge(_idlePower);
+                    ChangeGameState(_idleTimeState);
+                });
+            }); 
         }
     }
 
@@ -197,6 +217,8 @@ public class GameManager : MonoBehaviour
     /// <param name="enemy">追加するファン</param>
     public void AddEnemy(EnemyBase enemy)
     {
+        _isTimer = false;
+
         if (_enemies.Count <= 0)    //ステージにファンが出現
         {
             _currentEnemy = enemy;
@@ -215,7 +237,10 @@ public class GameManager : MonoBehaviour
         if (1 <= _enemies.Count)
         {
             _currentEnemy = _enemies[0];
+            return;
         }
+
+        _isTimer = true;
     }
 
     /// <summary>ゲームクリア時の処理</summary>

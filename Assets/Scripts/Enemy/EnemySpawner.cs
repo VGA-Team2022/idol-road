@@ -76,11 +76,6 @@ public class EnemySpawner : MonoBehaviour
                 _generateTimer = 0;
             }
         }
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            Debug.Log(_isGenerate);
-        }
     }
 
     /// <summary>生成するファンを決める（添え字を決める）</summary>
