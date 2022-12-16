@@ -18,6 +18,7 @@ public class ResultSwitcher : MonoBehaviour
     private bool _isDebug = false;
     [SerializeField, Tooltip("難易度を判定してResoursecで読み込む物をかえる")]
     bool _isEasy, _isNormal, _isHard;
+
     ResultData _resultData;
     ResultManager _result;
     [SerializeField,Tooltip("合計スコア")]
@@ -25,6 +26,7 @@ public class ResultSwitcher : MonoBehaviour
     public int Score { get => _score; set => _score = value; }
     void Start()
     {
+        _isEasy = true;
         _score = 0;
         _result = ResultManager.Instance;
         JudgeMode();
