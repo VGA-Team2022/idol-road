@@ -6,7 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
     #region private SerializeField
 
-    [SerializeField, Tooltip("0=ノーマル 1=壁ファン 2=ボス"), ElementNames(new string[] {"ノーマル", "壁ファン", "ボス"})]
+    [SerializeField, Tooltip("0=ノーマル 1=壁ファン 2=ボス"), ElementNames(new string[] { "ノーマル", "壁ファン", "ボス" })]
     EnemyBase[] _enemyPrefubs = default;
 
     [ElementNames(new string[] { "中央", "右側", "左側" })]
@@ -33,13 +33,16 @@ public class EnemySpawner : MonoBehaviour
     float _generateTimer = 0;
     /// <summary>最初または次の敵の発生位置を決める変数  0なら真ん中、1なら右、2なら左</summary>
     int _positionCount = 0;
+    /// <summary>ファンを生成するかどうか true=生成する </summary>
+    bool _isGenerate = true;
 
-#endregion
+    public bool IsGenerate { get => _isGenerate; set => _isGenerate = value; }
+
+    #endregion
     private void Start()
     {
         _timeIntervalIndex = Random.Range(0, _timeInterval.Length);
         _generateTimer = -_timeInterval[3]; //最初のみ2秒間遅延をさせる
-        
     }
 
     void Update()
@@ -48,9 +51,9 @@ public class EnemySpawner : MonoBehaviour
         {
             _generateTimer += Time.deltaTime;
 
-            if (_generateTimer >= _timeInterval[_timeIntervalIndex]) //_timeIntervalを超えるとInstantiateします
+            if (_generateTimer >= _timeInterval[_timeIntervalIndex] && _isGenerate) //_timeIntervalを超えるとInstantiateします
             {
-                
+
                 var enemy = Instantiate(_enemyPrefubs[GetEnemyIndex()], _spawnPoints[_positionCount].transform); //シリアライズで設定したオブジェクトの場所に出現します(最初は真ん中の位置に)
                 _manager.AddEnemy(enemy);
                 enemy.SetUp(_manager.CurrentGameState);
@@ -63,11 +66,13 @@ public class EnemySpawner : MonoBehaviour
 
                 _timeIntervalIndex = Random.Range(0, _timeInterval.Length);     //次の生成間隔を決める
 
-                _positionCount += 1;
+                _positionCount++;
+
                 if (_positionCount == 3)
                 {
-                    _positionCount= 0;
+                    _positionCount = 0;
                 }
+
                 _generateTimer = 0;
             }
         }
@@ -84,11 +89,13 @@ public class EnemySpawner : MonoBehaviour
     /// <summary>ボスを生成する </summary>
     public void SpawnBossEnemy()
     {
-       var boss = Instantiate(_enemyPrefubs[2], _bossSpawnPoint);
+        _isGenerate = false;
+       
+        var boss = Instantiate(_enemyPrefubs[2], _bossSpawnPoint);
 
         if (boss is not BossEnemy)  //キャストできなければ何もしない
         {
-            return;   
+            return;
         }
 
         _manager.StartBossMove += ((BossEnemy)boss).MoveStart;
@@ -96,6 +103,7 @@ public class EnemySpawner : MonoBehaviour
         var sr = boss.GetComponent<SpriteRenderer>();
         sr.color = new Color(1f, 1f, 1f, 0f);
         sr.DOFade(1f, 2f)
-            .SetDelay(5f);
+            .SetDelay(5f)
+            .OnComplete(() => _isGenerate = true);
     }
 }

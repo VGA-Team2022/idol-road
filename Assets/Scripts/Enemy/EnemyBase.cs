@@ -13,9 +13,9 @@ public abstract class EnemyBase : MonoBehaviour
     float _fadedSpeed = 1;
     [ElementNames(new string[] { "合計時間", "Bad", "Good", "Perfect", "Out" })]
     [SerializeField, Header("リズム判定の秒数"), Tooltip("0=合計時間 1=bad 2=good 3=perfect 4=out")]
-    float[] _resultTimes = default;
+    protected float[] _resultTimes = default;
     [SerializeField, Tooltip("ファンサを更新するクラス")]
-    RequestUIController[] _requestUIArray = null;
+    protected RequestUIController[] _requestUIArray = null;
     [SerializeField, Tooltip("イラストを管理するクラス")]
     EnemySpriteChange[] _enemySprites = null;
     [SerializeField, Tooltip("爆発エフェクト")]
@@ -30,11 +30,11 @@ public abstract class EnemyBase : MonoBehaviour
     /// <summary>答えたファンサ数</summary>
     int _requestCount = 0;
     /// <summary>評価判定の時間の添え字 </summary>
-    int _resultTimeIndex = 0;
+    protected int _resultTimeIndex = 0;
     /// <summary>敵の死亡フラグ</summary>
     bool _isdead = false;
     /// <summary>評価変更用変数</summary>
-    float _time = 0f;
+    protected float _time = 0f;
 
     /// <summary>倒されたらステージスクロールを開始する </summary>
     event Action _stageScroll = default;
@@ -199,7 +199,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
         _time -= Time.deltaTime;// リズム判定用
 
-        if (_time <= _resultTimes[_resultTimeIndex + 1])    //吹き飛び時の評価を更新する
+        if (_time <= _resultTimes[_resultTimeIndex + 1] && !_isdead)    //吹き飛び時の評価を更新する
         {
             _resultTimeIndex++;
             UpdateCurrentResult();
@@ -210,6 +210,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected void FlickNum()
     {
         _requestArray = new FlickType[_requestUIArray.Length];
+        _time = _resultTimes[_resultTimeIndex];
 
         for (var i = 0; i < _requestUIArray.Length; i++)
         {

@@ -56,6 +56,8 @@ public class GameManager : MonoBehaviour
     float _elapsedTime = 0f;
     /// <summary>ボスがプレイヤーに向かって移動しているかどうか </summary>
     bool _isBossMove = false;
+
+    bool _isBoss = false;
     /// <summary>ボスの移動を開始する処理</summary>
     event Action _startBossMove = default;
 
@@ -102,8 +104,16 @@ public class GameManager : MonoBehaviour
             ChangeGameState(_bossTimeState);
         }
 
-        if (Math.Abs(_gameTime - _elapsedTime) <= 50 && !_isBossMove)    //制限時間が0になったらボスを移動させる
+        if (_bossTime + 7 >= Math.Abs(_gameTime - _elapsedTime) && !_isBoss)
         {
+            _enemySpawner.IsGenerate = false;
+            _isBoss = true;
+        }
+
+        if (_gameTime - _elapsedTime <= 20 && !_isBossMove)    //制限時間が0になったらボスを移動させる
+        {
+            Debug.Log("移動開始");
+            _enemySpawner.IsGenerate = false;
             _startBossMove?.Invoke();
             _isBossMove = true;
         }

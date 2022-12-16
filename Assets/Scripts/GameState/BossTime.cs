@@ -6,6 +6,7 @@ public class BossTime : IState
 {
     public void OnEnter(GameManager manager, IState previousState)
     {
+        manager.Scroller.ScrollOperation();
         manager.WarningTape.gameObject.SetActive(true);
         manager.WarningTape.stopped += WarningTapeAnimEnd;
         manager.EnemyGenerator.SpawnBossEnemy();
