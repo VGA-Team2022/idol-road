@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
         _currentGameState = _startState;
         _currentGameState.OnEnter(this, null);
         _uiController.InitializeInGameUI(_maxIdleHp, _gameTime, _maxIdlePower); //UI‚Ì‰Šú‰»ˆ—
+        Application.targetFrameRate = 60; //FPS‚ğ60‚Éİ’è
     }
 
     void Update()

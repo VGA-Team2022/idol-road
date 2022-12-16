@@ -61,8 +61,10 @@ public class SuperIdolTime : MonoBehaviour
     private float _upFansValue = 0.3f;
     [SerializeField, Tooltip("背景に流すビデオのプレーヤー")]
     private VideoPlayer _videoPlayer = default;
-    [SerializeField, Tooltip("踊っているアイドルのプレーヤー")]
-    private VideoPlayer _danceIdolPlayer = default;
+    [SerializeField,Tooltip("アイドルの踊っているImage")]
+    private Image _dancingIdolImage = default;
+    //[SerializeField, Tooltip("踊っているアイドルのプレーヤー")]
+    //private VideoPlayer _danceIdolPlayer = default;
     [SerializeField,Tooltip("キラキラのエフェクト")]
     private ParticleSystem _shiningParticle = default;
     /// <summary>スーパーアイドルタイム中のタップされた回数</summary>
@@ -99,6 +101,7 @@ public class SuperIdolTime : MonoBehaviour
 
     private void OnEnable()
     {
+        _superIdolTimeBackUI.SetActive(true);
         _videoPlayer.gameObject.SetActive(true);
         _videoPlayer.Play();
         _normalCanvas.SetActive(false);
@@ -177,7 +180,8 @@ public class SuperIdolTime : MonoBehaviour
         _superIdolTimeBackUI.SetActive(false);
         _superIdolTimeFrontUI.SetActive(false);
         _shiningParticle.gameObject.SetActive(false);
-        _danceIdolPlayer.gameObject.SetActive(false);
+        //_danceIdolPlayer.gameObject.SetActive(false);
+        _dancingIdolImage.gameObject.SetActive(false);
         _fadePanel.DOFade(0, 0.25f);
     }
     public void GaugeIncrease()
@@ -219,12 +223,13 @@ public class SuperIdolTime : MonoBehaviour
     }
     private void EndVideo(VideoPlayer vp)
     {
-        _superIdolTimeBackUI.SetActive(true);
+
         _superIdolTimeFrontUI.SetActive(true);
         isSuperIdolTime = true;
         _videoPlayer.gameObject.SetActive(false);
-        _danceIdolPlayer.gameObject.SetActive(true);
-        _danceIdolPlayer.Play();
+        //_danceIdolPlayer.gameObject.SetActive(true);
+        //_danceIdolPlayer.Play();
+        _dancingIdolImage.gameObject.SetActive(true);
         _backGroundPanel.gameObject.SetActive(true);
         _shiningParticle.gameObject.SetActive(true);
         _shiningParticle.Play();
