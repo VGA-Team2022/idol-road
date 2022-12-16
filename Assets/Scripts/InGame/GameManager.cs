@@ -54,6 +54,10 @@ public class GameManager : MonoBehaviour
     int _nextComboCount = ADD_COMBO_ILLUST_CCHANGE;
     /// <summary>ゲーム開始からの経過時間 </summary>
     float _elapsedTime = 0f;
+    /// <summary>ボスがプレイヤーに向かって移動しているかどうか </summary>
+    bool _isBossMove = false;
+    /// <summary>ボスの移動を開始する処理</summary>
+    event Action _startBossMove = default;
 
 #region
     /// <summary>現在のゲーム状態 </summary>
@@ -67,6 +71,14 @@ public class GameManager : MonoBehaviour
     /// <summary>フェードを行うクラス</summary>
     public FadeController FadeCanvas { get => _fadeController; }
     public PlayableDirector WarningTape { get => _warningTape; }
+
+    /// <summary>ボスの移動を開始する処理</summary>
+    public event Action StartBossMove
+    {
+        add { _startBossMove += value; }
+        remove { _startBossMove -= value; }
+    }
+
 #endregion
 
     void Start()
@@ -88,6 +100,12 @@ public class GameManager : MonoBehaviour
         if (_bossTime >= Math.Abs(_gameTime - _elapsedTime) && _currentGameState is not BossTime　&& _currentGameState is not GameEnd)    //ボスステージを開始
         {
             ChangeGameState(_bossTimeState);
+        }
+
+        if (Math.Abs(_gameTime - _elapsedTime) <= 50 && !_isBossMove)    //制限時間が0になったらボスを移動させる
+        {
+            _startBossMove?.Invoke();
+            _isBossMove = true;
         }
     }
 

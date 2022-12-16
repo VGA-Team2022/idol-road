@@ -1,11 +1,12 @@
 using UnityEngine;
+using DG.Tweening;
 
 /// <summary>ファンを生成するクラス </summary>
 public class EnemySpawner : MonoBehaviour
 {
     #region private SerializeField
 
-    [SerializeField, Tooltip("プレハブ")]
+    [SerializeField, Tooltip("0=ノーマル 1=壁ファン 2=ボス"), ElementNames(new string[] {"ノーマル", "壁ファン", "ボス"})]
     EnemyBase[] _enemyPrefubs = default;
 
     [ElementNames(new string[] { "中央", "右側", "左側" })]
@@ -14,6 +15,9 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField, Tooltip("ゲームマネジャー")]
     GameManager _manager = default;
+
+    [SerializeField, Tooltip("Bossの生成位置")]
+    Transform _bossSpawnPoint = default;
 
     #endregion
 
@@ -73,17 +77,25 @@ public class EnemySpawner : MonoBehaviour
     /// <returns>生成するファンの添え字</returns>
     int GetEnemyIndex()
     {
-        var index = Random.Range(0, _enemyPrefubs.Length);
+        var index = Random.Range(0, _enemyPrefubs.Length - 1); //Bossを生成させない為に-1する
         return index;
     }
 
-    /// <summary>
-    /// ボタンに設定するパブリック関数
-    /// falseになるとエネミーの出現が止まる
-    /// 且つゲームの時間やエネミーが出てくるインターバルの時間をすべてリセット
-    /// </summary>
-    public void OffEnemy()
+    /// <summary>ボスを生成する </summary>
+    public void SpawnBossEnemy()
     {
-        _generateTimer = 0;
+       var boss = Instantiate(_enemyPrefubs[2], _bossSpawnPoint);
+
+        if (boss is not BossEnemy)  //キャストできなければ何もしない
+        {
+            return;   
+        }
+
+        _manager.StartBossMove += ((BossEnemy)boss).MoveStart;
+
+        var sr = boss.GetComponent<SpriteRenderer>();
+        sr.color = new Color(1f, 1f, 1f, 0f);
+        sr.DOFade(1f, 2f)
+            .SetDelay(5f);
     }
 }
