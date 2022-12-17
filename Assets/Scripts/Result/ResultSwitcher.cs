@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 public class ResultSwitcher : MonoBehaviour
 {
@@ -123,6 +123,11 @@ public class ResultSwitcher : MonoBehaviour
     {
         Debug.Log("SuperPerfect ëSî\ê_");
         _resultUIController.ChangeResultImage(Result.SuperPerfect);
+    }
+
+    public void Test()
+    {
+        SceneManager.LoadScene("Title");
     }
 }
 
