@@ -201,7 +201,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 28bac96804838dd4eac1b1a0c0b1f594, type: 3}
   - {fileID: 21300000, guid: 1d9cffdd0070c1d4094960303b8f02d8, type: 3}
   _goalSlider: {fileID: 587714612298976613}
-  _idolPowerGauge: {fileID: 587714610597963012}
+  _idolPowerGauge: {fileID: 0}
   _hpUIParent: {fileID: 587714610366235794}
   _hpPrefab: {fileID: 8451664795510223368, guid: 25937646bde21ea4f8545197f391f84f, type: 3}
   _comboText: {fileID: 4887356757688435704}
@@ -1252,7 +1252,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 910, y: 80}
-  m_SizeDelta: {x: 500, y: 800}
+  m_SizeDelta: {x: 900, y: 800}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &7488603752459880071
 CanvasRenderer:
