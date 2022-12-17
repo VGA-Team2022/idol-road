@@ -52,7 +52,7 @@ public class ScreenInput : MonoBehaviour
             }//ƒXƒƒCƒv‚µ‚½êŠ‚ğ•Û‘¶
             else if (Input.GetMouseButton(0))
             {
-                 _StartPosition = Input.mousePosition;
+                 //_StartPosition = Input.mousePosition;
             }
             //—£‚µ‚½êŠ‚ğ•Û‘¶
             else if (Input.GetMouseButtonUp(0))
@@ -81,7 +81,7 @@ public class ScreenInput : MonoBehaviour
                         _StartPosition = touch.position;
                         break;
                     case TouchPhase.Moved:
-                        _StartPosition = touch.position;
+                        //_StartPosition = touch.position;
                         break;
                     //—£‚µ‚½êŠ‚ğ•Û‘¶
                     case TouchPhase.Ended:

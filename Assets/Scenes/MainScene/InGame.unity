@@ -35183,60 +35183,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: InGameCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 587714610597963013, guid: 333de39ddbc53194599f4fa1aa420e0d, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 587714611129088072, guid: 333de39ddbc53194599f4fa1aa420e0d, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 587714611129088072, guid: 333de39ddbc53194599f4fa1aa420e0d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 587714611129088072, guid: 333de39ddbc53194599f4fa1aa420e0d, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 587714611459182626, guid: 333de39ddbc53194599f4fa1aa420e0d, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 587714611459182626, guid: 333de39ddbc53194599f4fa1aa420e0d, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 587714611459182627, guid: 333de39ddbc53194599f4fa1aa420e0d, type: 3}
-      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 587714611459182627, guid: 333de39ddbc53194599f4fa1aa420e0d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 587714611459182627, guid: 333de39ddbc53194599f4fa1aa420e0d, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1.166
-      objectReference: {fileID: 0}
-    - target: {fileID: 587714611459182627, guid: 333de39ddbc53194599f4fa1aa420e0d, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: -12.173
-      objectReference: {fileID: 0}
-    - target: {fileID: 587714611459182627, guid: 333de39ddbc53194599f4fa1aa420e0d, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -25.373047
-      objectReference: {fileID: 0}
-    - target: {fileID: 587714611459182627, guid: 333de39ddbc53194599f4fa1aa420e0d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 1.2849998
       objectReference: {fileID: 0}
     - target: {fileID: 587714611951101181, guid: 333de39ddbc53194599f4fa1aa420e0d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 587714612298976613, guid: 333de39ddbc53194599f4fa1aa420e0d, type: 3}
-      propertyPath: m_Value
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -64,7 +64,7 @@ MonoBehaviour:
     - 0
     - 0
   _cueName: 
-  _cueSheet: BGM_CueSheet_IDOL_1129
+  _cueSheet: BGM_CueSheet_IDOL_1213
 --- !u!1 &1429683745531273808
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,16 +114,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acfFile: IDOLROAD1104.acf
   cueSheets:
-  - name: BGM_CueSheet_IDOL_1206
-    acbFile: BGM_CueSheet_IDOL_1206.acb
+  - name: BGM_CueSheet_IDOL_1213
+    acbFile: BGM_CueSheet_IDOL_1213.acb
+    awbFile: BGM_CueSheet_IDOL_1213.awb
+    loaderStatus: 0
+  - name: VOICE_CueSheet_IDOL_1213
+    acbFile: VOICE_CueSheet_IDOL_1213.acb
     awbFile: 
     loaderStatus: 0
-  - name: SE_CueSheet_IDOL_1206
-    acbFile: SE_CueSheet_IDOL_1206.acb
-    awbFile: 
-    loaderStatus: 0
-  - name: Voice_CueSheet_IDOL_1206
-    acbFile: Voice_CueSheet_IDOL_1206.acb
+  - name: SE_CueSheet_IDOL_1213
+    acbFile: SE_CueSheet_IDOL_1213.acb
     awbFile: 
     loaderStatus: 0
   dspBusSetting: 
@@ -193,7 +193,7 @@ MonoBehaviour:
     - 0
     - 0
   _cueName: 
-  _cueSheet: VOICE_CueSheet_IDOL_1129
+  _cueSheet: VOICE_CueSheet_IDOL_1213
 --- !u!1 &1429683746686605163
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,4 +258,4 @@ MonoBehaviour:
     - 0
     - 0
   _cueName: 
-  _cueSheet: SE_CueSheet_IDOL_1129
+  _cueSheet: SE_CueSheet_IDOL_1213

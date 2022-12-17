@@ -132,7 +132,7 @@ public abstract class EnemyBase : MonoBehaviour
                 _currentResult = TimingResult.Out;
                 Array.ForEach(_enemySprites, s => 
                 s.GetComponent<SpriteRenderer>().DOFade(endValue: 0, duration: _fadedSpeed).OnComplete(() => Destroy(gameObject)));
-                _giveDamage?.Invoke(_requestArray.Length);
+                _giveDamage?.Invoke(1);
                 _addComboCount?.Invoke(_currentResult);
                 _disapperEnemies?.Invoke(this);
                 _isdead = true;
@@ -195,7 +195,7 @@ public abstract class EnemyBase : MonoBehaviour
     /// <summary>ダメージ処理を実行する </summary>
     protected void GiveDamageRun()
     {
-        _giveDamage?.Invoke(_requestArray.Length);
+        _giveDamage?.Invoke(1);
     }
 
     /// <summary>判定に使用する経過時間を計測する </summary>
