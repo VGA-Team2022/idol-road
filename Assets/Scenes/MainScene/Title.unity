@@ -2288,7 +2288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1429683745531273815, guid: 11ec29796cd01bb4ead4390ffb0e0698, type: 3}
       propertyPath: cueSheets.Array.data[2].name
-      value: Voice_CueSheet_IDOL_1213
+      value: VOICE_CueSheet_IDOL_1213
       objectReference: {fileID: 0}
     - target: {fileID: 1429683745531273815, guid: 11ec29796cd01bb4ead4390ffb0e0698, type: 3}
       propertyPath: cueSheets.Array.data[0].acbFile
@@ -2304,7 +2304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1429683745531273815, guid: 11ec29796cd01bb4ead4390ffb0e0698, type: 3}
       propertyPath: cueSheets.Array.data[2].acbFile
-      value: Voice_CueSheet_IDOL_1213.acb
+      value: VOICE_CueSheet_IDOL_1213.acb
       objectReference: {fileID: 0}
     - target: {fileID: 1429683746609967730, guid: 11ec29796cd01bb4ead4390ffb0e0698, type: 3}
       propertyPath: _cueSheet
