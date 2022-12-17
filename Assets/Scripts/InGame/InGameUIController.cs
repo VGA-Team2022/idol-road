@@ -9,8 +9,8 @@ public class InGameUIController : MonoBehaviour
     Sprite[] _comboSprites = default;
     [SerializeField, Tooltip("ゴールまでの距離を表示するスライダー")]
     Slider _goalSlider = default;
-    [SerializeField, Tooltip("アイドルパワーを表示するスライダー")]
-    Slider _idolPowerGauge = default;
+    [SerializeField, Tooltip("アイドルパワーを表示するImage")]
+    Image _idolPowerGauge = default;
     [SerializeField, Tooltip("HPUIの親オブジェクト")]
     GridLayoutGroup _hpUIParent = default;
     [SerializeField, Tooltip("HPUIのプレハブ")]
@@ -41,7 +41,7 @@ public class InGameUIController : MonoBehaviour
         }
 
         _goalSlider.maxValue = gameTime;          //スライダーの最大値をゲームプレイ時間と同じにする
-        _idolPowerGauge.maxValue = maxIdlePower;   //アイドルパワーゲージ最大値を変更する
+        //_idolPowerGauge.maxValue = maxIdlePower;   //アイドルパワーゲージ最大値を変更する(Slider時の処理)
     }
 
     /// <summary>HPUIを生成し配列に追加する </summary>
@@ -69,7 +69,7 @@ public class InGameUIController : MonoBehaviour
     /// <param name="value">増減値(減少させる場合は負数を入れる)</param>
     public void UpdateIdolPowerGauge(int value)
     {
-        _idolPowerGauge.value = value;
+        _idolPowerGauge.fillAmount = value;
     }
 
     /// <summary>ゴールまでの距離を表示するUIを更新する</summary>
