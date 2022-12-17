@@ -17,6 +17,8 @@ public class WallEnemy : EnemyBase
         s.GetComponent<SpriteRenderer>().DOFade(endValue: 0, duration: 2.0f).OnComplete(GiveDamageRun));
 
         StageScrollRun();        //ステージスクロールを行う
+
+        AudioManager.Instance.PlayVoice(13);
     }
 
     protected override void GoodEffect()
@@ -28,12 +30,16 @@ public class WallEnemy : EnemyBase
            .SetEase(Ease.Linear)
            .SetLoops(-1, LoopType.Restart);
         });
+
+        AudioManager.Instance.PlayVoice(5);
     }
 
     protected override void OutEffect()
     {
         GiveDamageRun(); //ダメージを与える
         Destroy(gameObject);
+
+        AudioManager.Instance.PlayVoice(13);
     }
 
     protected override void PerfactEffect()
@@ -45,6 +51,8 @@ public class WallEnemy : EnemyBase
            .SetEase(Ease.Linear)
            .SetLoops(-1, LoopType.Restart);
         });
+
+        AudioManager.Instance.PlayVoice(5);
     }
 
     /// <summary>

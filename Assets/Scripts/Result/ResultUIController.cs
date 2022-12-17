@@ -28,6 +28,7 @@ public class ResultUIController : MonoBehaviour
         _result = ResultManager.Instance;
         StartCoroutine(ShowResult());
     }
+
     /// <summary>Œ‹‰Ê‚É‚æ‚Á‚Ä”wŒi‚ğ•ÏX‚·‚é </summary>
     /// <param name="result"></param>
     public void ChangeResultImage(Result result)

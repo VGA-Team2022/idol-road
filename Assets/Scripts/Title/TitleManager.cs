@@ -6,8 +6,6 @@ public class TitleManager : MonoBehaviour
 {
     [SerializeField, Tooltip("フェードを行うクラス")]
     FadeController _fadeController = default;
-    [SerializeField, Tooltip("Storyを表示するUI")]
-    Canvas _storyCanvas = default;
     [SerializeField, Tooltip("遷移先のシーン名")]
     string _nextSceneName = "";
     /// <summary>入力を受け取るかどうか </summary>
@@ -17,7 +15,11 @@ public class TitleManager : MonoBehaviour
 
     private void Start()
     {
-        _fadeController.FadeIn(() => _isInput = true);
+        _fadeController.FadeIn(() => 
+        {
+            _isInput = true;
+            AudioManager.Instance.PlayVoice(14);
+        });
     }
 
     /// <summary>
@@ -28,6 +30,7 @@ public class TitleManager : MonoBehaviour
     {
         popup.SetActive(true);
         _isPopUp = true;
+        AudioManager.Instance.PlaySE(7);
     }
 
     /// <summary>
@@ -38,13 +41,15 @@ public class TitleManager : MonoBehaviour
     {
         popup.SetActive(false);
         _isPopUp = false;
+        AudioManager.Instance.PlaySE(7);
     }
 
     /// <summary>シーンを切り替える</summary>
     public void ChangeScene()
     {
         if (_isPopUp  || !_isInput) { return; }
-        
+
+        AudioManager.Instance.PlaySE(7);
         _fadeController.FadeOut(() => SceneManager.LoadScene(_nextSceneName));   //フェードを開始する
     }
 }
