@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bgmSource: {fileID: 0}
   _seSource: {fileID: 0}
+  _voiceSource: {fileID: 0}
