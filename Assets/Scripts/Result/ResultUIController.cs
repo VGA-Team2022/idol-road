@@ -8,6 +8,18 @@ using TMPro;
 /// <summary>リザルトシーンのUIを管理・更新するクラス</summary>
 public class ResultUIController : MonoBehaviour
 {
+    [SerializeField, Header("各スコアのテキストを表示させるまで時間")]
+    float _showResultSpan = 1.0f;
+    [SerializeField, Header("スコアを表示するまでの時間")]
+    float _scoreResultSpan = 2.0f;
+    [SerializeField, Header("ボタンを表示するまでの時間")]
+    float _buttonShowSpan = 1.0f;
+    [SerializeField, Header("テキストのフェードインにかかる時間")]
+    float _textShowSpan = 2.0f;
+    [SerializeField, Header("テキストのアニメーションにかかる時間")]
+    float _increseTime = 1.0f;
+
+
     [SerializeField, Header("背景(キャラクター)")]
     Image _backGround = default;
 
@@ -27,12 +39,6 @@ public class ResultUIController : MonoBehaviour
 
     [SerializeField, Tooltip("テキスト"), ElementNames(new string[] { "評価切り替え", "ステージセレクト", "リトライ" })]
     TextMeshProUGUI[] _fadeTextColor = default;
-
-    [SerializeField, Tooltip("値の増加時間")]
-    float _increseTime = 1.0f;
-
-    [SerializeField, Tooltip("UIを表示させるまでの時間"), ElementNames(new string[] { "評価表示", "スコア表示", "ボタンのフェードイン", "テキストのフェードイン" })]
-    float _showResultSpan = 1.0f, _scoreResultSpan = 2.0f, _buttonShowSpan = 1.0f, _textShowSpan = 2.0f;
 
     /// <summary>評価画面が表示されているかどうか</summary>
     bool _isValue = true;
