@@ -13,7 +13,7 @@ public class GameStart :  IState
     {
         Debug.Log("ƒQ[ƒ€ŠJnó‘Ô‚©‚ç‚Ê‚¯‚é");
         manager.Scroller.ScrollOperation();
-        AudioManager.Instance.PlayBGM(10, 0.1f);
+       // AudioManager.Instance.PlayBGM(10, 0.1f);
         //AudioManager.Instance.PlaySE(21, 0.1f);
     }
 

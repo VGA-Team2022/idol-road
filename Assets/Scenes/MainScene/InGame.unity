@@ -2797,6 +2797,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: InGameCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 587714610366235794, guid: 484bda7be6beb34409400aaed830226f, type: 3}
+      propertyPath: m_Spacing.x
+      value: -85
+      objectReference: {fileID: 0}
+    - target: {fileID: 587714610366235794, guid: 484bda7be6beb34409400aaed830226f, type: 3}
+      propertyPath: m_CellSize.x
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 587714610366235794, guid: 484bda7be6beb34409400aaed830226f, type: 3}
+      propertyPath: m_CellSize.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 587714610366235794, guid: 484bda7be6beb34409400aaed830226f, type: 3}
+      propertyPath: m_Padding.m_Top
+      value: -50
+      objectReference: {fileID: 0}
     - target: {fileID: 587714611129088072, guid: 484bda7be6beb34409400aaed830226f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -11108,10 +11124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1735335aea5c2694e8465a5297b7f329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxIdlePower: 100
-  _maxIdleHp: 5
-  _gameTime: 60
-  _bossTime: 30
   _stageScroller: {fileID: 1711237191}
   _fadeController: {fileID: 1591639049}
   _uiController: {fileID: 152129036}
