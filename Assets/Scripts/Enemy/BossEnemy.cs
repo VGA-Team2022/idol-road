@@ -33,7 +33,7 @@ public class BossEnemy : EnemyBase
 
     private void Start()
     {
-        _time = _resultTimes[_resultTimeIndex];
+       // _time = _resultTimes[_resultTimeIndex];
     }
 
     private void Update()
@@ -70,13 +70,6 @@ public class BossEnemy : EnemyBase
         AudioManager.Instance.PlayVoice(1);
     }
 
-    protected override void OutEffect()
-    {
-        GiveDamageRun(); //ダメージを与える
-        Destroy(gameObject);
-        AudioManager.Instance.PlayVoice(8);
-    }
-
     protected override void PerfactEffect()
     {
         _anim.Play(_playAnimName);
@@ -92,7 +85,7 @@ public class BossEnemy : EnemyBase
     /// <summary>移動を開始する</summary>
     public void MoveStart()
     {
-        _rb.AddForce(-transform.forward * _enemySpped); //ファンを前に移動させる
+      //  _rb.AddForce(-transform.forward * _enemySpped); //ファンを前に移動させる
         _isMove = true;
         FlickNum();
 
@@ -110,7 +103,7 @@ public class BossEnemy : EnemyBase
                 break;
         }
 
-        _requestUIArray[0].gameObject.SetActive(true);
+       // _requestUIArray[0].gameObject.SetActive(true);
     }
 
     /// <summary>

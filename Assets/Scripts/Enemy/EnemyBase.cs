@@ -6,45 +6,50 @@ using DG.Tweening;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class EnemyBase : MonoBehaviour
 {
-#region
-    [SerializeField, Header("向かってくる速度"), Range(1, 50)]
-    protected float _enemySpped;
-    [SerializeField, Header("透明になるまでにかかる時間")]
-    float _fadedSpeed = 1;
-    [ElementNames(new string[] { "合計時間", "Bad", "Good", "Perfect", "Out" })]
-    [SerializeField, Header("リズム判定の秒数"), Tooltip("0=合計時間 1=bad 2=good 3=perfect 4=out")]
-    protected float[] _resultTimes = default;
+    /// <summary>ファンサ要求の最小値 FlickTypeに対応</summary>
+    const int REQUREST_MIN_VALUE = 1;
+    /// <summary>ファンサ要求の最大値 FlickTypeに対応</summary>
+    const int REQUREST_MAX_VALUE = 5;
+
+    #region
+    [SerializeField, Header("ファンの種類")]
+    EnemyType _enemyType = EnemyType.None;
     [SerializeField, Tooltip("ファンサを更新するクラス")]
-    protected RequestUIController[] _requestUIArray = null;
+    RequestUIController[] _requestUIArray = null;
     [SerializeField, Tooltip("イラストを管理するクラス")]
     EnemySpriteChange[] _enemySprites = null;
     [SerializeField, Tooltip("爆発エフェクト")]
-    protected GameObject _explosionEffect = default;
+    GameObject _explosionEffect = default;
 
+    /// <summary>各ファンのパラメーター 0=通常 1=壁ファン2 2=壁ファン3 4=boss</summary>
+    EnemyParameter[] _parameters => LevelManager.Instance.CurrentLevel.EnemyParameters;
+    /// <summary>現在のパラメーター</summary>
+    protected EnemyParameter _currentParameter = default;
     /// <summary>ファンサ要求を保持する配列 </summary>
-    protected FlickType[] _requestArray = default;
+    FlickType[] _requestArray = default;
     /// <summary>吹き飛び時の評価 </summary>
-    protected TimingResult _currentResult = TimingResult.None;
+    TimingResult _currentResult = TimingResult.None;
     /// <summary>現在要求しているファンサ </summary>
     protected FlickType _currentRequest = FlickType.None;
     /// <summary>答えたファンサ数</summary>
     int _requestCount = 0;
     /// <summary>評価判定の時間の添え字 </summary>
-    protected int _resultTimeIndex = 0;
+    int _resultTimeIndex = 0;
     /// <summary>敵の死亡フラグ</summary>
     bool _isdead = false;
     /// <summary>評価変更用変数</summary>
-    protected float _time = 0f;
+    float _time = 0f;
 
     /// <summary>倒されたらステージスクロールを開始する </summary>
     event Action _stageScroll = default;
     /// <summary>ダメージを与える（プレイヤーの体力を減らす）</summary>
     event Action<int> _giveDamage = default;
-    /// <summary>コンボ数を増やす処理 </summay>
-    event Action<TimingResult> _addComboCount = default;
-    /// <summary>敵が死んだらリストから消える処理 </summay>
-    event Action<EnemyBase> _disapperEnemies = default;
 
+    /// <summary>コンボ数を増やす処理 </summary>
+    event Action<TimingResult> _addComboCount = default;
+
+    /// <summary>敵が死んだらリストから消える処理 </summary>
+    event Action<EnemyBase> _disapperEnemies = default;
 
     /// <summary>倒されたらステージスクロールを開始する </summary>
     public event Action StageScroll
@@ -85,8 +90,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     void Start()
     {
-        _rb.AddForce(-transform.forward * _enemySpped); //ファンを前に移動させる
-        _time = _resultTimes[_resultTimeIndex];
+        _rb.AddForce(-transform.forward * _currentParameter.MoveSpped); //ファンを前に移動させる
+        _time = _currentParameter.RhythmTimes[_resultTimeIndex];
     }
 
     void Update()
@@ -95,6 +100,28 @@ public abstract class EnemyBase : MonoBehaviour
         {
             UpdateResultTime();
         }
+    }
+
+    /// <summary>敵の種類によってパラメーターを変更する </summary>
+    void SelectEnemyParameter()
+    {
+        switch (_enemyType)
+        {
+            case EnemyType.Nomal:
+                _currentParameter = _parameters[0];
+                break;
+            case EnemyType.Wall2:
+                _currentParameter = _parameters[1];
+                break;
+            case EnemyType.Wall3:
+                _currentParameter = _parameters[2];
+                break;
+            case EnemyType.Boss:
+                _currentParameter = _parameters[3];
+                break;
+        }
+
+        _time = _currentParameter.RhythmTimes[_resultTimeIndex];    //リズム判定用のタイマーを初期化する
     }
 
     /// <summary>スコアを要求数分増加させる </summary>
@@ -130,12 +157,7 @@ public abstract class EnemyBase : MonoBehaviour
                 break;
             case TimingResult.Perfect:
                 _currentResult = TimingResult.Out;
-                Array.ForEach(_enemySprites, s => 
-                s.GetComponent<SpriteRenderer>().DOFade(endValue: 0, duration: _fadedSpeed).OnComplete(() => Destroy(gameObject)));
-                _giveDamage?.Invoke(1);
-                _addComboCount?.Invoke(_currentResult);
-                _disapperEnemies?.Invoke(this);
-                _isdead = true;
+                OutEffect();
                 break;
         }
 
@@ -149,19 +171,33 @@ public abstract class EnemyBase : MonoBehaviour
         {
             case TimingResult.Bad:
                 BadEffect();
-                AudioManager.Instance.PlaySE(2, 0.5f);
+                // AudioManager.Instance.PlaySE(2, 0.5f);
                 break;
             case TimingResult.Good:
                 Instantiate(_explosionEffect, transform.position, Quaternion.identity);     //爆発エフェクトを生成
-                AudioManager.Instance.PlaySE(6, 0.7f);
+                                                                                            //  AudioManager.Instance.PlaySE(6, 0.7f);
                 GoodEffect();
                 break;
             case TimingResult.Perfect:
                 Instantiate(_explosionEffect, transform.position, Quaternion.identity);
-                AudioManager.Instance.PlaySE(6, 0.7f);
+                //    AudioManager.Instance.PlaySE(6, 0.7f);
                 PerfactEffect();
                 break;
         }
+    }
+
+    /// <summary>アウト時の演出 (s処理)</summary>
+    void OutEffect()
+    {
+        //spirteをフェードさせる
+        Array.ForEach(_enemySprites, s =>
+              s.GetComponent<SpriteRenderer>().DOFade(endValue: 0, duration: _currentParameter.FadeSpeed).OnComplete(() => Destroy(gameObject)));
+
+        _giveDamage?.Invoke(_currentParameter.AddDamageValue);  //ダメージを与える
+        _addComboCount?.Invoke(_currentResult);
+        _disapperEnemies?.Invoke(this);
+
+        _isdead = true;
     }
 
     /// <summary>倒された時の処理 </summary>
@@ -183,9 +219,6 @@ public abstract class EnemyBase : MonoBehaviour
     /// <summary>パーフェクト判定時の演出 </summary>
     protected abstract void PerfactEffect();
 
-    /// <summary>アウト判定時の演出 </summary>
-    protected abstract void OutEffect();
-
     /// <summary>ステージスクロール処理を実行する </summary>
     protected void StageScrollRun()
     {
@@ -195,7 +228,7 @@ public abstract class EnemyBase : MonoBehaviour
     /// <summary>ダメージ処理を実行する </summary>
     protected void GiveDamageRun()
     {
-        _giveDamage?.Invoke(1);
+        _giveDamage?.Invoke(_currentParameter.AddDamageValue);
     }
 
     /// <summary>判定に使用する経過時間を計測する </summary>
@@ -203,7 +236,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
         _time -= Time.deltaTime;// リズム判定用
 
-        if (_time <= _resultTimes[_resultTimeIndex + 1] && !_isdead)    //吹き飛び時の評価を更新する
+        if (_time <= _currentParameter.RhythmTimes[_resultTimeIndex + 1] && !_isdead)    //吹き飛び時の評価を更新する
         {
             _resultTimeIndex++;
             UpdateCurrentResult();
@@ -213,17 +246,15 @@ public abstract class EnemyBase : MonoBehaviour
     /// <summary>ファンサを決める</summary>
     protected void FlickNum()
     {
-        _requestArray = new FlickType[_requestUIArray.Length];
-        _time = _resultTimes[_resultTimeIndex];
-
         for (var i = 0; i < _requestUIArray.Length; i++)
         {
-            var rnd = UnityEngine.Random.Range(1, 5);
+            var rnd = UnityEngine.Random.Range(REQUREST_MIN_VALUE, REQUREST_MAX_VALUE);
+
             _requestArray[i] = (FlickType)rnd;
             _requestUIArray[i].ChangeRequestImage((FlickType)rnd);
         }
 
-        _currentRequest = _requestArray[0];
+        _currentRequest = _requestArray[0]; //最初のファンサを決める
     }
 
 
@@ -231,15 +262,19 @@ public abstract class EnemyBase : MonoBehaviour
     /// <param name="istate">現在のゲームの状態</param>
     public virtual void SetUp(IState currentGameState)
     {
+        _requestArray = new FlickType[_requestUIArray.Length];
+
+        SelectEnemyParameter();
+
         FlickNum(); //ランダムでフリック方向を取得する
 
         if (currentGameState is BossTime)
         {
             Array.ForEach(_enemySprites, e => e.EnemyBossMethod(e.gameObject.GetComponent<SpriteRenderer>()));
         }
-        else 
+        else
         {
-            Array.ForEach(_enemySprites, e => e.EnemyRandomMethod(e.gameObject.GetComponent<SpriteRenderer>())); 
+            Array.ForEach(_enemySprites, e => e.EnemyRandomMethod(e.gameObject.GetComponent<SpriteRenderer>()));
         }
 
         //各ファンごとに行いたい処理があればoverrideする

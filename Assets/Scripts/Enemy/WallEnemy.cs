@@ -34,14 +34,6 @@ public class WallEnemy : EnemyBase
         AudioManager.Instance.PlayVoice(5);
     }
 
-    protected override void OutEffect()
-    {
-        GiveDamageRun(); //É_ÉÅÅ[ÉWÇó^Ç¶ÇÈ
-        Destroy(gameObject);
-
-        AudioManager.Instance.PlayVoice(13);
-    }
-
     protected override void PerfactEffect()
     {
         _anim.Play("Effect");
