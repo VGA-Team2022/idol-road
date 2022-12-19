@@ -84,4 +84,10 @@ public class StageSelectController : MonoBehaviour
             AudioManager.Instance.PlaySE(32);
         }
     }
+
+    public void TitleChange() 
+    {
+        AudioManager.Instance.PlaySE(7);
+        _fadeController.FadeOut(() => SceneManager.LoadScene(0));
+    }
 }
