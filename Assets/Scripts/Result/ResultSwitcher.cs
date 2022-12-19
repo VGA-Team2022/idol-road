@@ -19,7 +19,7 @@ public class ResultSwitcher : MonoBehaviour
     [SerializeField, Tooltip("難易度を判定してResoursecで読み込む物をかえる")]
     bool _isEasy, _isNormal, _isHard;
 
-    ResultData _resultData;
+    ResultParameter _resultData;
     ResultManager _result;
     [SerializeField,Tooltip("合計スコア")]
     int _score;
@@ -52,18 +52,18 @@ public class ResultSwitcher : MonoBehaviour
 
     void JudgeMode()
     {
-        if (_isEasy)// boolによって読み込むDataをかえる
-        {
-            _resultData = Resources.Load<ResultData>(_modeNameData[0]);
-        }
-        else if (_isNormal)
-        {
-            _resultData = Resources.Load<ResultData>(_modeNameData[1]);
-        }
-        else if (_isHard)
-        {
-            _resultData = Resources.Load<ResultData>(_modeNameData[2]);
-        }
+        //if (_isEasy)// boolによって読み込むDataをかえる
+        //{
+        //    _resultData = Resources.Load<ResultData>(_modeNameData[0]);
+        //}
+        //else if (_isNormal)
+        //{
+        //    _resultData = Resources.Load<ResultData>(_modeNameData[1]);
+        //}
+        //else if (_isHard)
+        //{
+        //    _resultData = Resources.Load<ResultData>(_modeNameData[2]);
+        //}
     }
 
     /// <summary>
@@ -82,23 +82,23 @@ public class ResultSwitcher : MonoBehaviour
     /// </summary>
     private void JudgeResult()
     {
-        if (_result.CountMiss >= _resultData._missCount)
-        {
-            ResultBad();
-        }
+        //if (_result.CountMiss >= _resultData._missCount)
+        //{
+        //    ResultBad();
+        //}
 
-        if (_score >= _resultData._superPerfectScore)
-        {
-            ResultSuperPerfect();
-        }
-        else if(_score >= _resultData._perfectScore)
-        {
-            ResultPerfect();
-        }
-        else 
-        { 
-            ResultGood();
-        }
+        //if (_score >= _resultData._superPerfectScore)
+        //{
+        //    ResultSuperPerfect();
+        //}
+        //else if(_score >= _resultData._perfectScore)
+        //{
+        //    ResultPerfect();
+        //}
+        //else 
+        //{ 
+        //    ResultGood();
+        //}
     } 
     //Game Over
     public void ResultBad()
