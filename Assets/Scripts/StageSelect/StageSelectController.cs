@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 /// <summary>ステージ選択シーンに関する処理を行うクラス </summary>
 public class StageSelectController : MonoBehaviour
 {
+    #region　変数
     [SerializeField, Header("次の遷移先のシーン名")]
     string _nextSceneName = "";
     [SerializeField, Header("ステージセレクトによって変化するイメージ")]
@@ -19,10 +20,13 @@ public class StageSelectController : MonoBehaviour
     Button[] _stageSelectButtons = default;
     [SerializeField, Header("遊び方を表示するボタン")]
     Button _playingUIButton = default;
+    [SerializeField , Header("遊び方を表示するキャンバス")]
+    Canvas _playUiCanvas = default;
 
     /// <summary>現在選択されているボタン </summary>
     Button _currentSelectedButton = default;
- 
+    #endregion
+
     void Start()
     {
         _fadeController.FadeIn();
@@ -35,6 +39,7 @@ public class StageSelectController : MonoBehaviour
         }
 
         _currentSelectedButton = _playingUIButton;    //初期ボタンを設定
+        _playingUIButton.onClick.AddListener(() => PlayUiButton(_playingUIButton));
         _stageImage.sprite = _stageSprites[0];              //初期イラストを設定
     }
 
@@ -48,10 +53,34 @@ public class StageSelectController : MonoBehaviour
         }
         else
         {
+            if (_playUiCanvas.enabled)
+            {
+                _playUiCanvas.enabled = false;
+            }
+
             //ステージを選択する
             _currentSelectedButton = selectButton;
             _stageImage.sprite = _stageSprites[index];
             LevelManager.Instance.SelectLevel((GameLevel)index);    //レベルを変更
+            AudioManager.Instance.PlaySE(32);
+        }
+    }
+
+    void PlayUiButton(Button selectButton)
+    {
+        if (selectButton == _currentSelectedButton)     //選択ゲームシーンに遷移する
+        {
+            AudioManager.Instance.PlaySE(7);
+            if (!_playUiCanvas.enabled) 
+            {
+                _playUiCanvas.enabled = true;
+            }
+        }
+        else
+        {
+            //ステージを選択する
+            _currentSelectedButton = selectButton;
+            _stageImage.sprite = _stageSprites[0];
             AudioManager.Instance.PlaySE(32);
         }
     }
