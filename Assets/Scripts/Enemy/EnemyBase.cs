@@ -103,13 +103,13 @@ public abstract class EnemyBase : MonoBehaviour
         switch (_currentResult)
         {
             case TimingResult.Perfect:
-                ResultManager.Instance.CountPerfect += _requestArray.Length;
+                PlayResult.Instance.CountPerfect += _requestArray.Length;
                 break;
             case TimingResult.Good:
-                ResultManager.Instance.CountGood += _requestArray.Length;
+                PlayResult.Instance.CountGood += _requestArray.Length;
                 break;
             case TimingResult.Bad:
-                ResultManager.Instance.CountBad += _requestArray.Length;
+                PlayResult.Instance.CountBad += _requestArray.Length;
                 break;
         }
     }
