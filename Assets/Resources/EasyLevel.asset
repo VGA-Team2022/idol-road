@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69c6db16c8a85c54a9fceec4a0fd2f20, type: 3}
+  m_Name: EasyLevel
+  m_EditorClassIdentifier: 
+  _inGame: {fileID: 11400000, guid: 7319fa862ff238e4bbcce83f3b7a9f41, type: 2}
+  _result: {fileID: 11400000, guid: 39c2016567802124f81bb89e0032d0ba, type: 2}
+  _enemyOrder: {fileID: 11400000, guid: bd3e33281727b47468dc20920a49d570, type: 2}
+  _enemyParameters:
+  - {fileID: 11400000, guid: bc0b8e5493814a443b579e4d6e677814, type: 2}
+  - {fileID: 11400000, guid: b77056dd10f127e488a3e4ca69a8cb88, type: 2}
+  - {fileID: 11400000, guid: 5446df4e23cae0f4389f9651c1420ab9, type: 2}
+  - {fileID: 11400000, guid: fb96cff74c5b58340827706b9889e992, type: 2}

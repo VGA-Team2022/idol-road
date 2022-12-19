@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c75464e6cf306964ea1b70dd35214d35, type: 3}
-  m_Name: HardData
+  m_Name: Result
   m_EditorClassIdentifier: 
-  _modeName: Hard
-  _bad: 0
-  _good: 0
-  _perfect: 0
+  _superPerfectLine: 0
+  _perfectLine: 0
+  _goodLine: 0
+  _addBadScoreValue: 0
+  _addGoodScoreValue: 0
+  _addParfectScoreValue: 0
+  _comboValue: 0

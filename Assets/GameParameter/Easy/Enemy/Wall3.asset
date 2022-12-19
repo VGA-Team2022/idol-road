@@ -9,10 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c75464e6cf306964ea1b70dd35214d35, type: 3}
-  m_Name: NormalData
+  m_Script: {fileID: 11500000, guid: df1a1aa990d20c044ad298c45cd60e82, type: 3}
+  m_Name: Wall3
   m_EditorClassIdentifier: 
-  _modeName: Normal
-  _bad: 0
-  _good: 0
-  _perfect: 0
+  _addDamageValue: 0
+  _moveSpeed: 0
+  _fadeSpeed: 0
+  _rhythmTimes:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
