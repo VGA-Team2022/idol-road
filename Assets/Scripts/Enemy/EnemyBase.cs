@@ -37,6 +37,8 @@ public abstract class EnemyBase : MonoBehaviour
     int _resultTimeIndex = 0;
     /// <summary>敵の死亡フラグ</summary>
     bool _isdead = false;
+    /// <summary>入力を受け付けるかどうか </summary>
+    bool _isInput = false;
     /// <summary>評価変更用変数</summary>
     float _time = 0f;
 
@@ -148,6 +150,8 @@ public abstract class EnemyBase : MonoBehaviour
         {
             case TimingResult.None:
                 _currentResult = TimingResult.Bad;
+                Array.ForEach(_requestUIArray, r => r.gameObject.SetActive(true));
+                _isInput = true;
                 break;
             case TimingResult.Bad:
                 _currentResult = TimingResult.Good;
@@ -157,6 +161,7 @@ public abstract class EnemyBase : MonoBehaviour
                 break;
             case TimingResult.Perfect:
                 _currentResult = TimingResult.Out;
+                _isInput = false;
                 OutEffect();
                 break;
         }
@@ -283,7 +288,7 @@ public abstract class EnemyBase : MonoBehaviour
     /// <summary>判定別の処理を行う</summary>
     public void JugeTime(FlickType playInput)
     {
-        if (_currentRequest != playInput || _isdead) { return; }
+        if (_currentRequest != playInput || _isdead || !_isInput) { return; }
 
         _requestUIArray[_requestCount].gameObject.SetActive(false);     //達成したファンサUIを非表示にする
         _requestCount++;

@@ -14,11 +14,12 @@ public class WallEnemy : EnemyBase
 
         //透明になりながら消えていくパターン
         Array.ForEach(EnemySprites, s => 
-        s.GetComponent<SpriteRenderer>().DOFade(endValue: 0, duration: 2.0f).OnComplete(GiveDamageRun));
+        s.GetComponent<SpriteRenderer>().DOFade(endValue: 0, duration: _currentParameter.FadeSpeed));
 
+        GiveDamageRun();    //ダメージを与える
         StageScrollRun();        //ステージスクロールを行う
 
-        AudioManager.Instance.PlayVoice(13);
+     //   AudioManager.Instance.PlayVoice(13);
     }
 
     protected override void GoodEffect()
@@ -31,7 +32,7 @@ public class WallEnemy : EnemyBase
            .SetLoops(-1, LoopType.Restart);
         });
 
-        AudioManager.Instance.PlayVoice(5);
+     //   AudioManager.Instance.PlayVoice(5);
     }
 
     protected override void PerfactEffect()
@@ -44,7 +45,7 @@ public class WallEnemy : EnemyBase
            .SetLoops(-1, LoopType.Restart);
         });
 
-        AudioManager.Instance.PlayVoice(5);
+      //  AudioManager.Instance.PlayVoice(5);
     }
 
     /// <summary>

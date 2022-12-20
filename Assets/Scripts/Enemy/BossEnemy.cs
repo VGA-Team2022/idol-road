@@ -10,8 +10,6 @@ public class BossEnemy : EnemyBase
 
     [SerializeField, Header("吹き飛ばしている時間"), Range(0.1f, 10f)]
     float _deadMoveTime = 1f;
-    [SerializeField, Header("吹き飛んだ時のサイズ"), Range(0.1f, 1f)]
-    float _minScale = 0.3f;
     [SerializeField, Tooltip("イラスト")]
     SpriteRenderer _bossSprite = default;
     /// <summary>ゲームクリア時の処理 </summary>

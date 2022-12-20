@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b51a1f1548ccc1740ae577f0eda748ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyType: 0
+  _enemyType: 3
   _requestUIArray:
   - {fileID: 5458414013977489636}
   - {fileID: 8148703470643814377}
@@ -865,6 +865,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RequestWindowMiddle
       objectReference: {fileID: 0}
+    - target: {fileID: 2263534891915938486, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2263534891915938487, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
       propertyPath: m_SortingOrder
       value: 3
@@ -962,6 +966,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RequestWindowLower
       objectReference: {fileID: 0}
+    - target: {fileID: 2263534891915938486, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2263534891915938487, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
       propertyPath: m_SortingOrder
       value: 2
@@ -1058,6 +1066,10 @@ PrefabInstance:
     - target: {fileID: 2263534891915938486, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
       propertyPath: m_Name
       value: RequestWindowUpper
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263534891915938486, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2263534891915938487, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
       propertyPath: m_SortingOrder
