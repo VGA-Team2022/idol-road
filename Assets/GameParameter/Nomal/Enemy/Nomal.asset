@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Nomal
   m_EditorClassIdentifier: 
   _addDamageValue: 1
+  _addIdolPowerValue: 5
   _moveSpeed: 10
   _fadeSpeed: 1
   _rhythmTimes:

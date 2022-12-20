@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Wall3
   m_EditorClassIdentifier: 
   _addDamageValue: 1
+  _addIdolPowerValue: 15
   _moveSpeed: 5
   _fadeSpeed: 1
   _rhythmTimes:
