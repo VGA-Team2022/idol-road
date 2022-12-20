@@ -13,7 +13,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     #region
     [SerializeField, Header("ファンの種類")]
-    EnemyType _enemyType = EnemyType.None;
+    EnemyType _enemyType = EnemyType.Nomal;
     [SerializeField, Tooltip("ファンサを更新するクラス")]
     RequestUIController[] _requestUIArray = null;
     [SerializeField, Tooltip("イラストを管理するクラス")]
@@ -248,15 +248,13 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
 
-    /// <summary>ファンサを決める</summary>
-    protected void FlickNum()
+    /// <summary>ファンサを読み込み設定する</summary>
+    protected void SetRequset(EnemyInfo info)
     {
-        for (var i = 0; i < _requestUIArray.Length; i++)
+        for (var i = 0; i < info.requestTypes.Count; i++)
         {
-            var rnd = UnityEngine.Random.Range(REQUREST_MIN_VALUE, REQUREST_MAX_VALUE);
-
-            _requestArray[i] = (FlickType)rnd;
-            _requestUIArray[i].ChangeRequestImage((FlickType)rnd);
+            _requestArray[i] = (FlickType)info.requestTypes[i];
+            _requestUIArray[i].ChangeRequestImage((FlickType)info.requestTypes[i]);
         }
 
         _currentRequest = _requestArray[0]; //最初のファンサを決める
@@ -265,13 +263,13 @@ public abstract class EnemyBase : MonoBehaviour
 
     /// <summary>生成時の初期化処理 </summary>
     /// <param name="istate">現在のゲームの状態</param>
-    public virtual void SetUp(IState currentGameState)
+    public virtual void SetUp(IState currentGameState, EnemyInfo info)
     {
         _requestArray = new FlickType[_requestUIArray.Length];
 
         SelectEnemyParameter();
 
-        FlickNum(); //ランダムでフリック方向を取得する
+        SetRequset(info); //ランダムでフリック方向を取得する
 
         if (currentGameState is BossTime)
         {

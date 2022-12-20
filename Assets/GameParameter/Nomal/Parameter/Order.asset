@@ -12,4 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ce71efaf8e21b4db6e80b9d37f6975, type: 3}
   m_Name: Order
   m_EditorClassIdentifier: 
-  _enemyOrder: []
+  _enemyOrder:
+  - _enemyType: 0
+    _generateInterval: 2
+    requestTypes: 01000000
+  - _enemyType: 0
+    _generateInterval: 3
+    requestTypes: 03000000
+  - _enemyType: 1
+    _generateInterval: 1
+    requestTypes: 0200000004000000
+  - _enemyType: 0
+    _generateInterval: 0
+    requestTypes: 02000000
+  - _enemyType: 2
+    _generateInterval: 2
+    requestTypes: 010000000300000004000000
+  - _enemyType: 0
+    _generateInterval: 3
+    requestTypes: 03000000
+  - _enemyType: 1
+    _generateInterval: 1
+    requestTypes: 0400000002000000
+  - _enemyType: 0
+    _generateInterval: 0
+    requestTypes: 02000000
+  - _enemyType: 1
+    _generateInterval: 3
+    requestTypes: 0100000002000000
+  - _enemyType: 2
+    _generateInterval: 1
+    requestTypes: 030000000400000001000000

@@ -48,14 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55f1c565b5844174093665ed4a401d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyType: 1
+  _enemyType: 0
   _requestUIArray:
   - {fileID: 7277948641732065839}
   _enemySprites:
   - {fileID: 1746651874851532797}
   _explosionEffect: {fileID: 5047219227802861214, guid: 5315674b013e09d4088b189a94135c4c, type: 3}
   _deadMoveTime: 1
-  _minScale: 0.3
 --- !u!54 &336802384846892835
 Rigidbody:
   m_ObjectHideFlags: 0

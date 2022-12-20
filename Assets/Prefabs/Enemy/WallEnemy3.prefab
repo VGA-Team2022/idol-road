@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b51a1f1548ccc1740ae577f0eda748ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyType: 3
+  _enemyType: 2
   _requestUIArray:
   - {fileID: 5458414013977489636}
   - {fileID: 8148703470643814377}

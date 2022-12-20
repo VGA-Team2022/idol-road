@@ -18,7 +18,7 @@ public class EnemyOrderParameter : ScriptableObject
 public class EnemyInfo
 {
     [SerializeField, Header("敵の種類")]
-    public EnemyType _enemyType = EnemyType.None;
+    public EnemyType _enemyType = EnemyType.Nomal;
     [SerializeField, Header("生成間隔"), Tooltip("1=7.68秒, 2=5.76秒, 3=3.84秒, 4=1.92秒")]
     public GenerateInterval _generateInterval = GenerateInterval.Interval1;
     [SerializeField, Header("ファンサ要求")]
@@ -28,16 +28,14 @@ public class EnemyInfo
 /// <summary>ファンの種類 </summary>
 public enum EnemyType
 {
-    /// <summary>なし </summary>
-    None = 0,
     /// <summary>通常 </summary>
-    Nomal = 1,
+    Nomal = 0,
     /// <summary>壁ファン ファンサ数 2 </summary>
-    Wall2 = 2,
+    Wall2 = 1,
     /// <summary>壁ファン ファンサ数 3 </summary>
-    Wall3 = 3,
+    Wall3 = 2,
     /// <summary>ボス </summary>
-    Boss = 4,
+    Boss = 3,
 }
 
 /// <summary>要求の種類 </summary>

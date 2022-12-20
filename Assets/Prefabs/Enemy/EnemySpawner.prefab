@@ -44,13 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300609633802189499a4afb059d88918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefub: {fileID: 1060883709, guid: f6d9bfa37d3f5d3439d216c6a0aee987, type: 3}
-  _positionObject: {fileID: 0}
-  _trajectoryParent: {fileID: 0}
+  _enemyPrefubs:
+  - {fileID: 7207804476372920346, guid: 26b8cfb6e2fea3a4b9f6bf9e682b1390, type: 3}
+  - {fileID: 7658112783905490770, guid: b2b6eb789e3e52a478bf993b87779c82, type: 3}
+  - {fileID: 7658112783905490770, guid: 6746c73842603f94bbb93aff1ec4c919, type: 3}
+  - {fileID: 3985818557772432053, guid: f5e818b0e117b0f43a3e5c62a600aa71, type: 3}
+  _spawnPoints: []
   _manager: {fileID: 0}
-  _timeReset: 0
-  _gameTime: 0
-  _firstDelayTime: 7
-  _generateOffset: 0
-  _gameFinishTime: 60
-  _onEnemy: 0
+  _bossSpawnPoint: {fileID: 0}
