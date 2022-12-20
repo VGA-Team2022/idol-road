@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Boss
   m_EditorClassIdentifier: 
   _addDamageValue: 0
-  _moveSpeed: 0
-  _fadeSpeed: 0
+  _moveSpeed: 8
+  _fadeSpeed: 0.5
   _rhythmTimes:
-  - 0
-  - 0
-  - 0
-  - 0
+  - 5
+  - 4
+  - 2
+  - 1
   - 0

@@ -17,6 +17,8 @@ public class RequestUIController : MonoBehaviour
     /// <summary>評価によって吹き出しイラストを変更する</summary>
     public void ChangeRequestWindow(TimingResult result)
     {
+        if (!gameObject.activeSelf) { return; }
+
         switch (result)
         {
             case TimingResult.Bad:

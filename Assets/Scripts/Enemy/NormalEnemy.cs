@@ -10,9 +10,7 @@ public class NormalEnemy : EnemyBase
 
     [SerializeField, Header("吹き飛ばしている時間"), Range(0.1f, 10f)]
     float _deadMoveTime = 1f;
-    [SerializeField, Header("吹き飛んだ時のサイズ"), Range(0.1f, 1f)]
-    float _minScale = 0.3f;
-   
+  
     /// <summary>吹き飛ぶ演出で再生するアニメーションの名前</summary>
     string _playAnimName = "";
 
@@ -28,27 +26,19 @@ public class NormalEnemy : EnemyBase
         
         StageScrollRun();        //ステージスクロールを行う
 
-        AudioManager.Instance.PlayVoice(12);
+       // AudioManager.Instance.PlayVoice(12);
     }
 
     protected override void GoodEffect()
     {
         _anim.Play(_playAnimName);
-    
+
         //回転 無限ループを行う為
-        transform.DOLocalRotate(new Vector3(0, 0, 360f), 0.1f, RotateMode.FastBeyond360)
+        EnemySprites[0].transform.DOLocalRotate(new Vector3(0, 0, 360f), 0.1f, RotateMode.FastBeyond360)
             .SetEase(Ease.Linear)
             .SetLoops(-1, LoopType.Restart);
 
-        AudioManager.Instance.PlayVoice(2);
-    }
-
-    protected override void OutEffect()
-    {
-        GiveDamageRun(); //ダメージを与える
-        Destroy(gameObject);
-
-        AudioManager.Instance.PlayVoice(11);
+       // AudioManager.Instance.PlayVoice(2);
     }
 
     protected override void PerfactEffect()
@@ -60,12 +50,12 @@ public class NormalEnemy : EnemyBase
             .SetEase(Ease.Linear)
             .SetLoops(-1, LoopType.Restart);
 
-        AudioManager.Instance.PlayVoice(4);
+       // AudioManager.Instance.PlayVoice(4);
     }
 
-    public override void SetUp(IState currentGameState)
+    public override void SetUp(IState currentGameState, EnemyInfo info)
     {
-        base.SetUp(currentGameState);
+        base.SetUp(currentGameState, info);
 
         switch (_currentRequest)    //各ファンサで吹き飛ぶ方向を決める
         {

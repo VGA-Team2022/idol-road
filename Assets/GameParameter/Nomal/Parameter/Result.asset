@@ -18,4 +18,4 @@ MonoBehaviour:
   _addBadScoreValue: 0
   _addGoodScoreValue: 0
   _addParfectScoreValue: 0
-  _comboValue: 0
+  _comboValue: 1

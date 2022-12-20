@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: InGame
   m_EditorClassIdentifier: 
   _gamePlayTime: 60
-  _startBossTime: 30
-  _playerHp: 3
+  _startBossTime: -10
+  _playerHp: 5
   _idolPowerMaxValue: 100

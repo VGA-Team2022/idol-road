@@ -48,21 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55f1c565b5844174093665ed4a401d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemySpped: 5
-  _fadedSpeed: 1
-  _resultTimes:
-  - 6
-  - 5
-  - 3
-  - 1
-  - 0
+  _enemyType: 0
   _requestUIArray:
   - {fileID: 7277948641732065839}
   _enemySprites:
   - {fileID: 1746651874851532797}
   _explosionEffect: {fileID: 5047219227802861214, guid: 5315674b013e09d4088b189a94135c4c, type: 3}
   _deadMoveTime: 1
-  _minScale: 0.3
 --- !u!54 &336802384846892835
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -276,7 +268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2263534891915938486, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}

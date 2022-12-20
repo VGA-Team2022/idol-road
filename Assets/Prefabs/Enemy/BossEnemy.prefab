@@ -148,20 +148,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24b192ab84e4b8b4db0b48e61eaa846e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemySpped: 5
-  _fadedSpeed: 1
-  _resultTimes:
-  - 10
-  - 9
-  - 7
-  - 8
-  - 0
+  _enemyType: 3
   _requestUIArray:
   - {fileID: 2516091766670467666}
   _enemySprites: []
   _explosionEffect: {fileID: 1415453749020358168, guid: 38394c7e5dd2fd5418d674a2410b4263, type: 3}
   _deadMoveTime: 1
-  _minScale: 0.2
   _bossSprite: {fileID: 4596636092407356529}
 --- !u!95 &6981697859168660804
 Animator:
