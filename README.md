@@ -4,7 +4,8 @@
 [仕様書概要](https://docs.google.com/spreadsheets/d/1wML1Vh02129pDP05RoIM4TkOHNcf2uz_/edit#gid=808293660) <br>
 [仕様書](https://docs.google.com/spreadsheets/d/1p_hVlgAJ9p46NuYBdzXLl0-_X8PwV9rC/edit#gid=879838157) <br>
 [スケジュール](https://docs.google.com/presentation/d/1ow_-hXHRjGXJRUTUF8pRT9znLzuYwnjh/edit#slide=id.p9) <br>
-[ガントチャート](https://lamact.github.io/react-issue-ganttchart/?giturl=https%3A%2F%2Fgithub.com%2FVGA-Team2022%2Fidol-road&labels=&assignee=)
+[ガントチャート](https://lamact.github.io/react-issue-ganttchart/?giturl=https%3A%2F%2Fgithub.com%2FVGA-Team2022%2Fidol-road&labels=&assignee=)<br>
+[ドライブ](https://drive.google.com/drive/folders/1eBgc7uLJqpwMPb_n6V4CSJU_bKVyokkQ)
 
 ## 命名規則・コーディング規約
 ・メンバー変数はアンダーバー( _ )をつけて小文字から始める <br>
