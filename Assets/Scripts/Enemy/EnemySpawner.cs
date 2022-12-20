@@ -91,6 +91,7 @@ public class EnemySpawner : MonoBehaviour
         enemy.StageScroll += _manager.StageScroll;
         enemy.GiveDamage += _manager.GetDamage;
         enemy.DisapperEnemies += _manager.RemoveEnemy;
+        enemy.AddIdolPower += _manager.IncreseIdlePower;
     }
 
     /// <summary>Ÿ‚Ì“Gî•ñ‚ğİ’è‚·‚é </summary>
