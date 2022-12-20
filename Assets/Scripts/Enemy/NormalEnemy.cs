@@ -55,6 +55,8 @@ public class NormalEnemy : EnemyBase
 
     public override void SetUp(IState currentGameState, EnemyInfo info)
     {
+        var nomalType = EnemySprites[0].ChangeNomalEnemySprite();   //イラストを切り替える
+
         base.SetUp(currentGameState, info);
 
         switch (_currentRequest)    //各ファンサで吹き飛ぶ方向を決める

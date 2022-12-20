@@ -6,11 +6,6 @@ using DG.Tweening;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class EnemyBase : MonoBehaviour
 {
-    /// <summary>ファンサ要求の最小値 FlickTypeに対応</summary>
-    const int REQUREST_MIN_VALUE = 1;
-    /// <summary>ファンサ要求の最大値 FlickTypeに対応</summary>
-    const int REQUREST_MAX_VALUE = 5;
-
     #region
     [SerializeField, Header("ファンの種類")]
     EnemyType _enemyType = EnemyType.Nomal;
@@ -274,13 +269,9 @@ public abstract class EnemyBase : MonoBehaviour
 
         if (currentGameState is BossTime)
         {
-            Array.ForEach(_enemySprites, e => e.EnemyBossMethod(e.gameObject.GetComponent<SpriteRenderer>()));
+            Array.ForEach(_enemySprites, e => e.EnemyBossMethod());
         }
-        else
-        {
-            Array.ForEach(_enemySprites, e => e.EnemyRandomMethod(e.gameObject.GetComponent<SpriteRenderer>()));
-        }
-
+        
         //各ファンごとに行いたい処理があればoverrideする
     }
 
