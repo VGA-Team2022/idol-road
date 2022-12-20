@@ -10,6 +10,8 @@ using Unity.Burst;
 
 public class SuperIdolTime : MonoBehaviour
 {
+    [SerializeField, Tooltip("エネミースポナー")]
+    private EnemySpawner _enemySpawner;
     [SerializeField,Tooltip("スーパーアイドルタイム中のゲージがマックスになるまでの回数")]
     private int _gaugeCountMax = 10;
     [SerializeField,Tooltip("スーパーアイドルタイムの持続時間")]
@@ -108,6 +110,7 @@ public class SuperIdolTime : MonoBehaviour
         _normalPlayer.SetActive(false);
         _normalRoad.SetActive(false);
         _normalFan.SetActive(false);
+        _enemySpawner.IsGenerate = false;
     }
 
     // Update is called once per frame
@@ -162,7 +165,7 @@ public class SuperIdolTime : MonoBehaviour
         var sequence = DOTween.Sequence();
         sequence.Append(_imageExplosion.transform.DOScale(new Vector3(_imageLange, _imageLange, _imageLange), 0.5f))
                 .Append(_imageExplosion.transform.DOScale(Vector3.zero, 1f))
-                .Append(_fadePanel.DOFade(1,0.5f))
+                
                 .OnComplete(() => { SwitchDisplayObject(); });
         isSuperIdolTime = false;
         //後ろのファンを飛ばす
@@ -171,6 +174,13 @@ public class SuperIdolTime : MonoBehaviour
         _BackUpFans.GetComponent<Animator>().Play("Burst");
         this.gameObject.SetActive(false);
     }
+    public void CloseSuperIdolTimeObject()
+    {
+        _superIdolTimeFrontUI.SetActive(false);
+        _shiningParticle.gameObject.SetActive(false);
+        //_danceIdolPlayer.gameObject.SetActive(false);
+        _dancingIdolImage.gameObject.SetActive(false);
+    }
     public void SwitchDisplayObject()
     {
         _normalCanvas.SetActive(true);
@@ -178,11 +188,7 @@ public class SuperIdolTime : MonoBehaviour
         _normalRoad.SetActive(true);
         _normalFan.SetActive(true);
         _superIdolTimeBackUI.SetActive(false);
-        _superIdolTimeFrontUI.SetActive(false);
-        _shiningParticle.gameObject.SetActive(false);
-        //_danceIdolPlayer.gameObject.SetActive(false);
-        _dancingIdolImage.gameObject.SetActive(false);
-        _fadePanel.DOFade(0, 0.25f);
+        _fadePanel.DOFade(0, 0.5f);
     }
     public void GaugeIncrease()
     {
