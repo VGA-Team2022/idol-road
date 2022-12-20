@@ -165,12 +165,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a0bd740dc83771f40ae382c9e09465bd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2e902d347f0f691459e47d2344c67956, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.25, y: 1.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -188,13 +188,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd19fe8c53476d24198de22380d71e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _normalEnemySprites:
-  - {fileID: 21300000, guid: 09918c91bcc977d4789c8ef27a8aa673, type: 3}
-  - {fileID: 21300000, guid: dd4dd3e9ece2d3048a803acaa55c52a1, type: 3}
-  - {fileID: 21300000, guid: 429a333402e609e439e297986472530a, type: 3}
-  - {fileID: 21300000, guid: a0bd740dc83771f40ae382c9e09465bd, type: 3}
-  - {fileID: 21300000, guid: 4c143ebb91169ab42bc655a3e26dc7a7, type: 3}
-  _bossEnemy: {fileID: 21300000, guid: f5d386be03d78524697dd07eca682694, type: 3}
+  _nomalEnemySprites:
+  - {fileID: 21300000, guid: 2e902d347f0f691459e47d2344c67956, type: 3}
+  - {fileID: 21300000, guid: f3272b1ad1c78374f824ef51ff2027b8, type: 3}
+  - {fileID: 21300000, guid: d7db60e076934364699c81629f9ca28b, type: 3}
+  - {fileID: 21300000, guid: 6907ffad79e68a24ab42ac9b7faa5139, type: 3}
+  _bossEnemy: {fileID: 21300000, guid: 5641f416d1f3a1f45ba9fe068bea99fa, type: 3}
 --- !u!1001 &1866035362427135112
 PrefabInstance:
   m_ObjectHideFlags: 0
