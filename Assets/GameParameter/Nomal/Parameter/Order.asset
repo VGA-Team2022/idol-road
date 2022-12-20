@@ -19,15 +19,15 @@ MonoBehaviour:
   - _enemyType: 4
     _generateInterval: 0
     requestTypes: 
-  - _enemyType: 1
+  - _enemyType: 0
     _generateInterval: 1
-    requestTypes: 0200000004000000
+    requestTypes: 02000000
   - _enemyType: 0
     _generateInterval: 0
-    requestTypes: 02000000
-  - _enemyType: 2
+    requestTypes: 03000000
+  - _enemyType: 0
     _generateInterval: 2
-    requestTypes: 010000000300000004000000
+    requestTypes: 01000000
   - _enemyType: 0
     _generateInterval: 3
     requestTypes: 03000000
