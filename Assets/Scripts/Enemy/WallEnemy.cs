@@ -19,7 +19,7 @@ public class WallEnemy : EnemyBase
         GiveDamageRun();    //ダメージを与える
         StageScrollRun();        //ステージスクロールを行う
 
-     //   AudioManager.Instance.PlayVoice(13);
+        AudioManager.Instance.PlayVoice(13);
     }
 
     protected override void GoodEffect()
@@ -32,7 +32,7 @@ public class WallEnemy : EnemyBase
            .SetLoops(-1, LoopType.Restart);
         });
 
-     //   AudioManager.Instance.PlayVoice(5);
+        AudioManager.Instance.PlayVoice(5);
     }
 
     protected override void PerfactEffect()
@@ -45,7 +45,7 @@ public class WallEnemy : EnemyBase
            .SetLoops(-1, LoopType.Restart);
         });
 
-      //  AudioManager.Instance.PlayVoice(5);
+        AudioManager.Instance.PlayVoice(5);
     }
 
     /// <summary>

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5968483811882916910}
   - component: {fileID: 7207804476372920346}
+  - component: {fileID: 8979959088236456945}
   - component: {fileID: 336802384846892835}
   - component: {fileID: 1623760751}
   m_Layer: 0
@@ -54,7 +55,19 @@ MonoBehaviour:
   _enemySprites:
   - {fileID: 1746651874851532797}
   _explosionEffect: {fileID: 5047219227802861214, guid: 5315674b013e09d4088b189a94135c4c, type: 3}
-  _deadMoveTime: 1
+  _enemyVoice: {fileID: 0}
+--- !u!114 &8979959088236456945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5968483811882916908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fcd82a2a6314d7429feda62148d08bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &336802384846892835
 Rigidbody:
   m_ObjectHideFlags: 0
