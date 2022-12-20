@@ -7,11 +7,10 @@ using DG.Tweening;
 using UnityEngine.Video;
 using System.Net;
 using Unity.Burst;
+using System.Linq;
 
 public class SuperIdolTime : MonoBehaviour
 {
-    [SerializeField, Tooltip("エネミースポナー")]
-    private EnemySpawner _enemySpawner;
     [SerializeField,Tooltip("スーパーアイドルタイム中のゲージがマックスになるまでの回数")]
     private int _gaugeCountMax = 10;
     [SerializeField,Tooltip("スーパーアイドルタイムの持続時間")]
@@ -29,18 +28,10 @@ public class SuperIdolTime : MonoBehaviour
     /// <summary>ゲージが溜まりきっているかの判定</summary>
     [SerializeField]
     private bool _isTimeMax = false;
-    [SerializeField,Tooltip("ゲージの画像")]
-    private Image _imageGauge = default;
-    [SerializeField, Tooltip("爆発の画像")]
-    private Image _imageExplosion = default;
-    [SerializeField, Tooltip("フェード用のパネル")]
-    private Image _fadePanel = default;
-    [SerializeField,Tooltip("スーパーアイドルタイムの後面のUI")]
-    private GameObject _superIdolTimeBackUI = default;
-    [SerializeField, Tooltip("スーパーアイドルタイムの前面のUI")]
-    private GameObject _superIdolTimeFrontUI = default;
-    [SerializeField, Tooltip("スーパーアイドルタイム画面の背景絵")]
-    private GameObject _backGroundPanel = default;
+    
+    //通常時のオブジェクト
+    [SerializeField, Tooltip("エネミースポナー")]
+    private EnemySpawner _enemySpawner;
     [SerializeField, Tooltip("通常画面のCanvas")]
     private GameObject _normalCanvas = default;
     [SerializeField,Tooltip("通常時のプレイヤー")]
@@ -49,6 +40,22 @@ public class SuperIdolTime : MonoBehaviour
     private GameObject _normalRoad = default;
     [SerializeField, Tooltip("通常時の道路脇のファン(StageObject)")]
     private GameObject _normalFan = default;
+    [SerializeField, Tooltip("通常時のオブジェクト")]
+    private GameObject[] _normalObjects = default;
+
+    //スーパーアイドルタイム時のオブジェクト
+    [SerializeField, Tooltip("ゲージの画像")]
+    private Image _imageGauge = default;
+    [SerializeField, Tooltip("爆発の画像")]
+    private Image _imageExplosion = default;
+    [SerializeField, Tooltip("フェード用のパネル")]
+    private Image _fadePanel = default;
+    [SerializeField, Tooltip("スーパーアイドルタイムの後面のUI")]
+    private GameObject _superIdolTimeBackUI = default;
+    [SerializeField, Tooltip("スーパーアイドルタイムの前面のUI")]
+    private GameObject _superIdolTimeFrontUI = default;
+    [SerializeField, Tooltip("スーパーアイドルタイム画面の背景絵")]
+    private GameObject _backGroundPanel = default;
     [SerializeField, Tooltip("ゲージに合わせて出てくるファンの下段")]
     private GameObject _BackDownFans = default;
     [SerializeField, Tooltip("下段のファンが出てくる値")]
@@ -106,10 +113,14 @@ public class SuperIdolTime : MonoBehaviour
         _superIdolTimeBackUI.SetActive(true);
         _videoPlayer.gameObject.SetActive(true);
         _videoPlayer.Play();
-        _normalCanvas.SetActive(false);
-        _normalPlayer.SetActive(false);
-        _normalRoad.SetActive(false);
-        _normalFan.SetActive(false);
+        //_normalCanvas.SetActive(false);
+        //_normalPlayer.SetActive(false);
+        //_normalRoad.SetActive(false);
+        //_normalFan.SetActive(false);
+        foreach(var obj in _normalObjects)
+        {
+            obj.SetActive(false);
+        }
         _enemySpawner.IsGenerate = false;
     }
 
@@ -162,10 +173,10 @@ public class SuperIdolTime : MonoBehaviour
     }
     public void EndSuperIdolTime()
     {
+        _superIdolTimeFrontUI.SetActive(false);
         var sequence = DOTween.Sequence();
         sequence.Append(_imageExplosion.transform.DOScale(new Vector3(_imageLange, _imageLange, _imageLange), 0.5f))
                 .Append(_imageExplosion.transform.DOScale(Vector3.zero, 1f))
-                
                 .OnComplete(() => { SwitchDisplayObject(); });
         isSuperIdolTime = false;
         //後ろのファンを飛ばす
@@ -174,19 +185,16 @@ public class SuperIdolTime : MonoBehaviour
         _BackUpFans.GetComponent<Animator>().Play("Burst");
         this.gameObject.SetActive(false);
     }
-    public void CloseSuperIdolTimeObject()
-    {
-        _superIdolTimeFrontUI.SetActive(false);
-        _shiningParticle.gameObject.SetActive(false);
-        //_danceIdolPlayer.gameObject.SetActive(false);
-        _dancingIdolImage.gameObject.SetActive(false);
-    }
     public void SwitchDisplayObject()
     {
-        _normalCanvas.SetActive(true);
-        _normalPlayer.SetActive(true);
-        _normalRoad.SetActive(true);
-        _normalFan.SetActive(true);
+        //_normalCanvas.SetActive(true);
+        //_normalPlayer.SetActive(true);
+        //_normalRoad.SetActive(true);
+        //_normalFan.SetActive(true);
+        foreach (var obj in _normalObjects)
+        {
+            obj.SetActive(true);
+        }
         _superIdolTimeBackUI.SetActive(false);
         _fadePanel.DOFade(0, 0.5f);
     }

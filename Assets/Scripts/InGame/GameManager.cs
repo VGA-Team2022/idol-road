@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     /// <summary>現在の体力 </summary>
     int _idleHp;
     /// <summary>現在のアイドルパワー </summary>
-    int _idlePower;
+    float _idlePower;
     /// <summary>コンボを数える変数 </summary>
     int _comboAmount;
     /// <summary>次にコンボイラストを表示するカウント</summary>
@@ -117,12 +117,12 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>アイドルパワーが増加する関数</summary>
-    public void IncreseIdlePower(int power)
+    public void IncreseIdlePower(float power)
     {
-        _idlePower += power;
-        // _uiController.UpdateIdolPowerGauge(_idlePower);
-
-        if (_inGameParameter.IdolPowerMaxValue <= _idlePower)    //スーパーアイドルタイムを発動
+        _idlePower += (power/ _inGameParameter.IdolPowerMaxValue);
+        Debug.Log(_idlePower);
+        _uiController.UpdateIdolPowerGauge(_idlePower);
+        if (1 <= _idlePower)    //スーパーアイドルタイムを発動
         {
             _fadeController.FadeOut(() =>
             {

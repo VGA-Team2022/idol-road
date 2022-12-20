@@ -67,7 +67,7 @@ public class InGameUIController : MonoBehaviour
 
     /// <summary> アイドルパワーゲージを増減させる</summary>
     /// <param name="value">増減値(減少させる場合は負数を入れる)</param>
-    public void UpdateIdolPowerGauge(int value)
+    public void UpdateIdolPowerGauge(float value)
     {
         _idolPowerGauge.fillAmount = value;
     }
