@@ -36,6 +36,8 @@ public enum EnemyType
     Wall3 = 2,
     /// <summary>ƒ{ƒX </summary>
     Boss = 3,
+    /// <summary>“G‚È‚µ</summary>
+    Wait = 4,
 }
 
 /// <summary>—v‹‚Ìí—Ş </summary>

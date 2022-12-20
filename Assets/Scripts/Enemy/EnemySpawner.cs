@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using DG.Tweening;
 
@@ -60,16 +61,8 @@ public class EnemySpawner : MonoBehaviour
 
             if (_generateTimer >= _nextGenerateTime) //_timeIntervalを超えるとInstantiateします
             {
+                GenerateEnemy();
 
-                var enemy = Instantiate(_enemyPrefubs[(int)_nextEnemyInfo._enemyType], _spawnPoints[_positionCount].transform); //シリアライズで設定したオブジェクトの場所に出現します(最初は真ん中の位置に)
-                _manager.AddEnemy(enemy);
-                enemy.SetUp(_manager.CurrentGameState, _nextEnemyInfo);
-
-                //イベントを登録
-                enemy.AddComboCount += _manager.ComboAmountTotal;
-                enemy.StageScroll += _manager.StageScroll;
-                enemy.GiveDamage += _manager.GetDamage;
-                enemy.DisapperEnemies += _manager.RemoveEnemy;
 
                 _positionCount++;
 
@@ -83,7 +76,23 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
-    
+
+    /// <summary>敵を生成し、初期化を行う</summary>
+    void GenerateEnemy()
+    {
+        if (_nextEnemyInfo._enemyType == EnemyType.Wait) { return; }　//待機であれば何もしない
+
+        var enemy = Instantiate(_enemyPrefubs[(int)_nextEnemyInfo._enemyType], _spawnPoints[_positionCount].transform); //シリアライズで設定したオブジェクトの場所に出現します(最初は真ん中の位置に)
+        _manager.AddEnemy(enemy);
+        enemy.SetUp(_manager.CurrentGameState, _nextEnemyInfo);
+
+        //イベントを登録
+        enemy.AddComboCount += _manager.ComboAmountTotal;
+        enemy.StageScroll += _manager.StageScroll;
+        enemy.GiveDamage += _manager.GetDamage;
+        enemy.DisapperEnemies += _manager.RemoveEnemy;
+    }
+
     /// <summary>次の敵情報を設定する </summary>
     void NextEnemyInfoSetup()
     {
@@ -96,7 +105,7 @@ public class EnemySpawner : MonoBehaviour
         }
 
         _nextEnemyInfo = _order.EnemyOrder[_infoIndex];
-        _nextGenerateTime = _timeInterval[(int)_nextEnemyInfo._generateInterval];  
+        _nextGenerateTime = _timeInterval[(int)_nextEnemyInfo._generateInterval];
     }
 
     /// <summary>ボスを生成する </summary>

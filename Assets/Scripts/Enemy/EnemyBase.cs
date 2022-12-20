@@ -201,6 +201,7 @@ public abstract class EnemyBase : MonoBehaviour
         _giveDamage?.Invoke(_currentParameter.AddDamageValue);  //ƒ_ƒ[ƒW‚ğ—^‚¦‚é
         _addComboCount?.Invoke(_currentResult);
         _disapperEnemies?.Invoke(this);
+        _stageScroll?.Invoke();
 
         _isdead = true;
     }
