@@ -41,12 +41,12 @@ public abstract class EnemyBase : MonoBehaviour
     event Action _stageScroll = default;
     /// <summary>ダメージを与える（プレイヤーの体力を減らす）</summary>
     event Action<int> _giveDamage = default;
-
     /// <summary>コンボ数を増やす処理 </summary>
     event Action<TimingResult> _addComboCount = default;
-
     /// <summary>敵が死んだらリストから消える処理 </summary>
     event Action<EnemyBase> _disapperEnemies = default;
+    /// <summary>アイドルパワーを増加させる処理</summary>
+    event Action<float> _addIdolPower = default;
 
     /// <summary>倒されたらステージスクロールを開始する </summary>
     public event Action StageScroll
@@ -74,6 +74,13 @@ public abstract class EnemyBase : MonoBehaviour
     {
         add { _disapperEnemies += value; }
         remove { _disapperEnemies -= value; }
+    }
+
+    /// <summary>アイドルパワーを増加させる処理</summary>
+    public event Action<float> AddIdolPower
+    {
+        add { _addIdolPower += value; }
+        remove { _addIdolPower -= value; }
     }
 
     protected Rigidbody _rb => GetComponent<Rigidbody>();
@@ -121,7 +128,7 @@ public abstract class EnemyBase : MonoBehaviour
         _time = _currentParameter.RhythmTimes[_resultTimeIndex];    //リズム判定用のタイマーを初期化する
     }
 
-    /// <summary>スコアを要求数分増加させる </summary>
+    /// <summary>スコア増加させる </summary>
     void AddScore()
     {
         switch (_currentResult)
@@ -134,6 +141,7 @@ public abstract class EnemyBase : MonoBehaviour
                 break;
             case TimingResult.Bad:
                 PlayResult.Instance.CountBad += _requestArray.Length;
+                PlayResult.Instance.CountMiss++;
                 break;
         }
     }
@@ -197,6 +205,7 @@ public abstract class EnemyBase : MonoBehaviour
         _addComboCount?.Invoke(_currentResult);
         _disapperEnemies?.Invoke(this);
         _stageScroll?.Invoke();
+        PlayResult.Instance.CountMiss++;
 
         _isdead = true;
     }
@@ -290,6 +299,7 @@ public abstract class EnemyBase : MonoBehaviour
             _addComboCount?.Invoke(_currentResult);
             _stageScroll?.Invoke();
             Dead();
+            _addIdolPower?.Invoke((float)_currentParameter.AddIdolPowerValue);
             return;
         }
 

@@ -7,6 +7,9 @@ public class EnemyParameter : ScriptableObject
     [SerializeField, Header("与えるダメージ")]
     int _addDamageValue = 0;
 
+    [SerializeField, Header("獲得出来るアイドルパワー量")]
+    int _addIdolPowerValue = 0;
+
     [SerializeField, Header("向かってくる速度")]
     float _moveSpeed = 0f;
 
@@ -27,4 +30,7 @@ public class EnemyParameter : ScriptableObject
 
     /// <summary>与えるダメージ </summary>
     public int AddDamageValue => _addDamageValue;
+
+    /// <summary>獲得出来るアイドルパワー量 </summary>
+    public int AddIdolPowerValue => _addIdolPowerValue;
 }
