@@ -148,14 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24b192ab84e4b8b4db0b48e61eaa846e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemySpped: 5
-  _fadedSpeed: 1
-  _resultTimes:
-  - 10
-  - 9
-  - 7
-  - 8
-  - 0
+  _enemyType: 4
   _requestUIArray:
   - {fileID: 2516091766670467666}
   _enemySprites: []

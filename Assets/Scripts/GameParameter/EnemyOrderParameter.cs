@@ -36,6 +36,8 @@ public enum EnemyType
     Wall2 = 2,
     /// <summary>壁ファン ファンサ数 3 </summary>
     Wall3 = 3,
+    /// <summary>ボス </summary>
+    Boss = 4,
 }
 
 /// <summary>要求の種類 </summary>
