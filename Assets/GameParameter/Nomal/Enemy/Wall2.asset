@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df1a1aa990d20c044ad298c45cd60e82, type: 3}
   m_Name: Wall2
   m_EditorClassIdentifier: 
-  _addDamageValue: 1
+  _addDamageValue: 0
   _moveSpeed: 5
   _fadeSpeed: 1
   _rhythmTimes:

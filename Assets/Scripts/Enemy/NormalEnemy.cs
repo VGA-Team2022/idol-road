@@ -53,9 +53,9 @@ public class NormalEnemy : EnemyBase
        // AudioManager.Instance.PlayVoice(4);
     }
 
-    public override void SetUp(IState currentGameState)
+    public override void SetUp(IState currentGameState, EnemyInfo info)
     {
-        base.SetUp(currentGameState);
+        base.SetUp(currentGameState, info);
 
         switch (_currentRequest)    //各ファンサで吹き飛ぶ方向を決める
         {

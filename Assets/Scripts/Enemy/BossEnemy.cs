@@ -85,8 +85,7 @@ public class BossEnemy : EnemyBase
     {
       //  _rb.AddForce(-transform.forward * _enemySpped); //ファンを前に移動させる
         _isMove = true;
-        FlickNum();
-
+       
         switch (_currentRequest)    //各ファンサで吹き飛ぶ方向を決める
         {
             case FlickType.Left:
