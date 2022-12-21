@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &93420887 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5541328050492127337, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+  m_PrefabInstance: {fileID: 344087550}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &344087550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -275,9 +286,33 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6811730741628505326, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+      propertyPath: _fanCommentTexts.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6811730741628505326, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
       propertyPath: _backGroundSprites.Array.size
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 6811730741628505326, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+      propertyPath: _fanCommentTexts.Array.data[0]
+      value: 
+      objectReference: {fileID: 1277941784}
+    - target: {fileID: 6811730741628505326, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+      propertyPath: _fanCommentTexts.Array.data[1]
+      value: 
+      objectReference: {fileID: 344121888}
+    - target: {fileID: 6811730741628505326, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+      propertyPath: _fanCommentTexts.Array.data[2]
+      value: 
+      objectReference: {fileID: 1222504628}
+    - target: {fileID: 6811730741628505326, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+      propertyPath: _fanCommentTexts.Array.data[3]
+      value: 
+      objectReference: {fileID: 1383900357}
+    - target: {fileID: 6811730741628505326, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+      propertyPath: _fanCommentTexts.Array.data[4]
+      value: 
+      objectReference: {fileID: 93420887}
     - target: {fileID: 6811730741628505326, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
       propertyPath: _backGroundSprites.Array.data[0]
       value: 
@@ -564,6 +599,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc0cea5d4cc4e542b6f343041d45e06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &344121888 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5541328050542713710, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+  m_PrefabInstance: {fileID: 344087550}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -803,6 +849,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1222504628 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5541328051508191751, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+  m_PrefabInstance: {fileID: 344087550}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1277941784 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5541328050461103599, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+  m_PrefabInstance: {fileID: 344087550}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1383900357 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5541328050916865482, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+  m_PrefabInstance: {fileID: 344087550}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1476493721
 GameObject:
   m_ObjectHideFlags: 0

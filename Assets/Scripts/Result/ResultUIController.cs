@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using TMPro;
+using System;
+using Unity.VisualScripting;
 
 /// <summary>リザルトシーンのUIを管理・更新するクラス</summary>
 public class ResultUIController : MonoBehaviour
@@ -40,8 +42,16 @@ public class ResultUIController : MonoBehaviour
     [SerializeField, Tooltip("テキスト"), ElementNames(new string[] { "評価切り替え", "ステージセレクト", "リトライ" })]
     TextMeshProUGUI[] _fadeTextColor = default;
 
+    [SerializeField, Tooltip("ファンのコメントのText"), ElementNames(new string[] { "ファン1", "ファン2", "ファン3", "ファン4", "ファン5" })]
+    TextMeshProUGUI[] _fanCommentTexts = default;
+
     /// <summary>評価画面が表示されているかどうか</summary>
     bool _isValue = true;
+
+    public void Start()
+    {
+        ReflectFansComment();
+    }
 
     /// <summary>結果によって背景を変更する </summary>
     /// <param name="result">プレイ結果</param>
@@ -132,5 +142,13 @@ public class ResultUIController : MonoBehaviour
     public void ReturnModeSelectAndRetry(int index)
     {
         SceneManager.LoadScene(index);
+    }
+    /// <summary>コメントを反映させる</summary>
+    public void ReflectFansComment()
+    {
+        for(int i = 0; i < LevelManager.Instance.CurrentLevel.Result._fanScripts.Length; i++)
+        {
+            _fanCommentTexts[i].text = LevelManager.Instance.CurrentLevel.Result._fanScripts[i];
+        }
     }
 }
