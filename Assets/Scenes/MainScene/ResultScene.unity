@@ -142,9 +142,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 904542253065838103, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 61.822495
+      objectReference: {fileID: 0}
     - target: {fileID: 1637774253892826340, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1798239650695072316, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 64.74498
       objectReference: {fileID: 0}
     - target: {fileID: 1848939418236162828, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
       propertyPath: m_fontColor.a
@@ -161,6 +169,10 @@ PrefabInstance:
     - target: {fileID: 1848939418236162828, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
       propertyPath: m_fontColor.r
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076828744611893440, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 58.9
       objectReference: {fileID: 0}
     - target: {fileID: 2116561547181565618, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
       propertyPath: m_IsActive
@@ -254,10 +266,34 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6546117430938638439, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.1433527
+      objectReference: {fileID: 0}
     - target: {fileID: 6622079048484785545, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6811730741628505326, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+      propertyPath: _backGroundSprites.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6811730741628505326, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+      propertyPath: _backGroundSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: a066d2fb6a08ebc4ab008719fce32dc5, type: 3}
+    - target: {fileID: 6811730741628505326, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+      propertyPath: _backGroundSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: e284072a1a2a0db4bbfec3460bccc9eb, type: 3}
+    - target: {fileID: 6811730741628505326, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+      propertyPath: _backGroundSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: b047f49f64c4fdc4880c95a97698444d, type: 3}
+    - target: {fileID: 6811730741628505326, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+      propertyPath: _backGroundSprites.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: 467176785b369554ab0dd6b6a8b8ae73, type: 3}
     - target: {fileID: 8196807886709795540, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -265,6 +301,10 @@ PrefabInstance:
     - target: {fileID: 8196807886709795540, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SwitchResultUi
+      objectReference: {fileID: 0}
+    - target: {fileID: 8623374530791758625, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 67.66734
       objectReference: {fileID: 0}
     - target: {fileID: 9109034947963958340, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
       propertyPath: m_IsActive
@@ -325,6 +365,10 @@ PrefabInstance:
     - target: {fileID: 9109034947974994591, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
       propertyPath: m_Pivot.y
       value: -0.000000014901161
+      objectReference: {fileID: 0}
+    - target: {fileID: 9109034947974994591, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9109034947974994591, guid: 42123fff1a10ce246a18a77fa9ac71fc, type: 3}
       propertyPath: m_LocalScale.x
