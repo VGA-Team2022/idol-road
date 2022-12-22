@@ -14,6 +14,7 @@ public class BossEnemy : EnemyBase
     SpriteRenderer _bossSprite = default;
     /// <summary>ゲームクリア時の処理 </summary>
     event Action _gameClear = default;
+ 
     /// <summary>吹き飛ぶ演出で再生するアニメーションの名前</summary>
     string _playAnimName = "";
 
@@ -48,7 +49,7 @@ public class BossEnemy : EnemyBase
         Array.ForEach(EnemySprites, s => s.GetComponent<SpriteRenderer>()
         .DOFade(endValue: 0, duration: 2.0f).OnComplete(GiveDamageRun));
 
-        AudioManager.Instance.PlayVoice(8);
+           AudioManager.Instance.PlayVoice(8);
     }
 
     protected override void GoodEffect()
@@ -61,6 +62,7 @@ public class BossEnemy : EnemyBase
             .SetLoops(-1, LoopType.Restart);
 
         AudioManager.Instance.PlayVoice(1);
+     
     }
 
     protected override void PerfactEffect()
@@ -73,6 +75,7 @@ public class BossEnemy : EnemyBase
             .SetLoops(-1, LoopType.Restart);
 
         AudioManager.Instance.PlayVoice(1);
+       
     }
 
     public override void SetUp(IState currentGameState, EnemyInfo info)
