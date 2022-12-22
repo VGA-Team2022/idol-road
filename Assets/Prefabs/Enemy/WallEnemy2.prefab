@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd19fe8c53476d24198de22380d71e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _normalEnemySprites: []
-  _bossEnemy: {fileID: 21300000, guid: f5d386be03d78524697dd07eca682694, type: 3}
+  _nomalEnemySprites: []
+  _bossEnemy: {fileID: 21300000, guid: 5641f416d1f3a1f45ba9fe068bea99fa, type: 3}
 --- !u!1 &7658112783905490768
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,8 +292,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd19fe8c53476d24198de22380d71e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _normalEnemySprites: []
-  _bossEnemy: {fileID: 21300000, guid: f5d386be03d78524697dd07eca682694, type: 3}
+  _nomalEnemySprites: []
+  _bossEnemy: {fileID: 21300000, guid: 5641f416d1f3a1f45ba9fe068bea99fa, type: 3}
 --- !u!1 &7658112784537714946
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,8 +391,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd19fe8c53476d24198de22380d71e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _normalEnemySprites: []
-  _bossEnemy: {fileID: 21300000, guid: f5d386be03d78524697dd07eca682694, type: 3}
+  _nomalEnemySprites: []
+  _bossEnemy: {fileID: 21300000, guid: 5641f416d1f3a1f45ba9fe068bea99fa, type: 3}
 --- !u!1 &7658112784663447085
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,8 +523,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd19fe8c53476d24198de22380d71e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _normalEnemySprites: []
-  _bossEnemy: {fileID: 21300000, guid: f5d386be03d78524697dd07eca682694, type: 3}
+  _nomalEnemySprites: []
+  _bossEnemy: {fileID: 21300000, guid: 5641f416d1f3a1f45ba9fe068bea99fa, type: 3}
 --- !u!1 &7658112785122887790
 GameObject:
   m_ObjectHideFlags: 0

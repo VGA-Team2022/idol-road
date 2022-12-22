@@ -23,4 +23,11 @@ public class StageScroller : MonoBehaviour
     {
         _isScroll = !_isScroll;
     }
+
+    /// <summary>ƒXƒNƒ[ƒ‹‚ğè“®‚Å‘€ì‚·‚é </summary>
+    /// <param name="flag">true=ˆÚ“® false=’â~</param>
+    public void ScrollOperation(bool flag)
+    {
+        _isScroll = flag;
+    }
 }
