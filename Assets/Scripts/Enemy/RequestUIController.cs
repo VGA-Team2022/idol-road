@@ -24,6 +24,7 @@ public class RequestUIController : MonoBehaviour
             case TimingResult.Bad:
                 gameObject.SetActive(true);
                 _requestWindow.sprite = _requestWindowSprites[0];
+                AudioManager.Instance.PlaySE(8);
                 break;
             case TimingResult.Good:
                 _requestWindow.sprite = _requestWindowSprites[1];
