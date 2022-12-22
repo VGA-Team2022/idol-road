@@ -157,6 +157,7 @@ public class EnemySpawner : MonoBehaviour
 
         _boss.AddComboCount += _manager.ComboAmountTotal;
         _boss.GiveDamage += _manager.GetDamage;
+        _boss.GameClear += _manager.GameClear;
 
         _boss.BossSprite.color = new Color(1f, 1f, 1f, 0f);
 

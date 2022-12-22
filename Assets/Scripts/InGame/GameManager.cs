@@ -31,6 +31,10 @@ public class GameManager : MonoBehaviour
     EnemySpawner _enemySpawner = default;
     [SerializeField, Tooltip("Warningプレハブ")]
     PlayableDirector _warningTape = default;
+    [SerializeField, Tooltip("タクシーオブジェクト")]
+    SpriteRenderer _taxi = default;
+    [SerializeField, Tooltip("プレイヤー")]
+    PlayerMotion _player = default;
     [SerializeField]
     SuperIdolTime _superIdolTime = default;
 
@@ -51,10 +55,7 @@ public class GameManager : MonoBehaviour
     int _nextComboCount = ADD_COMBO_ILLUST_CCHANGE;
     /// <summary>ゲーム開始からの経過時間 </summary>
     float _elapsedTime = 0f;
-    /// <summary>ボスがプレイヤーに向かって移動しているかどうか </summary>
-    bool _isBossMove = false;
-
-    bool _isBoss = false;
+   
     /// <summary>ボスの移動を開始する処理</summary>
     event Action _startBossMove = default;
 
@@ -69,6 +70,8 @@ public class GameManager : MonoBehaviour
     /// <summary>フェードを行うクラス</summary>
     public FadeController FadeCanvas { get => _fadeController; }
     public PlayableDirector WarningTape { get => _warningTape; }
+    public SpriteRenderer Taxi { get => _taxi; }
+    public PlayerMotion Player { get => _player; }
 
     /// <summary>ボスの移動を開始する処理</summary>
     public event Action StartBossMove
@@ -225,6 +228,6 @@ public class GameManager : MonoBehaviour
     public void GameClear()
     {
         ChangeGameState(_gameEndState);
-        _stageScroller.ScrollOperation();
+        _player.GameClearMove();
     }
 }
