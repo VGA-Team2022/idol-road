@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df1a1aa990d20c044ad298c45cd60e82, type: 3}
   m_Name: Boss
   m_EditorClassIdentifier: 
-  _addDamageValue: 1
-  _moveSpeed: 8
+  _addDamageValue: 5
+  _addIdolPowerValue: 0
+  _moveSpeed: 30
   _fadeSpeed: 0.5
   _rhythmTimes:
   - 5

@@ -16,30 +16,45 @@ MonoBehaviour:
   - _enemyType: 0
     _generateInterval: 2
     requestTypes: 01000000
-  - _enemyType: 4
+  - _enemyType: 0
+    _generateInterval: 3
+    requestTypes: 02000000
+  - _enemyType: 2
+    _generateInterval: 1
+    requestTypes: 020000000300000001000000
+  - _enemyType: 1
     _generateInterval: 0
-    requestTypes: 
+    requestTypes: 0200000001000000
   - _enemyType: 0
     _generateInterval: 1
     requestTypes: 02000000
-  - _enemyType: 0
-    _generateInterval: 0
-    requestTypes: 03000000
   - _enemyType: 0
     _generateInterval: 2
     requestTypes: 01000000
+  - _enemyType: 4
+    _generateInterval: 2
+    requestTypes: 
+  - _enemyType: 4
+    _generateInterval: 2
+    requestTypes: 
   - _enemyType: 0
-    _generateInterval: 3
-    requestTypes: 03000000
-  - _enemyType: 1
-    _generateInterval: 1
-    requestTypes: 0400000002000000
-  - _enemyType: 0
-    _generateInterval: 0
+    _generateInterval: 2
     requestTypes: 02000000
-  - _enemyType: 1
+  - _enemyType: 0
     _generateInterval: 3
-    requestTypes: 0100000002000000
-  - _enemyType: 2
+    requestTypes: 04000000
+  - _enemyType: 1
     _generateInterval: 1
-    requestTypes: 030000000400000001000000
+    requestTypes: 0300000004000000
+  - _enemyType: 2
+    _generateInterval: 2
+    requestTypes: 020000000300000001000000
+  - _enemyType: 4
+    _generateInterval: 3
+    requestTypes: 
+  - _enemyType: 0
+    _generateInterval: 3
+    requestTypes: 01000000
+  - _enemyType: 3
+    _generateInterval: 0
+    requestTypes: 03000000

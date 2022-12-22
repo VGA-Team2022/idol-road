@@ -14,6 +14,7 @@ public class BossEnemy : EnemyBase
     SpriteRenderer _bossSprite = default;
     /// <summary>ゲームクリア時の処理 </summary>
     event Action _gameClear = default;
+ 
     /// <summary>吹き飛ぶ演出で再生するアニメーションの名前</summary>
     string _playAnimName = "";
 
@@ -29,14 +30,9 @@ public class BossEnemy : EnemyBase
         remove { _gameClear -= value; }
     }
 
-    private void Start()
-    {
-       // _time = _resultTimes[_resultTimeIndex];
-    }
-
     private void Update()
     {
-        if (_isMove)
+        if (_isMove && !_isdead)
         {
             UpdateResultTime();
         }
@@ -53,7 +49,7 @@ public class BossEnemy : EnemyBase
         Array.ForEach(EnemySprites, s => s.GetComponent<SpriteRenderer>()
         .DOFade(endValue: 0, duration: 2.0f).OnComplete(GiveDamageRun));
 
-        AudioManager.Instance.PlayVoice(8);
+           AudioManager.Instance.PlayVoice(8);
     }
 
     protected override void GoodEffect()
@@ -66,6 +62,7 @@ public class BossEnemy : EnemyBase
             .SetLoops(-1, LoopType.Restart);
 
         AudioManager.Instance.PlayVoice(1);
+     
     }
 
     protected override void PerfactEffect()
@@ -78,14 +75,13 @@ public class BossEnemy : EnemyBase
             .SetLoops(-1, LoopType.Restart);
 
         AudioManager.Instance.PlayVoice(1);
+       
     }
 
-    /// <summary>移動を開始する</summary>
-    public void MoveStart()
+    public override void SetUp(IState currentGameState, EnemyInfo info)
     {
-      //  _rb.AddForce(-transform.forward * _enemySpped); //ファンを前に移動させる
-        _isMove = true;
-       
+        base.SetUp(currentGameState, info);
+
         switch (_currentRequest)    //各ファンサで吹き飛ぶ方向を決める
         {
             case FlickType.Left:
@@ -100,7 +96,13 @@ public class BossEnemy : EnemyBase
                 break;
         }
 
-       // _requestUIArray[0].gameObject.SetActive(true);
+        _isMove = true;
+    }
+
+    /// <summary>移動アニメーションを再生する </summary>
+    public void StartMoveAnim()
+    {
+        _anim.Play("Walk");
     }
 
     /// <summary>
@@ -110,6 +112,6 @@ public class BossEnemy : EnemyBase
     public void ThisDestroy()
     {
         _gameClear?.Invoke();
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }

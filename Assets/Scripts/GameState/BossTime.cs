@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -6,15 +7,17 @@ public class BossTime : IState
 {
     public void OnEnter(GameManager manager, IState previousState)
     {
-        manager.Scroller.ScrollOperation();
+        manager.Scroller.ScrollOperation(false);
         manager.WarningTape.gameObject.SetActive(true);
         manager.WarningTape.stopped += WarningTapeAnimEnd;
         manager.EnemyGenerator.SpawnBossEnemy();
+        manager.Taxi.gameObject.SetActive(true);
+        AudioManager.Instance.PlaySE(26);
     }
 
     public void OnExit(GameManager manager, IState nextState)
     {
-        manager.EnemyGenerator.IsGenerate = false;
+        
     }
 
     public void OnUpdate(GameManager manager)

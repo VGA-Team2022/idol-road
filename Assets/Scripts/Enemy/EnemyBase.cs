@@ -10,7 +10,7 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField, Header("ファンの種類")]
     EnemyType _enemyType = EnemyType.Nomal;
     [SerializeField, Tooltip("ファンサを更新するクラス")]
-    RequestUIController[] _requestUIArray = null;
+    protected RequestUIController[] _requestUIArray = null;
     [SerializeField, Tooltip("イラストを管理するクラス")]
     EnemySpriteChange[] _enemySprites = null;
     [SerializeField, Tooltip("爆発エフェクト")]
@@ -29,13 +29,13 @@ public abstract class EnemyBase : MonoBehaviour
     /// <summary>答えたファンサ数</summary>
     int _requestCount = 0;
     /// <summary>評価判定の時間の添え字 </summary>
-    int _resultTimeIndex = 0;
+    protected int _resultTimeIndex = 0;
     /// <summary>敵の死亡フラグ</summary>
-    bool _isdead = false;
+    protected bool _isdead = false;
     /// <summary>入力を受け付けるかどうか </summary>
     bool _isInput = false;
     /// <summary>評価変更用変数</summary>
-    float _time = 0f;
+    protected float _time = 0f;
 
     /// <summary>倒されたらステージスクロールを開始する </summary>
     event Action _stageScroll = default;
@@ -47,6 +47,15 @@ public abstract class EnemyBase : MonoBehaviour
     event Action<EnemyBase> _disapperEnemies = default;
     /// <summary>アイドルパワーを増加させる処理</summary>
     event Action<float> _addIdolPower = default;
+    /// <summary>ボスを移動させる処理 </summary>
+    event Action _bossMove = default;
+
+    /// <summary>ボスを移動させる処理 </summary>
+    public event Action BossMove
+    {
+        add { _bossMove += value; }
+        remove { _bossMove -= value; }
+    }
 
     /// <summary>倒されたらステージスクロールを開始する </summary>
     public event Action StageScroll
@@ -91,12 +100,6 @@ public abstract class EnemyBase : MonoBehaviour
     protected EnemySpriteChange[] EnemySprites { get => _enemySprites; }
 
     #endregion
-
-    void Start()
-    {
-        _rb.AddForce(-transform.forward * _currentParameter.MoveSpped); //ファンを前に移動させる
-        _time = _currentParameter.RhythmTimes[_resultTimeIndex];
-    }
 
     void Update()
     {
@@ -179,16 +182,16 @@ public abstract class EnemyBase : MonoBehaviour
         {
             case TimingResult.Bad:
                 BadEffect();
-                 AudioManager.Instance.PlaySE(2, 0.5f);
+                AudioManager.Instance.PlaySE(2, 0.5f);
                 break;
             case TimingResult.Good:
                 Instantiate(_explosionEffect, transform.position, Quaternion.identity);     //爆発エフェクトを生成
-                                                                                            //  AudioManager.Instance.PlaySE(6, 0.7f);
+                AudioManager.Instance.PlaySE(6, 0.7f);
                 GoodEffect();
                 break;
             case TimingResult.Perfect:
                 Instantiate(_explosionEffect, transform.position, Quaternion.identity);
-                 AudioManager.Instance.PlaySE(6, 0.7f);
+                AudioManager.Instance.PlaySE(6, 0.7f);
                 PerfactEffect();
                 break;
         }
@@ -205,6 +208,8 @@ public abstract class EnemyBase : MonoBehaviour
         _addComboCount?.Invoke(_currentResult);
         _disapperEnemies?.Invoke(this);
         _stageScroll?.Invoke();
+        _bossMove?.Invoke();
+
         PlayResult.Instance.CountMiss++;
 
         _isdead = true;
@@ -218,6 +223,8 @@ public abstract class EnemyBase : MonoBehaviour
         _isdead = true;
         Array.ForEach(_requestUIArray, r => r.gameObject.SetActive(false));
         SelectDeadEffect();
+
+        _bossMove?.Invoke();
     }
 
     /// <summary>bad判定時の演出 </summary>
@@ -280,7 +287,9 @@ public abstract class EnemyBase : MonoBehaviour
         {
             Array.ForEach(_enemySprites, e => e.EnemyBossMethod());
         }
-        
+
+        EnemyMove();
+
         //各ファンごとに行いたい処理があればoverrideする
     }
 
@@ -304,5 +313,11 @@ public abstract class EnemyBase : MonoBehaviour
         }
 
         _currentRequest = _requestArray[_requestCount];     //要求ファンサを更新
+    }
+
+    /// <summary>ファンを前に移動させる </summary>
+    public void EnemyMove()
+    {
+        _rb.AddForce(-transform.forward * _currentParameter.MoveSpped);
     }
 }

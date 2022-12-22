@@ -25,10 +25,7 @@ public class FadeController : MonoBehaviour
         gameObject.SetActive(true);
         _panel.color = new Color(0, 0, 0, MAX_α_VALUE);
         _panel.DOFade(MIN_α_VALUE, _fadeInTime)
-            .OnComplete(() =>
-            {
-                action?.Invoke();
-            });
+            .OnComplete(() => { action?.Invoke(); });
     }
 
     /// <summary>フェードアウトを行う処理　暗くなる</summary>
@@ -38,9 +35,26 @@ public class FadeController : MonoBehaviour
         gameObject.SetActive(true);
         _panel.color = new Color(0, 0, 0, MIN_α_VALUE);
         _panel.DOFade(MAX_α_VALUE, _fadeOutTime)
-            .OnComplete(() =>
-            {
-                action?.Invoke();
-            });
+            .OnComplete(() => { action?.Invoke(); });
+    }
+
+    /// <summary>フェードインする </summary>
+    /// <param name="time">フェードにかかる時間</param>
+    public void FadeIn(float time, Action action = null)
+    {
+        gameObject.SetActive(true);
+        _panel.color = new Color(0, 0, 0, MAX_α_VALUE);
+        _panel.DOFade(MIN_α_VALUE, time)
+            .OnComplete(() => { action?.Invoke(); });
+    }
+
+    /// <summary>フェードアウトする </summary>
+    /// <param name="time">フェードにかかる時間</param>
+    public void FadeOut(float time, Action action = null)
+    {
+        gameObject.SetActive(true);
+        _panel.color = new Color(0, 0, 0, MIN_α_VALUE);
+        _panel.DOFade(MAX_α_VALUE, time)
+            .OnComplete(() => { action?.Invoke(); });
     }
 }
