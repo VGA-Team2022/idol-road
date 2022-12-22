@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -10,6 +11,7 @@ public class BossTime : IState
         manager.WarningTape.gameObject.SetActive(true);
         manager.WarningTape.stopped += WarningTapeAnimEnd;
         manager.EnemyGenerator.SpawnBossEnemy();
+        manager.Taxi.gameObject.SetActive(true);
         AudioManager.Instance.PlaySE(26);
     }
 

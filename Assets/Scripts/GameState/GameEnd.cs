@@ -6,8 +6,7 @@ public class GameEnd : IState
 {
     public void OnEnter(GameManager manager, IState previousState)
     {
-        Debug.Log("ƒQ[ƒ€I—¹");
-        manager.FadeCanvas.FadeOut(() => SceneManager.LoadScene("ResultScene"));
+        manager.FadeCanvas.FadeOut(3f ,() => SceneManager.LoadScene("ResultScene"));
     }
 
     public void OnExit(GameManager manager, IState nextState)

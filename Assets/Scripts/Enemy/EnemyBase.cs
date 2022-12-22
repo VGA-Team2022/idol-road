@@ -31,7 +31,7 @@ public abstract class EnemyBase : MonoBehaviour
     /// <summary>•]‰¿”»’è‚ÌŠÔ‚Ì“Y‚¦š </summary>
     protected int _resultTimeIndex = 0;
     /// <summary>“G‚Ì€–Sƒtƒ‰ƒO</summary>
-    bool _isdead = false;
+    protected bool _isdead = false;
     /// <summary>“ü—Í‚ğó‚¯•t‚¯‚é‚©‚Ç‚¤‚© </summary>
     bool _isInput = false;
     /// <summary>•]‰¿•ÏX—p•Ï”</summary>

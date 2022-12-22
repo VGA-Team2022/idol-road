@@ -32,7 +32,7 @@ public class BossEnemy : EnemyBase
 
     private void Update()
     {
-        if (_isMove)
+        if (_isMove && !_isdead)
         {
             UpdateResultTime();
         }
@@ -97,6 +97,12 @@ public class BossEnemy : EnemyBase
         }
 
         _isMove = true;
+    }
+
+    /// <summary>移動アニメーションを再生する </summary>
+    public void StartMoveAnim()
+    {
+        _anim.Play("Walk");
     }
 
     /// <summary>
