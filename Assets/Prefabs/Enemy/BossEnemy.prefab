@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6967116159263764963}
   - component: {fileID: 4596636092407356529}
+  - component: {fileID: 4937831580538500714}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -84,6 +85,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4937831580538500714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7265368241165953381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd19fe8c53476d24198de22380d71e7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nomalEnemySprites: []
+  _bossEnemy: {fileID: 21300000, guid: fd2bcdfc0b5be734e8fc2dcd4b3f9214, type: 3}
 --- !u!1 &8890162699146751734
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,7 +166,8 @@ MonoBehaviour:
   _enemyType: 3
   _requestUIArray:
   - {fileID: 2516091766670467666}
-  _enemySprites: []
+  _enemySprites:
+  - {fileID: 4937831580538500714}
   _explosionEffect: {fileID: 1415453749020358168, guid: 38394c7e5dd2fd5418d674a2410b4263, type: 3}
   _deadMoveTime: 1
   _bossSprite: {fileID: 4596636092407356529}

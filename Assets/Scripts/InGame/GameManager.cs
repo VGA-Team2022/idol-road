@@ -96,31 +96,24 @@ public class GameManager : MonoBehaviour
             _uiController.UpdateGoalDistanceUI(_elapsedTime);
         }
 
-        if (_inGameParameter.StartBossTime >= Math.Abs(_inGameParameter.GamePlayTime - _elapsedTime) && _currentGameState is not BossTime　&& _currentGameState is not GameEnd)    //ボスステージを開始
+        if (_inGameParameter.StartBossTime >= Math.Abs(_inGameParameter.GamePlayTime - _elapsedTime) && _currentGameState is Playing)    //ボスステージを開始
         {
             ChangeGameState(_bossTimeState);
         }
 
-        if (_inGameParameter.StartBossTime + 7 >= Math.Abs(_inGameParameter.GamePlayTime - _elapsedTime) && !_isBoss)
-        {
-            _enemySpawner.IsGenerate = false;
-            _isBoss = true;
-        }
-
-        if (_inGameParameter.GamePlayTime - _elapsedTime <= 0 && !_isBossMove)    //制限時間が0になったらボスを移動させる
-        {
-            Debug.Log("移動開始");
-            _enemySpawner.IsGenerate = false;
-            _startBossMove?.Invoke();
-            _isBossMove = true;
-        }
+        //if (_inGameParameter.GamePlayTime - _elapsedTime <= 0 && !_isBossMove)    //制限時間が0になったらボスを移動させる
+        //{
+        //    Debug.Log("移動開始");
+        //    _enemySpawner.IsGenerate = false;
+        //    _startBossMove?.Invoke();
+        //    _isBossMove = true;
+        //}
     }
 
     /// <summary>アイドルパワーが増加する関数</summary>
     public void IncreseIdlePower(float power)
     {
         _idlePower += (power/ _inGameParameter.IdolPowerMaxValue);
-        Debug.Log(_idlePower);
         _uiController.UpdateIdolPowerGauge(_idlePower);
         if (1 <= _idlePower)    //スーパーアイドルタイムを発動
         {
@@ -192,7 +185,7 @@ public class GameManager : MonoBehaviour
     /// <summary>Enemy.csに登録するステージスクロール処理</summary>
     public void StageScroll()
     {
-        if (_enemies.Count <= 0)    //ファンがいなくなったらスクロールを開始する
+        if (_enemies.Count <= 0 && _currentGameState is not BossTime)    //ファンがいなくなったらスクロールを開始する
         {
             _stageScroller.ScrollOperation();
         }
@@ -205,7 +198,11 @@ public class GameManager : MonoBehaviour
         if (_enemies.Count <= 0)    //ステージにファンが出現
         {
             _currentEnemy = enemy;
-            _stageScroller.ScrollOperation();
+
+            if (_currentGameState is not BossTime)
+            {
+                _stageScroller.ScrollOperation();
+            }
         }
 
         _enemies.Add(enemy);    

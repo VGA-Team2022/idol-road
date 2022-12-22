@@ -5,6 +5,14 @@ using DG.Tweening;
 /// <summary>ファンを生成するクラス </summary>
 public class EnemySpawner : MonoBehaviour
 {
+    //TODO:EnemySpawnerがどこかで生成されているどこで生成されているか見つける
+    static EnemySpawner _instance = default; //一時的にシングルトンパターンを使用しているが本来は使わない
+
+    /// <summary>生成を辞める為の変数 </summary>
+    const int LAST_ENEMY_GENERATED = 1;
+    /// <summary>ボスを移動させる処理を登録する為変数 </summary>
+    const int BOSS_MOVE_REGISTER = 2;
+
     #region private SerializeField
 
     [SerializeField, Tooltip("0=ノーマル 1=壁ファン2 3=壁ファン3 4=ボス"), ElementNames(new string[] { "ノーマル", "壁ファン2", "壁ファン3", "ボス" })]
@@ -28,6 +36,8 @@ public class EnemySpawner : MonoBehaviour
     /// <summary>次に生成する敵の情報 </summary>
     EnemyInfo _nextEnemyInfo = default;
 
+    BossEnemy _boss = default;
+
     /// <summary>敵を出現させたい秒数 0=7.68f 1=5.76f 2=3.84f 3=1.92f</summary>
     float[] _timeInterval = new float[4] { 7.68f, 5.76f, 3.84f, 1.92f };
     /// <summary>ボス戦で敵を出現させたい秒数 0=7.6.4f 1=5.4.8f 2=3.2f 3=1.6f</summary>
@@ -43,8 +53,22 @@ public class EnemySpawner : MonoBehaviour
     int _positionCount = 0;
     /// <summary>ファンを生成するかどうか true=生成する </summary>
     bool _isGenerate = true;
+    /// <summary>ボスを移動させる処理を登録する</summary>
+    bool _isRegister = false;
 
     public bool IsGenerate { get => _isGenerate; set => _isGenerate = value; }
+
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     #endregion
     private void Start()
@@ -63,7 +87,6 @@ public class EnemySpawner : MonoBehaviour
             {
                 GenerateEnemy();
 
-
                 _positionCount++;
 
                 if (_positionCount == _spawnPoints.Length)
@@ -71,7 +94,9 @@ public class EnemySpawner : MonoBehaviour
                     _positionCount = 0;
                 }
 
+
                 NextEnemyInfoSetup();
+
                 _generateTimer = 0;
             }
         }
@@ -82,7 +107,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if (_nextEnemyInfo._enemyType == EnemyType.Wait) { return; }　//待機であれば何もしない
 
-        var enemy = Instantiate(_enemyPrefubs[(int)_nextEnemyInfo._enemyType], _spawnPoints[_positionCount].transform); //シリアライズで設定したオブジェクトの場所に出現します(最初は真ん中の位置に)
+        var enemy = Instantiate(_enemyPrefubs[(int)_nextEnemyInfo._enemyType], _spawnPoints[_positionCount].transform);
         _manager.AddEnemy(enemy);
         enemy.SetUp(_manager.CurrentGameState, _nextEnemyInfo);
 
@@ -92,6 +117,11 @@ public class EnemySpawner : MonoBehaviour
         enemy.GiveDamage += _manager.GetDamage;
         enemy.DisapperEnemies += _manager.RemoveEnemy;
         enemy.AddIdolPower += _manager.IncreseIdlePower;
+
+        if (_isRegister)
+        {
+            enemy.BossMove += BossMove;
+        }
     }
 
     /// <summary>次の敵情報を設定する </summary>
@@ -99,10 +129,15 @@ public class EnemySpawner : MonoBehaviour
     {
         _infoIndex++;
 
-        if (_order.EnemyOrder.Count <= _infoIndex)  //最後の敵を生成した
+
+        if (_order.EnemyOrder.Count - LAST_ENEMY_GENERATED <= _infoIndex)  //最後の敵が生成されたら生成を辞める
         {
             _isGenerate = false;
             return;
+        }
+        else if (_order.EnemyOrder.Count - BOSS_MOVE_REGISTER <= _infoIndex)  //最後の敵にボスを移動させる処理を登録する為
+        {
+            _isRegister = true;
         }
 
         _nextEnemyInfo = _order.EnemyOrder[_infoIndex];
@@ -112,23 +147,26 @@ public class EnemySpawner : MonoBehaviour
     /// <summary>ボスを生成する </summary>
     public void SpawnBossEnemy()
     {
+        _generateTimer = 0f;
+
+        var go = Instantiate(_enemyPrefubs[3], _bossSpawnPoint);
+
+        if (go is not BossEnemy) { return; }    //キャストできなければ何もしない
+
+        _boss = ((BossEnemy)go);
+
+        _boss.BossSprite.color = new Color(1f, 1f, 1f, 0f);
+
+        _boss.BossSprite.DOFade(1f, 2f)
+            .SetDelay(5f);
+    }
+
+    /// <summary>ボスを移動させる処理</summary>
+    void BossMove()
+    {
+        _manager.AddEnemy(_boss);
+        _boss.SetUp(_manager.CurrentGameState, _nextEnemyInfo);
         _isGenerate = false;
-
-        var go = Instantiate(_enemyPrefubs[2], _bossSpawnPoint);
-
-        if (go is not BossEnemy)  //キャストできなければ何もしない
-        {
-            return;
-        }
-
-        var boss = ((BossEnemy)go);
-        _manager.StartBossMove += boss.MoveStart;
-        boss.GameClear += _manager.GameClear;
-        _manager.AddEnemy(boss);
-
-        boss.BossSprite.color = new Color(1f, 1f, 1f, 0f);
-        boss.BossSprite.DOFade(1f, 2f)
-            .SetDelay(5f)
-            .OnComplete(() => _isGenerate = true);
+        _generateTimer = 0f;
     }
 }
