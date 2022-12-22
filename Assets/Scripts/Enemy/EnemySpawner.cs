@@ -155,6 +155,9 @@ public class EnemySpawner : MonoBehaviour
 
         _boss = ((BossEnemy)go);
 
+        _boss.AddComboCount += _manager.ComboAmountTotal;
+        _boss.GiveDamage += _manager.GetDamage;
+
         _boss.BossSprite.color = new Color(1f, 1f, 1f, 0f);
 
         _boss.BossSprite.DOFade(1f, 2f)
@@ -168,5 +171,6 @@ public class EnemySpawner : MonoBehaviour
         _boss.SetUp(_manager.CurrentGameState, _nextEnemyInfo);
         _isGenerate = false;
         _generateTimer = 0f;
+        _boss.StartMoveAnim();
     }
 }
