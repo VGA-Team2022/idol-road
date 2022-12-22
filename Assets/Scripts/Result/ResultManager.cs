@@ -26,7 +26,7 @@ public class ResultManager : MonoBehaviour
 
     /// <summary>スコアを計算する</summary>
     /// <returns>計算結果 0=bad 1=good 2=perfect 4=score</returns>
-    private int[] ScoreCalculation()
+    public int[] ScoreCalculation()
     {
         //判定それぞれのスコア値×判定した数
         var perfectValue = _resultParameter._addParfectScoreValue * _playResult.CountPerfect;
