@@ -8,7 +8,7 @@ using DG.Tweening;
 /// </summary>
 public class PlayerMotion : MonoBehaviour
 {
-    [SerializeField , Tooltip("アイドルのモーション絵")]
+    [SerializeField, Tooltip("アイドルのモーション絵")]
     Sprite[] _sprites;
     [SerializeField, Tooltip("アイドルのファンサ吹き出し"), ElementNames(new string[] { "投げキス", "ウィンク" })]
     GameObject[] _IdleBlowing;
@@ -18,7 +18,7 @@ public class PlayerMotion : MonoBehaviour
     float _motionTime = 3;
     [SerializeField, Tooltip("ファンサの吹き出しを表示する時間")]
     float _fansaShowTime = 0.5f;
-    [SerializeField , Tooltip("入力を送ってくれる")]
+    [SerializeField, Tooltip("入力を送ってくれる")]
     private ScreenInput _screenInput;
 
     private SpriteRenderer _spriteRenderer;
@@ -51,10 +51,10 @@ public class PlayerMotion : MonoBehaviour
 
             _timer = 0;
         }
-        else if(_flickType != FlickType.None)
+        else if (_flickType != FlickType.None)
         {
             _timer += Time.deltaTime;
-            if (_timer > _motionTime) 
+            if (_timer > _motionTime)
             {
                 _flickType = FlickType.None;
                 _spriteRenderer.sprite = _sprites[0];
@@ -66,12 +66,10 @@ public class PlayerMotion : MonoBehaviour
             case FlickType.Down:
                 var kissIllust = Instantiate(_IdleBlowing[0], _blowingSpawn.transform);
                 Destroy(kissIllust, _fansaShowTime);
-                Debug.Log("キスイラスト");
                 break;
             case FlickType.Right:
-                var winkIllust = Instantiate(_IdleBlowing[1],_blowingSpawn.transform);
+                var winkIllust = Instantiate(_IdleBlowing[1], _blowingSpawn.transform);
                 Destroy(winkIllust, _fansaShowTime);
-                Debug.Log("ウィンクイラスト");
                 break;
         }
     }
