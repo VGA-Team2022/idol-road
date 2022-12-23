@@ -5,7 +5,7 @@ using CriWare;
 /// <summary>サウンド関連を管理するクラス　シングルトンパターンを使用</summary>
 public class AudioManager : MonoBehaviour
 {
-    static AudioManager _instance = default;
+    static AudioManager _instance = default; 
 
     [SerializeField, Header("BGM")]
     CriAtomSource _bgmSource = default;
