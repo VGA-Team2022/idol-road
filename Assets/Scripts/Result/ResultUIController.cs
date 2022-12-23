@@ -89,10 +89,11 @@ public class ResultUIController : MonoBehaviour
                 break;
             case Result.Perfect:
                 _backGround.sprite = _backGroundSprites[1];
-                _resultValueText[0].text = "Perfect";
+                _resultValueText[0].text = "Excellent!!";
                 break;
             case Result.SuperPerfect:
                 _backGround.sprite = _backGroundSprites[0];
+                _resultValueText[0].text = "GOD!!";
                 break;
         }
     }
@@ -159,7 +160,7 @@ public class ResultUIController : MonoBehaviour
             _showResultParent[1].gameObject.SetActive(false);
             //ã§í UIÇÃêÿÇËë÷Ç¶
             SetCommonUI(0);
-            StartCoroutine(ShowResult(_resultManager.ScoreCalculation()));
+
             _isValue = true;
         }
     }

@@ -6,6 +6,8 @@ public class GameEnd : IState
 {
     public void OnEnter(GameManager manager, IState previousState)
     {
+        //TODO:‘«‰¹‚ðŽ~‚ß‚é
+        AudioManager.Instance.StopBGM(10);
         manager.FadeCanvas.FadeOut(3f ,() => SceneManager.LoadScene("ResultScene"));
     }
 
