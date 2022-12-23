@@ -1,15 +1,20 @@
 using UnityEngine;
 
-/// <summary>通常ファンのイラストに合わせたボイスを再生する為のクラス</summary>
-public class NomalEnemyVoice : MonoBehaviour
+/// <summary>ファンのイラストに合わせたボイスを再生する為のクラス</summary>
+public class EnemyVoice : MonoBehaviour
 {
+    /// <summary>ボスの成功時ボイスのID</summary>
+    const int BOOS_SUCCESS_VOICE_ID = 1;
+    /// <summary>ボスの失敗時ボイスのID </summary>
+    const int BOOS_FAIL_VOICE_ID = 8;
+
     /// <summary>成功・失敗時のIDを格納する為 </summary>
     const int VOICE_ID_SIZE = 2;
 
     /// <summary>通常ファンのイラストの種類を取得し、イラストに合ったボイスのIDを返す </summary>
     /// <param name="enemySprite">イラストの種類</param>
     /// <returns>サウンドID 0=成功 1=失敗</returns>
-    public int[] GetVoiceID(EnemyNomalSprites enemySprite)
+    public int[] GetNormalEnemyVoiceID(EnemyNomalSprites enemySprite)
     {
         var voiceID = new int[VOICE_ID_SIZE];
 
@@ -32,6 +37,15 @@ public class NomalEnemyVoice : MonoBehaviour
                 voiceID[1] = 10;
                 break;       
         }
+
+        return voiceID;
+    }
+
+    /// <summary>ボスのボイスのIDを返す </summary>
+    /// <returns>サウンドID 0=成功 1=失敗</returns>
+    public int[] GetBossTimeVoiceID()
+    {
+          var voiceID = new int[VOICE_ID_SIZE] { BOOS_SUCCESS_VOICE_ID, BOOS_FAIL_VOICE_ID };
 
         return voiceID;
     }

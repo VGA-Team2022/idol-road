@@ -3,13 +3,15 @@ using UnityEngine;
 using DG.Tweening;
 
 /// <summary>通常ファンの処理を行うクラス</summary>
-[RequireComponent(typeof(NomalEnemyVoice))]
+[RequireComponent(typeof(EnemyVoice))]
 public class NormalEnemy : EnemyBase
 {
+    /// <summary>成功・失敗時のIDを格納する為 </summary>
+    const int VOICE_ID_SIZE = 2;
     /// <summary>吹き飛ぶまでの遅延 </summary>
     const float EXPLOSION_DELAY = 0.3f;
     /// <summary>再生するボイスを決定するクラス </summary>
-    NomalEnemyVoice _enemyVoice => GetComponent<NomalEnemyVoice>();
+    EnemyVoice _enemyVoice => GetComponent<EnemyVoice>();
     /// <summary>吹き飛ぶ演出で再生するアニメーションの名前</summary>
     string _playAnimName = "";
     /// <summary>GOOD・PERFECT判定時に再生するサウンドID </summary>
@@ -58,8 +60,17 @@ public class NormalEnemy : EnemyBase
 
     public override void SetUp(IState currentGameState, EnemyInfo info)
     {
-        var nomalType = EnemySprites[0].ChangeNomalEnemySprite();   //イラストを切り替える
-        var voiceID = _enemyVoice.GetVoiceID(nomalType);    //0=成功ボイス 1=失敗ボイス
+        var voiceID = new int[VOICE_ID_SIZE];
+        var nomalType = EnemySprites[0].ChangeNomalEnemySprite();   //イラスト変更
+
+        if (currentGameState is BossTime)   //ボスステージ用のボイスを再生する為
+        {
+            voiceID = _enemyVoice.GetBossTimeVoiceID();
+        }
+        else
+        {
+            voiceID = _enemyVoice.GetNormalEnemyVoiceID(nomalType);    //0=成功ボイス 1=失敗ボイス
+        }
 
         //ボイスを設定
         _voiceSuccessID = voiceID[0];
