@@ -23,6 +23,9 @@ public class StageSelectController : MonoBehaviour
     [SerializeField , Header("遊び方を表示するキャンバス")]
     Canvas _playUiCanvas = default;
 
+    /// <summary>遷移をしているか true=開始している</summary>
+    bool _isTransition = false;
+
     /// <summary>現在選択されているボタン </summary>
     Button _currentSelectedButton = default;
     #endregion
@@ -46,9 +49,12 @@ public class StageSelectController : MonoBehaviour
     /// <summary>ゲームシーンに遷移する時の処理 </summary>
     void TransitionGameScene(Button selectButton, int index)
     {
+        if (_isTransition) { return; }
+
         if (selectButton == _currentSelectedButton)     //選択ゲームシーンに遷移する
         {
             AudioManager.Instance.PlaySE(7);
+            _isTransition = true;
             _fadeController.FadeOut(() => SceneManager.LoadScene(_nextSceneName));
         }
         else
@@ -66,8 +72,11 @@ public class StageSelectController : MonoBehaviour
         }
     }
 
+    /// <summary>操作説明・遊び方を表示する処理</summary>
     void PlayUiButton(Button selectButton)
     {
+        if (_isTransition) { return; }
+
         if (selectButton == _currentSelectedButton)     //選択ゲームシーンに遷移する
         {
             AudioManager.Instance.PlaySE(7);
@@ -85,9 +94,13 @@ public class StageSelectController : MonoBehaviour
         }
     }
 
+    /// <summary>タイトルシーンに戻る</summary>
     public void TitleChange() 
     {
+        if (_isTransition) { return; }
+
         AudioManager.Instance.PlaySE(7);
         _fadeController.FadeOut(() => SceneManager.LoadScene(0));
+        _isTransition = true;
     }
 }
