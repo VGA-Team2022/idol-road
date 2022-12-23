@@ -15,46 +15,46 @@ MonoBehaviour:
   _enemyOrder:
   - _enemyType: 0
     _generateInterval: 2
-    requestTypes: 01000000
+    requestTypes: 00000000
   - _enemyType: 0
     _generateInterval: 3
-    requestTypes: 02000000
+    requestTypes: 00000000
   - _enemyType: 2
     _generateInterval: 1
-    requestTypes: 020000000300000001000000
+    requestTypes: 000000000000000000000000
   - _enemyType: 1
     _generateInterval: 0
-    requestTypes: 0200000001000000
+    requestTypes: 0000000000000000
   - _enemyType: 0
     _generateInterval: 1
-    requestTypes: 02000000
+    requestTypes: 00000000
   - _enemyType: 0
     _generateInterval: 2
-    requestTypes: 01000000
+    requestTypes: 00000000
   - _enemyType: 4
     _generateInterval: 2
-    requestTypes: 
+    requestTypes: 00000000
   - _enemyType: 4
     _generateInterval: 2
-    requestTypes: 
+    requestTypes: 00000000
   - _enemyType: 0
     _generateInterval: 2
-    requestTypes: 02000000
+    requestTypes: 00000000
   - _enemyType: 0
     _generateInterval: 3
-    requestTypes: 04000000
+    requestTypes: 00000000
   - _enemyType: 1
     _generateInterval: 1
-    requestTypes: 0300000004000000
+    requestTypes: 0000000000000000
   - _enemyType: 2
     _generateInterval: 2
     requestTypes: 020000000300000001000000
   - _enemyType: 4
     _generateInterval: 3
-    requestTypes: 
+    requestTypes: 00000000
   - _enemyType: 0
     _generateInterval: 3
-    requestTypes: 01000000
+    requestTypes: 00000000
   - _enemyType: 3
     _generateInterval: 0
-    requestTypes: 03000000
+    requestTypes: 00000000
