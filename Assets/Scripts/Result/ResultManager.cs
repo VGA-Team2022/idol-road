@@ -8,6 +8,9 @@ public class ResultManager : MonoBehaviour
 
     [SerializeField, Header("リザルトUIを更新するクラス")]
     ResultUIController _resultUIController = default;
+    [SerializeField, Header("フェードを行うクラス")]
+    FadeController _fadeController = default;
+
 
     /// <summary>リザルト関連のパラメーターのクラス </summary>
     ResultParameter _resultParameter => LevelManager.Instance.CurrentLevel.Result;
@@ -17,11 +20,12 @@ public class ResultManager : MonoBehaviour
     int _score = 0;
     /// <summary>合計スコア </summary>
     public int Score { get => _score; }
+    public FadeController FadeController { get => _fadeController; }
 
     void Start()
     {
         JudgeResult();
-        StartCoroutine(_resultUIController.ShowResult(ScoreCalculation()));
+        _fadeController.FadeIn(StartShowResultAnim);
     }
 
     /// <summary>スコアを計算する</summary>
@@ -38,6 +42,12 @@ public class ResultManager : MonoBehaviour
         var result = new int[RESULT_COUNT] { badValue, goodValue, perfectValue, _score };  //画面に反映させる為の配列
 
         return result;
+    }
+
+    /// <summary>リザルトを表示するアニメーションを再生する</summary>
+    void StartShowResultAnim()
+    {
+        StartCoroutine(_resultUIController.ShowResult(ScoreCalculation()));
     }
 
     /// <summary>
