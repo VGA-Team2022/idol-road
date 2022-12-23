@@ -12,8 +12,8 @@ public class ResultUIController : MonoBehaviour
 {
     [SerializeField, Header("ResultManager")]
     ResultManager _resultManager = default;
-    [SerializeField,Header("フェードを行うクラス")]
-    FadeController _fadeController  =default;
+    [SerializeField, Header("フェードを行うクラス")]
+    FadeController _fadeController = default;
 
     [SerializeField, Header("各スコアのテキストを表示させるまで時間")]
     float _showResultSpan = 1.0f;
@@ -66,6 +66,9 @@ public class ResultUIController : MonoBehaviour
 
     /// <summary>評価画面が表示されているかどうか</summary>
     bool _isValue = true;
+
+    /// <summary>遷移をしているか true=開始している</summary>
+    bool _isTransition = false;
 
     public void Start()
     {
@@ -167,12 +170,15 @@ public class ResultUIController : MonoBehaviour
     /// <param name="index">シーン番号</param>
     public void ReturnModeSelectAndRetry(int index)
     {
+        if (_isTransition) { return; }
+
+        _isTransition = true;
         _fadeController.FadeOut(() => { SceneManager.LoadScene(index); });
     }
     /// <summary>コメントを反映させる</summary>
     public void ReflectFansComment()
     {
-        for(int i = 0; i < LevelManager.Instance.CurrentLevel.Result._fanScripts.Length; i++)
+        for (int i = 0; i < LevelManager.Instance.CurrentLevel.Result._fanScripts.Length; i++)
         {
             _fanCommentTexts[i].text = LevelManager.Instance.CurrentLevel.Result._fanScripts[i];
         }
