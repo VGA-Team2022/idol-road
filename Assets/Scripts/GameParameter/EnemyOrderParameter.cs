@@ -43,6 +43,8 @@ public enum EnemyType
 /// <summary>—v‹‚Ìí—Ş </summary>
 public enum RequestType
 {
+    Random = 0,
+
     Pose = 1,
     Kiss = 2,
     Wink = 3,
