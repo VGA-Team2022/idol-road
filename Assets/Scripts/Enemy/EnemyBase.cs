@@ -265,8 +265,15 @@ public abstract class EnemyBase : MonoBehaviour
     {
         for (var i = 0; i < info.requestTypes.Count; i++)
         {
-            _requestArray[i] = (FlickType)info.requestTypes[i];
-            _requestUIArray[i].ChangeRequestImage((FlickType)info.requestTypes[i]);
+            var type = info.requestTypes[i];
+            if (type == RequestType.Random)
+            {
+                var value = UnityEngine.Random.Range(1, 5);
+                type = (RequestType)value;
+            }
+            
+            _requestArray[i] = (FlickType)type;
+            _requestUIArray[i].ChangeRequestImage((FlickType)type);
         }
 
         _currentRequest = _requestArray[0]; //Å‰‚Ìƒtƒ@ƒ“ƒT‚ðŒˆ‚ß‚é
