@@ -4,17 +4,14 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using TMPro;
-using System;
-using Unity.VisualScripting;
 
 /// <summary>リザルトシーンのUIを管理・更新するクラス</summary>
 public class ResultUIController : MonoBehaviour
 {
+    #region
     [SerializeField, Header("ResultManager")]
     ResultManager _resultManager = default;
-    [SerializeField, Header("フェードを行うクラス")]
-    FadeController _fadeController = default;
-
+   
     [SerializeField, Header("各スコアのテキストを表示させるまで時間")]
     float _showResultSpan = 1.0f;
     [SerializeField, Header("スコアを表示するまでの時間")]
@@ -69,7 +66,7 @@ public class ResultUIController : MonoBehaviour
 
     /// <summary>遷移をしているか true=開始している</summary>
     bool _isTransition = false;
-
+    #endregion
     public void Start()
     {
         ReflectFansComment();
@@ -84,15 +81,15 @@ public class ResultUIController : MonoBehaviour
         {
             case Result.Bad:
                 _backGround.sprite = _backGroundSprites[3];
-                _resultValueText[0].text = "Result:Bad";
+                _resultValueText[0].text = "Bad";
                 break;
             case Result.Good:
                 _backGround.sprite = _backGroundSprites[2];
-                _resultValueText[0].text = "Result:Good";
+                _resultValueText[0].text = "Good";
                 break;
             case Result.Perfect:
                 _backGround.sprite = _backGroundSprites[1];
-                _resultValueText[0].text = "Result:Perfect";
+                _resultValueText[0].text = "Perfect";
                 break;
             case Result.SuperPerfect:
                 _backGround.sprite = _backGroundSprites[0];
@@ -111,22 +108,22 @@ public class ResultUIController : MonoBehaviour
         yield return new WaitForSeconds(_showResultSpan);
         _resultValueText[1].gameObject.SetActive(true);
         DOTween.To(() => firstValue, (r) => result[0] = r, result[0], _increseTime)
-            .OnUpdate(() => _resultValueText[1].text = $"Bad:{result[0]}");
+            .OnUpdate(() => _resultValueText[1].text = result[0].ToString());
         yield return new WaitForSeconds(_showResultSpan);
 
         _resultValueText[2].gameObject.SetActive(true);
         DOTween.To(() => firstValue, (r) => result[1] = r, result[1], _increseTime)
-            .OnUpdate(() => _resultValueText[2].text = $"Good:{result[1]}");
+            .OnUpdate(() => _resultValueText[2].text = result[1].ToString());
         yield return new WaitForSeconds(_showResultSpan);
 
         _resultValueText[3].gameObject.SetActive(true);
         DOTween.To(() => firstValue, (r) => result[2] = r, result[2], _increseTime)
-            .OnUpdate(() => _resultValueText[3].text = $"Perfect:{result[2]}");
+            .OnUpdate(() => _resultValueText[3].text = result[2].ToString());
         yield return new WaitForSeconds(_scoreResultSpan);
 
         _resultValueText[4].gameObject.SetActive(true);
         DOTween.To(() => firstValue, (r) => result[3] = r, result[3], _increseTime)
-             .OnUpdate(() => _resultValueText[4].text = $"Score:{result[3]}");
+             .OnUpdate(() => _resultValueText[4].text = result[3].ToString());
         yield return new WaitForSeconds(_scoreResultSpan);
 
         for (int i = 0; i < _fadeImageButton.Length; i++)
@@ -173,7 +170,7 @@ public class ResultUIController : MonoBehaviour
         if (_isTransition) { return; }
 
         _isTransition = true;
-        _fadeController.FadeOut(() => { SceneManager.LoadScene(index); });
+        _resultManager.FadeController.FadeOut(() => { SceneManager.LoadScene(index); });
     }
     /// <summary>コメントを反映させる</summary>
     public void ReflectFansComment()
