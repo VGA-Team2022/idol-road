@@ -5,6 +5,8 @@ public class ResultManager : MonoBehaviour
 {
     /// <summary>画面に反映させるプレイ結果の数 </summary>
     const int RESULT_COUNT = 4;
+    /// <summary>合計スコアが格納されている添え字 </summary>
+    const int TOTAL_SCORE_INDEX = 3;
 
     [SerializeField, Header("リザルトUIを更新するクラス")]
     ResultUIController _resultUIController = default;
@@ -16,30 +18,31 @@ public class ResultManager : MonoBehaviour
     ResultParameter _resultParameter => LevelManager.Instance.CurrentLevel.Result;
     /// <summary>プレイ結果 </summary>
     PlayResult _playResult => PlayResult.Instance;
-    /// <summary>合計スコア </summary>
-    int _score = 0;
-    /// <summary>合計スコア </summary>
-    public int Score { get => _score; }
+    /// <summary>各スコア </summary>
+    int[] _scores = default;
+   
     public FadeController FadeController { get => _fadeController; }
 
     void Start()
     {
+        _scores = ScoreCalculation();
         JudgeResult();
         _fadeController.FadeIn(StartShowResultAnim);
     }
 
     /// <summary>スコアを計算する</summary>
-    /// <returns>計算結果 0=bad 1=good 2=perfect 4=score</returns>
+    /// <returns>計算結果 0=bad 1=good 2=perfect 3=合計スコア</returns>
     public int[] ScoreCalculation()
     {
         //判定それぞれのスコア値×判定した数
         var perfectValue = _resultParameter._addParfectScoreValue * _playResult.CountPerfect;
         var goodValue = _resultParameter._addGoodScoreValue * _playResult.CountGood;
         var badValue = _resultParameter._addBadScoreValue * _playResult.CountBad;
+        var totalScore = 0;
 
-        _score += perfectValue + goodValue + badValue;  //スコア計算
+        totalScore += perfectValue + goodValue + badValue;  //スコア計算
 
-        var result = new int[RESULT_COUNT] { badValue, goodValue, perfectValue, _score };  //画面に反映させる為の配列
+        var result = new int[RESULT_COUNT] { badValue, goodValue, perfectValue, totalScore };  //画面に反映させる為の配列
 
         return result;
     }
@@ -47,7 +50,7 @@ public class ResultManager : MonoBehaviour
     /// <summary>リザルトを表示するアニメーションを再生する</summary>
     void StartShowResultAnim()
     {
-        StartCoroutine(_resultUIController.ShowResult(ScoreCalculation()));
+        StartCoroutine(_resultUIController.ShowResult(_scores));
     }
 
     /// <summary>
@@ -58,13 +61,14 @@ public class ResultManager : MonoBehaviour
         if (LevelManager.Instance.CurrentLevel.InGame.PlayerHp <= _playResult.CountMiss)    //失敗
         {
             ResultBad();
+            return;
         }
 
-        if (_score >= _resultParameter._superPerfectLine)
+        if (_scores[TOTAL_SCORE_INDEX] >= _resultParameter._superPerfectLine)
         {
             ResultSuperPerfect();
         }
-        else if (_score >= _resultParameter._perfectLine)
+        else if (_scores[TOTAL_SCORE_INDEX] >= _resultParameter._perfectLine)
         {
             ResultPerfect();
         }
