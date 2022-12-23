@@ -13,6 +13,7 @@ public class TitleManager : MonoBehaviour
     bool _isPopUp = false;
     /// <summary>難易度選択を開始したかどうか</summary>
     bool _isChangeScene = false;
+
     private void Start()
     {
         _fadeController.FadeIn(() => 
@@ -30,6 +31,8 @@ public class TitleManager : MonoBehaviour
     /// </summary>
     public void OpenPopUp(GameObject popup)
     {
+        if (_isChangeScene) { return; }
+
         popup.SetActive(true);
         _isPopUp = true;
         AudioManager.Instance.PlaySE(7);
@@ -41,6 +44,8 @@ public class TitleManager : MonoBehaviour
     /// </summary>
     public void ClosePopUp(GameObject popup)
     {
+        if (_isChangeScene) { return; }
+
         popup.SetActive(false);
         _isPopUp = false;
         AudioManager.Instance.PlaySE(7);
@@ -49,7 +54,7 @@ public class TitleManager : MonoBehaviour
     /// <summary>シーンを切り替える</summary>
     public void ChangeScene()
     {
-        if (_isPopUp) { return; }
+        if (_isPopUp || _isChangeScene) { return; }
 
         _isChangeScene = true;
         AudioManager.Instance.PlaySE(7);
