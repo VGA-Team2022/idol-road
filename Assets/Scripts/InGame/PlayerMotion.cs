@@ -10,10 +10,14 @@ public class PlayerMotion : MonoBehaviour
 {
     [SerializeField , Tooltip("アイドルのモーション絵")]
     Sprite[] _sprites;
-
+    [SerializeField, Tooltip("アイドルのファンサ吹き出し"), ElementNames(new string[] { "投げキス", "ウィンク" })]
+    GameObject[] _IdleBlowing;
+    [SerializeField, Tooltip("吹き出しが出る場所")]
+    GameObject _blowingSpawn = default;
     [SerializeField, Tooltip("モーションを続ける時間")]
     float _motionTime = 3;
-
+    [SerializeField, Tooltip("ファンサの吹き出しを表示する時間")]
+    float _fansaShowTime = 0.5f;
     [SerializeField , Tooltip("入力を送ってくれる")]
     private ScreenInput _screenInput;
 
@@ -56,6 +60,19 @@ public class PlayerMotion : MonoBehaviour
                 _spriteRenderer.sprite = _sprites[0];
                 _timer = 0;
             }
+        }
+        switch (_flickType)
+        {
+            case FlickType.Down:
+                var kissIllust = Instantiate(_IdleBlowing[0], _blowingSpawn.transform);
+                Destroy(kissIllust, _fansaShowTime);
+                Debug.Log("キスイラスト");
+                break;
+            case FlickType.Right:
+                var winkIllust = Instantiate(_IdleBlowing[1],_blowingSpawn.transform);
+                Destroy(winkIllust, _fansaShowTime);
+                Debug.Log("ウィンクイラスト");
+                break;
         }
     }
 
