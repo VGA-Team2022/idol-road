@@ -79,7 +79,7 @@ public class ResultManager : MonoBehaviour
         }
         else
         {
-            ResultGood();
+            ResultBad();
         }
     }
 
@@ -88,6 +88,7 @@ public class ResultManager : MonoBehaviour
     {
         _currentResult = Result.Bad;
         _resultUIController.ChangeResultImage(Result.Bad);
+        _resultUIController.ReflectFansComment(Result.Bad);
         AudioManager.Instance.PlayVoice(15);
         AudioManager.Instance.PlaySE(31, 0.5f);
     }
@@ -96,6 +97,7 @@ public class ResultManager : MonoBehaviour
     {
         _currentResult = Result.Good;
         _resultUIController.ChangeResultImage(Result.Good);
+        _resultUIController.ReflectFansComment(Result.Good);
         AudioManager.Instance.PlayVoice(19);
     }
     //ó«
@@ -103,6 +105,7 @@ public class ResultManager : MonoBehaviour
     {
         _currentResult = Result.Perfect;
         _resultUIController.ChangeResultImage(Result.Perfect);
+        _resultUIController.ReflectFansComment(Result.Perfect);
         AudioManager.Instance.PlayVoice(18);
     }
     //ê_Å@ëSó«
@@ -110,6 +113,7 @@ public class ResultManager : MonoBehaviour
     {
         _currentResult = Result.SuperPerfect;
         _resultUIController.ChangeResultImage(Result.SuperPerfect);
+        _resultUIController.ReflectFansComment(Result.SuperPerfect);
         AudioManager.Instance.PlayVoice(17);
     }
 }
