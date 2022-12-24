@@ -163,6 +163,8 @@ public class ResultUIController : MonoBehaviour
 
             _isValue = true;
         }
+
+        AudioManager.Instance.PlaySE(7);
     }
     /// <summary>難易度セレクトシーンに戻るかリトライするか</summary>
     /// <param name="index">シーン番号</param>
@@ -172,6 +174,13 @@ public class ResultUIController : MonoBehaviour
 
         _isTransition = true;
         _resultManager.FadeController.FadeOut(() => { SceneManager.LoadScene(index); });
+
+        if (_resultManager.CurrentResult == Result.Bad)
+        {
+            AudioManager.Instance.PlayVoice(16);
+        }
+
+        AudioManager.Instance.PlaySE(7);
     }
     /// <summary>コメントを反映させる</summary>
     public void ReflectFansComment()

@@ -62,7 +62,8 @@ public class BossEnemy : EnemyBase
             .SetLoops(-1, LoopType.Restart);
 
         AudioManager.Instance.PlayVoice(1);
-     
+        AudioManager.Instance.PlaySE(9);
+
     }
 
     protected override void PerfactEffect()
@@ -75,7 +76,8 @@ public class BossEnemy : EnemyBase
             .SetLoops(-1, LoopType.Restart);
 
         AudioManager.Instance.PlayVoice(1);
-       
+        AudioManager.Instance.PlaySE(9);
+
     }
 
     public override void SetUp(IState currentGameState, EnemyInfo info)
@@ -103,6 +105,7 @@ public class BossEnemy : EnemyBase
     public void StartMoveAnim()
     {
         _anim.Play("Walk");
+        AudioManager.Instance.PlaySE(17);
     }
 
     /// <summary>

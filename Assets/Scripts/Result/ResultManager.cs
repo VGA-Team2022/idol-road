@@ -18,10 +18,15 @@ public class ResultManager : MonoBehaviour
     ResultParameter _resultParameter => LevelManager.Instance.CurrentLevel.Result;
     /// <summary>プレイ結果 </summary>
     PlayResult _playResult => PlayResult.Instance;
+    /// <summary>１プレイの結果</summary>
+    Result _currentResult = Result.Good;
     /// <summary>各スコア </summary>
     int[] _scores = default;
    
     public FadeController FadeController { get => _fadeController; }
+
+
+    public Result CurrentResult { get => _currentResult; set => _currentResult = value; }
 
     void Start()
     {
@@ -81,26 +86,31 @@ public class ResultManager : MonoBehaviour
     //Game Over
     public void ResultBad()
     {
-        Debug.Log("Bad 悪");
+        _currentResult = Result.Bad;
         _resultUIController.ChangeResultImage(Result.Bad);
+        AudioManager.Instance.PlayVoice(15);
+        AudioManager.Instance.PlaySE(31, 0.5f);
     }
     //普通
     public void ResultGood()
     {
-        Debug.Log("Good 普通");
+        _currentResult = Result.Good;
         _resultUIController.ChangeResultImage(Result.Good);
+        AudioManager.Instance.PlayVoice(19);
     }
     //良
     public void ResultPerfect()
     {
-        Debug.Log("Perfect 神");
+        _currentResult = Result.Perfect;
         _resultUIController.ChangeResultImage(Result.Perfect);
+        AudioManager.Instance.PlayVoice(18);
     }
     //神　全良
     public void ResultSuperPerfect()
     {
-        Debug.Log("SuperPerfect 全能神");
+        _currentResult = Result.SuperPerfect;
         _resultUIController.ChangeResultImage(Result.SuperPerfect);
+        AudioManager.Instance.PlayVoice(17);
     }
 }
 
