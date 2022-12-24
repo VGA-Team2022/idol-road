@@ -69,7 +69,6 @@ public class ResultUIController : MonoBehaviour
     #endregion
     public void Start()
     {
-        ReflectFansComment();
         SetCommonUI(0);
     }
 
@@ -183,12 +182,36 @@ public class ResultUIController : MonoBehaviour
         AudioManager.Instance.PlaySE(7);
     }
     /// <summary>ƒRƒƒ“ƒg‚ğ”½‰f‚³‚¹‚é</summary>
-    public void ReflectFansComment()
+    public void ReflectFansComment(Result result)
     {
-        for (int i = 0; i < LevelManager.Instance.CurrentLevel.Result._fanScripts.Length; i++)
+        switch (result)
         {
-            _fanCommentTexts[i].text = LevelManager.Instance.CurrentLevel.Result._fanScripts[i];
+            case Result.Bad:
+                for (int i = 0; i < LevelManager.Instance.CurrentLevel.Result._fanScriptsBad.Length; i++)
+                {
+                    _fanCommentTexts[i].text = LevelManager.Instance.CurrentLevel.Result._fanScriptsBad[i];
+                }
+                break;
+            case Result.Good:
+                for (int i = 0; i < LevelManager.Instance.CurrentLevel.Result._fanScriptsGood.Length; i++)
+                {
+                    _fanCommentTexts[i].text = LevelManager.Instance.CurrentLevel.Result._fanScriptsGood[i];
+                }
+                break;
+            case Result.Perfect:
+                for (int i = 0; i < LevelManager.Instance.CurrentLevel.Result._fanScriptsExcellent.Length; i++)
+                {
+                    _fanCommentTexts[i].text = LevelManager.Instance.CurrentLevel.Result._fanScriptsExcellent[i];
+                }
+                break;
+            case Result.SuperPerfect:
+                for (int i = 0; i < LevelManager.Instance.CurrentLevel.Result._fanScriptsPerfect.Length; i++)
+                {
+                    _fanCommentTexts[i].text = LevelManager.Instance.CurrentLevel.Result._fanScriptsPerfect[i];
+                }
+                break;
         }
+
     }
     public void SetCommonUI(int num)
     {
