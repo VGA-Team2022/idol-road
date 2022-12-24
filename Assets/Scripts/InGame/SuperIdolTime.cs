@@ -11,70 +11,62 @@ using System.Linq;
 
 public class SuperIdolTime : MonoBehaviour
 {
-    [SerializeField,Tooltip("スーパーアイドルタイム中のゲージがマックスになるまでの回数")]
+    [SerializeField, Header("ゲージがマックスになる回数")]
     private int _gaugeCountMax = 10;
-    [SerializeField,Tooltip("スーパーアイドルタイムの持続時間")]
+    [SerializeField, Header("スーパーアイドルタイムの持続時間")]
     private float _timeEndSuperIdolTime = 15;
-    [SerializeField,Tooltip("スーパーアイドルタイムの経過時間")]
+    [SerializeField, Header("スーパーアイドルタイムの経過時間")]
     private float _elapsed = 0;
-    [SerializeField,Tooltip("一タップで溜まるゲージの変化にかかる時間")]
+    [SerializeField, Header("一タップで溜まるゲージの変化にかかる時間")]
     private float _gaugePlusTime = 0.5f;
 
-    [SerializeField,Tooltip("")]
+    [SerializeField, Header("爆発の画像の最大拡大サイズ")]
     private float _imageLange = 5.62f;
     /// <summary>時間が過ぎているかの判定</summary>
-    [SerializeField]
+    [SerializeField,Header("ゲージが満タンかどうか")]
     private bool _isGaugeMax = false;
     /// <summary>ゲージが溜まりきっているかの判定</summary>
-    [SerializeField]
+    [SerializeField,Header("持続時間を超えたかどうか")]
     private bool _isTimeMax = false;
-    
-    //通常時のオブジェクト
-    [SerializeField, Tooltip("エネミースポナー")]
-    private EnemySpawner _enemySpawner;
-    [SerializeField, Tooltip("通常画面のCanvas")]
-    private GameObject _normalCanvas = default;
-    [SerializeField,Tooltip("通常時のプレイヤー")]
-    private GameObject _normalPlayer = default; 
-    [SerializeField, Tooltip("通常時の道路(BackGround)")]
-    private GameObject _normalRoad = default;
-    [SerializeField, Tooltip("通常時の道路脇のファン(StageObject)")]
-    private GameObject _normalFan = default;
-    [SerializeField, Tooltip("通常時のオブジェクト")]
+
+    [SerializeField, Header("通常時のオブジェクト"), ElementNames(new string[] {
+        "EnemySpawner","CenterSpawnPoint","RightSpawnPoint","LeftSpawnPoint","BossSpawnPoint",
+        "ItemGanarator","LeftGeneratePoint","LeftArrivalPoint","RightGeneratePoint","RightArrivalPoint",
+        "BackGround","Player","StageObject","BlowingSpawnPosition","InGameCanvas",
+        "WarningTimeLine"
+    })]
     private GameObject[] _normalObjects = default;
 
     //スーパーアイドルタイム時のオブジェクト
-    [SerializeField, Tooltip("ゲージの画像")]
+    [SerializeField, Header("ゲージのImage")]
     private Image _imageGauge = default;
-    [SerializeField, Tooltip("爆発の画像")]
+    [SerializeField, Header("爆発のImage")]
     private Image _imageExplosion = default;
-    [SerializeField, Tooltip("フェード用のパネル")]
+    [SerializeField, Header("フェード用のパネル")]
     private Image _fadePanel = default;
-    [SerializeField, Tooltip("スーパーアイドルタイムの後面のUI")]
+    [SerializeField, Header("スーパーアイドルタイムの後面のUI")]
     private GameObject _superIdolTimeBackUI = default;
-    [SerializeField, Tooltip("スーパーアイドルタイムの前面のUI")]
+    [SerializeField, Header("スーパーアイドルタイムの前面のUI")]
     private GameObject _superIdolTimeFrontUI = default;
-    [SerializeField, Tooltip("スーパーアイドルタイム画面の背景絵")]
+    [SerializeField, Header("スーパーアイドルタイム画面の背景絵")]
     private GameObject _backGroundPanel = default;
-    [SerializeField, Tooltip("ゲージに合わせて出てくるファンの下段")]
+    [SerializeField, Header("下段のファン"),Tooltip("ゲージに合わせて出てくるファンの下段")]
     private GameObject _BackDownFans = default;
-    [SerializeField, Tooltip("下段のファンが出てくる値")]
+    [SerializeField, Header("下段のファンが出てくる値")]
     private float _downFansValue = 0.9f;
-    [SerializeField, Tooltip("ゲージに合わせて出てくるファンの中段")]
+    [SerializeField, Header("中段のファン"), Tooltip("ゲージに合わせて出てくるファンの中段")]
     private GameObject _BackMiddleFans = default;
-    [SerializeField, Tooltip("中段のファンが出てくる値")]
+    [SerializeField, Header("中段のファンが出てくる値")]
     private float _middleFansValue = 0.6f;
-    [SerializeField, Tooltip("ゲージに合わせて出てくるファンの上段")]
+    [SerializeField, Header("上段のファン"), Tooltip("ゲージに合わせて出てくるファンの下段")]
     private GameObject _BackUpFans = default;
-    [SerializeField, Tooltip("上段のファンが出てくる値")]
+    [SerializeField, Header("上段のファンが出てくる値")]
     private float _upFansValue = 0.3f;
-    [SerializeField, Tooltip("背景に流すビデオのプレーヤー")]
+    [SerializeField, Header("カットイン用ビデオプレーヤー")]
     private VideoPlayer _videoPlayer = default;
-    [SerializeField,Tooltip("アイドルの踊っているImage")]
+    [SerializeField,Header("アイドルの踊っているImage")]
     private Image _dancingIdolImage = default;
-    //[SerializeField, Tooltip("踊っているアイドルのプレーヤー")]
-    //private VideoPlayer _danceIdolPlayer = default;
-    [SerializeField,Tooltip("キラキラのエフェクト")]
+    [SerializeField,Header("キラキラのエフェクト")]
     private ParticleSystem _shiningParticle = default;
     /// <summary>スーパーアイドルタイム中のタップされた回数</summary>
     private int _gaugeCount = 0;
@@ -113,15 +105,10 @@ public class SuperIdolTime : MonoBehaviour
         _superIdolTimeBackUI.SetActive(true);
         _videoPlayer.gameObject.SetActive(true);
         _videoPlayer.Play();
-        //_normalCanvas.SetActive(false);
-        //_normalPlayer.SetActive(false);
-        //_normalRoad.SetActive(false);
-        //_normalFan.SetActive(false);
         foreach(var obj in _normalObjects)
         {
             obj.SetActive(false);
         }
-        _enemySpawner.IsGenerate = false;
     }
 
     // Update is called once per frame
