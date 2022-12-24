@@ -42,8 +42,6 @@ public class AudioManager : MonoBehaviour
     {
         ChangeSEVolume(volume);  //音量を調整する
         _seSource.Play(cueID);
-
-       // _seSource.SetAisacControl();  AISACコントロール
     }
 
     /// <summary>ボイスを再生する </summary>

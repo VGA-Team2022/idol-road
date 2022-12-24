@@ -1,4 +1,3 @@
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>ƒQ[ƒ€ƒGƒ“ƒhó‘Ô‚Ìˆ—</summary>
@@ -8,7 +7,11 @@ public class GameEnd : IState
     {
         //TODO:‘«‰¹‚ğ~‚ß‚é
         AudioManager.Instance.StopBGM(10);
-        manager.FadeCanvas.FadeOut(3f ,() => SceneManager.LoadScene("ResultScene"));
+        manager.FadeCanvas.FadeOut(3f ,() => 
+        {
+            AudioManager.Instance.PlaySE(31);
+            SceneManager.LoadScene("ResultScene");
+        });
     }
 
     public void OnExit(GameManager manager, IState nextState)

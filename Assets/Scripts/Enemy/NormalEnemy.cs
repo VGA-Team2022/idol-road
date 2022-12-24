@@ -44,6 +44,7 @@ public class NormalEnemy : EnemyBase
             .SetLoops(-1, LoopType.Restart);
 
         AudioManager.Instance.PlayVoice(_voiceSuccessID);
+        AudioManager.Instance.PlaySE(6, 0.7f);
     }
 
     protected override void PerfactEffect()
@@ -56,6 +57,7 @@ public class NormalEnemy : EnemyBase
             .SetLoops(-1, LoopType.Restart);
 
         AudioManager.Instance.PlayVoice(_voiceSuccessID);
+        AudioManager.Instance.PlaySE(6, 0.7f);
     }
 
     public override void SetUp(IState currentGameState, EnemyInfo info)
