@@ -60,5 +60,6 @@ public class PlayResult
         _countPerfect = 0;
         _countSuperIdleTimePerfect = 0;
         _highComboCount = 0;
+        _countMiss = 0;
     }
 }
