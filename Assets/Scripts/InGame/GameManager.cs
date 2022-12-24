@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        PlayResult.Instance.ResetResult();
         _idleHp = _inGameParameter.PlayerHp;
         _currentGameState = _startState;
         _currentGameState.OnEnter(this, null);
