@@ -49,6 +49,8 @@ public abstract class EnemyBase : MonoBehaviour
     event Action<float> _addIdolPower = default;
     /// <summary>ボスを移動させる処理 </summary>
     event Action _bossMove = default;
+    /// <summary>スーパーアイドルタイムを呼び出す処理</summary>
+    event Action _enterSuperIdolTime = default;
 
     /// <summary>ボスを移動させる処理 </summary>
     public event Action BossMove
@@ -90,6 +92,12 @@ public abstract class EnemyBase : MonoBehaviour
     {
         add { _addIdolPower += value; }
         remove { _addIdolPower -= value; }
+    }
+    /// <summary>スーパーアイドルタイムを呼び出す処理</summary>
+    public event Action EnterSuperIdolTime
+    {
+        add { _enterSuperIdolTime += value;}
+        remove { _enterSuperIdolTime -= value;}
     }
 
     protected Rigidbody _rb => GetComponent<Rigidbody>();
@@ -315,6 +323,7 @@ public abstract class EnemyBase : MonoBehaviour
             _stageScroll?.Invoke();
             Dead();
             _addIdolPower?.Invoke((float)_currentParameter.AddIdolPowerValue);
+            _enterSuperIdolTime?.Invoke();
             return;
         }
 

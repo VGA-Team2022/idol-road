@@ -117,6 +117,7 @@ public class EnemySpawner : MonoBehaviour
         enemy.GiveDamage += _manager.GetDamage;
         enemy.DisapperEnemies += _manager.RemoveEnemy;
         enemy.AddIdolPower += _manager.IncreseIdlePower;
+        enemy.EnterSuperIdolTime += _manager.EnemyCheckIdolPower;
 
         if (_isRegister)
         {

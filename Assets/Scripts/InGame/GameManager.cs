@@ -119,20 +119,33 @@ public class GameManager : MonoBehaviour
     {
         _idlePower += (power/ _inGameParameter.IdolPowerMaxValue);
         _uiController.UpdateIdolPowerGauge(_idlePower);
-        if (1 <= _idlePower)    //スーパーアイドルタイムを発動
+        if(_enemies.Count <= 0 && _idlePower >= 1)
         {
-            _fadeController.FadeOut(() =>
-            {
-                _superIdolTime.gameObject.SetActive(true);
-
-                _fadeController.FadeIn(() =>
-                {
-                    _idlePower = 0;
-                    _uiController.UpdateIdolPowerGauge(_idlePower);
-                    ChangeGameState(_idleTimeState);
-                });
-            }); 
+            EnterSuperIdolTime();
         }
+    }
+    /// <summary>スーパーアイドルタイムを発動する関数</summary>
+    public void EnemyCheckIdolPower()
+    {
+        if (_idlePower >= 1)
+        {
+            EnterSuperIdolTime();
+        }
+    }
+
+    public void EnterSuperIdolTime()
+    {
+        _fadeController.FadeOut(() =>
+        {
+            _superIdolTime.gameObject.SetActive(true);
+
+            _fadeController.FadeIn(() =>
+            {
+                _idlePower = 0;
+                _uiController.UpdateIdolPowerGauge(_idlePower);
+                ChangeGameState(_idleTimeState);
+            });
+        });
     }
 
     /// <summary>コンボ数を管理する関数</summary>
