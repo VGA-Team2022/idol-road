@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     int _nextComboCount = ADD_COMBO_ILLUST_CCHANGE;
     /// <summary>ゲーム開始からの経過時間 </summary>
     float _elapsedTime = 0f;
-   
+
     /// <summary>ボスの移動を開始する処理</summary>
     event Action _startBossMove = default;
 
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
         remove { _startBossMove -= value; }
     }
 
-#endregion
+    #endregion
 
     void Start()
     {
@@ -117,9 +117,9 @@ public class GameManager : MonoBehaviour
     /// <summary>アイドルパワーが増加する関数</summary>
     public void IncreseIdlePower(float power)
     {
-        _idlePower += (power/ _inGameParameter.IdolPowerMaxValue);
+        _idlePower += (power / _inGameParameter.IdolPowerMaxValue);
         _uiController.UpdateIdolPowerGauge(_idlePower);
-        if(_enemies.Count <= 0 && _idlePower >= 1)
+        if (_enemies.Count <= 0)
         {
             EnterSuperIdolTime();
         }
@@ -127,25 +127,27 @@ public class GameManager : MonoBehaviour
     /// <summary>スーパーアイドルタイムを発動する関数</summary>
     public void EnemyCheckIdolPower()
     {
-        if (_idlePower >= 1)
-        {
-            EnterSuperIdolTime();
-        }
+        EnterSuperIdolTime();
+
     }
 
     public void EnterSuperIdolTime()
     {
-        _fadeController.FadeOut(() =>
+        Debug.Log(_bossTimeState.IsPlaying);
+        if (_idlePower >= 1 && !_bossTimeState.IsPlaying)
         {
-            _superIdolTime.gameObject.SetActive(true);
-
-            _fadeController.FadeIn(() =>
+            Debug.Log("SuperIdolTime");
+            _fadeController.FadeOut(() =>
             {
-                _idlePower = 0;
-                _uiController.UpdateIdolPowerGauge(_idlePower);
-                ChangeGameState(_idleTimeState);
+                _superIdolTime.gameObject.SetActive(true);
+                _fadeController.FadeIn(() =>
+                {
+                    _idlePower = 0;
+                    _uiController.UpdateIdolPowerGauge(_idlePower);
+                    ChangeGameState(_idleTimeState);
+                });
             });
-        });
+        }
     }
 
     /// <summary>コンボ数を管理する関数</summary>
@@ -222,7 +224,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        _enemies.Add(enemy);    
+        _enemies.Add(enemy);
     }
 
     /// <summary>倒されたファンをリストから削除する</summary>
