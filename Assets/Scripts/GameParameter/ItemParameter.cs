@@ -30,7 +30,7 @@ public class ItemParameter : ScriptableObject
 [Serializable]
 public class ItemInfo
 {
-    [SerializeField, Header("アイテムを生成するまでの時間")]
+    [SerializeField, Header("アイテムを生成するまでの時間"), Range(1f, 10f)]
     float _generatorInterval;
 
     [SerializeField, Header("生成するアイテム")]
