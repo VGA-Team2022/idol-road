@@ -15,6 +15,7 @@ MonoBehaviour:
   _inGame: {fileID: 11400000, guid: b80957afc4f2c5d45a2ab991681f0e59, type: 2}
   _result: {fileID: 11400000, guid: 0fcb547e6a9511649a7446c3d9bcf822, type: 2}
   _enemyOrder: {fileID: 11400000, guid: 758b031d6f2f0bb44b54b4228a473c92, type: 2}
+  _itemParameter: {fileID: 11400000, guid: 0625724d31b05194e84e4895aa9b2d8a, type: 2}
   _enemyParameters:
   - {fileID: 11400000, guid: 4f6323960eddea8428057fdd5ae97acc, type: 2}
   - {fileID: 11400000, guid: 6737823eb64df984488153ef0c1c353a, type: 2}

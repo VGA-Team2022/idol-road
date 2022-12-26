@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.WSA;
 
 /// <summary>アイテムを生成するクラス</summary>
 public class ItemGenerator : MonoBehaviour
@@ -17,15 +20,36 @@ public class ItemGenerator : MonoBehaviour
     [SerializeField, Header("生成するアイテム"), ElementNames(new string[] { "ぬいぐるみ", "花束", "プレゼント", "お金" })]
     IdolPowerItem[] _items = default;
 
+    ItemParameter _itemParameter => LevelManager.Instance.CurrentLevel.ItemParameter;
+
     /// <summary>重みの総和 </summary>
     float _totalWeight = 0f;
 
     float _timer = 0f;
     /// <summary>生成をするかどうか </summary>
-    bool _isGenerate = false;
+    bool _isGenerate = true;
+
+    /// <summary>アイテムの生成順</summary>
+    List<ItemInfo> _generatorItems = new List<ItemInfo>();
+
+    /// <summary>次に生成するアイテムのindex</summary>
+    int _generateIndex = 0;
 
     private void Start()
-    {   
+    {
+        if (_itemParameter.RandomGenerator) 
+        {
+            _itemWeights = _itemParameter.ItemWeights;
+
+            _generateTime = _itemParameter.GeneratorInterval;
+        }
+        else 
+        {
+            _generatorItems = _itemParameter.GeneratorItems;
+
+            _generateTime = _generatorItems[_generateIndex]._generatorInterval;
+        }
+
         foreach (var weight in _itemWeights)    //重みの総和を計算する
         {
             _totalWeight += weight;
@@ -49,19 +73,48 @@ public class ItemGenerator : MonoBehaviour
     /// <summary>アイテムを生成する </summary>
     void Generate()
     {
-        var direction = (GenerateDirection)Random.Range(0, System.Enum.GetNames(typeof(GenerateDirection)).Length);
-
-        if (direction == GenerateDirection.Right)
+        if (_generatorItems.Count > 0)
         {
-            var item = Instantiate(_items[GetSelectItemIndex()], _rightPoints[0].position, Quaternion.identity);
-            item.GameManager = _gameManager;
-            item.Move(_rightPoints[1].position);
+            ItemInfo itemInfo = _generatorItems[_generateIndex];
+
+            var direction = _generatorItems[_generateIndex]._generateDirection;
+
+            if (_generatorItems[_generateIndex]._generateDirection == ItemGenerateDirection.Random)
+            {
+                direction = (ItemGenerateDirection)Random.Range(0, System.Enum.GetNames(typeof(ItemGenerateDirection)).Length -1);
+            }
+
+            if (direction == ItemGenerateDirection.Right)
+            {
+                var item = Instantiate(_items[(int)itemInfo._item], _rightPoints[0].position, Quaternion.identity);
+                item.GameManager = _gameManager;
+                item.Move(_rightPoints[1].position);
+            }
+            else
+            {
+                var item = Instantiate(_items[(int)itemInfo._item], _leftPoints[0].position, Quaternion.identity);
+                item.GameManager = _gameManager;
+                item.Move(_leftPoints[1].position);
+            }
+            _generateIndex++;
+            _generateTime = _generatorItems[_generateIndex]._generatorInterval;
         }
         else
         {
-            var item = Instantiate(_items[GetSelectItemIndex()], _leftPoints[0].position, Quaternion.identity);
-            item.GameManager = _gameManager;
-            item.Move(_leftPoints[1].position);
+            var direction = (GenerateDirection)Random.Range(0, System.Enum.GetNames(typeof(GenerateDirection)).Length);
+
+            if (direction == GenerateDirection.Right)
+            {
+                var item = Instantiate(_items[GetSelectItemIndex()], _rightPoints[0].position, Quaternion.identity);
+                item.GameManager = _gameManager;
+                item.Move(_rightPoints[1].position);
+            }
+            else
+            {
+                var item = Instantiate(_items[GetSelectItemIndex()], _leftPoints[0].position, Quaternion.identity);
+                item.GameManager = _gameManager;
+                item.Move(_leftPoints[1].position);
+            }
         }
 
         AudioManager.Instance.PlaySE(15, 0.5f);
