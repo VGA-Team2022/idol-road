@@ -16,6 +16,9 @@ public class GameParameter : ScriptableObject
     [SerializeField, Header("アイテムの生成順番")]
     ItemParameter _itemParameter = default;
 
+    [SerializeField, Header("スーパーアイドルタイムのパラメーター")]
+    SuperIdolTimeParamater _idolTimeParamater = default;
+
     [SerializeField, Header("各エネミーのパラメーター"), ElementNames(new string[] { "通常", "壁ファン2", "壁ファン3", "ボス" })]
     EnemyParameter[] _enemyParameters = new EnemyParameter[4];
 
@@ -30,6 +33,9 @@ public class GameParameter : ScriptableObject
 
     /// <summary>アイテムの生成順番 </summary>
     public ItemParameter ItemParameter => _itemParameter;
+
+    /// <summary>スーパーアイドルタイムのパラメーター</summary>
+    public SuperIdolTimeParamater IdolTimeParamater => _idolTimeParamater;
 
     /// <summary>各エネミーのパラメーター 0=通常 1=壁ファン2 2=壁ファン3  3=ボス</summary>
     public EnemyParameter[] EnemyParameters => _enemyParameters;

@@ -5,8 +5,8 @@ using UnityEngine.Playables;
 /// <summary>ボスステージ状態の処理</summary>
 public class BossTime : IState
 {
-    private bool _isPlaying = false;
-    public bool IsPlaying
+    private static bool _isPlaying = false;
+    public static bool IsPlaying
     {
         get { return _isPlaying; }
         set { _isPlaying = value; }
@@ -19,7 +19,6 @@ public class BossTime : IState
         manager.EnemyGenerator.SpawnBossEnemy();
         manager.Taxi.gameObject.SetActive(true);
         _isPlaying= true;
-        Debug.Log("Enter");
         AudioManager.Instance.PlaySE(26);
     }
 
@@ -38,6 +37,5 @@ public class BossTime : IState
     {
         director.gameObject.SetActive(false);
         _isPlaying= false;
-        Debug.Log("Invoked");
     }
 }

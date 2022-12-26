@@ -11,10 +11,8 @@ using System.Linq;
 
 public class SuperIdolTime : MonoBehaviour
 {
-    [SerializeField, Header("ゲージがマックスになる回数")]
-    private int _gaugeCountMax = 10;
-    [SerializeField, Header("スーパーアイドルタイムの持続時間")]
-    private float _timeEndSuperIdolTime = 15;
+    SuperIdolTimeParamater _paramater => LevelManager.Instance.CurrentLevel.IdolTimeParamater;
+
     [SerializeField, Header("スーパーアイドルタイムの経過時間")]
     private float _elapsed = 0;
     [SerializeField, Header("一タップで溜まるゲージの変化にかかる時間")]
@@ -22,10 +20,8 @@ public class SuperIdolTime : MonoBehaviour
 
     [SerializeField, Header("爆発の画像の最大拡大サイズ")]
     private float _imageLange = 5.62f;
-    /// <summary>時間が過ぎているかの判定</summary>
     [SerializeField,Header("ゲージが満タンかどうか")]
     private bool _isGaugeMax = false;
-    /// <summary>ゲージが溜まりきっているかの判定</summary>
     [SerializeField,Header("持続時間を超えたかどうか")]
     private bool _isTimeMax = false;
 
@@ -77,13 +73,6 @@ public class SuperIdolTime : MonoBehaviour
     private bool isUpEnemy = false;
     /// <summary> 入力受付判定</summary>
     private bool isSuperIdolTime = false;
-    /// <summary>ゲージの最大値</summary>
-    public int GaugeCountMax
-    {
-        get => _gaugeCountMax;
-        set => _gaugeCountMax = value;
-    }
-
     /// <summary>ゲージを増加させる</summary>
     public int GaugeCount
     {
@@ -121,7 +110,7 @@ public class SuperIdolTime : MonoBehaviour
             {
                 GaugeCount++;
             }
-            if (_isGaugeMax && _isTimeMax)
+            if (_isTimeMax)
             {
                 EndSuperIdolTime();
                 _isGaugeMax = false;
@@ -138,7 +127,7 @@ public class SuperIdolTime : MonoBehaviour
         if (isSuperIdolTime == true)
         {
             _elapsed += Time.deltaTime;
-            if (_elapsed > _timeEndSuperIdolTime)
+            if (_elapsed > _paramater.TimeEndSuperIdolTime)
             {
                 _isTimeMax = true;
                 //Debug.Log("終了");
@@ -187,7 +176,7 @@ public class SuperIdolTime : MonoBehaviour
     }
     public void GaugeIncrease()
     {
-        _gaugeLength = (float)_gaugeCount / _gaugeCountMax;
+        _gaugeLength = (float)_gaugeCount / _paramater.GaugeCountMax;
         if (_imageGauge != null)
         {
             //ネットで調べて参考にした、ゲージの値をなめらかに変える処理
