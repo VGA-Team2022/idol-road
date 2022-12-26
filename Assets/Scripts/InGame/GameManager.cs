@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     /// <summary>アイドルタイム状態 </summary>
     public static IdleTime _idleTimeState => new IdleTime();
     /// <summary>ボス状態状態 </summary>
-    public static BossTime _bossTimeState => new BossTime();
+    public BossTime _bossTimeState => new BossTime();
     /// <summary>ゲーム終了状態 </summary>
     public static GameEnd _gameEndState => new GameEnd();
 
@@ -104,7 +104,6 @@ public class GameManager : MonoBehaviour
         {
             ChangeGameState(_bossTimeState);
         }
-
         //if (_inGameParameter.GamePlayTime - _elapsedTime <= 0 && !_isBossMove)    //制限時間が0になったらボスを移動させる
         //{
         //    Debug.Log("移動開始");
@@ -133,10 +132,8 @@ public class GameManager : MonoBehaviour
 
     public void EnterSuperIdolTime()
     {
-        Debug.Log(_bossTimeState.IsPlaying);
-        if (_idlePower >= 1 && !_bossTimeState.IsPlaying)
+        if (_idlePower >= 1 && !BossTime.IsPlaying)
         {
-            Debug.Log("SuperIdolTime");
             _fadeController.FadeOut(() =>
             {
                 _superIdolTime.gameObject.SetActive(true);
