@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,60 +6,66 @@ using UnityEngine;
 [CreateAssetMenu]
 public class ItemParameter : ScriptableObject
 {
-    [SerializeField, Header("ƒ`ƒFƒbƒN‚ğ“ü‚ê‚ê‚Îƒ‰ƒ“ƒ_ƒ€‚ÅƒAƒCƒeƒ€‚ªo‚é")]
+    [SerializeField, Header("ãƒã‚§ãƒƒã‚¯ã‚’å…¥ã‚Œã‚Œã°ãƒ©ãƒ³ãƒ€ãƒ ã§ã‚¢ã‚¤ãƒ†ãƒ ãŒå‡ºã‚‹")]
     bool _randomGenerator = false;
 
-    [Tooltip("’l‚ª‚‚¯‚ê‚Î‚‚¢‚Ù‚ÇoŒ»‚µ‚Ü‚·")]
-    [SerializeField, Header("ƒ‰ƒ“ƒ_ƒ€‚Ìê‡‚ÌŠeƒAƒCƒeƒ€‚ÌoŒ»Šm—¦"), ElementNames(new string[] { "‚Ê‚¢‚®‚é‚İ", "‰Ô‘©", "ƒvƒŒƒ[ƒ“ƒg", "‚¨‹à" }), Range(0f, 10f)]
+    [Tooltip("å€¤ãŒé«˜ã‘ã‚Œã°é«˜ã„ã»ã©å‡ºç¾ã—ã¾ã™")]
+    [SerializeField, Header("ãƒ©ãƒ³ãƒ€ãƒ ã®å ´åˆã®å„ã‚¢ã‚¤ãƒ†ãƒ ã®å‡ºç¾ç¢ºç‡"), ElementNames(new string[] { "ã¬ã„ãã‚‹ã¿", "èŠ±æŸ", "ãƒ—ãƒ¬ã‚¼ãƒ³ãƒˆ", "ãŠé‡‘" }), Range(0f, 10f)]
     float[] _itemWeights = default;
 
-    [SerializeField, Header("¶¬‚·‚éƒAƒCƒeƒ€")]
+    [SerializeField, Header("ãƒ©ãƒ³ãƒ€ãƒ ç”Ÿæˆã™ã‚‹å ´åˆã®ç”Ÿæˆé–“éš”")]
+    float _generatorInterval = 5f;
+
+    [SerializeField, Header("ç”Ÿæˆã™ã‚‹ã‚¢ã‚¤ãƒ†ãƒ ")]
     List<ItemInfo> _items = default;
 
-    /// <summary>true‚È‚çƒ‰ƒ“ƒ_ƒ€‚ÅƒAƒCƒeƒ€‚ªo‚é</summary>
+    /// <summary>trueãªã‚‰ãƒ©ãƒ³ãƒ€ãƒ ã§ã‚¢ã‚¤ãƒ†ãƒ ãŒå‡ºã‚‹</summary>
     public bool RandomGenerator => _randomGenerator;
 
-    /// <summary>ŠeƒAƒCƒeƒ€‚ÌoŒ»Šm—¦</summary>
+    /// <summary>å„ã‚¢ã‚¤ãƒ†ãƒ ã®å‡ºç¾ç¢ºç‡</summary>
     public float[] ItemWeights => _itemWeights;
 
-    /// <summary>¶¬‡”Ô</summary>
+    /// <summary>ãƒ©ãƒ³ãƒ€ãƒ ç”Ÿæˆã™ã‚‹å ´åˆã®ç”Ÿæˆé–“éš”</summary>
+    public float GeneratorInterval => _generatorInterval;
+
+    /// <summary>ç”Ÿæˆé †ç•ª</summary>
     public List<ItemInfo> GeneratorItems => _items;
 }
 
-/// <summary>¶¬‚·‚éƒAƒCƒeƒ€‚Ìî•ñ‚ğ•Û‚·‚éƒNƒ‰ƒX</summary>
+/// <summary>ç”Ÿæˆã™ã‚‹ã‚¢ã‚¤ãƒ†ãƒ ã®æƒ…å ±ã‚’ä¿æŒã™ã‚‹ã‚¯ãƒ©ã‚¹</summary>
 [Serializable]
 public class ItemInfo
 {
-    [SerializeField, Header("ƒAƒCƒeƒ€‚ğ¶¬‚·‚é‚Ü‚Å‚ÌŠÔ"), Range(1f, 10f)]
-    float _generatorInterval;
+    [SerializeField, Header("ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç”Ÿæˆã™ã‚‹ã¾ã§ã®æ™‚é–“"), Range(1f, 10f)]
+    public float _generatorInterval;
 
-    [SerializeField, Header("¶¬‚·‚éƒAƒCƒeƒ€")]
-    ItemType _item = default;
+    [SerializeField, Header("ç”Ÿæˆã™ã‚‹ã‚¢ã‚¤ãƒ†ãƒ ")]
+    public ItemType _item = default;
 
-    [SerializeField, Header("¶‰E‚Ç‚¿‚ç‚É¶¬‚·‚é‚©")]
-    GenerateDirection _generateDirection = default;
+    [SerializeField, Header("å·¦å³ã©ã¡ã‚‰ã«ç”Ÿæˆã™ã‚‹ã‹")]
+    public ItemGenerateDirection _generateDirection = default;
 }
 
-/// <summary>ƒAƒCƒeƒ€‚Ìí—Ş </summary>
+/// <summary>ã‚¢ã‚¤ãƒ†ãƒ ã®ç¨®é¡ </summary>
 public enum ItemType
 {
-    /// <summary>‚Ê‚¢‚®‚é‚İ</summary>
+    /// <summary>ã¬ã„ãã‚‹ã¿</summary>
     Toy = 0,
-    /// <summary>‰Ô‘©</summary>
+    /// <summary>èŠ±æŸ</summary>
     Bouquet = 1,
-    /// <summary>ƒvƒŒƒ[ƒ“ƒg</summary>
-    Present,
-    /// <summary>‚¨‹à</summary>
-    Money
+    /// <summary>ãƒ—ãƒ¬ã‚¼ãƒ³ãƒˆ</summary>
+    Present = 2,
+    /// <summary>ãŠé‡‘</summary>
+    Money = 3
 }
 
-/// <summary>¶‰E‚Ç‚¿‚ç‚É¶¬‚·‚é‚©</summary>
-public enum GenerateDirection
+/// <summary>å·¦å³ã©ã¡ã‚‰ã«ç”Ÿæˆã™ã‚‹ã‹</summary>
+public enum ItemGenerateDirection
 {
-    /// <summary>‰E‚É¶¬ </summary>
+    /// <summary>å³ã«ç”Ÿæˆ </summary>
     Right = 0,
-    /// <summary>¶‚É¶¬ </summary>
+    /// <summary>å·¦ã«ç”Ÿæˆ </summary>
     Left = 1,
-    /// <summary>¶‰Eƒ‰ƒ“ƒ_ƒ€‚É¶¬ </summary>
+    /// <summary>å·¦å³ãƒ©ãƒ³ãƒ€ãƒ ã«ç”Ÿæˆ </summary>
     Random = 2
 }
