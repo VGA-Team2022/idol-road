@@ -106,24 +106,26 @@ public class ResultUIController : MonoBehaviour
         _resultValueText[0].gameObject.SetActive(true);
 
         yield return new WaitForSeconds(_showResultSpan);
+
         _resultValueText[1].gameObject.SetActive(true);
-        DOTween.To(() => firstValue, (r) => result[0] = r, result[0], _increseTime)
-            .OnUpdate(() => _resultValueText[1].text = result[0].ToString());
+        _resultValueText[1].text = result[0].ToString();
+
         yield return new WaitForSeconds(_showResultSpan);
 
         _resultValueText[2].gameObject.SetActive(true);
-        DOTween.To(() => firstValue, (r) => result[1] = r, result[1], _increseTime)
-            .OnUpdate(() => _resultValueText[2].text = result[1].ToString());
+        _resultValueText[2].text = result[1].ToString();
+
         yield return new WaitForSeconds(_showResultSpan);
 
         _resultValueText[3].gameObject.SetActive(true);
-        DOTween.To(() => firstValue, (r) => result[2] = r, result[2], _increseTime)
-            .OnUpdate(() => _resultValueText[3].text = result[2].ToString());
+        _resultValueText[3].text = result[2].ToString();
+
         yield return new WaitForSeconds(_scoreResultSpan);
 
         _resultValueText[4].gameObject.SetActive(true);
         DOTween.To(() => firstValue, (r) => result[3] = r, result[3], _increseTime)
              .OnUpdate(() => _resultValueText[4].text = result[3].ToString());
+
         yield return new WaitForSeconds(_scoreResultSpan);
 
         for (int i = 0; i < _fadeImageButton.Length; i++)
