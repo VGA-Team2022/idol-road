@@ -4,19 +4,64 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class MenuController : MonoBehaviour
 {
-    Animator _anim =>GetComponent<Animator>();
+    [SerializeField, Header("チュートリアル用アニメーター")]
+    Animator _tutorialAnimator = default;
 
-    /// <summary>メニューを表示する </summary>
-    public void MenuOpen()
+    [SerializeField, Header("クレジット用アニメーター")]
+    Animator _creditAnimator = default;
+
+    /// <summary>メニュー用アニメーター </summary>
+    Animator _menuAnim =>GetComponent<Animator>();
+
+    /// <summary>メニューUIを操作する関数 </summary>
+    /// <param name="flag">true=表示 false=非表示</param>
+    public void MenuOperator(bool flag)
     {
-        _anim.Play("Open");
-        AudioManager.Instance.PlaySE(7);
+        if (flag)   
+        {
+
+            _menuAnim.Play("MenuOpen");          //メニューを表示
+        }
+        else
+        {
+            _menuAnim.Play("MenuClose");        //メニューを非表示
+        }
+
+        AudioManager.Instance.PlaySE(7);　
     }
 
-    /// <summary>メニューを非表示にする </summary>
-    public void MenuClose()
+
+    /// <summary>遊び方UIを操作する </summary>
+    /// <param name="flag">true=表示 false=非表示</param>
+    public void TutorialOperator(bool flag)
     {
-        _anim.Play("Close");
-        AudioManager.Instance.PlaySE(7);
+        if (flag)
+        {
+            _tutorialAnimator.Play("TutorialOpen");
+            
+        }
+        else
+        {
+            _tutorialAnimator.Play("TutorialClose");
+           
+        }
+
+        AudioManager.Instance.PlaySE(7);　
+    }
+
+    /// <summary>クレジットUIを操作する </summary>
+    /// <param name="flag">true=表示 false=非表示</param>
+    public void CreditOperator(bool flag)
+    {
+        if (flag)
+        {
+            _creditAnimator.Play("CreditOpen");
+        }
+        else
+        {
+            _creditAnimator.Play("CreditClose");
+        }
+
+        AudioManager.Instance.PlaySE(7);　
     }
 }
