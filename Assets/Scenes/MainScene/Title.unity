@@ -758,7 +758,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1194,6 +1194,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1016080522747188690, guid: fd44eb2d09729fc4d88d396c86c68bb0, type: 3}
+      propertyPath: _fadeInTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1016080522747188690, guid: fd44eb2d09729fc4d88d396c86c68bb0, type: 3}
+      propertyPath: _fadeOutTime
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1016080522747188697, guid: fd44eb2d09729fc4d88d396c86c68bb0, type: 3}
       propertyPath: m_Name
       value: FadeCanvas
@@ -1204,7 +1212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1016080522747188700, guid: fd44eb2d09729fc4d88d396c86c68bb0, type: 3}
       propertyPath: m_SortingOrder
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1016080522747188701, guid: fd44eb2d09729fc4d88d396c86c68bb0, type: 3}
       propertyPath: m_Pivot.x
