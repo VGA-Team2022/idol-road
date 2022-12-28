@@ -27,12 +27,13 @@ public class ResultManager : MonoBehaviour
 
 
     public Result CurrentResult { get => _currentResult; set => _currentResult = value; }
+    public int[] Scores { get => _scores; set => _scores = value; }
 
     void Start()
     {
         _scores = ScoreCalculation();
         JudgeResult();
-        _fadeController.FadeIn(StartShowResultAnim);
+        _fadeController.FadeIn(_resultUIController.StartCommentAnime);
     }
 
     /// <summary>スコアを計算する</summary>

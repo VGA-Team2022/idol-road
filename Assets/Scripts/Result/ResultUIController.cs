@@ -11,7 +11,7 @@ public class ResultUIController : MonoBehaviour
     #region
     [SerializeField, Header("ResultManager")]
     ResultManager _resultManager = default;
-   
+
     [SerializeField, Header("各スコアのテキストを表示させるまで時間")]
     float _showResultSpan = 1.0f;
     [SerializeField, Header("スコアを表示するまでの時間")]
@@ -33,6 +33,9 @@ public class ResultUIController : MonoBehaviour
     [SerializeField, Header("ページのText")]
     TextMeshProUGUI _pageText = default;
 
+    [SerializeField, Header("コメント用のアニメーター")]
+    Animator _commentAnim = default;
+
 
     [ElementNames(new string[] { "神", "良", "普通", "悪" })]
     [SerializeField, Header("評価別背景(キャラクター)"), Tooltip("0=神 1=良 2=普通 3=悪")]
@@ -48,7 +51,7 @@ public class ResultUIController : MonoBehaviour
     [SerializeField, Header("ボタン表示切替"), ElementNames(new string[] { "評価", "みんなのコメント" })]
     Sprite[] _buttonSprites = default;
 
-    [SerializeField, Header("項目名切替"), ElementNames(new string[] { "評価", "みんなのコメント" })]
+    [SerializeField, Header("項目名切替"), ElementNames(new string[] { "みんなのコメント", "評価" })]
     string[] _pageName = default;
 
 
@@ -62,15 +65,14 @@ public class ResultUIController : MonoBehaviour
     TextMeshProUGUI[] _fanCommentTexts = default;
 
     /// <summary>評価画面が表示されているかどうか</summary>
-    bool _isValue = true;
+    bool _isValue = false;
+
+    /// <summary>初めてスコアを表示した</summary>
+    bool _isFirstScoreWindow = true;
 
     /// <summary>遷移をしているか true=開始している</summary>
     bool _isTransition = false;
     #endregion
-    public void Start()
-    {
-        SetCommonUI(0);
-    }
 
     /// <summary>結果によって背景を変更する </summary>
     /// <param name="result">プレイ結果</param>
@@ -148,7 +150,8 @@ public class ResultUIController : MonoBehaviour
             //みんなのコメントを表示
             _showResultParent[1].gameObject.SetActive(true);
             //共通UIの切り替え
-            SetCommonUI(1);
+            SetCommonUI(0);
+            _commentAnim.Play("CommentAnimation");
             _isValue = false;
 
         }
@@ -160,8 +163,16 @@ public class ResultUIController : MonoBehaviour
             //みんなのコメントを非表示に
             _showResultParent[1].gameObject.SetActive(false);
             //共通UIの切り替え
-            SetCommonUI(0);
+            SetCommonUI(1);
 
+            if (_isFirstScoreWindow)    //初めてスコアを表示したらアニメーションを再生する
+            {
+                _buttonImage.color = new Color(1, 1, 1, 0);
+                _buttonImage.gameObject.SetActive(false);
+                StartCoroutine(ShowResult(_resultManager.Scores));
+                _isFirstScoreWindow = false;
+            }
+           
             _isValue = true;
         }
 
@@ -176,13 +187,14 @@ public class ResultUIController : MonoBehaviour
         _isTransition = true;
         _resultManager.FadeController.FadeOut(() => { SceneManager.LoadScene(index); });
 
-        if (_resultManager.CurrentResult == Result.Bad)
+        if (_resultManager.CurrentResult == Result.Bad) //リトライ用ボイスを再生する
         {
             AudioManager.Instance.PlayVoice(16);
         }
 
         AudioManager.Instance.PlaySE(7);
     }
+
     /// <summary>コメントを反映させる</summary>
     public void ReflectFansComment(Result result)
     {
@@ -215,9 +227,19 @@ public class ResultUIController : MonoBehaviour
         }
 
     }
+
     public void SetCommonUI(int num)
     {
         _buttonImage.sprite = _buttonSprites[num];
         _pageText.text = _pageName[num];
+    }
+
+    /// <summary>ファンコメントを表示するアニメーションを再生する </summary>
+    public void StartCommentAnime()
+    {
+        _commentAnim.gameObject.SetActive(true);
+        _commentAnim.Play("CommentAnimation");
+        _fadeImageButton[0].gameObject.SetActive(true);
+        _fadeImageButton[0].DOFade(1.0f, _buttonShowSpan);
     }
 }
