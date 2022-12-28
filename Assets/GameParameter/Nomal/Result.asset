@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Result
   m_EditorClassIdentifier: 
   _superPerfectLine: 1800
-  _perfectLine: 1500
-  _goodLine: 100
+  _perfectLine: 1000
+  _goodLine: 50
   _addBadScoreValue: 50
   _addGoodScoreValue: 500
   _addParfectScoreValue: 100
-  _comboValue: 1
+  _comboValue: 5.32
   _fanScriptsBad:
   - "\u63A8\u3057\u5909\u3057\u307E\u3059..."
   - "\u795E\u306F\u6B7B\u3093\u3060"

@@ -18,8 +18,6 @@ public class StageSelectController : MonoBehaviour
     [ElementNames(new string[] {"簡単", "普通", "難しい" })]
     [SerializeField, Header("ステージセレクトのボタン"), Tooltip("1=簡単, 2=普通, 3=難しい")]
     Button[] _stageSelectButtons = default;
-    [SerializeField, Header("遊び方を表示するボタン")]
-    Button _playingUIButton = default;
     [SerializeField , Header("遊び方を表示するキャンバス")]
     Canvas _playUiCanvas = default;
 
@@ -40,9 +38,6 @@ public class StageSelectController : MonoBehaviour
             var index = i;
             _stageSelectButtons[i].onClick.AddListener(() => TransitionGameScene(button, index));
         }
-
-        _currentSelectedButton = _playingUIButton;    //初期ボタンを設定
-        _playingUIButton.onClick.AddListener(() => PlayUiButton(_playingUIButton));
         _stageImage.sprite = _stageSprites[0];              //初期イラストを設定
     }
 
