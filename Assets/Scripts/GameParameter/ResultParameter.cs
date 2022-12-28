@@ -29,18 +29,34 @@ public class ResultParameter : ScriptableObject
     public float _comboValue;
 
     [ElementNames(new string[] { "地雷", "男１", "壁女", "男２", "強欲" })]
-    [SerializeField, Header("リザルト画面でのBad時のファンセリフ")]
+    [SerializeField, Header("=========リザルト画面でのBad時のファンセリフ=========")]
     public string[] _fanScriptsBad = new string[FAN_SCRIPTS_SIZE];
+    [SerializeField, Header("左側のテキストで表示する内容")]
+    public string _idolResultScriptBad = "";
+    [SerializeField, Header("左側のアイドルのセリフ")]
+    public string _idolScriptBad = "";
 
     [ElementNames(new string[] { "地雷", "男１", "壁女", "男２", "強欲" })]
-    [SerializeField, Header("リザルト画面でのGood時のファンセリフ")]
+    [SerializeField, Header("=========リザルト画面でのGood時のファンセリフ=========")]
     public string[] _fanScriptsGood = new string[FAN_SCRIPTS_SIZE];
+    [SerializeField, Header("左側のテキストで表示する内容")]
+    public string _idolResultScriptGood = "";
+    [SerializeField, Header("左側のアイドルのセリフ")]
+    public string _idolScriptGood = "";
 
     [ElementNames(new string[] { "地雷", "男１", "壁女", "男２", "強欲" })]
-    [SerializeField, Header("リザルト画面でのExcellent時のファンセリフ")]
+    [SerializeField, Header("=========リザルト画面でのExcellent時のファンセリフ=========")]
     public string[] _fanScriptsExcellent = new string[FAN_SCRIPTS_SIZE];
+    [SerializeField, Header("左側のテキストで表示する内容")]
+    public string _idolResultScriptExcellent = "";
+    [SerializeField, Header("左側のアイドルのセリフ")]
+    public string _idolScriptExcellent = "";
 
     [ElementNames(new string[] { "地雷", "男１", "壁女", "男２", "強欲" })]
-    [SerializeField, Header("リザルト画面でのPerfect時のファンセリフ")]
+    [SerializeField, Header("=========リザルト画面でのPerfect時のファンセリフ=========")]
     public string[] _fanScriptsPerfect = new string[FAN_SCRIPTS_SIZE];
+    [SerializeField, Header("左側のテキストで表示する内容")]
+    public string _idolResultScriptPerfect = "";
+    [SerializeField, Header("左側のアイドルのセリフ")]
+    public string _idolScriptPerfect = "";
 }
