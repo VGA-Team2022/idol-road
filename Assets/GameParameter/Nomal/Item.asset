@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f8ca41a31ba37f479f7b6b6d3e60d40, type: 3}
   m_Name: Item
   m_EditorClassIdentifier: 
-  _randomGenerator: 0
+  _randomGenerator: 1
   _itemWeights:
   - 4
   - 4
