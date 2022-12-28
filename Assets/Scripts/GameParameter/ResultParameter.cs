@@ -28,19 +28,19 @@ public class ResultParameter : ScriptableObject
     [SerializeField, Header("コンボの倍率"), Range(1, 10)]
     public float _comboValue;
 
-    [ElementNames(new string[] { "1つ目", "2つ目", "3つ目", "4つ目", "5つ目" })]
+    [ElementNames(new string[] { "地雷", "男１", "壁女", "男２", "強欲" })]
     [SerializeField, Header("リザルト画面でのBad時のファンセリフ")]
     public string[] _fanScriptsBad = new string[FAN_SCRIPTS_SIZE];
 
-    [ElementNames(new string[] {"1つ目", "2つ目", "3つ目" , "4つ目" , "5つ目" })]
+    [ElementNames(new string[] { "地雷", "男１", "壁女", "男２", "強欲" })]
     [SerializeField, Header("リザルト画面でのGood時のファンセリフ")]
     public string[] _fanScriptsGood = new string[FAN_SCRIPTS_SIZE];
 
-    [ElementNames(new string[] { "1つ目", "2つ目", "3つ目", "4つ目", "5つ目" })]
+    [ElementNames(new string[] { "地雷", "男１", "壁女", "男２", "強欲" })]
     [SerializeField, Header("リザルト画面でのExcellent時のファンセリフ")]
     public string[] _fanScriptsExcellent = new string[FAN_SCRIPTS_SIZE];
 
-    [ElementNames(new string[] { "1つ目", "2つ目", "3つ目", "4つ目", "5つ目" })]
+    [ElementNames(new string[] { "地雷", "男１", "壁女", "男２", "強欲" })]
     [SerializeField, Header("リザルト画面でのPerfect時のファンセリフ")]
     public string[] _fanScriptsPerfect = new string[FAN_SCRIPTS_SIZE];
 }

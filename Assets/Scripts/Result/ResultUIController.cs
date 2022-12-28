@@ -67,6 +67,9 @@ public class ResultUIController : MonoBehaviour
     /// <summary>評価画面が表示されているかどうか</summary>
     bool _isValue = false;
 
+    /// <summary>初めてスコアを表示した</summary>
+    bool _isFirstScoreWindow = true;
+
     /// <summary>遷移をしているか true=開始している</summary>
     bool _isTransition = false;
     #endregion
@@ -162,8 +165,14 @@ public class ResultUIController : MonoBehaviour
             //共通UIの切り替え
             SetCommonUI(1);
 
-            StartCoroutine(ShowResult(_resultManager.Scores));
-
+            if (_isFirstScoreWindow)    //初めてスコアを表示したらアニメーションを再生する
+            {
+                _buttonImage.color = new Color(1, 1, 1, 0);
+                _buttonImage.gameObject.SetActive(false);
+                StartCoroutine(ShowResult(_resultManager.Scores));
+                _isFirstScoreWindow = false;
+            }
+           
             _isValue = true;
         }
 
