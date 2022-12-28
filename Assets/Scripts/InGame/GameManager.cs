@@ -176,6 +176,8 @@ public class GameManager : MonoBehaviour
         {
             _idleHp -= 1;
 
+            _player.FailmMotion();
+
             if (0 <= _idleHp)
             {
                 _uiController.UpdateHpUI(_idleHp); //HPUI‚ðXV

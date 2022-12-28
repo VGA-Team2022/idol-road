@@ -1,31 +1,38 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Unity.VisualScripting;
 
 /// <summary>
-///  Player‚Ì“®‚«‚ğ~‚ß‚½‚èAÄŠJ‚³‚¹‚½‚è‚µ‚ÄƒAƒNƒVƒ‡ƒ“‚ğ‚³‚¹‚éƒTƒ|[ƒg‚ğ‚·‚éƒXƒNƒŠƒvƒg
+///  Playerã®å‹•ãã‚’æ­¢ã‚ãŸã‚Šã€å†é–‹ã•ã›ãŸã‚Šã—ã¦ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’ã•ã›ã‚‹ã‚µãƒãƒ¼ãƒˆã‚’ã™ã‚‹ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
 /// </summary>
 public class PlayerMotion : MonoBehaviour
 {
-    [SerializeField, Tooltip("ƒAƒCƒhƒ‹‚Ìƒ‚[ƒVƒ‡ƒ“ŠG")]
+    [SerializeField, Tooltip("ã‚¢ã‚¤ãƒ‰ãƒ«ã®ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³çµµ")]
     Sprite[] _sprites;
-    [SerializeField, Tooltip("ƒAƒCƒhƒ‹‚Ìƒtƒ@ƒ“ƒT‚«o‚µ"), ElementNames(new string[] { "“Š‚°ƒLƒX", "ƒEƒBƒ“ƒN" })]
+    [SerializeField, Tooltip("ã‚¢ã‚¤ãƒ‰ãƒ«ã®ãƒ•ã‚¡ãƒ³ã‚µå¹ãå‡ºã—"), ElementNames(new string[] { "æŠ•ã’ã‚­ã‚¹", "ã‚¦ã‚£ãƒ³ã‚¯" })]
     GameObject[] _IdleBlowing;
-    [SerializeField, Tooltip("‚«o‚µ‚ªo‚éêŠ")]
+    [SerializeField, Tooltip("å¹ãå‡ºã—ãŒå‡ºã‚‹å ´æ‰€")]
     GameObject _blowingSpawn = default;
-    [SerializeField, Tooltip("ƒ‚[ƒVƒ‡ƒ“‚ğ‘±‚¯‚éŠÔ")]
+    [SerializeField, Tooltip("ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ç¶šã‘ã‚‹æ™‚é–“")]
     float _motionTime = 3;
-    [SerializeField, Tooltip("ƒtƒ@ƒ“ƒT‚Ì‚«o‚µ‚ğ•\¦‚·‚éŠÔ")]
+    [SerializeField, Tooltip("ãƒ•ã‚¡ãƒ³ã‚µã®å¹ãå‡ºã—ã‚’è¡¨ç¤ºã™ã‚‹æ™‚é–“")]
     float _fansaShowTime = 0.5f;
-    [SerializeField, Tooltip("“ü—Í‚ğ‘—‚Á‚Ä‚­‚ê‚é")]
+    [SerializeField, Tooltip("å…¥åŠ›ã‚’é€ã£ã¦ãã‚Œã‚‹")]
     private ScreenInput _screenInput;
+    [SerializeField, Header("å¤±æ•—ã—ãŸå ´åˆã®ã‚¢ã‚¤ãƒ‰ãƒ«ã®çµµ")]
+    Sprite _failsprite;
+    [SerializeField, Header("å¤±æ•—ã—ãŸå ´åˆã®çµµãŒå‡ºç¶šã‘ã‚‹æ™‚é–“")]
+    float _failTime = 3;
 
     private SpriteRenderer _spriteRenderer;
 
     private FlickType _flickType = FlickType.None;
 
     private bool _gameStop = false;
+
+    private float _changeTime;
 
     private float _timer = 0;
 
@@ -44,17 +51,19 @@ public class PlayerMotion : MonoBehaviour
         {
             int index = (int)flickType;
 
-            //index‚ª‡‚í‚È‚¢‚©‚à
+            //indexãŒåˆã‚ãªã„ã‹ã‚‚
             _spriteRenderer.sprite = _sprites[index];
 
             _flickType = flickType;
 
+            _changeTime = _motionTime;
+
             _timer = 0;
         }
-        else if (_flickType != FlickType.None)
+        else if (_flickType != FlickType.None || _spriteRenderer.sprite == _failsprite)
         {
             _timer += Time.deltaTime;
-            if (_timer > _motionTime)
+            if (_timer > _changeTime)
             {
                 _flickType = FlickType.None;
                 _spriteRenderer.sprite = _sprites[0];
@@ -74,19 +83,26 @@ public class PlayerMotion : MonoBehaviour
         }
     }
 
-    /// <summary>ƒQ[ƒ€ƒNƒŠƒA‚Éƒ^ƒNƒV[‚ÉŒü‚©‚í‚¹‚éˆ— </summary>
+    public void FailmMotion() 
+    {
+        _spriteRenderer.sprite = _failsprite;
+        _changeTime = _failTime;
+        _timer = 0;
+    }
+
+    /// <summary>ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢æ™‚ã«ã‚¿ã‚¯ã‚·ãƒ¼ã«å‘ã‹ã‚ã›ã‚‹å‡¦ç† </summary>
     public void GameClearMove()
     {
         transform.DOMoveZ(5, 30f);
     }
 
-    // “®‚«‚ğ~‚ß‚½‚¢‚É‚±‚ÌŠÖ”‚ğŠO•”‚É‚Á‚Ä‚±‚ê‚é‚æ‚¤‚Éƒƒ\ƒbƒh\’z
+    // å‹•ãã‚’æ­¢ã‚ãŸã„æ™‚ã«ã“ã®é–¢æ•°ã‚’å¤–éƒ¨ã«æŒã£ã¦ã“ã‚Œã‚‹ã‚ˆã†ã«ãƒ¡ã‚½ãƒƒãƒ‰æ§‹ç¯‰
     public void StopMotion()
     {
         _gameStop = true;
     }
 
-    // “®‚«‚ğÄŠJ‚½‚¢‚É‚±‚ÌŠÖ”‚ğŠO•”‚É‚Á‚Ä‚±‚ê‚é‚æ‚¤‚Éƒƒ\ƒbƒh\’z
+    // å‹•ãã‚’å†é–‹ãŸã„æ™‚ã«ã“ã®é–¢æ•°ã‚’å¤–éƒ¨ã«æŒã£ã¦ã“ã‚Œã‚‹ã‚ˆã†ã«ãƒ¡ã‚½ãƒƒãƒ‰æ§‹ç¯‰
     public void ResumeMotion()
     {
         _gameStop = false;
