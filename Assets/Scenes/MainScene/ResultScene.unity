@@ -4435,6 +4435,8 @@ MonoBehaviour:
   _buttonImage: {fileID: 6622079048694388343}
   _pageText: {fileID: 400619782524964831}
   _commentAnim: {fileID: 2198834885786920115}
+  _leftResultText: {fileID: 1372361222347816930}
+  _idolText: {fileID: 8235094439585799538}
   _backGroundSprites:
   - {fileID: 21300000, guid: a066d2fb6a08ebc4ab008719fce32dc5, type: 3}
   - {fileID: 21300000, guid: e284072a1a2a0db4bbfec3460bccc9eb, type: 3}
@@ -4460,7 +4462,6 @@ MonoBehaviour:
   - {fileID: 9109034949279775133}
   - {fileID: 9109034948302029167}
   _fadeTextColor:
-  - {fileID: 0}
   - {fileID: 9109034948920221244}
   - {fileID: 9109034948307775416}
   _fanCommentTexts:

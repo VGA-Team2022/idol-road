@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,6 +37,10 @@ public class ResultUIController : MonoBehaviour
     [SerializeField, Header("コメント用のアニメーター")]
     Animator _commentAnim = default;
 
+    [SerializeField, Tooltip("左側 リザルトを表示するテキスト")]
+    TMP_Text _leftResultText = default;
+    [SerializeField, Tooltip("左側 アイドルのセリフ")]
+    TMP_Text _idolText = default;
 
     [ElementNames(new string[] { "神", "良", "普通", "悪" })]
     [SerializeField, Header("評価別背景(キャラクター)"), Tooltip("0=神 1=良 2=普通 3=悪")]
@@ -54,11 +59,10 @@ public class ResultUIController : MonoBehaviour
     [SerializeField, Header("項目名切替"), ElementNames(new string[] { "みんなのコメント", "評価" })]
     string[] _pageName = default;
 
-
     [SerializeField, Header("フェードイン関連"), Tooltip("ボタンイメージ"), ElementNames(new string[] { "評価切り替え", "ステージセレクト", "リトライ" })]
     Image[] _fadeImageButton = default;
 
-    [SerializeField, Tooltip("テキスト"), ElementNames(new string[] { "評価切り替え", "ステージセレクト", "リトライ" })]
+    [SerializeField, Tooltip("テキスト"), ElementNames(new string[] { "ステージセレクト", "リトライ" })]
     TextMeshProUGUI[] _fadeTextColor = default;
 
     [SerializeField, Tooltip("ファンのコメントのText"), ElementNames(new string[] { "ファン1", "ファン2", "ファン3", "ファン4", "ファン5" })]
@@ -72,6 +76,8 @@ public class ResultUIController : MonoBehaviour
 
     /// <summary>遷移をしているか true=開始している</summary>
     bool _isTransition = false;
+
+    ResultParameter _parameter => LevelManager.Instance.CurrentLevel.Result;
     #endregion
 
     /// <summary>結果によって背景を変更する </summary>
@@ -134,8 +140,9 @@ public class ResultUIController : MonoBehaviour
         {
             _fadeImageButton[i].gameObject.SetActive(true);
             _fadeImageButton[i].DOFade(1.0f, _buttonShowSpan);
-            _fadeTextColor[i].DOFade(1.0f, _textShowSpan);
         }
+
+        Array.ForEach(_fadeTextColor, t => t.DOFade(1.0f, _textShowSpan));
 
         yield return null;
     }
@@ -172,7 +179,7 @@ public class ResultUIController : MonoBehaviour
                 StartCoroutine(ShowResult(_resultManager.Scores));
                 _isFirstScoreWindow = false;
             }
-           
+
             _isValue = true;
         }
 
@@ -201,31 +208,42 @@ public class ResultUIController : MonoBehaviour
         switch (result)
         {
             case Result.Bad:
-                for (int i = 0; i < LevelManager.Instance.CurrentLevel.Result._fanScriptsBad.Length; i++)
+                for (int i = 0; i < _parameter._fanScriptsBad.Length; i++)
                 {
-                    _fanCommentTexts[i].text = LevelManager.Instance.CurrentLevel.Result._fanScriptsBad[i];
+                    _fanCommentTexts[i].text = _parameter._fanScriptsBad[i];
                 }
+
+                _leftResultText.text = _parameter._idolResultScriptBad;
+                _idolText.text = _parameter._idolScriptBad;
                 break;
             case Result.Good:
-                for (int i = 0; i < LevelManager.Instance.CurrentLevel.Result._fanScriptsGood.Length; i++)
+                for (int i = 0; i < _parameter._fanScriptsGood.Length; i++)
                 {
-                    _fanCommentTexts[i].text = LevelManager.Instance.CurrentLevel.Result._fanScriptsGood[i];
+                    _fanCommentTexts[i].text = _parameter._fanScriptsGood[i];
                 }
+
+                _leftResultText.text = _parameter._idolResultScriptGood;
+                _idolText.text = _parameter._idolScriptGood;
                 break;
             case Result.Perfect:
-                for (int i = 0; i < LevelManager.Instance.CurrentLevel.Result._fanScriptsExcellent.Length; i++)
+                for (int i = 0; i < _parameter._fanScriptsExcellent.Length; i++)
                 {
-                    _fanCommentTexts[i].text = LevelManager.Instance.CurrentLevel.Result._fanScriptsExcellent[i];
+                    _fanCommentTexts[i].text = _parameter._fanScriptsExcellent[i];
                 }
+
+                _leftResultText.text = _parameter._idolResultScriptExcellent;
+                _idolText.text = _parameter._idolScriptExcellent;
                 break;
             case Result.SuperPerfect:
-                for (int i = 0; i < LevelManager.Instance.CurrentLevel.Result._fanScriptsPerfect.Length; i++)
+                for (int i = 0; i < _parameter._fanScriptsPerfect.Length; i++)
                 {
-                    _fanCommentTexts[i].text = LevelManager.Instance.CurrentLevel.Result._fanScriptsPerfect[i];
+                    _fanCommentTexts[i].text = _parameter._fanScriptsPerfect[i];
                 }
+
+                _leftResultText.text = _parameter._idolResultScriptPerfect;
+                _idolText.text = _parameter._idolScriptPerfect;
                 break;
         }
-
     }
 
     public void SetCommonUI(int num)
