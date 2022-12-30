@@ -3202,6 +3202,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1429683744992018538, guid: 11ec29796cd01bb4ead4390ffb0e0698, type: 3}
+      propertyPath: _cueSheet
+      value: BGM_CueSheet_IDOL_1224
+      objectReference: {fileID: 0}
     - target: {fileID: 1429683745531273808, guid: 11ec29796cd01bb4ead4390ffb0e0698, type: 3}
       propertyPath: m_Name
       value: CRIWARE
@@ -3250,9 +3254,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1429683745531273815, guid: 11ec29796cd01bb4ead4390ffb0e0698, type: 3}
-      propertyPath: dontDestroyOnLoad
-      value: 1
+    - target: {fileID: 1429683746609967730, guid: 11ec29796cd01bb4ead4390ffb0e0698, type: 3}
+      propertyPath: _cueSheet
+      value: VOICE_CueSheet_IDOL_1224
+      objectReference: {fileID: 0}
+    - target: {fileID: 1429683746686605161, guid: 11ec29796cd01bb4ead4390ffb0e0698, type: 3}
+      propertyPath: _cueSheet
+      value: SE_CueSheet_IDOL_1224
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11ec29796cd01bb4ead4390ffb0e0698, type: 3}
@@ -9194,6 +9202,8 @@ MonoBehaviour:
   _motionTime: 1
   _fansaShowTime: 0.5
   _screenInput: {fileID: 553798498}
+  _failsprite: {fileID: 0}
+  _failTime: 3
 --- !u!212 &548471503
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13477,6 +13487,7 @@ MonoBehaviour:
   _taxi: {fileID: 1374032613}
   _player: {fileID: 548471502}
   _superIdolTime: {fileID: 1909771482}
+  _itemGenerator: {fileID: 1206663313}
 --- !u!4 &856055409
 Transform:
   m_ObjectHideFlags: 0
@@ -20065,6 +20076,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4847845766766163283, guid: be82955cba00e8449976fa808b2e6790, type: 3}
   m_PrefabInstance: {fileID: 136165720}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1206663313 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4847845766766163282, guid: be82955cba00e8449976fa808b2e6790, type: 3}
+  m_PrefabInstance: {fileID: 136165720}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206663312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d729ecf640165d47b10654ec16438ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1215683109
 GameObject:
   m_ObjectHideFlags: 0
@@ -33135,6 +33157,18 @@ PrefabInstance:
       objectReference: {fileID: 189888863}
     - target: {fileID: 8897461432588541098, guid: b9f18d18cce7959429b428c5b25b8ea3, type: 3}
       propertyPath: _voiceSource
+      value: 
+      objectReference: {fileID: 189888861}
+    - target: {fileID: 8897461432588541098, guid: b9f18d18cce7959429b428c5b25b8ea3, type: 3}
+      propertyPath: _sources.Array.data[0]
+      value: 
+      objectReference: {fileID: 189888863}
+    - target: {fileID: 8897461432588541098, guid: b9f18d18cce7959429b428c5b25b8ea3, type: 3}
+      propertyPath: _sources.Array.data[1]
+      value: 
+      objectReference: {fileID: 189888862}
+    - target: {fileID: 8897461432588541098, guid: b9f18d18cce7959429b428c5b25b8ea3, type: 3}
+      propertyPath: _sources.Array.data[2]
       value: 
       objectReference: {fileID: 189888861}
     m_RemovedComponents: []

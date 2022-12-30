@@ -80,9 +80,78 @@ public class ResultUIController : MonoBehaviour
     ResultParameter _parameter => LevelManager.Instance.CurrentLevel.Result;
     #endregion
 
+    /// <summary>コメントを反映させる</summary>
+    void ReflectFansComment(Result result)
+    {
+        switch (result)
+        {
+            case Result.Bad:
+                for (int i = 0; i < _parameter._fanScriptsBad.Length; i++)
+                {
+                    _fanCommentTexts[i].text = _parameter._fanScriptsBad[i];
+                }
+
+                _leftResultText.text = _parameter._idolResultScriptBad;
+                _idolText.text = _parameter._idolScriptBad;
+                break;
+            case Result.Good:
+                for (int i = 0; i < _parameter._fanScriptsGood.Length; i++)
+                {
+                    _fanCommentTexts[i].text = _parameter._fanScriptsGood[i];
+                }
+
+                _leftResultText.text = _parameter._idolResultScriptGood;
+                _idolText.text = _parameter._idolScriptGood;
+                break;
+            case Result.Perfect:
+                for (int i = 0; i < _parameter._fanScriptsExcellent.Length; i++)
+                {
+                    _fanCommentTexts[i].text = _parameter._fanScriptsExcellent[i];
+                }
+
+                _leftResultText.text = _parameter._idolResultScriptExcellent;
+                _idolText.text = _parameter._idolScriptExcellent;
+                break;
+            case Result.SuperPerfect:
+                for (int i = 0; i < _parameter._fanScriptsPerfect.Length; i++)
+                {
+                    _fanCommentTexts[i].text = _parameter._fanScriptsPerfect[i];
+                }
+
+                _leftResultText.text = _parameter._idolResultScriptPerfect;
+                _idolText.text = _parameter._idolScriptPerfect;
+                break;
+        }
+    }
+
+    /// <summary>画面左側に表示しているテキストを結果によって変更する </summary>
+    /// <param name="result"></param>
+    void SetIdolScript(Result result)
+    {
+        switch (result)
+        {
+            case Result.Bad:
+                _leftResultText.text = _parameter._idolResultScriptBad;
+                _idolText.text = _parameter._idolScriptBad;
+                break;
+            case Result.Good:
+                _leftResultText.text = _parameter._idolResultScriptGood;
+                _idolText.text = _parameter._idolScriptGood;
+                break;
+            case Result.Perfect:
+                _leftResultText.text = _parameter._idolResultScriptExcellent;
+                _idolText.text = _parameter._idolScriptExcellent;
+                break;
+            case Result.SuperPerfect:
+                _leftResultText.text = _parameter._idolResultScriptPerfect;
+                _idolText.text = _parameter._idolScriptPerfect;
+                break;
+        }
+    }
+
     /// <summary>結果によって背景を変更する </summary>
     /// <param name="result">プレイ結果</param>
-    public void ChangeResultImage(Result result)
+    void ChangeResultImage(Result result)
     {
         switch (result)
         {
@@ -104,6 +173,8 @@ public class ResultUIController : MonoBehaviour
                 break;
         }
     }
+
+
     /// <summary>結果のテキストを表示する関数</summary>
     /// <param name="result">0=bad 1=good 2=perfect 4=score</param>
     public IEnumerator ShowResult(int[] result)
@@ -157,7 +228,7 @@ public class ResultUIController : MonoBehaviour
             //みんなのコメントを表示
             _showResultParent[1].gameObject.SetActive(true);
             //共通UIの切り替え
-            SetCommonUI(0);
+            SetCommentUI(0);
             _commentAnim.Play("CommentAnimation");
             _isValue = false;
 
@@ -170,7 +241,7 @@ public class ResultUIController : MonoBehaviour
             //みんなのコメントを非表示に
             _showResultParent[1].gameObject.SetActive(false);
             //共通UIの切り替え
-            SetCommonUI(1);
+            SetCommentUI(1);
 
             if (_isFirstScoreWindow)    //初めてスコアを表示したらアニメーションを再生する
             {
@@ -185,7 +256,10 @@ public class ResultUIController : MonoBehaviour
 
         AudioManager.Instance.PlaySE(7);
     }
-    /// <summary>難易度セレクトシーンに戻るかリトライするか</summary>
+    /// <summary>
+    /// 難易度セレクトシーンに戻るかリトライするか
+    /// ボタンから呼び出す
+    /// </summary>
     /// <param name="index">シーン番号</param>
     public void ReturnModeSelectAndRetry(int index)
     {
@@ -202,51 +276,16 @@ public class ResultUIController : MonoBehaviour
         AudioManager.Instance.PlaySE(7);
     }
 
-    /// <summary>コメントを反映させる</summary>
-    public void ReflectFansComment(Result result)
+    /// <summary>結果によって表示するUIを変更する </summary>
+    public void SetupUI(Result result)
     {
-        switch (result)
-        {
-            case Result.Bad:
-                for (int i = 0; i < _parameter._fanScriptsBad.Length; i++)
-                {
-                    _fanCommentTexts[i].text = _parameter._fanScriptsBad[i];
-                }
-
-                _leftResultText.text = _parameter._idolResultScriptBad;
-                _idolText.text = _parameter._idolScriptBad;
-                break;
-            case Result.Good:
-                for (int i = 0; i < _parameter._fanScriptsGood.Length; i++)
-                {
-                    _fanCommentTexts[i].text = _parameter._fanScriptsGood[i];
-                }
-
-                _leftResultText.text = _parameter._idolResultScriptGood;
-                _idolText.text = _parameter._idolScriptGood;
-                break;
-            case Result.Perfect:
-                for (int i = 0; i < _parameter._fanScriptsExcellent.Length; i++)
-                {
-                    _fanCommentTexts[i].text = _parameter._fanScriptsExcellent[i];
-                }
-
-                _leftResultText.text = _parameter._idolResultScriptExcellent;
-                _idolText.text = _parameter._idolScriptExcellent;
-                break;
-            case Result.SuperPerfect:
-                for (int i = 0; i < _parameter._fanScriptsPerfect.Length; i++)
-                {
-                    _fanCommentTexts[i].text = _parameter._fanScriptsPerfect[i];
-                }
-
-                _leftResultText.text = _parameter._idolResultScriptPerfect;
-                _idolText.text = _parameter._idolScriptPerfect;
-                break;
-        }
+        SetIdolScript(result);
+        ChangeResultImage(result);
+        ReflectFansComment(result);
     }
 
-    public void SetCommonUI(int num)
+    /// <summary> 表示しているUIによってウィンドウ切り替えボタンのイラストを変更する </summary>
+    public void SetCommentUI(int num)
     {
         _buttonImage.sprite = _buttonSprites[num];
         _pageText.text = _pageName[num];

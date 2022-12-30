@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     PlayerMotion _player = default;
     [SerializeField]
     SuperIdolTime _superIdolTime = default;
+    [SerializeField, Tooltip("アイテムジェネレーター")]
+    ItemGenerator _itemGenerator = default;
 
     InGameParameter _inGameParameter => LevelManager.Instance.CurrentLevel.InGame;
     /// <summary>現在対象の敵 </summary>
@@ -71,7 +73,6 @@ public class GameManager : MonoBehaviour
     public FadeController FadeCanvas { get => _fadeController; }
     public PlayableDirector WarningTape { get => _warningTape; }
     public SpriteRenderer Taxi { get => _taxi; }
-    public PlayerMotion Player { get => _player; }
 
     /// <summary>ボスの移動を開始する処理</summary>
     public event Action StartBossMove
@@ -104,13 +105,6 @@ public class GameManager : MonoBehaviour
         {
             ChangeGameState(_bossTimeState);
         }
-        //if (_inGameParameter.GamePlayTime - _elapsedTime <= 0 && !_isBossMove)    //制限時間が0になったらボスを移動させる
-        //{
-        //    Debug.Log("移動開始");
-        //    _enemySpawner.IsGenerate = false;
-        //    _startBossMove?.Invoke();
-        //    _isBossMove = true;
-        //}
     }
 
     /// <summary>アイドルパワーが増加する関数</summary>
@@ -127,7 +121,6 @@ public class GameManager : MonoBehaviour
     public void EnemyCheckIdolPower()
     {
         EnterSuperIdolTime();
-
     }
 
     public void EnterSuperIdolTime()
@@ -243,6 +236,7 @@ public class GameManager : MonoBehaviour
     public void GameClear()
     {
         ChangeGameState(_gameEndState);
+        _itemGenerator.GeneratorOperation();
         _player.GameClearMove();
     }
 }

@@ -7,10 +7,10 @@ public class GameEnd : IState
     {
         //TODO:‘«‰¹‚ðŽ~‚ß‚é
         AudioManager.Instance.StopBGM(10);
-        manager.FadeCanvas.FadeOut(3f ,() => 
+        AudioManager.Instance.PlaySE(33);
+        manager.FadeCanvas.FadeOut(3f, () =>
         {
-            AudioManager.Instance.PlaySE(31);
-            SceneManager.LoadScene("ResultScene");
+            AudioManager.Instance.PlaySoundAfterExecution(Sources.SE, 31, () => SceneManager.LoadScene("ResultScene"));
         });
     }
 
