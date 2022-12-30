@@ -7,7 +7,7 @@ public class LevelManager
     public static LevelManager Instance => _instance;
 
     /// <summary>Œ»İ‚ÌƒŒƒxƒ‹ </summary>
-    GameParameter _currentLevel = Resources.Load<GameParameter>("NomalLevel");
+    GameParameter _currentLevel = default;
     
     GameParameter _easy => Resources.Load<GameParameter>("EasyLevel");
 
