@@ -52,11 +52,15 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>特定のサウンドの再生終了時間を取得する </summary>
+    /// <param name="sourceIndex">取得したいサウンドのソース</param>
+    /// <param name="cueID">取得したいサウンドのID</param>
+    /// <returns>再生終了時間 -1は取得失敗</returns>
     long GetAudioPlayEndTime(Sources sourceIndex, int cueID)
     {
         CriAtomEx.CueInfo cueInfo;
 
-        if (!_exAcbs[(int)sourceIndex].GetCueInfo(cueID, out cueInfo))     // CueInfoが読み込めなかった場合は暫定で-1を返す
+        if (!_exAcbs[(int)sourceIndex].GetCueInfo(cueID, out cueInfo))     // CueInfoが読み込めなかった場合は-1を返す
         {
             return -1;
         }   
@@ -64,12 +68,20 @@ public class AudioManager : MonoBehaviour
         return cueInfo.length;
     }
 
+    /// <summary>サウンド再生が終了するまで待機し終了後、処理を実行する </summary>
+    /// <param name="waitTime">待機時間</param>
+    /// <param name="action">再生後の処理</param>
+    /// <returns></returns>
     IEnumerator SoundEndAfterExecution(float waitTime, Action action)
     {
         yield return new WaitForSeconds(waitTime);
         action?.Invoke();
     }
 
+    /// <summary>サウンド再生後に処理を実行する為の関数 </summary>
+    /// <param name="source">再生させるソース</param>
+    /// <param name="cueID">再生するサウンドのID</param>
+    /// <param name="action">再生後の処理</param>
     public void PlaySoundAfterExecution(Sources source, int cueID, Action action)
     {
         if (source == Sources.BGM)
@@ -82,8 +94,6 @@ public class AudioManager : MonoBehaviour
         }
 
         var endTime = (float)GetAudioPlayEndTime(source, cueID) / 1000; //ミリ秒を秒に変換する為に1000で割る
-
-        Debug.Log("終了時間" + endTime);
 
         if (endTime == -1)
         {
