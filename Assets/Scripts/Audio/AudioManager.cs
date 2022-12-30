@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CriWare;
@@ -5,14 +7,17 @@ using CriWare;
 /// <summary>サウンド関連を管理するクラス　シングルトンパターンを使用</summary>
 public class AudioManager : MonoBehaviour
 {
-    static AudioManager _instance = default; 
+    static AudioManager _instance = default;
 
-    [SerializeField, Header("BGM")]
-    CriAtomSource _bgmSource = default;
-    [SerializeField, Header("SE")]
-    CriAtomSource _seSource = default;
-    [SerializeField, Header("Voice")]
-    CriAtomSource _voiceSource = default;
+    /// <summary>使用するCriAtomSourceの数 </summary>
+    const int SOURCE_COUNT = 3;
+
+    [ElementNames(new string[] {"BGM", "SE", "VOICE"})]
+    [SerializeField, Header("各サウンドソース"), Tooltip("0=BGM, 1=SE, 2=VOICE")]
+    CriAtomSource[] _sources = new CriAtomSource[SOURCE_COUNT]; 
+
+    /// <summary>各ソースのACBファイル 0=BGM 1=SE 2=VOICE </summary>
+    CriAtomExAcb[] _exAcbs = new CriAtomExAcb[SOURCE_COUNT];
 
     /// <summary>再生中のBGMを管理するディクショナリ key=キューID, value=状態</summary>
     Dictionary<int, CriAtomExPlayback> _playingBGMs = new Dictionary<int, CriAtomExPlayback>();
@@ -31,8 +36,62 @@ public class AudioManager : MonoBehaviour
         else
         {
             _instance = this;
+            _exAcbs[0] = CriAtom.GetAcb(_sources[(int)Sources.BGM].cueSheet);
+            _exAcbs[1] = CriAtom.GetAcb(_sources[(int)Sources.SE].cueSheet);
+            _exAcbs[2] = CriAtom.GetAcb(_sources[(int)Sources.VOICE].cueSheet);
+
             DontDestroyOnLoad(gameObject);
         }
+    }
+
+    public void Update()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            PlaySoundAfterExecution(Sources.SE, 31, () => Debug.Log("hit"));
+        }
+    }
+
+    long GetAudioPlayEndTime(Sources sourceIndex, int cueID)
+    {
+        CriAtomEx.CueInfo cueInfo;
+
+        if (!_exAcbs[(int)sourceIndex].GetCueInfo(cueID, out cueInfo))     // CueInfoが読み込めなかった場合は暫定で-1を返す
+        {
+            return -1;
+        }   
+        
+        return cueInfo.length;
+    }
+
+    IEnumerator SoundEndAfterExecution(float waitTime, Action action)
+    {
+        yield return new WaitForSeconds(waitTime);
+        action?.Invoke();
+    }
+
+    public void PlaySoundAfterExecution(Sources source, int cueID, Action action)
+    {
+        if (source == Sources.BGM)
+        {
+            PlayBGM(cueID);
+        }
+        else
+        {
+            _sources[(int)source].Play(cueID);
+        }
+
+        var endTime = (float)GetAudioPlayEndTime(source, cueID) / 1000; //ミリ秒を秒に変換する為に1000で割る
+
+        Debug.Log("終了時間" + endTime);
+
+        if (endTime == -1)
+        {
+            Debug.Log("再生に失敗しました");
+            return;
+        }
+
+        StartCoroutine(SoundEndAfterExecution(endTime, action));
     }
 
     /// <summary>SEを再生する </summary>
@@ -41,7 +100,7 @@ public class AudioManager : MonoBehaviour
     public void PlaySE(int cueID, float volume = 1f)
     {
         ChangeSEVolume(volume);  //音量を調整する
-        _seSource.Play(cueID);
+        _sources[(int)Sources.SE].Play(cueID);
     }
 
     /// <summary>ボイスを再生する </summary>
@@ -50,7 +109,7 @@ public class AudioManager : MonoBehaviour
     public void PlayVoice(int cueID, float volume = 1f)
     {
         ChangeVoiceVolume(volume);  //音量を調整する
-        _voiceSource.Play(cueID);
+        _sources[(int)Sources.VOICE].Play(cueID);
     }
 
     /// <summary>BGNを再生する </summary>
@@ -63,12 +122,12 @@ public class AudioManager : MonoBehaviour
         if (_playingBGMs.ContainsKey(cueID))    //既に再生中
         {
             StopBGM(cueID);            //一度再生を止める
-            var bgm = _bgmSource.Play(cueID);     //再度再生を開始する
+            var bgm = _sources[(int)Sources.BGM].Play(cueID);     //再度再生を開始する
             _playingBGMs.Add(cueID, bgm);
             return;
         }
 
-        var playBGM = _bgmSource.Play(cueID);
+        var playBGM = _sources[(int)Sources.BGM].Play(cueID);
         _playingBGMs.Add(cueID, playBGM);  //ディクショナリに追加
     }
 
@@ -107,7 +166,7 @@ public class AudioManager : MonoBehaviour
             case FlickType.Left:
                 PlaySE(4, volum);
                 break;
-                    
+
         }
     }
 
@@ -115,32 +174,40 @@ public class AudioManager : MonoBehaviour
     /// <param name="volume">音量</param>
     public void ChangeBGMVolume(float volume)
     {
-        _bgmSource.volume = volume;
+        _sources[(int)Sources.BGM].volume = volume;
     }
 
     /// <summary>SEの音量を調整する</summary>
     /// <param name="volume">音量</param>
     public void ChangeSEVolume(float volume)
     {
-        _seSource.volume = volume;
+        _sources[(int)Sources.SE].volume = volume;
     }
 
     /// <summary>Voiceの音量を調整する</summary>
     /// <param name="volume">音量</param>
     public void ChangeVoiceVolume(float volume)
     {
-        _voiceSource.volume = volume;
+        _sources[(int)Sources.VOICE].volume = volume;
     }
 
     /// <summary>BGMの再生を一時停止する</summary>
     public void PauseBGM()
     {
-        _bgmSource.Pause(true);
+        _sources[(int)Sources.BGM].Pause(true);
     }
 
     /// <summary>BGMの再生を再開する</summary>
     public void ResumeBGM()
     {
-        _bgmSource.Pause(false);
+        _sources[(int)Sources.BGM].Pause(false);
     }
+}
+
+/// <summary>各サウンドソース </summary>
+public enum Sources
+{
+    BGM = 0,
+    SE = 1,
+    VOICE = 2,
 }
