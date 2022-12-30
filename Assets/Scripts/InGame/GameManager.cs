@@ -21,6 +21,10 @@ public class GameManager : MonoBehaviour
     /// <summary>ゲーム終了状態 </summary>
     public static GameEnd _gameEndState => new GameEnd();
 
+    [SerializeField, Header("デバッグモード"), Tooltip("デバッグ時はチェックを入れて下さい")]
+    bool _debugMode = false;
+    [SerializeField, Header("現在の難易度"), Tooltip("選択されている難易度が適用されます")]
+    GameLevel _currentLevel = GameLevel.Nomal;
     [SerializeField, Header("スクロールさせるオブジェクト")]
     StageScroller _stageScroller = default;
     [SerializeField, Tooltip("フェードを行うクラス")]
@@ -82,6 +86,14 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
+
+    private void Awake()
+    {
+        if (_debugMode)
+        {
+            LevelManager.Instance.SelectLevel(_currentLevel);
+        }
+    }
 
     void Start()
     {
