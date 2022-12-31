@@ -738,13 +738,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 333433712}
-        m_TargetAssemblyTypeName: SelectButtonController, Assembly-CSharp
+      - m_Target: {fileID: 333433709}
+        m_TargetAssemblyTypeName: StageSelectManager, Assembly-CSharp
         m_MethodName: StartSelectLevelAnime
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 282881472}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Animator, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 333433709}
+        m_TargetAssemblyTypeName: StageSelectManager, Assembly-CSharp
+        m_MethodName: LevelSelect
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -820,7 +832,6 @@ GameObject:
   - component: {fileID: 333433709}
   - component: {fileID: 333433710}
   - component: {fileID: 333433711}
-  - component: {fileID: 333433712}
   m_Layer: 0
   m_Name: SelectManager
   m_TagString: Untagged
@@ -863,11 +874,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 10a40501a5a467a4cb2fffefcca03b82, type: 3}
   - {fileID: 21300000, guid: df27ab4b814d37b43aa4e78960646d17, type: 3}
   - {fileID: 21300000, guid: d4f4e4ce1747a8247bb748712944a194, type: 3}
-  _stageSelectButtons:
-  - {fileID: 282881469}
-  - {fileID: 721106463}
-  - {fileID: 1207818947}
   _playUiCanvas: {fileID: 1995098632}
+  _startAnimator: {fileID: 546173324}
 --- !u!114 &333433710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -901,19 +909,6 @@ MonoBehaviour:
   _tutorialAnimator: {fileID: 1995098633}
   _creditAnimator: {fileID: 2077096898}
   _menuAnim: {fileID: 2102135802}
---- !u!114 &333433712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 333433707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef66241689a612b4e9c715f687e273c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _startAnimator: {fileID: 546173324}
 --- !u!114 &346481679 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1016080522747188690, guid: fd44eb2d09729fc4d88d396c86c68bb0, type: 3}
@@ -1746,7 +1741,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 546173322}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 333433709}
+        m_TargetAssemblyTypeName: StageSelectManager, Assembly-CSharp
+        m_MethodName: TransitionGameScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &546173322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2134,14 +2141,26 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 333433712}
-        m_TargetAssemblyTypeName: SelectButtonController, Assembly-CSharp
+      - m_Target: {fileID: 333433709}
+        m_TargetAssemblyTypeName: StageSelectManager, Assembly-CSharp
         m_MethodName: StartSelectLevelAnime
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 721106466}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Animator, UnityEngine
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 333433709}
+        m_TargetAssemblyTypeName: StageSelectManager, Assembly-CSharp
+        m_MethodName: LevelSelect
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3385,14 +3404,26 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 333433712}
-        m_TargetAssemblyTypeName: SelectButtonController, Assembly-CSharp
+      - m_Target: {fileID: 333433709}
+        m_TargetAssemblyTypeName: StageSelectManager, Assembly-CSharp
         m_MethodName: StartSelectLevelAnime
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1207818950}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Animator, UnityEngine
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 333433709}
+        m_TargetAssemblyTypeName: StageSelectManager, Assembly-CSharp
+        m_MethodName: LevelSelect
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
