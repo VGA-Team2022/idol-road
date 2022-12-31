@@ -1,7 +1,6 @@
 using UnityEngine;
 
 /// <summary>メニューUIを操作する為のクラス </summary>
-[RequireComponent(typeof(Animator))]
 public class MenuController : MonoBehaviour
 {
     /// <summary>各UIを表示する為のアニメーション名 </summary>

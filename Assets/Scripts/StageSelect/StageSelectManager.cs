@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 /// <summary>ステージ選択シーンに関する処理を行うクラス </summary>
-public class StageSelectController : MonoBehaviour
+public class StageSelectManager : MonoBehaviour
 {
     #region　変数
     [SerializeField, Header("次の遷移先のシーン名")]
@@ -16,55 +16,25 @@ public class StageSelectController : MonoBehaviour
     [SerializeField, Header("各ステージのイラスト"), Tooltip("0=チュートリアル, 1=簡単, 2=普通, 3=難しい")]
     Sprite[] _stageSprites = default;
     [ElementNames(new string[] {"簡単", "普通", "難しい" })]
-    [SerializeField, Header("ステージセレクトのボタン"), Tooltip("1=簡単, 2=普通, 3=難しい")]
-    Button[] _stageSelectButtons = default;
     [SerializeField , Header("遊び方を表示するキャンバス")]
     Canvas _playUiCanvas = default;
+    [SerializeField, Header("スタートボタンのアニメーター")]
+    Animator _startAnimator = default;
 
     /// <summary>遷移をしているか true=開始している</summary>
     bool _isTransition = false;
 
     /// <summary>現在選択されているボタン </summary>
     Button _currentSelectedButton = default;
+
+    /// <summary>選択されているステージ選択ボタンのアニメーター </summary>
+    Animator _currentButtonAnimator = default;
     #endregion
 
     void Start()
     {
         _fadeController.FadeIn();
-
-        for (var i = 0; i < _stageSelectButtons.Length; i++)
-        {
-            var button = _stageSelectButtons[i];    //一度ローカル変更に代入しないとエラーが出る
-            var index = i;
-            _stageSelectButtons[i].onClick.AddListener(() => TransitionGameScene(button, index));
-        }
         _stageImage.sprite = _stageSprites[0];              //初期イラストを設定
-    }
-
-    /// <summary>ゲームシーンに遷移する時の処理 </summary>
-    void TransitionGameScene(Button selectButton, int index)
-    {
-        if (_isTransition) { return; }
-
-        if (selectButton == _currentSelectedButton)     //選択ゲームシーンに遷移する
-        {
-            AudioManager.Instance.PlaySE(7);
-            _isTransition = true;
-            _fadeController.FadeOut(() => SceneManager.LoadScene(_nextSceneName));
-        }
-        else
-        {
-            if (_playUiCanvas.enabled)
-            {
-                _playUiCanvas.enabled = false;
-            }
-
-            //ステージを選択する
-            _currentSelectedButton = selectButton;
-            _stageImage.sprite = _stageSprites[index];
-            LevelManager.Instance.SelectLevel((GameLevel)index);    //レベルを変更
-            AudioManager.Instance.PlaySE(32);
-        }
     }
 
     /// <summary>操作説明・遊び方を表示する処理</summary>
@@ -72,7 +42,7 @@ public class StageSelectController : MonoBehaviour
     {
         if (_isTransition) { return; }
 
-        if (selectButton == _currentSelectedButton)     //選択ゲームシーンに遷移する
+        if (selectButton == _currentSelectedButton)
         {
             AudioManager.Instance.PlaySE(7);
             if (!_playUiCanvas.enabled) 
@@ -89,6 +59,14 @@ public class StageSelectController : MonoBehaviour
         }
     }
 
+    /// <summary>難易度を選択する </summary>
+    /// <param name="index"></param>
+    public void LevelSelect(int index)
+    {
+        LevelManager.Instance.SelectLevel((GameLevel)index);    //レベルを変更
+        AudioManager.Instance.PlaySE(32);
+    }
+
     /// <summary>タイトルシーンに戻る</summary>
     public void TitleChange() 
     {
@@ -98,4 +76,39 @@ public class StageSelectController : MonoBehaviour
         _fadeController.FadeOut(() => SceneManager.LoadScene(0));
         _isTransition = true;
     }
+
+    /// <summary>
+    /// ゲームシーンに遷移する時の処理 
+    /// ボタンから呼び出す
+    /// </summary>
+    public void TransitionGameScene()
+    {
+        if (_isTransition) { return; }
+
+        AudioManager.Instance.PlaySE(7);
+        _isTransition = true;
+        _fadeController.FadeOut(() => SceneManager.LoadScene(_nextSceneName));
+    }
+
+    /// <summary>
+    /// レベル選択ボタンが押された時のアニメーションを再生する
+    /// ボタンから呼び出す
+    /// </summary>
+    public void StartSelectLevelAnime(Animator selectAnimator)
+    {
+        if (_currentButtonAnimator == null)     //初めて難易度が選択された時の処理
+        {
+            _startAnimator.gameObject.SetActive(true);
+            _startAnimator.Play("In");
+
+            _currentButtonAnimator = selectAnimator;
+            _currentButtonAnimator.Play("Select");
+            return;
+        }
+
+        _currentButtonAnimator.Play("Deselect");
+        _currentButtonAnimator = selectAnimator;
+        _currentButtonAnimator.Play("Select");
+    }
+
 }
