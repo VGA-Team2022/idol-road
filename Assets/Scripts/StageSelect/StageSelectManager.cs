@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 /// <summary>ステージ選択シーンに関する処理を行うクラス </summary>
-public class StageSelectController : MonoBehaviour
+public class StageSelectManager : MonoBehaviour
 {
     #region　変数
     [SerializeField, Header("次の遷移先のシーン名")]
