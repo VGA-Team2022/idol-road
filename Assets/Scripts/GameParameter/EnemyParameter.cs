@@ -18,47 +18,54 @@ public class EnemyParameter : ScriptableObject
 
     [SerializeField, Header("リズム判定の秒数"), ElementNames(new string[] {"合計時間", "Bad", "Good", "Perfect", "Out"})]
     float[] _rhythmTimes = new float[5];
-    
+
     [SerializeField, Header("----------------------------ボス戦の時----------------------------"), Header("与えるダメージ")]
-    int _addDamageValueToBossBattle = 0;
+    int _addDamageValueBoss = 0;
 
     [SerializeField, Header("向かってくる速度")]
-    float _moveSpeedToBossBattle = 0f;
+    float _moveSpeedBoss = 0f;
 
     [SerializeField, Header("透明になるまでの速度")]
-    float _fadeSpeedToBossBattle = 0f;
+    float _fadeSpeedBoss = 0f;
 
     [SerializeField, Header("獲得出来るアイドルパワー量")]
-    int _addIdolPowerValueToBossBattle = 0;
+    int _addIdolPowerValueBoss = 0;
 
     [SerializeField, Header("リズム判定の秒数"), ElementNames(new string[] { "合計時間", "Bad", "Good", "Perfect", "Out" })]
-    float[] _rhythmTimesToBossBattle = new float[5];
-    
-    /// <summary>向かってくる速度</summary>
-    public float MoveSpped => _moveSpeed;
+    float[] _rhythmTimesBoss = new float[5];
 
-    /// <summary>ボス戦のときの向かってくる速度</summary>
-    public float MoveSpeedToBossBattle => _moveSpeedToBossBattle;
+    /// <summary>向かってくる速度</summary>
+    public float MoveSpeed => _moveSpeed;
 
     /// <summary>透明になるまでの速度</summary>
     public float FadeSpeed => _fadeSpeed;
 
-    /// <summary>ボス戦のときの透明になるまでの速度</summary>
-    public float FadeSpeedToBossBattle => _fadeSpeedToBossBattle;
-
     /// <summary>リズム判定の秒数 0=合計時間 1=Bad 2=Good 3=Perfect 4=Out</summary>
     public float[] RhythmTimes => _rhythmTimes;
-
-    /// <summary>ボス戦時のリズム判定の秒数 0=合計時間 1=Bad 2=Good 3=Perfect 4=Out</summary>
-    public float[] RhythmTimesToBossBattle => _rhythmTimesToBossBattle;
-
+   
     /// <summary>与えるダメージ </summary>
     public int AddDamageValue => _addDamageValue;
-
-    /// <summary>ボス戦のときの与えるダメージ</summary>
-    public int AddDamageValueToBossBattle => _addDamageValueToBossBattle;
+   
     /// <summary>獲得できるアイドルパワー量</summary>
     public int AddIdolPowerValue => _addIdolPowerValue;
-    /// <summary>ボス戦のときの獲得出来るアイドルパワー量 </summary>
-    public int AddIdolPowerValueToBossBattle => _addIdolPowerValueToBossBattle;
+
+
+    //========== 以下 ボスステージ用パラメータープロパティ ===========
+
+    /// <summary>ダメージ量 </summary>
+    public int AddDamageValueBoss => _addDamageValueBoss;
+
+    /// <summary>移動速度 </summary>
+    public float MoveSpeedBoss => _moveSpeedBoss;
+
+    /// <summary>フェード速度 </summary>
+    public float FadeSpeedBoss => _fadeSpeedBoss;
+
+    /// <summary>リズム判定</summary>
+    public float[] RhythmTimesBoss => _rhythmTimesBoss;
+
+    /// <summary>アイドルパワーの獲得量 </summary>
+    public int AddIdolPowerValueBoss => _addIdolPowerValueBoss;
+
+
 }

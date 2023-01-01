@@ -42,12 +42,12 @@ MonoBehaviour:
   - "\u56FD\u5B9D\u7D1A\u306E\u5B58\u5728\u3060\u3041\u3041!!"
   - "\u4ECA\u65E5\u3082\u30B9\u30C6\u30AD\u2661\u2661\u2661"
   _idolResultScriptExcellent: Excellent!!
-  _idolScriptExcellent: "\u3084\u3063\u3071\u4FFA\u3063\u3066\u6700\u9AD8\u3060\u306A\uFF01\uFF01"
+  _idolScriptExcellent: "\u3084\u3063\u3071\u4FFA\u3063\u3066\u6700\u9AD8\u3060\u305C\uFF01\uFF01"
   _fanScriptsPerfect:
   - "\u795E..."
   - "\u795E!?"
   - "\u304B\u307F!"
   - "\u795E\u3043\u3043\u3044\u3044\u3044!"
   - God of Idle
-  _idolResultScriptPerfect: GOD
+  _idolResultScriptPerfect: "GOD\u203C"
   _idolScriptPerfect: "\u5168\u3066\u306E\u30D5\u30A1\u30F3\u306B\u611B\u3092"

@@ -16,10 +16,8 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField, Tooltip("爆発エフェクト")]
     GameObject _explosionEffect = default;
 
-    /// <summary>各ファンのパラメーター 0=通常 1=壁ファン2 2=壁ファン3 4=boss</summary>
-    EnemyParameter[] _parameters => LevelManager.Instance.CurrentLevel.EnemyParameters;
     /// <summary>現在のパラメーター</summary>
-    protected EnemyParameter _currentParameter = default;
+    protected CurrentEnemyParameter _currentParameter = default;
     /// <summary>ファンサ要求を保持する配列 </summary>
     FlickType[] _requestArray = default;
     /// <summary>吹き飛び時の評価 </summary>
@@ -96,8 +94,8 @@ public abstract class EnemyBase : MonoBehaviour
     /// <summary>スーパーアイドルタイムを呼び出す処理</summary>
     public event Action EnterSuperIdolTime
     {
-        add { _enterSuperIdolTime += value;}
-        remove { _enterSuperIdolTime -= value;}
+        add { _enterSuperIdolTime += value; }
+        remove { _enterSuperIdolTime -= value; }
     }
 
     protected Rigidbody _rb => GetComponent<Rigidbody>();
@@ -115,28 +113,6 @@ public abstract class EnemyBase : MonoBehaviour
         {
             UpdateResultTime();
         }
-    }
-
-    /// <summary>敵の種類によってパラメーターを変更する </summary>
-    void SelectEnemyParameter()
-    {
-        switch (_enemyType)
-        {
-            case EnemyType.Nomal:
-                _currentParameter = _parameters[0];
-                break;
-            case EnemyType.Wall2:
-                _currentParameter = _parameters[1];
-                break;
-            case EnemyType.Wall3:
-                _currentParameter = _parameters[2];
-                break;
-            case EnemyType.Boss:
-                _currentParameter = _parameters[3];
-                break;
-        }
-
-        _time = _currentParameter.RhythmTimes[_resultTimeIndex];    //リズム判定用のタイマーを初期化する
     }
 
     /// <summary>スコア増加させる </summary>
@@ -278,7 +254,7 @@ public abstract class EnemyBase : MonoBehaviour
                 var value = UnityEngine.Random.Range(1, 5);
                 type = (RequestType)value;
             }
-            
+
             _requestArray[i] = (FlickType)type;
             _requestUIArray[i].ChangeRequestImage((FlickType)type);
         }
@@ -291,9 +267,11 @@ public abstract class EnemyBase : MonoBehaviour
     /// <param name="istate">現在のゲームの状態</param>
     public virtual void Setup(IState currentGameState, EnemyInfo info)
     {
+        _currentParameter = new CurrentEnemyParameter(currentGameState, _enemyType);
+
         _requestArray = new FlickType[_requestUIArray.Length];
 
-        SelectEnemyParameter();
+        _time = _currentParameter.RhythmTimes[_resultTimeIndex];    //リズム判定用のタイマーを初期化する
 
         SetRequset(info); //ランダムでフリック方向を取得する
 
