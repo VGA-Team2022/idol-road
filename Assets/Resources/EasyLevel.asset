@@ -16,8 +16,13 @@ MonoBehaviour:
   _result: {fileID: 11400000, guid: 39c2016567802124f81bb89e0032d0ba, type: 2}
   _enemyOrder: {fileID: 11400000, guid: bd3e33281727b47468dc20920a49d570, type: 2}
   _itemParameter: {fileID: 11400000, guid: def0ecacc39130948b37fa4852fbf283, type: 2}
+  _idolTimeParamater: {fileID: 11400000, guid: c7e2788414e4c394f90fc6861647cf06, type: 2}
   _enemyParameters:
   - {fileID: 11400000, guid: bc0b8e5493814a443b579e4d6e677814, type: 2}
   - {fileID: 11400000, guid: b77056dd10f127e488a3e4ca69a8cb88, type: 2}
   - {fileID: 11400000, guid: 5446df4e23cae0f4389f9651c1420ab9, type: 2}
   - {fileID: 11400000, guid: fb96cff74c5b58340827706b9889e992, type: 2}
+  _bossStageParameters:
+  - {fileID: 11400000, guid: bd8ced3fc0f32524391d64622dfe4565, type: 2}
+  - {fileID: 11400000, guid: b184ac822797ef146ab0e47e744b308c, type: 2}
+  - {fileID: 11400000, guid: 35d60a67a19df704ca6b0f7f45a296ea, type: 2}
