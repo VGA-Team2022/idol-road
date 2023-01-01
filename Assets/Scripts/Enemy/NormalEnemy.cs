@@ -10,6 +10,10 @@ public class NormalEnemy : EnemyBase
     const int VOICE_ID_SIZE = 2;
     /// <summary>吹き飛ぶまでの遅延 </summary>
     const float EXPLOSION_DELAY = 0.3f;
+
+    [SerializeField, Header("ボスタイム用アニメーター")]
+    Animator _bossAnim = default;
+
     /// <summary>再生するボイスを決定するクラス </summary>
     EnemyVoice _enemyVoice => GetComponent<EnemyVoice>();
     /// <summary>吹き飛ぶ演出で再生するアニメーションの名前</summary>
@@ -60,7 +64,7 @@ public class NormalEnemy : EnemyBase
         AudioManager.Instance.PlaySE(6, 0.7f);
     }
 
-    public override void SetUp(IState currentGameState, EnemyInfo info)
+    public override void Setup(IState currentGameState, EnemyInfo info)
     {
         var voiceID = new int[VOICE_ID_SIZE];
         var nomalType = EnemySprites[0].ChangeNomalEnemySprite();   //イラスト変更
@@ -68,6 +72,8 @@ public class NormalEnemy : EnemyBase
         if (currentGameState is BossTime)   //ボスステージ用のボイスを再生する為
         {
             voiceID = _enemyVoice.GetBossTimeVoiceID();
+            _bossAnim.enabled = true;
+            _bossAnim.Play("BossTimeWalk");
         }
         else
         {
@@ -78,7 +84,7 @@ public class NormalEnemy : EnemyBase
         _voiceSuccessID = voiceID[0];
         _voiceFailureID = voiceID[1];
 
-        base.SetUp(currentGameState, info);
+        base.Setup(currentGameState, info);
 
         switch (_currentRequest)    //各ファンサで吹き飛ぶ方向を決める
         {

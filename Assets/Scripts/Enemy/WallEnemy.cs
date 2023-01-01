@@ -11,6 +11,9 @@ public class WallEnemy : EnemyBase
     /// <summary>失敗時ボイスのID </summary>
     const int FAIL_VOICE_ID = 13;
 
+    [SerializeField, Tooltip("ボスステージ用アニメーターの配列")]
+    Animator[] _bossAnimators = default;
+
     /// <summary>再生するボイスを決定するクラス </summary>
     EnemyVoice _enemyVoice => GetComponent<EnemyVoice>();
     /// <summary>GOOD・PERFECT判定時に再生するサウンドID </summary>
@@ -63,7 +66,7 @@ public class WallEnemy : EnemyBase
         AudioManager.Instance.PlaySE(6, 0.7f);
     }
 
-    public override void SetUp(IState currentGameState, EnemyInfo info)
+    public override void Setup(IState currentGameState, EnemyInfo info)
     {
         if (currentGameState is BossTime)   //ボスステージ用のボイスを再生する為
         {
@@ -71,9 +74,11 @@ public class WallEnemy : EnemyBase
 
             _voiceSuccessID = voiceID[0];
             _voiceFailureID = voiceID[1];
+
+            Array.ForEach(_bossAnimators, b => b.Play("BossTimeWalk"));
         }
 
-        base.SetUp(currentGameState, info);
+        base.Setup(currentGameState, info);
     }
 
     /// <summary>

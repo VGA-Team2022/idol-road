@@ -289,7 +289,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     /// <summary>¶¬‚Ì‰Šú‰»ˆ— </summary>
     /// <param name="istate">Œ»İ‚ÌƒQ[ƒ€‚Ìó‘Ô</param>
-    public virtual void SetUp(IState currentGameState, EnemyInfo info)
+    public virtual void Setup(IState currentGameState, EnemyInfo info)
     {
         _requestArray = new FlickType[_requestUIArray.Length];
 
