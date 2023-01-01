@@ -22,9 +22,6 @@ public class GameParameter : ScriptableObject
     [SerializeField, Header("各エネミーのパラメーター"), ElementNames(new string[] { "通常", "壁ファン2", "壁ファン3", "ボス" })]
     EnemyParameter[] _enemyParameters = new EnemyParameter[4];
 
-    [SerializeField, Header("ボスステージでの各敵パラメーター"), ElementNames(new string[] { "通常", "壁ファン2", "壁ファン3" })]
-    BossStageParameter[] _bossStageParameters = new BossStageParameter[3];
-
     /// <summary>インゲームパラメーター </summary>
     public InGameParameter InGame => _inGame;
 
@@ -42,7 +39,4 @@ public class GameParameter : ScriptableObject
 
     /// <summary>各エネミーのパラメーター 0=通常 1=壁ファン2 2=壁ファン3  3=ボス</summary>
     public EnemyParameter[] EnemyParameters => _enemyParameters;
-
-    /// <summary>ボスステージでの各敵パラメーター </summary>
-    public BossStageParameter[] BossStageParameter => _bossStageParameters;
 }

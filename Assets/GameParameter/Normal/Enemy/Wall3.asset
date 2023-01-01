@@ -12,11 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df1a1aa990d20c044ad298c45cd60e82, type: 3}
   m_Name: Wall3
   m_EditorClassIdentifier: 
-  _addDamageValue: 1
-  _addIdolPowerValue: 15
+  _addDamageValue: 0
   _moveSpeed: 5
   _fadeSpeed: 1
+  _addIdolPowerValue: 15
   _rhythmTimes:
+  - 10
+  - 8
+  - 5
+  - 3
+  - 0
+  _addDamageValueBoss: 1
+  _moveSpeedBoss: 5
+  _fadeSpeedBoss: 1
+  _addIdolPowerValueBoss: 15
+  _rhythmTimesBoss:
   - 10
   - 8
   - 5
