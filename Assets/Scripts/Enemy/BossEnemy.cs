@@ -80,9 +80,9 @@ public class BossEnemy : EnemyBase
 
     }
 
-    public override void SetUp(IState currentGameState, EnemyInfo info)
+    public override void Setup(IState currentGameState, EnemyInfo info)
     {
-        base.SetUp(currentGameState, info);
+        base.Setup(currentGameState, info);
 
         switch (_currentRequest)    //各ファンサで吹き飛ぶ方向を決める
         {

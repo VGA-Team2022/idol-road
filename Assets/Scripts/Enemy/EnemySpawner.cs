@@ -109,7 +109,7 @@ public class EnemySpawner : MonoBehaviour
 
         var enemy = Instantiate(_enemyPrefubs[(int)_nextEnemyInfo._enemyType], _spawnPoints[_positionCount].transform);
         _manager.AddEnemy(enemy);
-        enemy.SetUp(_manager.CurrentGameState, _nextEnemyInfo);
+        enemy.Setup(_manager.CurrentGameState, _nextEnemyInfo);
 
         //ƒCƒxƒ“ƒg‚ð“o˜^
         enemy.AddComboCount += _manager.ComboAmountTotal;
@@ -170,7 +170,7 @@ public class EnemySpawner : MonoBehaviour
     void BossMove()
     {
         _manager.AddEnemy(_boss);
-        _boss.SetUp(_manager.CurrentGameState, _nextEnemyInfo);
+        _boss.Setup(_manager.CurrentGameState, _nextEnemyInfo);
         _isGenerate = false;
         _generateTimer = 0f;
         _boss.StartMoveAnim();

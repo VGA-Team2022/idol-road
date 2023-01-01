@@ -55,7 +55,7 @@ MonoBehaviour:
   _enemySprites:
   - {fileID: 1746651874851532797}
   _explosionEffect: {fileID: 5047219227802861214, guid: 5315674b013e09d4088b189a94135c4c, type: 3}
-  _enemyVoice: {fileID: 0}
+  _bossAnim: {fileID: 8881259881916464258}
 --- !u!114 &8979959088236456945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 2024111080292627622}
   - component: {fileID: 5143912652442734053}
   - component: {fileID: 1746651874851532797}
+  - component: {fileID: 8881259881916464258}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -178,7 +179,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2e902d347f0f691459e47d2344c67956, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1ceb6e801bc9d2243a94ba98b1e5b2d4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -207,6 +208,26 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d7db60e076934364699c81629f9ca28b, type: 3}
   - {fileID: 21300000, guid: 6907ffad79e68a24ab42ac9b7faa5139, type: 3}
   _bossEnemy: {fileID: 21300000, guid: 5641f416d1f3a1f45ba9fe068bea99fa, type: 3}
+--- !u!95 &8881259881916464258
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8025912129625385349}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aa5f26b1866a19c478f7b63f85a553ab, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1866035362427135112
 PrefabInstance:
   m_ObjectHideFlags: 0
