@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 /// <summary>タイトルシーンの処理を管理するクラス </summary>
@@ -8,15 +9,22 @@ public class TitleManager : MonoBehaviour
     FadeController _fadeController = default;
     [SerializeField, Tooltip("遷移先のシーン名")]
     string _nextSceneName = "";
+    [SerializeField, Tooltip("ストーリーを表示するキャンバス")]
+    Canvas _storyCanvas = default;
+    [SerializeField, Tooltip("クレジットを表示するキャンバス")]
+    Canvas _creditCanvas = default;
 
-    /// <summary>ポップアップが表示されているか　true=表示</summary>
-    bool _isPopUp = false;
+    /// <summary>ストーリー用アニメーター </summary>
+    Animator _storyAnimator => _storyCanvas.GetComponent<Animator>();
+    /// <summary>クレジット用アニメーター </summary>
+    Animator _creditAnimator => _creditCanvas.GetComponent<Animator>();
+
     /// <summary>難易度選択を開始したかどうか</summary>
     bool _isChangeScene = false;
 
     private void Start()
     {
-        _fadeController.FadeIn(() => 
+        _fadeController.FadeIn(() =>
         {
             if (!_isChangeScene)
             {
@@ -25,36 +33,44 @@ public class TitleManager : MonoBehaviour
         });
     }
 
-    /// <summary>
-    /// ストーリーやクレジットのポップアップを開く
-    /// ボタンで呼び出す
-    /// </summary>
-    public void OpenPopUp(GameObject popup)
+    public void StoryOpen()
     {
         if (_isChangeScene) { return; }
 
-        popup.SetActive(true);
-        _isPopUp = true;
+        _storyAnimator.Play("In");
+        _storyCanvas.enabled = true;
         AudioManager.Instance.PlaySE(7);
     }
 
-    /// <summary>
-    /// ストーリーやクレジットのポップアップを閉じる 
-    /// ボタンで呼び出す
-    /// </summary>
-    public void ClosePopUp(GameObject popup)
+    public void StoryClose()
     {
         if (_isChangeScene) { return; }
 
-        popup.SetActive(false);
-        _isPopUp = false;
+        _storyAnimator.Play("Out");
+        AudioManager.Instance.PlaySE(7);
+    }
+
+    public void CreditOpen()
+    {
+        if (_isChangeScene) { return; }
+
+        _creditAnimator.Play("In");
+        _creditCanvas.enabled = true;
+        AudioManager.Instance.PlaySE(7);
+    }
+
+    public void CreditClose()
+    {
+        if (_isChangeScene) { return; }
+
+        _creditAnimator.Play("Out");
         AudioManager.Instance.PlaySE(7);
     }
 
     /// <summary>シーンを切り替える</summary>
     public void ChangeScene()
     {
-        if (_isPopUp || _isChangeScene) { return; }
+        if (_isChangeScene) { return; }
 
         _isChangeScene = true;
         AudioManager.Instance.PlaySE(7);
