@@ -308,6 +308,11 @@ public abstract class EnemyBase : MonoBehaviour
         _currentRequest = _requestArray[_requestCount];     //要求ファンサを更新
     }
 
+    public void ReverseEnemySprite(IState state)
+    {
+        Array.ForEach(_enemySprites, s => s.ReverseSprite(state));
+    }
+
     /// <summary>ファンを前に移動させる </summary>
     public void EnemyMove()
     {

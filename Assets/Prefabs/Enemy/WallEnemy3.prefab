@@ -99,6 +99,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nomalEnemySprites: []
   _bossEnemy: {fileID: 21300000, guid: 5641f416d1f3a1f45ba9fe068bea99fa, type: 3}
+  _reversalSprites:
+  - {fileID: 21300000, guid: 1ceb6e801bc9d2243a94ba98b1e5b2d4, type: 3}
+  - {fileID: 21300000, guid: 87b29bac1f85fc54b981d4f06dc1fa76, type: 3}
+  - {fileID: 21300000, guid: 0f762b44e7fd1a24ca1278635c695086, type: 3}
+  - {fileID: 21300000, guid: b7d987b45e29fd44091d1276ff4bbb9e, type: 3}
+  - {fileID: 21300000, guid: 11fbd683c9d78b3408dd556cdbbf3615, type: 3}
+  - {fileID: 21300000, guid: 5d9d4c0e69825ea44930e8eb0c1626a7, type: 3}
+  - {fileID: 21300000, guid: e5c1a02656bafe44ca425043e1f4bffe, type: 3}
+  - {fileID: 21300000, guid: 01e91ed25e3fdec4a97f4c6319b86ece, type: 3}
+  - {fileID: 21300000, guid: fd2bcdfc0b5be734e8fc2dcd4b3f9214, type: 3}
 --- !u!1 &7658112783769440842
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +209,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nomalEnemySprites: []
   _bossEnemy: {fileID: 21300000, guid: 5641f416d1f3a1f45ba9fe068bea99fa, type: 3}
+  _reversalSprites:
+  - {fileID: 21300000, guid: 1ceb6e801bc9d2243a94ba98b1e5b2d4, type: 3}
+  - {fileID: 21300000, guid: 87b29bac1f85fc54b981d4f06dc1fa76, type: 3}
+  - {fileID: 21300000, guid: 0f762b44e7fd1a24ca1278635c695086, type: 3}
+  - {fileID: 21300000, guid: b7d987b45e29fd44091d1276ff4bbb9e, type: 3}
+  - {fileID: 21300000, guid: 11fbd683c9d78b3408dd556cdbbf3615, type: 3}
+  - {fileID: 21300000, guid: 5d9d4c0e69825ea44930e8eb0c1626a7, type: 3}
+  - {fileID: 21300000, guid: e5c1a02656bafe44ca425043e1f4bffe, type: 3}
+  - {fileID: 21300000, guid: 01e91ed25e3fdec4a97f4c6319b86ece, type: 3}
+  - {fileID: 21300000, guid: fd2bcdfc0b5be734e8fc2dcd4b3f9214, type: 3}
 --- !u!95 &1068833181229315096
 Animator:
   serializedVersion: 4
@@ -207,7 +227,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7658112783769440842}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: aa5f26b1866a19c478f7b63f85a553ab, type: 2}
   m_CullingMode: 0
@@ -468,6 +488,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nomalEnemySprites: []
   _bossEnemy: {fileID: 21300000, guid: 5641f416d1f3a1f45ba9fe068bea99fa, type: 3}
+  _reversalSprites:
+  - {fileID: 21300000, guid: 1ceb6e801bc9d2243a94ba98b1e5b2d4, type: 3}
+  - {fileID: 21300000, guid: 87b29bac1f85fc54b981d4f06dc1fa76, type: 3}
+  - {fileID: 21300000, guid: 0f762b44e7fd1a24ca1278635c695086, type: 3}
+  - {fileID: 21300000, guid: b7d987b45e29fd44091d1276ff4bbb9e, type: 3}
+  - {fileID: 21300000, guid: 11fbd683c9d78b3408dd556cdbbf3615, type: 3}
+  - {fileID: 21300000, guid: 5d9d4c0e69825ea44930e8eb0c1626a7, type: 3}
+  - {fileID: 21300000, guid: e5c1a02656bafe44ca425043e1f4bffe, type: 3}
+  - {fileID: 21300000, guid: 01e91ed25e3fdec4a97f4c6319b86ece, type: 3}
+  - {fileID: 21300000, guid: fd2bcdfc0b5be734e8fc2dcd4b3f9214, type: 3}
 --- !u!1 &7658112784537714946
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,6 +598,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nomalEnemySprites: []
   _bossEnemy: {fileID: 21300000, guid: 5641f416d1f3a1f45ba9fe068bea99fa, type: 3}
+  _reversalSprites:
+  - {fileID: 21300000, guid: 1ceb6e801bc9d2243a94ba98b1e5b2d4, type: 3}
+  - {fileID: 21300000, guid: 87b29bac1f85fc54b981d4f06dc1fa76, type: 3}
+  - {fileID: 21300000, guid: 0f762b44e7fd1a24ca1278635c695086, type: 3}
+  - {fileID: 21300000, guid: b7d987b45e29fd44091d1276ff4bbb9e, type: 3}
+  - {fileID: 21300000, guid: 11fbd683c9d78b3408dd556cdbbf3615, type: 3}
+  - {fileID: 21300000, guid: 5d9d4c0e69825ea44930e8eb0c1626a7, type: 3}
+  - {fileID: 21300000, guid: e5c1a02656bafe44ca425043e1f4bffe, type: 3}
+  - {fileID: 21300000, guid: 01e91ed25e3fdec4a97f4c6319b86ece, type: 3}
+  - {fileID: 21300000, guid: fd2bcdfc0b5be734e8fc2dcd4b3f9214, type: 3}
 --- !u!95 &1834560195576721075
 Animator:
   serializedVersion: 4
@@ -576,7 +616,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7658112784537714946}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: aa5f26b1866a19c478f7b63f85a553ab, type: 2}
   m_CullingMode: 0
@@ -720,6 +760,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nomalEnemySprites: []
   _bossEnemy: {fileID: 21300000, guid: 5641f416d1f3a1f45ba9fe068bea99fa, type: 3}
+  _reversalSprites:
+  - {fileID: 21300000, guid: 1ceb6e801bc9d2243a94ba98b1e5b2d4, type: 3}
+  - {fileID: 21300000, guid: 87b29bac1f85fc54b981d4f06dc1fa76, type: 3}
+  - {fileID: 21300000, guid: 0f762b44e7fd1a24ca1278635c695086, type: 3}
+  - {fileID: 21300000, guid: b7d987b45e29fd44091d1276ff4bbb9e, type: 3}
+  - {fileID: 21300000, guid: 11fbd683c9d78b3408dd556cdbbf3615, type: 3}
+  - {fileID: 21300000, guid: 5d9d4c0e69825ea44930e8eb0c1626a7, type: 3}
+  - {fileID: 21300000, guid: e5c1a02656bafe44ca425043e1f4bffe, type: 3}
+  - {fileID: 21300000, guid: 01e91ed25e3fdec4a97f4c6319b86ece, type: 3}
+  - {fileID: 21300000, guid: fd2bcdfc0b5be734e8fc2dcd4b3f9214, type: 3}
 --- !u!1 &7658112785122887790
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,6 +902,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nomalEnemySprites: []
   _bossEnemy: {fileID: 21300000, guid: 5641f416d1f3a1f45ba9fe068bea99fa, type: 3}
+  _reversalSprites:
+  - {fileID: 21300000, guid: 1ceb6e801bc9d2243a94ba98b1e5b2d4, type: 3}
+  - {fileID: 21300000, guid: 87b29bac1f85fc54b981d4f06dc1fa76, type: 3}
+  - {fileID: 21300000, guid: 0f762b44e7fd1a24ca1278635c695086, type: 3}
+  - {fileID: 21300000, guid: b7d987b45e29fd44091d1276ff4bbb9e, type: 3}
+  - {fileID: 21300000, guid: 11fbd683c9d78b3408dd556cdbbf3615, type: 3}
+  - {fileID: 21300000, guid: 5d9d4c0e69825ea44930e8eb0c1626a7, type: 3}
+  - {fileID: 21300000, guid: e5c1a02656bafe44ca425043e1f4bffe, type: 3}
+  - {fileID: 21300000, guid: 01e91ed25e3fdec4a97f4c6319b86ece, type: 3}
+  - {fileID: 21300000, guid: fd2bcdfc0b5be734e8fc2dcd4b3f9214, type: 3}
 --- !u!1001 &1005156342652404046
 PrefabInstance:
   m_ObjectHideFlags: 0

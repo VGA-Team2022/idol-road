@@ -12,6 +12,10 @@ public class EnemySpawner : MonoBehaviour
     const int LAST_ENEMY_GENERATED = 1;
     /// <summary>ボスを移動させる処理を登録する為変数 </summary>
     const int BOSS_MOVE_REGISTER = 2;
+    /// <summary>左側の生成位置の添え字 </summary>
+    const int LEFT_SPAWN_POINT = 2;
+
+
 
     #region private SerializeField
 
@@ -85,7 +89,7 @@ public class EnemySpawner : MonoBehaviour
 
             if (_generateTimer >= _nextGenerateTime) //_timeIntervalを超えるとInstantiateします
             {
-                GenerateEnemy();
+                GenerateEnemy(_positionCount);
 
                 _positionCount++;
 
@@ -103,7 +107,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
     /// <summary>敵を生成し、初期化を行う</summary>
-    void GenerateEnemy()
+    void GenerateEnemy(int spawnPointNumber)
     {
         if (_nextEnemyInfo._enemyType == EnemyType.Wait) { return; }　//待機であれば何もしない
 
@@ -118,6 +122,11 @@ public class EnemySpawner : MonoBehaviour
         enemy.DisapperEnemies += _manager.RemoveEnemy;
         enemy.AddIdolPower += _manager.IncreseIdlePower;
         enemy.EnterSuperIdolTime += _manager.EnemyCheckIdolPower;
+
+        if (spawnPointNumber == LEFT_SPAWN_POINT)      //左側だったらイラストを反転する
+        {
+            enemy.ReverseEnemySprite(_manager.CurrentGameState);
+        }
 
         if (_isRegister)
         {
