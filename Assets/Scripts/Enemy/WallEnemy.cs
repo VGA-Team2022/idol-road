@@ -75,7 +75,12 @@ public class WallEnemy : EnemyBase
             _voiceSuccessID = voiceID[0];
             _voiceFailureID = voiceID[1];
 
-            Array.ForEach(_bossAnimators, b => b.Play("BossTimeWalk"));
+            
+            Array.ForEach(_bossAnimators, b => 
+            {
+                b.enabled = true;
+                b.Play("BossTimeWalk");
+            });
         }
 
         base.Setup(currentGameState, info);

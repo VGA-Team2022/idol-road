@@ -99,6 +99,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nomalEnemySprites: []
   _bossEnemy: {fileID: 21300000, guid: fd2bcdfc0b5be734e8fc2dcd4b3f9214, type: 3}
+  _reversalSprites:
+  - {fileID: 21300000, guid: 1ceb6e801bc9d2243a94ba98b1e5b2d4, type: 3}
+  - {fileID: 21300000, guid: 87b29bac1f85fc54b981d4f06dc1fa76, type: 3}
+  - {fileID: 21300000, guid: 0f762b44e7fd1a24ca1278635c695086, type: 3}
+  - {fileID: 21300000, guid: b7d987b45e29fd44091d1276ff4bbb9e, type: 3}
+  - {fileID: 21300000, guid: 11fbd683c9d78b3408dd556cdbbf3615, type: 3}
+  - {fileID: 21300000, guid: 5d9d4c0e69825ea44930e8eb0c1626a7, type: 3}
+  - {fileID: 21300000, guid: e5c1a02656bafe44ca425043e1f4bffe, type: 3}
+  - {fileID: 21300000, guid: 01e91ed25e3fdec4a97f4c6319b86ece, type: 3}
+  - {fileID: 21300000, guid: fd2bcdfc0b5be734e8fc2dcd4b3f9214, type: 3}
 --- !u!1 &8890162699146751734
 GameObject:
   m_ObjectHideFlags: 0
