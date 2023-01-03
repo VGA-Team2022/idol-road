@@ -794,7 +794,6 @@ MonoBehaviour:
   _stageImage: {fileID: 1061867713}
   _fadeController: {fileID: 346481679}
   _stageSprites:
-  - {fileID: 21300000, guid: 8af1b799f92c1674d999a2f696b1dbe5, type: 3}
   - {fileID: 21300000, guid: 10a40501a5a467a4cb2fffefcca03b82, type: 3}
   - {fileID: 21300000, guid: df27ab4b814d37b43aa4e78960646d17, type: 3}
   - {fileID: 21300000, guid: d4f4e4ce1747a8247bb748712944a194, type: 3}

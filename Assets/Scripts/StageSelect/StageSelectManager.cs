@@ -12,11 +12,11 @@ public class StageSelectManager : MonoBehaviour
     Image _stageImage = default;
     [SerializeField, Header("フェード行うクラス")]
     FadeController _fadeController = default;
-    [ElementNames(new string[] { "チュートリアル", "簡単", "普通", "難しい" })]
-    [SerializeField, Header("各ステージのイラスト"), Tooltip("0=チュートリアル, 1=簡単, 2=普通, 3=難しい")]
+    [ElementNames(new string[] { "簡単", "普通", "難しい" })]
+    [SerializeField, Header("各ステージのイラスト"), Tooltip("0=簡単, 1=普通, 2=難しい")]
     Sprite[] _stageSprites = default;
-    [ElementNames(new string[] {"簡単", "普通", "難しい" })]
-    [SerializeField , Header("遊び方を表示するキャンバス")]
+    [ElementNames(new string[] { "簡単", "普通", "難しい" })]
+    [SerializeField, Header("遊び方を表示するキャンバス")]
     Canvas _playUiCanvas = default;
     [SerializeField, Header("スタートボタンのアニメーター")]
     Animator _startAnimator = default;
@@ -45,7 +45,7 @@ public class StageSelectManager : MonoBehaviour
         if (selectButton == _currentSelectedButton)
         {
             AudioManager.Instance.PlaySE(7);
-            if (!_playUiCanvas.enabled) 
+            if (!_playUiCanvas.enabled)
             {
                 _playUiCanvas.enabled = true;
             }
@@ -59,16 +59,26 @@ public class StageSelectManager : MonoBehaviour
         }
     }
 
-    /// <summary>難易度を選択する </summary>
+    /// <summary>
+    /// 難易度を選択する
+    /// ボタンから呼び出す
+    /// </summary>
     /// <param name="index"></param>
     public void LevelSelect(int index)
     {
+        if (_isTransition) { return; }
+
         LevelManager.Instance.SelectLevel((GameLevel)index);    //レベルを変更
         AudioManager.Instance.PlaySE(32);
+
+        _stageImage.sprite = _stageSprites[index];
     }
 
-    /// <summary>タイトルシーンに戻る</summary>
-    public void TitleChange() 
+    /// <summary>
+    /// タイトルシーンに戻る
+    /// ボタンから呼び出す
+    /// </summary>
+    public void TitleChange()
     {
         if (_isTransition) { return; }
 
