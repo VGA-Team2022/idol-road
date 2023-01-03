@@ -443,17 +443,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 363423391}
-        m_TargetAssemblyTypeName: TitleManager, Assembly-CSharp
-        m_MethodName: StoryOpen
-        m_Mode: 1
+      - m_Target: {fileID: 1377346268}
+        m_TargetAssemblyTypeName: StoryPrinter, Assembly-CSharp
+        m_MethodName: StroyOperator
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &153728401
 MonoBehaviour:
@@ -1240,6 +1240,17 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 8027290799931248767, guid: 76e016eac153f35448a36028b88ef1c3, type: 3}
   m_PrefabInstance: {fileID: 1520466611105804819}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1377346268 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 970479122, guid: 76e016eac153f35448a36028b88ef1c3, type: 3}
+  m_PrefabInstance: {fileID: 1520466611105804819}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f12ae729aae17b24d8fc7b94d14de40e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1477347684 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1429683746686605161, guid: 11ec29796cd01bb4ead4390ffb0e0698, type: 3}
