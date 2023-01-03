@@ -764,7 +764,7 @@ GameObject:
   - component: {fileID: 7018228033577133965}
   - component: {fileID: 7018228033577133964}
   m_Layer: 5
-  m_Name: StoryCanvas
+  m_Name: StoryCanvas Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

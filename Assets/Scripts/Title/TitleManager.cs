@@ -9,18 +9,16 @@ public class TitleManager : MonoBehaviour
     FadeController _fadeController = default;
     [SerializeField, Tooltip("遷移先のシーン名")]
     string _nextSceneName = "";
-    [SerializeField, Tooltip("ストーリーを表示するキャンバス")]
-    Canvas _storyCanvas = default;
-    [SerializeField, Tooltip("クレジットを表示するキャンバス")]
-    Canvas _creditCanvas = default;
-
-    /// <summary>ストーリー用アニメーター </summary>
-    Animator _storyAnimator => _storyCanvas.GetComponent<Animator>();
-    /// <summary>クレジット用アニメーター </summary>
-    Animator _creditAnimator => _creditCanvas.GetComponent<Animator>();
+    [SerializeField, Tooltip("ストーリー用アニメーター")]
+    Animator _storyAnimator = default;
+    [SerializeField, Tooltip("クレジット用アニメーター")]
+    Animator _creditAnimator = default;
 
     /// <summary>難易度選択を開始したかどうか</summary>
     bool _isChangeScene = false;
+
+    /// <summary>ポップアップを表示中かどうか </summary>
+    bool _isPopup = false;
 
     private void Start()
     {
@@ -37,8 +35,8 @@ public class TitleManager : MonoBehaviour
     {
         if (_isChangeScene) { return; }
 
-        _storyAnimator.Play("In");
-        _storyCanvas.enabled = true;
+        _isPopup = true;
+        _storyAnimator.Play("Open");
         AudioManager.Instance.PlaySE(7);
     }
 
@@ -46,7 +44,8 @@ public class TitleManager : MonoBehaviour
     {
         if (_isChangeScene) { return; }
 
-        _storyAnimator.Play("Out");
+        _isPopup = false;
+        _storyAnimator.Play("Close");
         AudioManager.Instance.PlaySE(7);
     }
 
@@ -54,8 +53,8 @@ public class TitleManager : MonoBehaviour
     {
         if (_isChangeScene) { return; }
 
-        _creditAnimator.Play("In");
-        _creditCanvas.enabled = true;
+        _isPopup = true;
+        _creditAnimator.Play("Open");
         AudioManager.Instance.PlaySE(7);
     }
 
@@ -63,14 +62,15 @@ public class TitleManager : MonoBehaviour
     {
         if (_isChangeScene) { return; }
 
-        _creditAnimator.Play("Out");
+        _isPopup = false;
+        _creditAnimator.Play("Close");
         AudioManager.Instance.PlaySE(7);
     }
 
     /// <summary>シーンを切り替える</summary>
     public void ChangeScene()
     {
-        if (_isChangeScene) { return; }
+        if (_isPopup || _isChangeScene) { return; }
 
         _isChangeScene = true;
         AudioManager.Instance.PlaySE(7);

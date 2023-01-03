@@ -99,7 +99,7 @@ public class StageSelectManager : MonoBehaviour
         if (_currentButtonAnimator == null)     //‰‚ß‚Ä“ïˆÕ“x‚ª‘I‘ğ‚³‚ê‚½‚Ìˆ—
         {
             _startAnimator.gameObject.SetActive(true);
-            _startAnimator.Play("In");
+            _startAnimator.Play("Open");
 
             _currentButtonAnimator = selectAnimator;
             _currentButtonAnimator.Play("Select");
