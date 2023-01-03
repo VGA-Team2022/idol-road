@@ -1,16 +1,47 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>メニューUIを操作する為のクラス (アニメーションを再生する)</summary>
 public class MenuController : MonoBehaviour
 {
+    [SerializeField, Header("ストーリーを強制表示させるまでの待機時間")]
+    float _stroyWaitTime = 2f;
+    [SerializeField, Header("遊び方を強制表示させるまでの待機時間")]
+    float _tutorialWaitTime = 1f;
+
     [SerializeField, Header("ストーリーを表示するキャンバス")]
-    Animator _storyAnimator = default;
+    StoryPrinter _storyPrinter = default;
     [SerializeField, Header("クレジットを表示するキャンバス")]
     Animator _creditAnimator = default;
     [SerializeField, Header("チュートリアル用アニメーター")]
-    Animator _tutorialAnimator = default;
+    TutorialManager _tutorialManager = default;
     [SerializeField, Header("メニュー用アニメーター")]
     Animator _menuAnimator = default;
+    [SerializeField, Tooltip("フェード行うクラス")]
+    FadeController _fadeController = default;
+    [SerializeField, Tooltip("最初にストーリーと遊び方を表示している間の背景")]
+    Image _firstBackGround = default;
+
+    private IEnumerator Start()
+    {
+        yield return new WaitForSeconds(_stroyWaitTime);
+        _storyPrinter.StroyOperator(true);
+        _storyPrinter.CloseButtonAddListener(() => StartCoroutine(WaitTutorialUI()));
+    }
+
+    /// <summary>遊び方を強制表示させる </summary>
+    /// <returns></returns>
+    IEnumerator WaitTutorialUI()
+    {
+        yield return new WaitForSeconds(_tutorialWaitTime);
+        _tutorialManager.TutorialOperator(true);
+        _tutorialManager.CloseButtonAddListener(() =>
+        {
+            _firstBackGround.gameObject.SetActive(false);
+            _fadeController.FadeIn();
+        });
+    }
 
     ///====以下関数はボタンから呼び出す====
 
@@ -18,7 +49,7 @@ public class MenuController : MonoBehaviour
     /// <param name="flag">true=表示 false=非表示</param>
     public void MenuOperator(bool flag)
     {
-        if (flag)   
+        if (flag)
         {
 
             _menuAnimator.Play("Open");          //メニューを表示
@@ -28,25 +59,7 @@ public class MenuController : MonoBehaviour
             _menuAnimator.Play("Close");        //メニューを非表示
         }
 
-        AudioManager.Instance.PlaySE(7);　
-    }
-
-    /// <summary>遊び方UIを操作する </summary>
-    /// <param name="flag">true=表示 false=非表示</param>
-    public void TutorialOperator(bool flag)
-    {
-        if (flag)
-        {
-            _tutorialAnimator.Play("Open");
-            
-        }
-        else
-        {
-            _tutorialAnimator.Play("Close");
-           
-        }
-
-        AudioManager.Instance.PlaySE(7);　
+        AudioManager.Instance.PlaySE(7);
     }
 
     /// <summary>クレジットUIを操作する </summary>
@@ -55,27 +68,11 @@ public class MenuController : MonoBehaviour
     {
         if (flag)
         {
-           _creditAnimator.Play("Open");
+            _creditAnimator.Play("Open");
         }
         else
         {
             _creditAnimator.Play("Close");
-        }
-
-        AudioManager.Instance.PlaySE(7);　
-    }
-
-    /// <summary>ストーリーUIを操作する </summary>
-    /// <param name="flag">true=表示 false=非表示</param>
-    public void StroyOperator(bool flag)
-    {
-        if (flag)
-        {
-            _storyAnimator.Play("Open");
-        }
-        else
-        {
-            _storyAnimator.Play("Close");
         }
 
         AudioManager.Instance.PlaySE(7);

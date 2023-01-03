@@ -829,10 +829,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae82b25c28bea7b4f9bb92b8b19ce970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _storyAnimator: {fileID: 0}
+  _storyPrinter: {fileID: 493762581}
   _creditAnimator: {fileID: 2920526577038358533}
-  _tutorialAnimator: {fileID: 1995098633}
+  _tutorialManager: {fileID: 1995098634}
   _menuAnimator: {fileID: 2102135802}
+  _fadeController: {fileID: 346481679}
+  _firstBackGround: {fileID: 1989119315}
 --- !u!114 &346481679 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1016080522747188690, guid: fd44eb2d09729fc4d88d396c86c68bb0, type: 3}
@@ -927,8 +929,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 333433711}
-        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+      - m_Target: {fileID: 1995098634}
+        m_TargetAssemblyTypeName: TutorialManager, Assembly-CSharp
         m_MethodName: TutorialOperator
         m_Mode: 6
         m_Arguments:
@@ -1285,6 +1287,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1520466610407078675, guid: 76e016eac153f35448a36028b88ef1c3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520466611017892063, guid: 76e016eac153f35448a36028b88ef1c3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520466611017892063, guid: 76e016eac153f35448a36028b88ef1c3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520466611017892063, guid: 76e016eac153f35448a36028b88ef1c3, type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2853,12 +2867,12 @@ GameObject:
   - component: {fileID: 1029146696}
   - component: {fileID: 1029146695}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: FirstCavas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1029146695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3899,8 +3913,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 333433711}
-        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+      - m_Target: {fileID: 1995098634}
+        m_TargetAssemblyTypeName: TutorialManager, Assembly-CSharp
         m_MethodName: TutorialOperator
         m_Mode: 6
         m_Arguments:
@@ -5295,6 +5309,7 @@ GameObject:
   - component: {fileID: 1995098631}
   - component: {fileID: 1995098630}
   - component: {fileID: 1995098633}
+  - component: {fileID: 1995098634}
   m_Layer: 5
   m_Name: TutorialCanvas
   m_TagString: Untagged
@@ -5404,6 +5419,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1995098634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995098628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1c369e471ca9ea42a47915070026a88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _closeButton: {fileID: 390255304}
 --- !u!1 &2014440711
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 /// <summary>ストーリーを表示する為のクラス </summary>
 [RequireComponent(typeof(Animator))]
@@ -92,10 +93,18 @@ public class StoryPrinter : MonoBehaviour
     /// </summary>
     public void Skip()
     {
+        StopCoroutine(_showStroyEnumerator);
         _closeButton.gameObject.SetActive(true);
         Array.ForEach(_storyTexts, s => s.alpha = 1);
         _closeButtonText.alpha = 1;
         _closeButton.image.color = new Color(1, 1, 1, 1);
-        StopCoroutine(_showStroyEnumerator);
+    }
+
+    /// <summary>閉じるボタンを押した時に実行したい処理を追加する関数 </summary>
+    /// <param name="action"></param>
+    public void CloseButtonAddListener(UnityAction action)
+    {
+        _closeButton.onClick.AddListener(action);
+        _closeButton.onClick.AddListener(() => _closeButton.onClick.RemoveAllListeners());  //一度だけ実行させる為に、ボタンが押されたら登録されている処理を全て削除する
     }
 }
