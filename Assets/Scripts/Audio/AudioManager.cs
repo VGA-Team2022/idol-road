@@ -43,15 +43,6 @@ public class AudioManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-
-    public void Update()
-    {
-        if (Input.GetButtonDown("Jump"))
-        {
-            PlaySoundAfterExecution(Sources.SE, 31, () => Debug.Log("hit"));
-        }
-    }
-
     /// <summary>特定のサウンドの再生終了時間を取得する </summary>
     /// <param name="sourceIndex">取得したいサウンドのソース</param>
     /// <param name="cueID">取得したいサウンドのID</param>

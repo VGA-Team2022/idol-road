@@ -55,7 +55,7 @@ public class ResultManager : MonoBehaviour
         var badValue = _resultParameter._addBadScoreValue * _playResult.CountBad;
         var totalScore = 0;
 
-        totalScore += perfectValue + goodValue + badValue;  //スコア計算
+        totalScore += perfectValue + goodValue + badValue + _playResult.ValueSuperIdleTimePerfect;  //スコア計算
         var result = new int[RESULT_COUNT] { badValue, goodValue, perfectValue, totalScore };  //画面に反映させる為の配列
 
         return result;

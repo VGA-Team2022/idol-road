@@ -49,10 +49,14 @@ public class ScreenInput : MonoBehaviour
             {
                 ResetParameter();
                 _StartPosition = Input.mousePosition;
+                if (_manager.CurrentGameState is IdolTime && _superIdolTime.IsSuperIdolTime)
+                {
+                    _superIdolTime.GaugeCount++;
+                }
             }//ƒXƒƒCƒv‚µ‚½êŠ‚ğ•Û‘¶
             else if (Input.GetMouseButton(0))
             {
-                 //_StartPosition = Input.mousePosition;
+             
             }
             //—£‚µ‚½êŠ‚ğ•Û‘¶
             else if (Input.GetMouseButtonUp(0))
@@ -79,6 +83,10 @@ public class ScreenInput : MonoBehaviour
                     case TouchPhase.Began:
                         ResetParameter();
                         _StartPosition = touch.position;
+                        if (_manager.CurrentGameState is IdolTime)
+                        {
+                            _superIdolTime.GaugeCount++;
+                        }
                         break;
                     case TouchPhase.Moved:
                         //_StartPosition = touch.position;

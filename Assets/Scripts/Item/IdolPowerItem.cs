@@ -12,10 +12,18 @@ public class IdolPowerItem : MonoBehaviour
     [SerializeField, Header("軌道の高さ")]
     float _jumpPower = 4f;
     private GameManager _gameManager;
-    event Action _scrollStart = default;
+    
     /// <summary>ゲームマネージャーのプロパティ</summary>
     public GameManager GameManager { get => _gameManager; set => _gameManager = value; }
 
+    private void Update()
+    {
+        if(_gameManager.CurrentGameState is IdolTime)
+        {
+            Destroy(gameObject);
+            Debug.Log("Destroy");
+        }
+    }
     /// <summary>移動処理 </summary>
     /// <param name="targetPoint">到着位置</param>
     /// /// <param name="scrollStart">移動処理が終了したらスクロールさせる</param>
