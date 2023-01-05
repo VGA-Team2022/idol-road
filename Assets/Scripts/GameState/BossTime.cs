@@ -11,15 +11,25 @@ public class BossTime : IState
         get { return _isPlaying; }
         set { _isPlaying = value; }
     }
+    public bool _isBossTime = false;
+    public bool IsBossTime
+    {
+        get { return _isBossTime; }
+        set { _isBossTime = value; }
+    }
     public void OnEnter(GameManager manager, IState previousState)
     {
-        manager.Scroller.ScrollOperation(false);
-        manager.WarningTape.gameObject.SetActive(true);
-        manager.WarningTape.stopped += WarningTapeAnimEnd;
-        manager.EnemyGenerator.SpawnBossEnemy();
-        manager.Taxi.gameObject.SetActive(true);
-        _isPlaying= true;
-        AudioManager.Instance.PlaySE(26);
+        if (!_isBossTime) 
+        {
+            manager.Scroller.ScrollOperation(false);
+            manager.WarningTape.gameObject.SetActive(true);
+            manager.WarningTape.stopped += WarningTapeAnimEnd;
+            manager.EnemyGenerator.SpawnBossEnemy();
+            manager.Taxi.gameObject.SetActive(true);
+            _isPlaying = true;
+            _isBossTime= true;
+            AudioManager.Instance.PlaySE(26);
+        } 
     }
 
     public void OnExit(GameManager manager, IState nextState)

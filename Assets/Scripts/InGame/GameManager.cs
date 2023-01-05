@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     /// <summary>プレイ状態 </summary>
     public static Playing _playingState => new Playing();
     /// <summary>アイドルタイム状態 </summary>
-    public static IdleTime _idleTimeState => new IdleTime();
+    public static IdolTime _idleTimeState => new IdolTime();
     /// <summary>ボス状態状態 </summary>
     public BossTime _bossTimeState => new BossTime();
     /// <summary>ゲーム終了状態 </summary>
@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     SpriteRenderer _taxi = default;
     [SerializeField, Tooltip("プレイヤー")]
     PlayerMotion _player = default;
-    [SerializeField]
+    [SerializeField, Tooltip("スーパーアイドルタイムの処理を行うクラス")]
     SuperIdolTime _superIdolTime = default;
     [SerializeField, Tooltip("アイテムジェネレーター")]
     ItemGenerator _itemGenerator = default;
@@ -61,7 +61,8 @@ public class GameManager : MonoBehaviour
     int _nextComboCount = ADD_COMBO_ILLUST_CCHANGE;
     /// <summary>ゲーム開始からの経過時間 </summary>
     float _elapsedTime = 0f;
-
+    /// <summary>時間が経過しているか否か</summary>
+    bool _isElapsing = true;
     /// <summary>ボスの移動を開始する処理</summary>
     event Action _startBossMove = default;
 
@@ -77,6 +78,7 @@ public class GameManager : MonoBehaviour
     public FadeController FadeCanvas { get => _fadeController; }
     public PlayableDirector WarningTape { get => _warningTape; }
     public SpriteRenderer Taxi { get => _taxi; }
+    public SuperIdolTime IdolTime { get => _superIdolTime; }
 
     /// <summary>ボスの移動を開始する処理</summary>
     public event Action StartBossMove
@@ -107,7 +109,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (_currentGameState is not GameStart && _currentGameState is not GameEnd) //時間経過のUIを更新する
+        if (_currentGameState is not GameStart && _currentGameState is not GameEnd && _isElapsing) //時間経過のUIを更新する
         {
             _elapsedTime += Time.deltaTime;
             _uiController.UpdateGoalDistanceUI(_elapsedTime);
@@ -142,11 +144,12 @@ public class GameManager : MonoBehaviour
             _fadeController.FadeOut(() =>
             {
                 _superIdolTime.gameObject.SetActive(true);
+                _superIdolTime.CurrentState = _currentGameState;
+                ChangeGameState(_idleTimeState);
                 _fadeController.FadeIn(() =>
                 {
                     _idlePower = 0;
                     _uiController.UpdateIdolPowerGauge(_idlePower);
-                    ChangeGameState(_idleTimeState);
                 });
             });
         }
@@ -244,6 +247,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ChangeTimeElapsing(bool which)
+    {
+        _isElapsing = which;
+    }
+     
     /// <summary>ゲームクリア時の処理</summary>
     public void GameClear()
     {

@@ -9474,7 +9474,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _manager: {fileID: 856055408}
-  _superIdolTime: {fileID: 0}
+  _superIdolTime: {fileID: 1909771482}
 --- !u!4 &553798499
 Transform:
   m_ObjectHideFlags: 0
@@ -33350,6 +33350,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6742015527086477076, guid: 7c25c6a4cedf4a841842a1ba713ee0ef, type: 3}
+      propertyPath: _manager
+      value: 
+      objectReference: {fileID: 856055408}
     - target: {fileID: 6742015527086477076, guid: 7c25c6a4cedf4a841842a1ba713ee0ef, type: 3}
       propertyPath: _fadePanel
       value: 

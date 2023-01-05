@@ -12,7 +12,7 @@ public class PlayResult
     int _countMiss;
 
     /// <summary>スーパーアイドルタイム中のタップ回数</summary>
-    int _countSuperIdleTimePerfect;
+    int _valueSuperIdleTimePerfect;
     /// <summary>最高コンボ数 </summary>
     int _highComboCount = 0;
 
@@ -45,11 +45,11 @@ public class PlayResult
         set => _countMiss = value;
     }
 
-    /// <summary>スーパーアイドルタイム中のタップ回数 </summary>
-    public int CountSuperIdleTimePerfect
+    /// <summary>スーパーアイドルタイム時の追加スコア </summary>
+    public int ValueSuperIdleTimePerfect
     {
-        get => _countSuperIdleTimePerfect;
-        set => _countSuperIdleTimePerfect = value;
+        get => _valueSuperIdleTimePerfect;
+        set => _valueSuperIdleTimePerfect = value;
     }
 
     /// <summary>プレイデータを削除する</summary>
@@ -58,7 +58,7 @@ public class PlayResult
         _countBad = 0;
         _countGood = 0;
         _countPerfect = 0;
-        _countSuperIdleTimePerfect = 0;
+        _valueSuperIdleTimePerfect = 0;
         _highComboCount = 0;
         _countMiss = 0;
     }
