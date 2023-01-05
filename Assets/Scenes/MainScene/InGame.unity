@@ -32205,6 +32205,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5439522157763531588, guid: 0bb0e609ba487544db12396fef7640f5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5439522158266458072, guid: 0bb0e609ba487544db12396fef7640f5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5439522158662788643, guid: 0bb0e609ba487544db12396fef7640f5, type: 3}
       propertyPath: m_Name
       value: SuperIdolTImeFrontCanvas
@@ -32616,6 +32624,10 @@ PrefabInstance:
     - target: {fileID: 2346677534156051502, guid: 30142b1b5077a7e42a0778ca3a604fec, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -2106
+      objectReference: {fileID: 0}
+    - target: {fileID: 4471553972708861588, guid: 30142b1b5077a7e42a0778ca3a604fec, type: 3}
+      propertyPath: m_RenderMode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4471553972943490192, guid: 30142b1b5077a7e42a0778ca3a604fec, type: 3}
       propertyPath: m_RootOrder
@@ -33432,7 +33444,7 @@ PrefabInstance:
       objectReference: {fileID: 1856970679}
     - target: {fileID: 6742015527086477076, guid: 7c25c6a4cedf4a841842a1ba713ee0ef, type: 3}
       propertyPath: _normalObjects.Array.size
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6742015527086477076, guid: 7c25c6a4cedf4a841842a1ba713ee0ef, type: 3}
       propertyPath: _normalObjects.Array.data[0]
