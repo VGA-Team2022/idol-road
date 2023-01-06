@@ -37,7 +37,7 @@ public class ItemGenerator : MonoBehaviour
 
     private void Start()
     {
-        if (_itemParameter.RandomGenerator) 
+        if (_itemParameter.RandomGenerator || _itemParameter.GeneratorItems.Count == 0) 
         {
             _itemWeights = _itemParameter.ItemWeights;
 
