@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gaugeCountMax: 10
   _timeEndSuperIdolTime: 15
-  _successScore: 5000
+  _successScore: 3000
