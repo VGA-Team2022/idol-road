@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>リザルトシーンを管理するクラス </summary>
 public class ResultManager : MonoBehaviour
@@ -23,6 +24,11 @@ public class ResultManager : MonoBehaviour
     Result _currentResult = Result.Good;
     /// <summary>各スコア 0=bad 1=good 2=perfect 3=合計スコア</summary>
     int[] _scores = default;
+    /// <summary>再生しているBGMのID </summary>
+    int _playBgmID = 0;
+    /// <summary>遷移をしているか true=開始している</summary>
+    bool _isTransition = false;
+
 
     public FadeController FadeController { get => _fadeController; }
 
@@ -103,15 +109,23 @@ public class ResultManager : MonoBehaviour
             case Result.Bad:
                 AudioManager.Instance.PlayVoice(15);
                 AudioManager.Instance.PlaySE(31, 0.5f);
+                AudioManager.Instance.PlayBGM(12);
+                _playBgmID = 12;
                 break;
             case Result.Good:
                 AudioManager.Instance.PlayVoice(19);
+                AudioManager.Instance.PlayBGM(13);
+                _playBgmID = 13;
                 break;
             case Result.Perfect:
                 AudioManager.Instance.PlayVoice(18);
+                AudioManager.Instance.PlayBGM(13);
+                _playBgmID = 13;
                 break;
             case Result.SuperPerfect:
                 AudioManager.Instance.PlayVoice(17);
+                AudioManager.Instance.PlayBGM(13);
+                _playBgmID = 13;
                 break;
         }
     }
@@ -146,6 +160,28 @@ public class ResultManager : MonoBehaviour
         _currentResult = Result.SuperPerfect;
         _resultUIController.SetupUI(_currentResult);
     }
+
+    /// <summary>
+    /// 難易度セレクトシーンに戻るかリトライするか
+    /// ボタンから呼び出す
+    /// </summary>
+    /// <param name="index">シーン番号</param>
+    public void ReturnModeSelectAndRetry(int index)
+    {
+        if (_isTransition) { return; }
+
+        _isTransition = true;
+        _fadeController.FadeOut(() => { SceneManager.LoadScene(index); });
+
+        if (_currentResult == Result.Bad) //リトライ用ボイスを再生する
+        {
+            AudioManager.Instance.PlayVoice(16);
+        }
+
+        AudioManager.Instance.PlaySE(7);
+        AudioManager.Instance.StopBGM(_playBgmID);
+    }
+
 }
 
 public enum Result

@@ -487,6 +487,18 @@ PrefabInstance:
       propertyPath: _voiceSource
       value: 
       objectReference: {fileID: 1363871762}
+    - target: {fileID: 8897461432588541098, guid: b9f18d18cce7959429b428c5b25b8ea3, type: 3}
+      propertyPath: _sources.Array.data[0]
+      value: 
+      objectReference: {fileID: 1363871764}
+    - target: {fileID: 8897461432588541098, guid: b9f18d18cce7959429b428c5b25b8ea3, type: 3}
+      propertyPath: _sources.Array.data[1]
+      value: 
+      objectReference: {fileID: 1363871763}
+    - target: {fileID: 8897461432588541098, guid: b9f18d18cce7959429b428c5b25b8ea3, type: 3}
+      propertyPath: _sources.Array.data[2]
+      value: 
+      objectReference: {fileID: 1363871762}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9f18d18cce7959429b428c5b25b8ea3, type: 3}
 --- !u!1 &984220462
@@ -1093,11 +1105,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1671899980 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1016080522747188697, guid: fd44eb2d09729fc4d88d396c86c68bb0, type: 3}
-  m_PrefabInstance: {fileID: 2118302172}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1726918311
 GameObject:
   m_ObjectHideFlags: 0
@@ -1326,7 +1333,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1016080522747188690, guid: fd44eb2d09729fc4d88d396c86c68bb0, type: 3}
   m_PrefabInstance: {fileID: 2118302172}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1671899980}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d43634a981a86c245a87de534115e1e4, type: 3}
@@ -5071,8 +5078,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6811730741435717392}
-        m_TargetAssemblyTypeName: ResultUIController, Assembly-CSharp
+      - m_Target: {fileID: 2106405866}
+        m_TargetAssemblyTypeName: ResultManager, Assembly-CSharp
         m_MethodName: ReturnModeSelectAndRetry
         m_Mode: 3
         m_Arguments:
@@ -5665,26 +5672,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6811730741435717392}
-        m_TargetAssemblyTypeName: ResultUIController, Assembly-CSharp
+      - m_Target: {fileID: 2106405866}
+        m_TargetAssemblyTypeName: ResultManager, Assembly-CSharp
         m_MethodName: ReturnModeSelectAndRetry
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1671899980}
-        m_TargetAssemblyTypeName: ResultUIController, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
