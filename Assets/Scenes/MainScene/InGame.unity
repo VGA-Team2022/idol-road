@@ -3935,6 +3935,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InGameCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6611426711797159782, guid: 484bda7be6beb34409400aaed830226f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28.601562
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 484bda7be6beb34409400aaed830226f, type: 3}
 --- !u!114 &241909718 stripped
@@ -9202,8 +9206,8 @@ MonoBehaviour:
   _motionTime: 1
   _fansaShowTime: 0.5
   _screenInput: {fileID: 553798498}
-  _failsprite: {fileID: 0}
-  _failTime: 3
+  _failsprite: {fileID: 21300000, guid: 6f9db75c8c1875d469c0ab70a41bd89c, type: 3}
+  _failTime: 1
 --- !u!212 &548471503
 SpriteRenderer:
   m_ObjectHideFlags: 0
