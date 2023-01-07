@@ -43,6 +43,8 @@ public class PlayUiCanvas : MonoBehaviour
             _currentPageNumber++;
             ChangeContents();
             _pageCountImages[_currentPageNumber].enabled = true;
+
+            AudioManager.Instance.PlaySE(32);
         }
     }
 
@@ -56,6 +58,8 @@ public class PlayUiCanvas : MonoBehaviour
             _currentPageNumber--;
             ChangeContents();
             _pageCountImages[_currentPageNumber].enabled = true;
+
+            AudioManager.Instance.PlaySE(32);
         }
     }
 

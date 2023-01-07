@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using DG.Tweening;
 using TMPro;
 
@@ -73,9 +72,6 @@ public class ResultUIController : MonoBehaviour
 
     /// <summary>初めてスコアを表示した</summary>
     bool _isFirstScoreWindow = true;
-
-    /// <summary>遷移をしているか true=開始している</summary>
-    bool _isTransition = false;
 
     ResultParameter _parameter => LevelManager.Instance.CurrentLevel.Result;
     #endregion
@@ -182,27 +178,32 @@ public class ResultUIController : MonoBehaviour
         int firstValue = 0;
 
         yield return new WaitForSeconds(_showResultSpan);
+        AudioManager.Instance.PlaySE(37);
         _resultValueText[0].gameObject.SetActive(true);
 
         yield return new WaitForSeconds(_showResultSpan);
 
+        AudioManager.Instance.PlaySE(37);
         _resultValueText[1].gameObject.SetActive(true);
         _resultValueText[1].text = result[0].ToString();
 
         yield return new WaitForSeconds(_showResultSpan);
 
+        AudioManager.Instance.PlaySE(37);
         _resultValueText[2].gameObject.SetActive(true);
         _resultValueText[2].text = result[1].ToString();
 
         yield return new WaitForSeconds(_showResultSpan);
 
+        AudioManager.Instance.PlaySE(37);
         _resultValueText[3].gameObject.SetActive(true);
         _resultValueText[3].text = result[2].ToString();
 
         yield return new WaitForSeconds(_scoreResultSpan);
 
+        AudioManager.Instance.PlaySE(36);
         _resultValueText[4].gameObject.SetActive(true);
-        DOTween.To(() => firstValue, (r) => result[3] = r, result[3], _increseTime)
+        DOTween.To(() => firstValue, (r) => result[3] = r, result[3], 0.7f)
              .OnUpdate(() => _resultValueText[4].text = result[3].ToString());
 
         yield return new WaitForSeconds(_scoreResultSpan);
@@ -256,26 +257,7 @@ public class ResultUIController : MonoBehaviour
 
         AudioManager.Instance.PlaySE(7);
     }
-    /// <summary>
-    /// 難易度セレクトシーンに戻るかリトライするか
-    /// ボタンから呼び出す
-    /// </summary>
-    /// <param name="index">シーン番号</param>
-    public void ReturnModeSelectAndRetry(int index)
-    {
-        if (_isTransition) { return; }
-
-        _isTransition = true;
-        _resultManager.FadeController.FadeOut(() => { SceneManager.LoadScene(index); });
-
-        if (_resultManager.CurrentResult == Result.Bad) //リトライ用ボイスを再生する
-        {
-            AudioManager.Instance.PlayVoice(16);
-        }
-
-        AudioManager.Instance.PlaySE(7);
-    }
-
+  
     /// <summary>結果によって表示するUIを変更する </summary>
     public void SetupUI(Result result)
     {

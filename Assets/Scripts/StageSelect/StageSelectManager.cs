@@ -98,6 +98,7 @@ public class StageSelectManager : MonoBehaviour
         AudioManager.Instance.PlaySE(7);
         _isTransition = true;
         _fadeController.FadeOut(() => SceneManager.LoadScene(_nextSceneName));
+        AudioManager.Instance.StopBGM(14);
     }
 
     /// <summary>
