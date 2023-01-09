@@ -6,11 +6,6 @@ using UnityEngine.WSA;
 /// <summary>アイテムを生成するクラス</summary>
 public class ItemGenerator : MonoBehaviour
 {
-    [Tooltip("値が高ければ高いほど出現します")]
-    [SerializeField, Header("各アイテムの出現確率"), ElementNames(new string[] { "ぬいぐるみ", "花束", "プレゼント", "お金" }), Range(0f, 10f)]
-    float[] _itemWeights = default;
-    [SerializeField, Header("生成間隔")]
-    float _generateTime = 5f;
     [SerializeField, Header("右生成位置・到着位置")]
     Transform[] _rightPoints = default;
     [SerializeField, Header("左生成位置・到着位置")]
@@ -24,6 +19,12 @@ public class ItemGenerator : MonoBehaviour
 
     /// <summary>重みの総和 </summary>
     float _totalWeight = 0f;
+
+    /// <summary>各アイテムの出現確率</summary>
+    float[] _itemWeights = default;
+
+    /// <summary>生成間隔 </summary>
+    float _generateTime = 5f;
 
     float _timer = 0f;
     /// <summary>生成をするかどうか </summary>
