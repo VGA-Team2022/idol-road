@@ -27,7 +27,8 @@ public class MenuController : MonoBehaviour
     {
         yield return new WaitForSeconds(_stroyWaitTime);
         _storyPrinter.StroyOperator(true);
-        _storyPrinter.CloseButtonAddListener(() => StartCoroutine(WaitTutorialUI()));
+
+        _storyPrinter.StorySkip += () => StartCoroutine(WaitTutorialUI());      //スキップ処理を追加       
     }
 
     /// <summary>遊び方を強制表示させる </summary>

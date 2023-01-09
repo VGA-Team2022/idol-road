@@ -10,6 +10,8 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Animator))]
 public class StoryPrinter : MonoBehaviour
 {
+    [SerializeField, Header("表示モード")]
+    ShowMode _currentMode = ShowMode.Title;
     [SerializeField, Header("テキストを表示するまでにかかる秒数")]
     float _showTextTime = 2f;
     [SerializeField, Header("次のテキストを表示するまでの待機時間")]
@@ -20,26 +22,27 @@ public class StoryPrinter : MonoBehaviour
     TMP_Text[] _storyTexts = default;
     [SerializeField, Tooltip("キャンバスを閉じる為のボタン")]
     Button _closeButton = default;
+    [SerializeField, Tooltip("スキップするボタン")]
+    Button _skipButton = default;
+    [SerializeField, Tooltip("強制表示時に使用するNextテキスト")]
+    TMP_Text _nextText = default;
 
     /// <summary>表示したテキストの添え字 </summary>
     int _currnetTextIndex = 0;
+    /// <summary>演出が終了したかどうか </summary>
+    bool _endAnimation = false;
+    /// <summary>強制表示時にスキップする為の処理 </summary>
+    event Action _storySkip = default;
     /// <summary>ストーリー表示のコルーチンを終了させる為の変数 </summary>
     IEnumerator _showStroyEnumerator = default;
 
     Animator _anim => GetComponent<Animator>();
-    TMP_Text _closeButtonText => _closeButton.transform.GetChild(0).GetComponent<TMP_Text>();
-
-    /// <summary>
-    /// アニメーションさせた値をリセットする
-    /// 再度アニメーションさせる為
-    /// </summary>
-    void ResetValue()
+   
+    /// <summary>強制表示時にスキップする為の処理 </summary>
+    public event Action StorySkip
     {
-        Array.ForEach(_storyTexts, s => s.alpha = 0);
-        _closeButton.gameObject.SetActive(false);
-        _closeButtonText.alpha = 0;
-        _closeButton.image.color = new Color(1, 1, 1, 0);
-        _currnetTextIndex = 0;
+        add { _storySkip += value; }
+        remove { _storySkip -= value; }
     }
 
     /// <summary>ストーリーを表示する </summary>
@@ -51,18 +54,14 @@ public class StoryPrinter : MonoBehaviour
             ShowText();
         }
 
-        yield return new WaitForSeconds(_fadeWaitTime);
-
-        _closeButton.gameObject.SetActive(true);
-        _closeButton.image.DOFade(1, 2);
-        _closeButtonText.DOFade(1, 2);
+        _endAnimation = true;
     }
 
     /// <summary>テキストをフェードさせて表示する </summary>
     public void ShowText()
     {
-        _storyTexts[_currnetTextIndex].DOFade(1, _showTextTime);
-        _currnetTextIndex++;
+        _storyTexts[_currnetTextIndex].DOFade(1, _showTextTime)
+            .OnComplete(() => _currnetTextIndex++);
     }
 
     /// <summary>
@@ -74,6 +73,7 @@ public class StoryPrinter : MonoBehaviour
     {
         if (flag)
         {
+            Initialize();
             _anim.Play("Open");
             _showStroyEnumerator = ShowStory();
             StartCoroutine(_showStroyEnumerator);
@@ -81,30 +81,73 @@ public class StoryPrinter : MonoBehaviour
         else
         {
             _anim.Play("Close");
-            ResetValue();
+            StopCoroutine(_showStroyEnumerator);
+
+            if (!_endAnimation)
+            {
+                _storyTexts[_currnetTextIndex].DOComplete();
+            }
+
+            Array.ForEach(_storyTexts, s => s.alpha = 0);
+            _currnetTextIndex = 0;
+            _endAnimation = false;
+
+
+            if (_currentMode == ShowMode.InGame)    //タイトル表示モードに切り替える
+            {
+                _currentMode = ShowMode.Title;
+                _storySkip?.Invoke();
+            }
         }
 
         AudioManager.Instance.PlaySE(7);
     }
 
-    /// <summary>
-    /// すべてのテキストを一気に表示する
-    /// ボタンから呼び出す
-    /// </summary>
-    public void Skip()
+    /// <summary>各モードの初期化処理を行う </summary>
+    public void Initialize()
     {
-        StopCoroutine(_showStroyEnumerator);
-        _closeButton.gameObject.SetActive(true);
-        Array.ForEach(_storyTexts, s => s.alpha = 1);
-        _closeButtonText.alpha = 1;
-        _closeButton.image.color = new Color(1, 1, 1, 1);
+        if (_currentMode == ShowMode.Title)
+        {
+            _closeButton.gameObject.SetActive(true);
+            _skipButton.gameObject.SetActive(false);
+            _nextText.gameObject.SetActive(false);
+        }
+        else
+        {
+            _closeButton.gameObject.SetActive(false);
+            _nextText.color = new Color(0, 0, 0, 0);
+        }
     }
 
-    /// <summary>閉じるボタンを押した時に実行したい処理を追加する関数 </summary>
-    /// <param name="action"></param>
-    public void CloseButtonAddListener(UnityAction action)
+    /// <summary>
+    /// ストーリーの演出を無くし、すぐにテキストを表示させる
+    /// ボタンから呼び出す
+    /// </summary>
+    public void EndAnimation()
     {
-        _closeButton.onClick.AddListener(action);
-        _closeButton.onClick.AddListener(() => _closeButton.onClick.RemoveAllListeners());  //一度だけ実行させる為に、ボタンが押されたら登録されている処理を全て削除する
+        if (!_endAnimation)
+        {
+            StopCoroutine(_showStroyEnumerator);
+            _storyTexts[_currnetTextIndex].DOComplete();
+            Array.ForEach(_storyTexts, s => s.alpha = 1);
+            _endAnimation = true;
+        }
+        else if(_currentMode == ShowMode.InGame)    //タイトル表示モードに切り替える
+        {
+            _currentMode = ShowMode.Title;
+            _storySkip?.Invoke();
+            StroyOperator(false);
+        }
+    }
+
+    /// <summary>表示させる場所によって表示の仕方を変える </summary>
+    enum ShowMode
+    {
+        /// <summary>タイトルで表示 </summary>
+        Title,
+        /// <summary>ゲーム内(強制表示) </summary>
+        InGame,
     }
 }
+
+
