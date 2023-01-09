@@ -65,3 +65,4 @@ MonoBehaviour:
   _BackUpFans: {fileID: 0}
   _upFansValue: 0.9
   _videoPlayer: {fileID: 0}
+  _shiningParticle: {fileID: 0}

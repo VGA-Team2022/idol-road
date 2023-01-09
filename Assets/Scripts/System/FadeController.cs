@@ -18,19 +18,43 @@ public class FadeController : MonoBehaviour
     [SerializeField, Tooltip("フェードを行うパネル")]
     Image _panel = default;
 
-    /// <summary>フェードインを行う処理</summary>
+    /// <summary>フェードインを行う処理 明るくなる</summary>
     /// <param name="action">フェードイン終了時処理</param>
     public void FadeIn(Action action = null)
     {
-        _panel.DOFade(MAX_α_VALUE, _fadeInTime)
-            .OnComplete(() => action?.Invoke());
+        gameObject.SetActive(true);
+        _panel.color = new Color(0, 0, 0, MAX_α_VALUE);
+        _panel.DOFade(MIN_α_VALUE, _fadeInTime)
+            .OnComplete(() => { action?.Invoke(); });
     }
 
-    /// <summary>フェードアウトを行う処理</summary>
+    /// <summary>フェードアウトを行う処理　暗くなる</summary>
     /// <param name="action">フェードアウト終了時処理</param>
     public void FadeOut(Action action = null)
     {
-        _panel?.DOFade(MIN_α_VALUE, _fadeOutTime)
-            .OnComplete(() => action?.Invoke());
+        gameObject.SetActive(true);
+        _panel.color = new Color(0, 0, 0, MIN_α_VALUE);
+        _panel.DOFade(MAX_α_VALUE, _fadeOutTime)
+            .OnComplete(() => { action?.Invoke(); });
+    }
+
+    /// <summary>フェードインする </summary>
+    /// <param name="time">フェードにかかる時間</param>
+    public void FadeIn(float time, Action action = null)
+    {
+        gameObject.SetActive(true);
+        _panel.color = new Color(0, 0, 0, MAX_α_VALUE);
+        _panel.DOFade(MIN_α_VALUE, time)
+            .OnComplete(() => { action?.Invoke(); });
+    }
+
+    /// <summary>フェードアウトする </summary>
+    /// <param name="time">フェードにかかる時間</param>
+    public void FadeOut(float time, Action action = null)
+    {
+        gameObject.SetActive(true);
+        _panel.color = new Color(0, 0, 0, MIN_α_VALUE);
+        _panel.DOFade(MAX_α_VALUE, time)
+            .OnComplete(() => { action?.Invoke(); });
     }
 }

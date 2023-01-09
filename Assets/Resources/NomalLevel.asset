@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69c6db16c8a85c54a9fceec4a0fd2f20, type: 3}
+  m_Name: NomalLevel
+  m_EditorClassIdentifier: 
+  _inGame: {fileID: 11400000, guid: b80957afc4f2c5d45a2ab991681f0e59, type: 2}
+  _result: {fileID: 11400000, guid: 0fcb547e6a9511649a7446c3d9bcf822, type: 2}
+  _enemyOrder: {fileID: 11400000, guid: 758b031d6f2f0bb44b54b4228a473c92, type: 2}
+  _itemParameter: {fileID: 11400000, guid: 0625724d31b05194e84e4895aa9b2d8a, type: 2}
+  _idolTimeParamater: {fileID: 11400000, guid: 4a4b92129d65b614a871660c76545c5e, type: 2}
+  _enemyParameters:
+  - {fileID: 11400000, guid: 4f6323960eddea8428057fdd5ae97acc, type: 2}
+  - {fileID: 11400000, guid: 6737823eb64df984488153ef0c1c353a, type: 2}
+  - {fileID: 11400000, guid: 37efd7ad2134cb64e8e25684d8058481, type: 2}
+  - {fileID: 11400000, guid: f0d65451692f2c64799b62cfda22b08b, type: 2}
+  _bossStageParameters:
+  - {fileID: 11400000, guid: 3a5f9da54b3261545bb9ce638286cade, type: 2}
+  - {fileID: 11400000, guid: 8e37cb9c0e6f68942b4e6092e6794260, type: 2}
+  - {fileID: 11400000, guid: 012a91ba5b0298443b843587d91e1fa1, type: 2}

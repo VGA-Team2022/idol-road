@@ -1,55 +1,113 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using DG.Tweening;
 
-public class NormalEnemy : MonoBehaviour
+/// <summary>通常ファンの処理を行うクラス</summary>
+[RequireComponent(typeof(EnemyVoice))]
+public class NormalEnemy : EnemyBase
 {
-    [SerializeField, Tooltip("ファンが動く方向"),Header("ファン関係")]
-    Vector3 _enemySpped;
-    [SerializeField, Tooltip("ファンサを要求する数")]
-    int _fansaNum = 1;
-    [SerializeField, Tooltip("リズム判定をするための時間(デバッグ用)"), Header("リズム関係")]
-    float _time = default;
-    [SerializeField, Tooltip("リズム判定の秒数")]
-    float _perfect, _good, _bad , _out;
+    /// <summary>成功・失敗時のIDを格納する為 </summary>
+    const int VOICE_ID_SIZE = 2;
+    /// <summary>吹き飛ぶまでの遅延 </summary>
+    const float EXPLOSION_DELAY = 0.3f;
 
+    [SerializeField, Header("ボスタイム用アニメーター")]
+    Animator _bossAnim = default;
 
-    /// <summary>とりあえずボタンで判定確認できるようにするもの</summary>
-    bool _knockDownEnemy;
+    /// <summary>再生するボイスを決定するクラス </summary>
+    EnemyVoice _enemyVoice => GetComponent<EnemyVoice>();
+    /// <summary>吹き飛ぶ演出で再生するアニメーションの名前</summary>
+    string _playAnimName = "";
+    /// <summary>GOOD・PERFECT判定時に再生するサウンドID </summary>
+    int _voiceSuccessID = 0;
+    /// <summary>BAD判定時に再生するサウンドID </summary>
+    int _voiceFailureID = 0;
 
-    Rigidbody _rb;
-    void Start()
+    protected override void BadEffect()
     {
-        _rb = GetComponent<Rigidbody>();
-        _rb.AddForce(_enemySpped);　//ファンを前に動かす（仮）
-        _knockDownEnemy = false;
+        //横移動
+        transform.DOMoveX(-3, 2)
+            .SetDelay(EXPLOSION_DELAY)
+            .OnComplete(() => Destroy(gameObject));
+
+        //透明になりながら消えていくパターン
+        Array.ForEach(EnemySprites, s => s.GetComponent<SpriteRenderer>().DOFade(endValue: 0, duration: 2.0f).OnComplete(GiveDamageRun));
+        
+        StageScrollRun();        //ステージスクロールを行う
+
+        AudioManager.Instance.PlayVoice(_voiceFailureID);
     }
-    /// <summary> リズム判定するもの</summary>
-    void Update()
+
+    protected override void GoodEffect()
     {
-        if(_knockDownEnemy) 
+        _anim.Play(_playAnimName);
+
+        //回転 無限ループを行う為
+        EnemySprites[0].transform.DOLocalRotate(new Vector3(0, 0, 360f), 0.1f, RotateMode.FastBeyond360)
+            .SetEase(Ease.Linear)
+            .SetLoops(-1, LoopType.Restart);
+
+        AudioManager.Instance.PlayVoice(_voiceSuccessID);
+        AudioManager.Instance.PlaySE(6, 0.7f);
+    }
+
+    protected override void PerfactEffect()
+    {
+        _anim.Play(_playAnimName);
+
+        //回転 無限ループを行う為
+        EnemySprites[0].transform.DOLocalRotate(new Vector3(0, 0, 360f), 0.1f, RotateMode.FastBeyond360)
+            .SetEase(Ease.Linear)
+            .SetLoops(-1, LoopType.Restart);
+
+        AudioManager.Instance.PlayVoice(_voiceSuccessID);
+        AudioManager.Instance.PlaySE(6, 0.7f);
+    }
+
+    public override void Setup(IState currentGameState, EnemyInfo info)
+    {
+        var voiceID = new int[VOICE_ID_SIZE];
+        var nomalType = EnemySprites[0].ChangeNomalEnemySprite();   //イラスト変更
+
+        if (currentGameState is BossTime)   //ボスステージ用のボイスを再生する為
         {
-            _time -= Time.deltaTime;
-            if(_time <= _out)
-            {
-                Debug.Log("out");
-            }
-            else if (_time <= _perfect)
-            {
-                Debug.Log($"perfect { _time:F1}");
-            }
-            else if(_time <= _good)
-            {
-                Debug.Log($"good { _time:F1}");
-            }
-            else if(_time <= _bad)
-            {
-                Debug.Log($"bad { _time:F1}");
-            }
+            voiceID = _enemyVoice.GetBossTimeVoiceID();
+            _bossAnim.enabled = true;
+            _bossAnim.Play("BossTimeWalk");
+        }
+        else
+        {
+            voiceID = _enemyVoice.GetNormalEnemyVoiceID(nomalType);    //0=成功ボイス 1=失敗ボイス
+        }
+
+        //ボイスを設定
+        _voiceSuccessID = voiceID[0];
+        _voiceFailureID = voiceID[1];
+
+        base.Setup(currentGameState, info);
+
+        switch (_currentRequest)    //各ファンサで吹き飛ぶ方向を決める
+        {
+            case FlickType.Left:
+                _playAnimName = FlickType.Left.ToString();
+                break;
+            case FlickType.Right:
+                _playAnimName = FlickType.Right.ToString();
+                break;
+            case FlickType.Up:
+            case FlickType.Down:
+                _playAnimName = FlickType.Up.ToString();
+                break;
         }
     }
-    public void DebugOnBottom()
+
+
+    /// <summary>
+    /// 吹き飛びアニメーションが終了したら自身を削除する
+    /// アニメーショントリガーで呼び出す
+    /// </summary>
+    public void ThisDestroy()
     {
-        _knockDownEnemy = true;
+        Destroy(this.gameObject);
     }
 }

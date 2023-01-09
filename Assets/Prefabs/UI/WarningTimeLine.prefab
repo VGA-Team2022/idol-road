@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.392}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3d72fdf6a594f674a80f5e450e70580d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fcef0083e55372e41b9941cb282be700, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -261,7 +261,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3d72fdf6a594f674a80f5e450e70580d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fcef0083e55372e41b9941cb282be700, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -345,14 +345,14 @@ PlayableDirector:
     value: {fileID: 3408837269618950583}
   - key: {fileID: -3181982630924000639, guid: 13e37f67d2fbe894a9af0a50169b0931, type: 2}
     value: {fileID: 3408837271147916801}
-  - key: {fileID: -7037272378313093698, guid: 13e37f67d2fbe894a9af0a50169b0931, type: 2}
-    value: {fileID: 7403181838932654774}
   - key: {fileID: -1757828121499820394, guid: 13e37f67d2fbe894a9af0a50169b0931, type: 2}
     value: {fileID: 0}
   - key: {fileID: 515796288932375241, guid: 13e37f67d2fbe894a9af0a50169b0931, type: 2}
     value: {fileID: 0}
   - key: {fileID: -6982478791279145559, guid: 13e37f67d2fbe894a9af0a50169b0931, type: 2}
     value: {fileID: 0}
+  - key: {fileID: -4570772847434844821, guid: 13e37f67d2fbe894a9af0a50169b0931, type: 2}
+    value: {fileID: 7403181838932654774}
   m_ExposedReferences:
     m_References:
     - 12b6ddaaef3f09e42a141a2cfe336d42: {fileID: 3408837269573975242}
@@ -527,7 +527,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3d72fdf6a594f674a80f5e450e70580d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fcef0083e55372e41b9941cb282be700, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1

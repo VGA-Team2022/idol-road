@@ -17,11 +17,14 @@ public class RequestUIController : MonoBehaviour
     /// <summary>評価によって吹き出しイラストを変更する</summary>
     public void ChangeRequestWindow(TimingResult result)
     {
+        if (!gameObject.activeSelf) { return; }
+
         switch (result)
         {
             case TimingResult.Bad:
                 gameObject.SetActive(true);
                 _requestWindow.sprite = _requestWindowSprites[0];
+                AudioManager.Instance.PlaySE(8);
                 break;
             case TimingResult.Good:
                 _requestWindow.sprite = _requestWindowSprites[1];

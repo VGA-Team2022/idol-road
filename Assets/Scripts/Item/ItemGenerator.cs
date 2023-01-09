@@ -1,32 +1,56 @@
+ï»¿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.WSA;
 
-/// <summary>ƒAƒCƒeƒ€‚ğ¶¬‚·‚éƒNƒ‰ƒX</summary>
+/// <summary>ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç”Ÿæˆã™ã‚‹ã‚¯ãƒ©ã‚¹</summary>
 public class ItemGenerator : MonoBehaviour
 {
-    [Tooltip("’l‚ª‚‚¯‚ê‚Î‚‚¢‚Ù‚ÇoŒ»‚µ‚Ü‚·")]
-    [SerializeField, Header("ŠeƒAƒCƒeƒ€‚ÌoŒ»Šm—¦"), ElementNames(new string[] { "‚Ê‚¢‚®‚é‚İ", "‰Ô‘©", "ƒvƒŒƒ[ƒ“ƒg", "‚¨‹à" }), Range(0f, 10f)]
+    [Tooltip("å€¤ãŒé«˜ã‘ã‚Œã°é«˜ã„ã»ã©å‡ºç¾ã—ã¾ã™")]
+    [SerializeField, Header("å„ã‚¢ã‚¤ãƒ†ãƒ ã®å‡ºç¾ç¢ºç‡"), ElementNames(new string[] { "ã¬ã„ãã‚‹ã¿", "èŠ±æŸ", "ãƒ—ãƒ¬ã‚¼ãƒ³ãƒˆ", "ãŠé‡‘" }), Range(0f, 10f)]
     float[] _itemWeights = default;
-    [SerializeField, Header("¶¬ŠÔŠu")]
+    [SerializeField, Header("ç”Ÿæˆé–“éš”")]
     float _generateTime = 5f;
-    [SerializeField, Header("‰E¶¬ˆÊ’uE“’…ˆÊ’u")]
+    [SerializeField, Header("å³ç”Ÿæˆä½ç½®ãƒ»åˆ°ç€ä½ç½®")]
     Transform[] _rightPoints = default;
-    [SerializeField, Header("¶¶¬ˆÊ’uE“’…ˆÊ’u")]
+    [SerializeField, Header("å·¦ç”Ÿæˆä½ç½®ãƒ»åˆ°ç€ä½ç½®")]
     Transform[] _leftPoints = default;
-    [SerializeField, Header("ƒQ[ƒ€ƒ}ƒl[ƒWƒƒ[")]
+    [SerializeField, Header("ã‚²ãƒ¼ãƒ ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼")]
     GameManager _gameManager = default;
-    [SerializeField, Header("¶¬‚·‚éƒAƒCƒeƒ€"), ElementNames(new string[] { "‚Ê‚¢‚®‚é‚İ", "‰Ô‘©", "ƒvƒŒƒ[ƒ“ƒg", "‚¨‹à" })]
+    [SerializeField, Header("ç”Ÿæˆã™ã‚‹ã‚¢ã‚¤ãƒ†ãƒ "), ElementNames(new string[] { "ã¬ã„ãã‚‹ã¿", "èŠ±æŸ", "ãƒ—ãƒ¬ã‚¼ãƒ³ãƒˆ", "ãŠé‡‘" })]
     IdolPowerItem[] _items = default;
 
-    /// <summary>d‚İ‚Ì‘˜a </summary>
+    ItemParameter _itemParameter => LevelManager.Instance.CurrentLevel.ItemParameter;
+
+    /// <summary>é‡ã¿ã®ç·å’Œ </summary>
     float _totalWeight = 0f;
 
     float _timer = 0f;
-    /// <summary>¶¬‚ğ‚·‚é‚©‚Ç‚¤‚© </summary>
-    bool _isGenerate = false;
+    /// <summary>ç”Ÿæˆã‚’ã™ã‚‹ã‹ã©ã†ã‹ </summary>
+    bool _isGenerate = true;
+
+    /// <summary>ã‚¢ã‚¤ãƒ†ãƒ ã®ç”Ÿæˆé †</summary>
+    List<ItemInfo> _generatorItems = new List<ItemInfo>();
+
+    /// <summary>æ¬¡ã«ç”Ÿæˆã™ã‚‹ã‚¢ã‚¤ãƒ†ãƒ ã®index</summary>
+    int _generateIndex = 0;
 
     private void Start()
-    {   
-        foreach (var weight in _itemWeights)    //d‚İ‚Ì‘˜a‚ğŒvZ‚·‚é
+    {
+        if (_itemParameter.RandomGenerator || _itemParameter.GeneratorItems.Count == 0) 
+        {
+            _itemWeights = _itemParameter.ItemWeights;
+
+            _generateTime = _itemParameter.GeneratorInterval;
+        }
+        else 
+        {
+            _generatorItems = _itemParameter.GeneratorItems;
+
+            _generateTime = _generatorItems[_generateIndex]._generatorInterval;
+        }
+
+        foreach (var weight in _itemWeights)    //é‡ã¿ã®ç·å’Œã‚’è¨ˆç®—ã™ã‚‹
         {
             _totalWeight += weight;
         }
@@ -34,7 +58,8 @@ public class ItemGenerator : MonoBehaviour
 
     private void Update()
     {
-        if (_isGenerate)
+        //ç”Ÿæˆé–“éš”ã®å€¤ãŒãƒã‚¤ãƒŠã‚¹ã ã£ãŸå ´åˆç”Ÿæˆã—ãªã„
+        if (_isGenerate && _generateTime > 0)
         {
             _timer += Time.deltaTime;
 
@@ -46,48 +71,83 @@ public class ItemGenerator : MonoBehaviour
         }
     }
 
-    /// <summary>ƒAƒCƒeƒ€‚ğ¶¬‚·‚é </summary>
+    /// <summary>ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç”Ÿæˆã™ã‚‹ </summary>
     void Generate()
     {
-        var direction = (GenerateDirection)Random.Range(0, System.Enum.GetNames(typeof(GenerateDirection)).Length);
-
-        if (direction == GenerateDirection.Right)
+        if (_generatorItems.Count > 0)
         {
-            var item = Instantiate(_items[GetSelectItemIndex()], _rightPoints[0].position, Quaternion.identity);
-            item.GameManager = _gameManager;
-            item.Move(_rightPoints[1].position);
+            ItemInfo itemInfo = _generatorItems[_generateIndex];
+
+            var direction = _generatorItems[_generateIndex]._generateDirection;
+
+            if (_generatorItems[_generateIndex]._generateDirection == ItemGenerateDirection.Random)
+            {
+                direction = (ItemGenerateDirection)Random.Range(0, System.Enum.GetNames(typeof(ItemGenerateDirection)).Length -1);
+            }
+
+            if (direction == ItemGenerateDirection.Right)
+            {
+                var item = Instantiate(_items[(int)itemInfo._item], _rightPoints[0].position, Quaternion.identity);
+                item.GameManager = _gameManager;
+                item.Move(_rightPoints[1].position);
+            }
+            else
+            {
+                var item = Instantiate(_items[(int)itemInfo._item], _leftPoints[0].position, Quaternion.identity);
+                item.GameManager = _gameManager;
+                item.Move(_leftPoints[1].position);
+            }
+            _generateIndex++;
+
+            if (_generatorItems.Count > _generateIndex)
+            {
+                _generateTime = _generatorItems[_generateIndex]._generatorInterval;
+            }
+            //ãƒã‚¤ãƒŠã‚¹ã«ã™ã‚‹ã“ã¨ã§ç”Ÿæˆã—ãªããªã‚‹
+            else { _generateTime = -1;  }
         }
         else
         {
-            var item = Instantiate(_items[GetSelectItemIndex()], _leftPoints[0].position, Quaternion.identity);
-            item.GameManager = _gameManager;
-            item.Move(_leftPoints[1].position);
+            var direction = (GenerateDirection)Random.Range(0, System.Enum.GetNames(typeof(GenerateDirection)).Length);
+
+            if (direction == GenerateDirection.Right)
+            {
+                var item = Instantiate(_items[GetSelectItemIndex()], _rightPoints[0].position, Quaternion.identity);
+                item.GameManager = _gameManager;
+                item.Move(_rightPoints[1].position);
+            }
+            else
+            {
+                var item = Instantiate(_items[GetSelectItemIndex()], _leftPoints[0].position, Quaternion.identity);
+                item.GameManager = _gameManager;
+                item.Move(_leftPoints[1].position);
+            }
         }
 
         AudioManager.Instance.PlaySE(15, 0.5f);
     }
 
-    /// <summary>¶¬‚·‚éƒAƒCƒeƒ€‚Ì“Y‚¦š‚ğæ“¾‚·‚é </summary>
-    /// <returns>¶¬‚·‚éƒAƒCƒeƒ€‚Ì“Y‚¦š</returns>
+    /// <summary>ç”Ÿæˆã™ã‚‹ã‚¢ã‚¤ãƒ†ãƒ ã®æ·»ãˆå­—ã‚’å–å¾—ã™ã‚‹ </summary>
+    /// <returns>ç”Ÿæˆã™ã‚‹ã‚¢ã‚¤ãƒ†ãƒ ã®æ·»ãˆå­—</returns>
     int GetSelectItemIndex()
     {
         var rand = Random.Range(0, _totalWeight); 
-        var currnetWeight = 0f;     //Œ»İ‚Ìd‚³
+        var currnetWeight = 0f;     //ç¾åœ¨ã®é‡ã•
 
-        for (var i = 0; i < _itemWeights.Length; i++)   // —”’l‚ª‘®‚·‚é—v‘f‚ğæ“ª‚©‚ç‡‚É‘I‘ğ
+        for (var i = 0; i < _itemWeights.Length; i++)   // ä¹±æ•°å€¤ãŒå±ã™ã‚‹è¦ç´ ã‚’å…ˆé ­ã‹ã‚‰é †ã«é¸æŠ
         {
-            currnetWeight += _itemWeights[i];   // Œ»İ—v‘f‚Ü‚Å‚Ìd‚İ‚Ì‘˜a‚ğ‹‚ß‚é
+            currnetWeight += _itemWeights[i];   // ç¾åœ¨è¦ç´ ã¾ã§ã®é‡ã¿ã®ç·å’Œã‚’æ±‚ã‚ã‚‹
 
-            if (rand < currnetWeight)   // —”’l‚ªŒ»İ—v‘f‚Ì”ÍˆÍ“à‚©ƒ`ƒFƒbƒN
+            if (rand < currnetWeight)   // ä¹±æ•°å€¤ãŒç¾åœ¨è¦ç´ ã®ç¯„å›²å†…ã‹ãƒã‚§ãƒƒã‚¯
             {
                 return i;
             }
         }
 
-        return _itemWeights.Length - 1;     // —”’l‚ªd‚İ‚Ì‘˜aˆÈã‚È‚ç––”ö—v‘f‚Æ‚·‚é
+        return _itemWeights.Length - 1;     // ä¹±æ•°å€¤ãŒé‡ã¿ã®ç·å’Œä»¥ä¸Šãªã‚‰æœ«å°¾è¦ç´ ã¨ã™ã‚‹
     }
 
-    /// <summary>ƒWƒFƒlƒŒ[ƒ^[‚ğ‹N“®A’â~‚³‚¹‚éŠÖ” </summary>
+    /// <summary>ã‚¸ã‚§ãƒãƒ¬ãƒ¼ã‚¿ãƒ¼ã‚’èµ·å‹•ã€åœæ­¢ã•ã›ã‚‹é–¢æ•° </summary>
     public void GeneratorOperation()
     {
         _isGenerate = !_isGenerate;
@@ -95,9 +155,9 @@ public class ItemGenerator : MonoBehaviour
 
     public enum GenerateDirection
     {
-        /// <summary>‰E‚É¶¬ </summary>
+        /// <summary>å³ã«ç”Ÿæˆ </summary>
         Right = 0,
-        /// <summary>¶‚É¶¬ </summary>
+        /// <summary>å·¦ã«ç”Ÿæˆ </summary>
         Left = 1,
     }
 }

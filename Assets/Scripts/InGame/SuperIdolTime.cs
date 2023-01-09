@@ -7,54 +7,64 @@ using DG.Tweening;
 using UnityEngine.Video;
 using System.Net;
 using Unity.Burst;
+using System.Linq;
+using UnityEngine.Rendering;
 
 public class SuperIdolTime : MonoBehaviour
 {
-    [SerializeField,Tooltip("スーパーアイドルタイム中のゲージがマックスになるまでの回数")]
-    private int _gaugeCountMax = 10;
-    [SerializeField,Tooltip("スーパーアイドルタイムの持続時間")]
-    private float _timeEndSuperIdolTime = 15;
-    [SerializeField,Tooltip("スーパーアイドルタイムの経過時間")]
-    private float _elapsed = 0;
-    [SerializeField,Tooltip("一タップで溜まるゲージの変化にかかる時間")]
-    private float _gaugePlusTime = 0.5f;
+    SuperIdolTimeParamater _paramater => LevelManager.Instance.CurrentLevel.IdolTimeParamater;
+    PlayResult _result => PlayResult.Instance;
+    [SerializeField, Header("GameManager")]
+    GameManager _manager;
 
-    [SerializeField,Tooltip("")]
+    [SerializeField, Header("スーパーアイドルタイムの経過時間")]
+    private float _elapsed = 0;
+    [SerializeField, Header("一タップで溜まるゲージの変化にかかる時間")]
+    private const float _gaugePlusTime = 0.5f;
+
+    [SerializeField, Header("爆発の画像の最大拡大サイズ")]
     private float _imageLange = 5.62f;
-    /// <summary>時間が過ぎているかの判定</summary>
-    [SerializeField]
+    [SerializeField,Header("ゲージが満タンかどうか")]
     private bool _isGaugeMax = false;
-    /// <summary>ゲージが溜まりきっているかの判定</summary>
-    [SerializeField]
-    private bool _isTimeMax = false;
-    [SerializeField,Tooltip("ゲージの画像")]
+
+    [SerializeField, Header("通常時のオブジェクト"), ElementNames(new string[] {
+        "EnemySpawner","CenterSpawnPoint","RightSpawnPoint","LeftSpawnPoint","BossSpawnPoint",
+        "ItemGanarator","LeftGeneratePoint","LeftArrivalPoint","RightGeneratePoint","RightArrivalPoint",
+        "BackGround","Player","StageObject","BlowingSpawnPosition","InGameCanvas"
+    })]
+    private GameObject[] _normalObjects = default;
+
+    //スーパーアイドルタイム時のオブジェクト
+    [SerializeField, Header("ゲージのImage")]
     private Image _imageGauge = default;
-    [SerializeField, Tooltip("爆発の画像")]
+    [SerializeField, Header("爆発のImage")]
     private Image _imageExplosion = default;
-    [SerializeField, Tooltip("フェード用のパネル")]
+    [SerializeField, Header("フェード用のパネル")]
     private Image _fadePanel = default;
-    [SerializeField,Tooltip("スーパーアイドルタイム画面のUIの親オブジェクト")]
-    private GameObject _superIdolTimeObject = default;
-    [SerializeField, Tooltip("スーパーアイドルタイム画面の背景絵")]
+    [SerializeField, Header("スーパーアイドルタイムの後面のUI")]
+    private GameObject _superIdolTimeBackUI = default;
+    [SerializeField, Header("スーパーアイドルタイムの前面のUI")]
+    private GameObject _superIdolTimeFrontUI = default;
+    [SerializeField, Header("スーパーアイドルタイム画面の背景絵")]
     private GameObject _backGroundPanel = default;
-    [SerializeField, Tooltip("通常画面のCanvas")]
-    private GameObject _normalCanvas = default;
-    [SerializeField,Tooltip("通常時のプレイヤー")]
-    private GameObject _normalPlayer = default;
-    [SerializeField, Tooltip("ゲージに合わせて出てくるファンの下段")]
+    [SerializeField, Header("下段のファン"),Tooltip("ゲージに合わせて出てくるファンの下段")]
     private GameObject _BackDownFans = default;
-    [SerializeField, Tooltip("下段のファンが出てくる値")]
-    private float _downFansValue = 0.9f;
-    [SerializeField, Tooltip("ゲージに合わせて出てくるファンの中段")]
+    [SerializeField, Header("下段のファンが出てくる値")]
+    private float _downFansValue = 0.3f;
+    [SerializeField, Header("中段のファン"), Tooltip("ゲージに合わせて出てくるファンの中段")]
     private GameObject _BackMiddleFans = default;
-    [SerializeField, Tooltip("中段のファンが出てくる値")]
+    [SerializeField, Header("中段のファンが出てくる値")]
     private float _middleFansValue = 0.6f;
-    [SerializeField, Tooltip("ゲージに合わせて出てくるファンの上段")]
+    [SerializeField, Header("上段のファン"), Tooltip("ゲージに合わせて出てくるファンの下段")]
     private GameObject _BackUpFans = default;
-    [SerializeField, Tooltip("上段のファンが出てくる値")]
-    private float _upFansValue = 0.3f;
-    [SerializeField, Tooltip("背景に流すビデオのプレーヤー")]
+    [SerializeField, Header("上段のファンが出てくる値")]
+    private float _upFansValue = 0.9f;
+    [SerializeField, Header("カットイン用ビデオプレーヤー")]
     private VideoPlayer _videoPlayer = default;
+    [SerializeField,Header("アイドルの踊っているImage")]
+    private Image _dancingIdolImage = default;
+    [SerializeField,Header("キラキラのエフェクト")]
+    private ParticleSystem _shiningParticle = default;
     /// <summary>スーパーアイドルタイム中のタップされた回数</summary>
     private int _gaugeCount = 0;
     /// <summary>ゲージの溜まり具合</summary>
@@ -64,13 +74,7 @@ public class SuperIdolTime : MonoBehaviour
     private bool isUpEnemy = false;
     /// <summary> 入力受付判定</summary>
     private bool isSuperIdolTime = false;
-    /// <summary>ゲージの最大値</summary>
-    public int GaugeCountMax
-    {
-        get => _gaugeCountMax;
-        set => _gaugeCountMax = value;
-    }
-
+    private IState _currentState = default;
     /// <summary>ゲージを増加させる</summary>
     public int GaugeCount
     {
@@ -81,131 +85,173 @@ public class SuperIdolTime : MonoBehaviour
             GaugeIncrease();
         }
     }
-    // Start is called before the first frame update
-    void Start()
+    public IState CurrentState
     {
-
+        get => _currentState;
+        set 
+        {
+            _currentState = value;
+            Debug.Log(_currentState);
+        }
     }
-
+    public bool IsSuperIdolTime => isSuperIdolTime;
+    
     private void OnEnable()
     {
+        _superIdolTimeBackUI.SetActive(true);
         _videoPlayer.gameObject.SetActive(true);
         _videoPlayer.Play();
-        _normalCanvas.gameObject.SetActive(false);
-        _normalPlayer.gameObject.SetActive(false);
+        foreach (var obj in _normalObjects)
+        {
+            obj.SetActive(false);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isSuperIdolTime == true)
-        {
-            //デバッグ用
-            if (Input.GetButtonDown("Fire1"))
-            {
-                GaugeCount++;
-            }
-            if (_isGaugeMax && _isTimeMax)
-            {
-                EndSuperIdolTime();
-                _isGaugeMax = false;
-                _gaugeCount = 0;
-            }
-        }
+        //if (isSuperIdolTime == true)
+        //{
+        //    //デバッグ用
+        //    if (Input.GetButtonDown("Fire1"))
+        //    {
+        //        GaugeCount++;
+        //    }
+        //}
         _videoPlayer.loopPointReached += EndVideo;
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Debug.Log(_manager.CurrentGameState);
+        }
     }
-
-  
-
     private void FixedUpdate()
     {
         if (isSuperIdolTime == true)
         {
             _elapsed += Time.deltaTime;
-            if (_elapsed > _timeEndSuperIdolTime)
+            if (_elapsed > _paramater.TimeEndSuperIdolTime)
             {
-                _isTimeMax = true;
-                //Debug.Log("終了");
+                _elapsed = 0;
+                CheckGauge();
+                isSuperIdolTime = false;
+                _manager.ChangeGameState(_currentState);
+                Debug.Log(_currentState);
             }
-            //Debug.Log($"{(int)_elapsed}秒");
         }
     }
-
-    /// <summary>
-    /// 鈴木先生のサンプルを参照した、ゲージの値をなめらかに変える関数
-    /// </summary>
-    /// <param name="value"></param>
-    void GaugeAdvance(float value)
+    /// <summary>開始時に呼び出す処理</summary>
+    public void StartSuperIdolTime()
     {
-        DOTween.To(() => _imageGauge.fillAmount,
-            x => _imageGauge.fillAmount = x,
-            value,
-            _gaugePlusTime);
+        _gaugeLength = 0;
+        _elapsed = 0;
+        _gaugeCount = 0;
+        _imageGauge.fillAmount = 0;
+        _superIdolTimeBackUI.SetActive(true);
+        _videoPlayer.Play();
+        foreach (var obj in _normalObjects)
+        {
+            obj.SetActive(false);
+        }
     }
-    public void EndSuperIdolTime()
+    /// <summary>終了時に呼び出す処理</summary>
+    public void InitializationProcess()
     {
-        var sequence = DOTween.Sequence();
-        sequence.Append(_imageExplosion.transform.DOScale(new Vector3(_imageLange, _imageLange, _imageLange), 0.5f))
-                .Append(_imageExplosion.transform.DOScale(Vector3.zero, 1f))
-                .Append(_fadePanel.DOFade(1,0.5f))
-                .OnComplete(() => { SwitchDisplayObject(); });
-        isSuperIdolTime = false;
+        _dancingIdolImage.gameObject.SetActive(false);
+        _backGroundPanel.gameObject.SetActive(false);
+        _BackDownFans.GetComponent<Animator>().Play("Idol");
+        isDownEnemy = false;
+        _BackMiddleFans.GetComponent<Animator>().Play("Idol");
+        isMiddleEnemy = false;
+        _BackUpFans.GetComponent<Animator>().Play("Idol");
+        isUpEnemy = false; 
+        _isGaugeMax = false;
+    }
+    /// <summary>スーパーアイドルタイムの終了時に処理をは</summary>
+    private void CheckGauge()
+    {
+        if (_isGaugeMax)
+        {
+            GorgeousEndProcess();
+            _result.ValueSuperIdleTimePerfect += _paramater.SuccessScore;
+        }
+        else if (!_isGaugeMax)
+        {
+            PlainEndProcess();
+        }
+    }
+    /// <summary>スーパーアイドルタイムのゲージをマックスで終了した際の豪華な処理</summary>
+    private void GorgeousEndProcess()
+    {
         //後ろのファンを飛ばす
         _BackDownFans.GetComponent<Animator>().Play("Burst");
         _BackMiddleFans.GetComponent<Animator>().Play("Burst");
         _BackUpFans.GetComponent<Animator>().Play("Burst");
-        this.gameObject.SetActive(false);
+        var sequence = DOTween.Sequence();
+        sequence.Append(_imageExplosion.transform.DOScale(new Vector3(_imageLange, _imageLange, _imageLange), 0.5f))
+                .Append(_imageExplosion.transform.DOScale(Vector3.zero, 1f))
+                .OnComplete(() => { SwitchDisplayObject(); });
     }
-    public void SwitchDisplayObject()
+    /// <summary>スーパーアイドルタイムのゲージが溜まり切らなかった際の簡素な処理</summary>
+    private void PlainEndProcess()
     {
-        _normalCanvas.SetActive(true);
-        _normalPlayer.SetActive(true);
-        _superIdolTimeObject.SetActive(false);
-        _fadePanel.DOFade(0, 0.25f);
+        SwitchDisplayObject();
     }
-    public void GaugeIncrease()
+    private void SwitchDisplayObject()
     {
-        _gaugeLength = (float)_gaugeCount / _gaugeCountMax;
+        foreach (var obj in _normalObjects)
+        {
+            obj.SetActive(true);
+        }
+        _superIdolTimeFrontUI.SetActive(false);
+        _shiningParticle.gameObject.SetActive(false);
+        _fadePanel.DOFade(0, 0.5f)
+            .OnComplete(() => 
+            {
+                _superIdolTimeBackUI.SetActive(false);
+                _videoPlayer.gameObject.SetActive(true);
+                InitializationProcess();
+                this.gameObject.SetActive(false);
+            });
+    }
+    private void GaugeIncrease()
+    {
+        _gaugeLength = (float)_gaugeCount / _paramater.GaugeCountMax;
+
         if (_imageGauge != null)
         {
-            //ネットで調べて参考にした、ゲージの値をなめらかに変える処理
+            //ゲージの値をなめらかに変える処理
             var sequence = DOTween.Sequence();
             sequence.Append(_imageGauge.DOFillAmount(_gaugeLength, _gaugePlusTime));
-            //GaugeAdvance(_gaugeLength);
         }
         if (_gaugeLength > _downFansValue && isDownEnemy == false)
         {
             isDownEnemy = true;
             _BackDownFans.GetComponent<Animator>().Play("SlideIn");
-            Debug.Log("Down");
         }
         if (_gaugeLength > _middleFansValue && isMiddleEnemy == false)
         {
             isMiddleEnemy = true;
             _BackMiddleFans.GetComponent<Animator>().Play("SlideIn");
-            Debug.Log("Middle");
         }
         if (_gaugeLength > _upFansValue && isUpEnemy == false)
         {
             isUpEnemy = true;
             _BackUpFans.GetComponent<Animator>().Play("SlideIn");
-            Debug.Log("Up");
         }
         if (_gaugeLength > 1)
         {
             _gaugeLength = 1;
             _isGaugeMax = true;
-            //Debug.Log("Full");
-            
         }
-        //Debug.Log($"max:{_gaugeCountMax},count:{_gaugeCount},gauge:{_gaugeLength}");
     }
     private void EndVideo(VideoPlayer vp)
     {
-        _superIdolTimeObject.SetActive(true);
+        _superIdolTimeFrontUI.SetActive(true);
         isSuperIdolTime = true;
         _videoPlayer.gameObject.SetActive(false);
+        _dancingIdolImage.gameObject.SetActive(true);
         _backGroundPanel.gameObject.SetActive(true);
-        //Debug.Log("endvideo");
+        _shiningParticle.gameObject.SetActive(true);
+        _shiningParticle.Play();
     }
 }
