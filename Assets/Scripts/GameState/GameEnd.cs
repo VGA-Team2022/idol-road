@@ -1,4 +1,5 @@
 using UnityEngine.SceneManagement;
+using UnityEngine;
 
 /// <summary>ƒQ[ƒ€ƒGƒ“ƒhó‘Ô‚Ìˆ—</summary>
 public class GameEnd : IState
