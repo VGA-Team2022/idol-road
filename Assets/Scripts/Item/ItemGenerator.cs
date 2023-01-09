@@ -40,20 +40,18 @@ public class ItemGenerator : MonoBehaviour
     {
         if (_itemParameter.RandomGenerator || _itemParameter.GeneratorItems.Count == 0) 
         {
+            _generateTime = _itemParameter.GeneratorInterval;
             _itemWeights = _itemParameter.ItemWeights;
 
-            _generateTime = _itemParameter.GeneratorInterval;
+            foreach (var weight in _itemWeights)    //重みの総和を計算する
+            {
+                _totalWeight += weight;
+            }
         }
         else 
         {
             _generatorItems = _itemParameter.GeneratorItems;
-
             _generateTime = _generatorItems[_generateIndex]._generatorInterval;
-        }
-
-        foreach (var weight in _itemWeights)    //重みの総和を計算する
-        {
-            _totalWeight += weight;
         }
     }
 
@@ -103,6 +101,7 @@ public class ItemGenerator : MonoBehaviour
             if (_generatorItems.Count > _generateIndex)
             {
                 _generateTime = _generatorItems[_generateIndex]._generatorInterval;
+                Debug.Log(_generateTime);
             }
             //マイナスにすることで生成しなくなる
             else { _generateTime = -1;  }

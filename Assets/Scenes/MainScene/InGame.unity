@@ -13483,7 +13483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1735335aea5c2694e8465a5297b7f329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debugMode: 0
+  _debugMode: 1
   _currentLevel: 1
   _stageScroller: {fileID: 957882129}
   _fadeController: {fileID: 1494124742}
