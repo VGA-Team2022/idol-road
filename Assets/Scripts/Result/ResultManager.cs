@@ -108,7 +108,6 @@ public class ResultManager : MonoBehaviour
         {
             case Result.Bad:
                 AudioManager.Instance.PlayVoice(15);
-                AudioManager.Instance.PlaySE(31, 0.5f);
                 AudioManager.Instance.PlayBGM(12);
                 _playBgmID = 12;
                 break;

@@ -67,6 +67,8 @@ public class GameManager : MonoBehaviour
     float _elapsedTime = 0f;
     /// <summary>時間が経過しているか否か</summary>
     bool _isElapsing = true;
+    /// <summary>死亡したかどうか </summary>
+    bool _isdead = false;
     /// <summary>ボスの移動を開始する処理</summary>
     event Action _startBossMove = default;
 
@@ -166,7 +168,11 @@ public class GameManager : MonoBehaviour
         {
             _comboAmount = 0;
             _comboIndex = 0;
-            _nextComboCount = _comboInfos[0]._nextCombo;
+
+            if (0 < _comboInfos.Count)
+            {
+                _nextComboCount = _comboInfos[0]._nextCombo;
+            }
         }
         else
         {
@@ -201,9 +207,10 @@ public class GameManager : MonoBehaviour
                 _uiController.UpdateHpUI(_idleHp); //HPUIを更新
             }
 
-            if (_idleHp <= 0)   //ゲームオーバー
+            if (_idleHp <= 0 && !_isdead)   //ゲームオーバー
             {
                 ChangeGameState(_gameEndState); //ゲーム終了状態に遷移
+                _isdead = true;
                 return;
             }
         }
