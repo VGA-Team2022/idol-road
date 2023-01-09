@@ -16,6 +16,9 @@ public class GameParameter : ScriptableObject
     [SerializeField, Header("アイテムの生成順番")]
     ItemParameter _itemParameter = default;
 
+    [SerializeField, Header("コンボ数によって表示するイラスト")]
+    ComboParameter _comboParameter = default;
+
     [SerializeField, Header("スーパーアイドルタイムのパラメーター")]
     SuperIdolTimeParamater _idolTimeParamater = default;
 
@@ -33,6 +36,8 @@ public class GameParameter : ScriptableObject
 
     /// <summary>アイテムの生成順番 </summary>
     public ItemParameter ItemParameter => _itemParameter;
+
+    public ComboParameter ComboParameter => _comboParameter;
 
     /// <summary>スーパーアイドルタイムのパラメーター</summary>
     public SuperIdolTimeParamater IdolTimeParamater => _idolTimeParamater;

@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
     ItemGenerator _itemGenerator = default;
 
     InGameParameter _inGameParameter => LevelManager.Instance.CurrentLevel.InGame;
+    /// <summary>コンボによって変えるイラスト</summary>
+    List<ComboInfo> _comboInfos => LevelManager.Instance.CurrentLevel.ComboParameter.ComboInfos;
     /// <summary>現在対象の敵 </summary>
     EnemyBase _currentEnemy = default;
     /// <summary>現在のゲーム状態</summary>
@@ -59,6 +61,8 @@ public class GameManager : MonoBehaviour
     int _comboAmount;
     /// <summary>次にコンボイラストを表示するカウント</summary>
     int _nextComboCount = ADD_COMBO_ILLUST_CCHANGE;
+    /// <summary>次のコンボで表示するイラストの要素</summary>
+    int _comboIndex = 0;
     /// <summary>ゲーム開始からの経過時間 </summary>
     float _elapsedTime = 0f;
     /// <summary>時間が経過しているか否か</summary>
@@ -161,6 +165,8 @@ public class GameManager : MonoBehaviour
         if (result == TimingResult.Out || result == TimingResult.Bad)
         {
             _comboAmount = 0;
+            _comboIndex = 0;
+            _nextComboCount = _comboInfos[0]._nextCombo;
         }
         else
         {
@@ -171,8 +177,12 @@ public class GameManager : MonoBehaviour
 
         if (_comboAmount == _nextComboCount)    //コンボイラストを表示
         {
-            _uiController.PlayComboAnimation();
-            _nextComboCount += ADD_COMBO_ILLUST_CCHANGE;
+            _uiController.PlayComboAnimation(_comboInfos[_comboIndex]._comboSprites);
+            _comboIndex++;
+            if (_nextComboCount > _comboIndex) 
+            {
+                _nextComboCount = _comboInfos[_comboIndex]._nextCombo;
+            }  
         }
     }
 

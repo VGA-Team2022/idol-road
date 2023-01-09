@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -85,10 +86,12 @@ public class InGameUIController : MonoBehaviour
     }
 
     /// <summary>コンボ用カットインのアニメーションを再生する</summary>
-    public void PlayComboAnimation()
+    public void PlayComboAnimation(Sprite sprite)
     {
-        _comboImage.sprite = _comboSprites[_currentComboIndex];     //イラストを変更
-        _currentComboIndex = (_currentComboIndex + 1) % _comboSprites.Length;   //イラストを循環させるため
+        //_comboImage.sprite = _comboSprites[_currentComboIndex];     //イラストを変更
+        //_currentComboIndex = (_currentComboIndex + 1) % _comboSprites.Length;   //イラストを循環させるため
+
+        _comboImage.sprite = sprite;
 
         foreach (var anim in _comboAnimators)
         {
