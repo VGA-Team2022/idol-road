@@ -117,6 +117,8 @@ public class StageSelectManager : MonoBehaviour
             return;
         }
 
+        if (selectAnimator == _currentButtonAnimator) { return; }   //“¯‚¶“ïˆÕ“x‚Ìƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚ç‰½‚à‚µ‚È‚¢
+
         _currentButtonAnimator.Play("Deselect");
         _currentButtonAnimator = selectAnimator;
         _currentButtonAnimator.Play("Select");
