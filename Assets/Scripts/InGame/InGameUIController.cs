@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,8 +5,6 @@ using UnityEngine.UI;
 /// <summary>ゲームシーンで使用するUIの管理するクラス </summary>
 public class InGameUIController : MonoBehaviour
 {
-    [SerializeField, Header("コンボ時に表示するイラストの順番"), ElementNames(new string[] {"1", "2", "3", "4"})]
-    Sprite[] _comboSprites = default;
     [SerializeField, Tooltip("ゴールまでの距離を表示するスライダー")]
     Slider _goalSlider = default;
     [SerializeField, Tooltip("アイドルパワーを表示するImage")]
@@ -88,9 +85,6 @@ public class InGameUIController : MonoBehaviour
     /// <summary>コンボ用カットインのアニメーションを再生する</summary>
     public void PlayComboAnimation(Sprite sprite)
     {
-        //_comboImage.sprite = _comboSprites[_currentComboIndex];     //イラストを変更
-        //_currentComboIndex = (_currentComboIndex + 1) % _comboSprites.Length;   //イラストを循環させるため
-
         _comboImage.sprite = sprite;
 
         foreach (var anim in _comboAnimators)
