@@ -31,19 +31,18 @@ public class StoryPrinter : MonoBehaviour
     int _currnetTextIndex = 0;
     /// <summary>演出が終了したかどうか </summary>
     bool _endAnimation = false;
+    /// <summary>強制表示時にスキップする為の処理 </summary>
+    event Action _storySkip = default;
     /// <summary>ストーリー表示のコルーチンを終了させる為の変数 </summary>
     IEnumerator _showStroyEnumerator = default;
 
     Animator _anim => GetComponent<Animator>();
-
-    /// <summary>
-    /// アニメーションさせた値をリセットする
-    /// 再度アニメーションさせる為
-    /// </summary>
-    void ResetValue()
+   
+    /// <summary>強制表示時にスキップする為の処理 </summary>
+    public event Action StorySkip
     {
-        Array.ForEach(_storyTexts, s => s.alpha = 0);
-        _currnetTextIndex = 0;
+        add { _storySkip += value; }
+        remove { _storySkip -= value; }
     }
 
     /// <summary>ストーリーを表示する </summary>
@@ -92,17 +91,16 @@ public class StoryPrinter : MonoBehaviour
             Array.ForEach(_storyTexts, s => s.alpha = 0);
             _currnetTextIndex = 0;
             _endAnimation = false;
+
+
+            if (_currentMode == ShowMode.InGame)    //タイトル表示モードに切り替える
+            {
+                _currentMode = ShowMode.Title;
+                _storySkip?.Invoke();
+            }
         }
 
         AudioManager.Instance.PlaySE(7);
-    }
-
-    /// <summary>閉じるボタンを押した時に実行したい処理を追加する関数 </summary>
-    /// <param name="action"></param>
-    public void CloseButtonAddListener(UnityAction action)
-    {
-        _closeButton.onClick.AddListener(action);
-        _closeButton.onClick.AddListener(() => _closeButton.onClick.RemoveAllListeners());  //一度だけ実行させる為に、ボタンが押されたら登録されている処理を全て削除する
     }
 
     /// <summary>各モードの初期化処理を行う </summary>
@@ -110,6 +108,7 @@ public class StoryPrinter : MonoBehaviour
     {
         if (_currentMode == ShowMode.Title)
         {
+            _closeButton.gameObject.SetActive(true);
             _skipButton.gameObject.SetActive(false);
             _nextText.gameObject.SetActive(false);
         }
@@ -126,11 +125,19 @@ public class StoryPrinter : MonoBehaviour
     /// </summary>
     public void EndAnimation()
     {
-        if (_endAnimation) { return; }  //アニメーションが終了していたら何もしない
-
-        StopCoroutine(_showStroyEnumerator);
-        _storyTexts[_currnetTextIndex].DOComplete();
-        Array.ForEach(_storyTexts, s => s.alpha = 1);
+        if (!_endAnimation)
+        {
+            StopCoroutine(_showStroyEnumerator);
+            _storyTexts[_currnetTextIndex].DOComplete();
+            Array.ForEach(_storyTexts, s => s.alpha = 1);
+            _endAnimation = true;
+        }
+        else if(_currentMode == ShowMode.InGame)    //タイトル表示モードに切り替える
+        {
+            _currentMode = ShowMode.Title;
+            _storySkip?.Invoke();
+            StroyOperator(false);
+        }
     }
 
     /// <summary>表示させる場所によって表示の仕方を変える </summary>
@@ -142,3 +149,5 @@ public class StoryPrinter : MonoBehaviour
         InGame,
     }
 }
+
+

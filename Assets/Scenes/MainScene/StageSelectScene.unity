@@ -3021,6 +3021,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 970479122, guid: 76e016eac153f35448a36028b88ef1c3, type: 3}
+      propertyPath: _currentMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1520466610407078636, guid: 76e016eac153f35448a36028b88ef1c3, type: 3}
       propertyPath: m_Name
       value: StoryCanvas
@@ -3039,7 +3043,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1520466610407078675, guid: 76e016eac153f35448a36028b88ef1c3, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1520466610407078675, guid: 76e016eac153f35448a36028b88ef1c3, type: 3}
       propertyPath: m_AnchorMax.x
@@ -6122,7 +6126,7 @@ RectTransform:
   m_Children:
   - {fileID: 1989119314}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -10728,7 +10732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -12116,7 +12120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7022600469531980255, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7022600469531980255, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
       propertyPath: m_AnchorMax.x
