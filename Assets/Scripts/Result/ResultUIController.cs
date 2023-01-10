@@ -14,8 +14,6 @@ public class ResultUIController : MonoBehaviour
 
     [SerializeField, Header("各スコアのテキストを表示させるまで時間")]
     float _showResultSpan = 1.0f;
-    [SerializeField, Header("スコアを表示するまでの時間")]
-    float _scoreResultSpan = 2.0f;
     [SerializeField, Header("ボタンを表示するまでの時間")]
     float _buttonShowSpan = 1.0f;
     [SerializeField, Header("テキストのフェードインにかかる時間")]
@@ -45,8 +43,8 @@ public class ResultUIController : MonoBehaviour
     [SerializeField, Header("評価別背景(キャラクター)"), Tooltip("0=神 1=良 2=普通 3=悪")]
     Sprite[] _backGroundSprites = default;
 
-    [ElementNames(new string[] { "評価", "Bad", "Good", "Perfect", "合計スコア" })]
-    [SerializeField, Header("結果を表示するテキスト"), Tooltip("0=評価, 1=Bad, 2=Good, 3=Perfect, 4=合計スコア")]
+    [ElementNames(new string[] { "評価", "Bad", "Good", "Perfect","Bonus", "合計スコア" })]
+    [SerializeField, Header("結果を表示するテキスト"), Tooltip("0=評価, 1=Bad, 2=Good, 3=Perfect, 4=Bonus,5=合計スコア")]
     TextMeshProUGUI[] _resultValueText = default;
 
     [SerializeField, Header("リザルト表示切替"), ElementNames(new string[] { "評価", "みんなのコメント" })]
@@ -172,7 +170,7 @@ public class ResultUIController : MonoBehaviour
 
 
     /// <summary>結果のテキストを表示する関数</summary>
-    /// <param name="result">0=bad 1=good 2=perfect 4=score</param>
+    /// <param name="result">0=bad 1=good 2=perfect 3=ボーナス 4=score</param>
     public IEnumerator ShowResult(int[] result)
     {
         int firstValue = 0;
@@ -199,14 +197,18 @@ public class ResultUIController : MonoBehaviour
         _resultValueText[3].gameObject.SetActive(true);
         _resultValueText[3].text = result[2].ToString();
 
-        yield return new WaitForSeconds(_scoreResultSpan);
+        yield return new WaitForSeconds(_showResultSpan);
+        AudioManager.Instance.PlaySE(37);
+        _resultValueText[4].gameObject.SetActive(true);
+        _resultValueText[4].text = result[3].ToString();
+        yield return new WaitForSeconds(_showResultSpan);
 
         AudioManager.Instance.PlaySE(36);
-        _resultValueText[4].gameObject.SetActive(true);
-        DOTween.To(() => firstValue, (r) => result[3] = r, result[3], 0.7f)
-             .OnUpdate(() => _resultValueText[4].text = result[3].ToString());
+        _resultValueText[5].gameObject.SetActive(true);
+        DOTween.To(() => firstValue, (r) => result[4] = r, result[4], 0.7f)
+             .OnUpdate(() => _resultValueText[5].text = result[4].ToString());
 
-        yield return new WaitForSeconds(_scoreResultSpan);
+        yield return new WaitForSeconds(_showResultSpan);
 
         for (int i = 0; i < _fadeImageButton.Length; i++)
         {
