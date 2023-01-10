@@ -26,7 +26,7 @@ public class TitleManager : MonoBehaviour
         {
             if (!_isChangeScene)
             {
-                AudioManager.Instance.PlaySoundAfterExecution(Sources.VOICE, 14, () => AudioManager.Instance.PlayBGM(14));
+                AudioManager.Instance.PlaySoundAfterExecution(Sources.VOICE, 14, () => AudioManager.Instance.PlayBGM(14, 0.5f));
             }
         });
     }

@@ -29,7 +29,10 @@ public class BossTime : IState
             _isPlaying = true;
             _isBossTime= true;
             AudioManager.Instance.PlaySE(26);
-        } 
+        }
+
+        AudioManager.Instance.StopBGM(10);
+        AudioManager.Instance.PlayBGM(15);
     }
 
     public void OnExit(GameManager manager, IState nextState)
