@@ -143,7 +143,7 @@ public class EnemySpawner : MonoBehaviour
         if (_order.EnemyOrder.Count - LAST_ENEMY_GENERATED <= _infoIndex)  //ÅŒã‚Ì“G‚ª¶¬‚³‚ê‚½‚ç¶¬‚ðŽ«‚ß‚é
         {
             _isGenerate = false;
-            return;
+           // return;
         }
         else if (_order.EnemyOrder.Count - BOSS_MOVE_REGISTER <= _infoIndex)  //ÅŒã‚Ì“G‚Éƒ{ƒX‚ðˆÚ“®‚³‚¹‚éˆ—‚ð“o˜^‚·‚éˆ×
         {
