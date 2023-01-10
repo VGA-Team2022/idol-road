@@ -8,9 +8,6 @@ using UnityEngine.Playables;
 public class GameManager : MonoBehaviour
 {
     #region
-    /// <summary>イラストが変わるタイミング</summary>
-    const int ADD_COMBO_ILLUST_CCHANGE = 5;
-
     /// <summary>スタート状態 </summary>
     public static GameStart _startState => new GameStart();
     /// <summary>プレイ状態 </summary>
@@ -61,7 +58,7 @@ public class GameManager : MonoBehaviour
     /// <summary>コンボを数える変数 </summary>
     int _comboAmount;
     /// <summary>次にコンボイラストを表示するカウント</summary>
-    int _nextComboCount = ADD_COMBO_ILLUST_CCHANGE;
+    int _nextComboCount = -1;
     /// <summary>次のコンボで表示するイラストの要素</summary>
     int _comboIndex = 0;
     /// <summary>ゲーム開始からの経過時間 </summary>
@@ -112,6 +109,11 @@ public class GameManager : MonoBehaviour
         _currentGameState.OnEnter(this, null);
         _uiController.InitializeInGameUI(_inGameParameter.PlayerHp, _inGameParameter.GamePlayTime, _inGameParameter.IdolPowerMaxValue); //UIの初期化処理
         Application.targetFrameRate = 60; //FPSを60に設定
+
+        if (0 < _comboInfos.Count)
+        {
+            _nextComboCount = _comboInfos[0]._nextCombo;
+        }
     }
 
     void Update()
@@ -128,6 +130,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>BGMを止める処理</summary>
     IEnumerator StopBGM()
     {
         yield return new WaitForSeconds(1f);
@@ -135,6 +138,7 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.StopBGM(15);
     }
 
+    /// <summary>BGM処理を実行する </summary>
     public void RunStopBGM()
     {
         StartCoroutine(StopBGM());
@@ -182,7 +186,7 @@ public class GameManager : MonoBehaviour
             _comboAmount = 0;
             _comboIndex = 0;
 
-            if (0 < _comboInfos.Count)
+            if (0 < _nextComboCount)
             {
                 _nextComboCount = _comboInfos[0]._nextCombo;
             }
@@ -194,8 +198,9 @@ public class GameManager : MonoBehaviour
 
         _uiController.UpdateComboText(_comboAmount);    //UIを更新
 
-        if (_comboInfos[0] == null) { return; }
-      
+
+        if(_nextComboCount < 0) { return; }
+
         if (_comboAmount == _nextComboCount)    //コンボイラストを表示
         {
             _uiController.PlayComboAnimation(_comboInfos[_comboIndex]._comboSprites);
