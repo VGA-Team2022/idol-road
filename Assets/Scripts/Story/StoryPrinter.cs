@@ -26,6 +26,8 @@ public class StoryPrinter : MonoBehaviour
     Button _skipButton = default;
     [SerializeField, Tooltip("強制表示時に使用するNextテキスト")]
     TMP_Text _nextText = default;
+    [SerializeField, Tooltip("ストーリーテキストの親オブジェクト")]
+    RectTransform _storyTextParent = default;
 
     /// <summary>表示したテキストの添え字 </summary>
     int _currnetTextIndex = 0;
@@ -111,11 +113,13 @@ public class StoryPrinter : MonoBehaviour
             _closeButton.gameObject.SetActive(true);
             _skipButton.gameObject.SetActive(false);
             _nextText.gameObject.SetActive(false);
+            _storyTextParent.localPosition = new Vector3(11, 0, 0);
         }
         else
         {
             _closeButton.gameObject.SetActive(false);
             _nextText.color = new Color(0, 0, 0, 0);
+            _storyTextParent.localPosition = new Vector3(11, 37, 0);
         }
     }
 
