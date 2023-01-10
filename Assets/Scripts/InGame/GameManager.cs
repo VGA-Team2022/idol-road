@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -7,9 +8,6 @@ using UnityEngine.Playables;
 public class GameManager : MonoBehaviour
 {
     #region
-    /// <summary>イラストが変わるタイミング</summary>
-    const int ADD_COMBO_ILLUST_CCHANGE = 5;
-
     /// <summary>スタート状態 </summary>
     public static GameStart _startState => new GameStart();
     /// <summary>プレイ状態 </summary>
@@ -60,13 +58,15 @@ public class GameManager : MonoBehaviour
     /// <summary>コンボを数える変数 </summary>
     int _comboAmount;
     /// <summary>次にコンボイラストを表示するカウント</summary>
-    int _nextComboCount = ADD_COMBO_ILLUST_CCHANGE;
+    int _nextComboCount = -1;
     /// <summary>次のコンボで表示するイラストの要素</summary>
     int _comboIndex = 0;
     /// <summary>ゲーム開始からの経過時間 </summary>
     float _elapsedTime = 0f;
     /// <summary>時間が経過しているか否か</summary>
     bool _isElapsing = true;
+    /// <summary>死亡したかどうか </summary>
+    bool _isdead = false;
     /// <summary>ボスの移動を開始する処理</summary>
     event Action _startBossMove = default;
 
@@ -109,6 +109,11 @@ public class GameManager : MonoBehaviour
         _currentGameState.OnEnter(this, null);
         _uiController.InitializeInGameUI(_inGameParameter.PlayerHp, _inGameParameter.GamePlayTime, _inGameParameter.IdolPowerMaxValue); //UIの初期化処理
         Application.targetFrameRate = 60; //FPSを60に設定
+
+        if (0 < _comboInfos.Count)
+        {
+            _nextComboCount = _comboInfos[0]._nextCombo;
+        }
     }
 
     void Update()
@@ -123,6 +128,20 @@ public class GameManager : MonoBehaviour
         {
             ChangeGameState(_bossTimeState);
         }
+    }
+
+    /// <summary>BGMを止める処理</summary>
+    IEnumerator StopBGM()
+    {
+        yield return new WaitForSeconds(1f);
+        AudioManager.Instance.StopBGM(10);
+        AudioManager.Instance.StopBGM(15);
+    }
+
+    /// <summary>BGM処理を実行する </summary>
+    public void RunStopBGM()
+    {
+        StartCoroutine(StopBGM());
     }
 
     /// <summary>アイドルパワーが増加する関数</summary>
@@ -166,7 +185,11 @@ public class GameManager : MonoBehaviour
         {
             _comboAmount = 0;
             _comboIndex = 0;
-            _nextComboCount = _comboInfos[0]._nextCombo;
+
+            if (0 < _nextComboCount)
+            {
+                _nextComboCount = _comboInfos[0]._nextCombo;
+            }
         }
         else
         {
@@ -174,6 +197,9 @@ public class GameManager : MonoBehaviour
         }
 
         _uiController.UpdateComboText(_comboAmount);    //UIを更新
+
+
+        if(_nextComboCount < 0) { return; }
 
         if (_comboAmount == _nextComboCount)    //コンボイラストを表示
         {
@@ -201,9 +227,10 @@ public class GameManager : MonoBehaviour
                 _uiController.UpdateHpUI(_idleHp); //HPUIを更新
             }
 
-            if (_idleHp <= 0)   //ゲームオーバー
+            if (_idleHp <= 0 && !_isdead)   //ゲームオーバー
             {
                 ChangeGameState(_gameEndState); //ゲーム終了状態に遷移
+                _isdead = true;
                 return;
             }
         }

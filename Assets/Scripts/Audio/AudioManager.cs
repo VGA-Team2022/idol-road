@@ -12,9 +12,9 @@ public class AudioManager : MonoBehaviour
     /// <summary>使用するCriAtomSourceの数 </summary>
     const int SOURCE_COUNT = 3;
 
-    [ElementNames(new string[] {"BGM", "SE", "VOICE"})]
+    [ElementNames(new string[] { "BGM", "SE", "VOICE" })]
     [SerializeField, Header("各サウンドソース"), Tooltip("0=BGM, 1=SE, 2=VOICE")]
-    CriAtomSource[] _sources = new CriAtomSource[SOURCE_COUNT]; 
+    CriAtomSource[] _sources = new CriAtomSource[SOURCE_COUNT];
 
     /// <summary>各ソースのACBファイル 0=BGM 1=SE 2=VOICE </summary>
     CriAtomExAcb[] _exAcbs = new CriAtomExAcb[SOURCE_COUNT];
@@ -54,8 +54,8 @@ public class AudioManager : MonoBehaviour
         if (!_exAcbs[(int)sourceIndex].GetCueInfo(cueID, out cueInfo))     // CueInfoが読み込めなかった場合は-1を返す
         {
             return -1;
-        }   
-        
+        }
+
         return cueInfo.length;
     }
 
