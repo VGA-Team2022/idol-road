@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -127,6 +128,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    IEnumerator StopBGM()
+    {
+        yield return new WaitForSeconds(1f);
+        AudioManager.Instance.StopBGM(10);
+        AudioManager.Instance.StopBGM(15);
+    }
+
+    public void RunStopBGM()
+    {
+        StartCoroutine(StopBGM());
+    }
+
     /// <summary>アイドルパワーが増加する関数</summary>
     public void IncreseIdlePower(float power)
     {
@@ -181,6 +194,8 @@ public class GameManager : MonoBehaviour
 
         _uiController.UpdateComboText(_comboAmount);    //UIを更新
 
+        if (_comboInfos[0] == null) { return; }
+      
         if (_comboAmount == _nextComboCount)    //コンボイラストを表示
         {
             _uiController.PlayComboAnimation(_comboInfos[_comboIndex]._comboSprites);

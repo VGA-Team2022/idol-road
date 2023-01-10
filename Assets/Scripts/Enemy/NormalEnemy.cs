@@ -36,6 +36,7 @@ public class NormalEnemy : EnemyBase
         StageScrollRun();        //ステージスクロールを行う
 
         AudioManager.Instance.PlayVoice(_voiceFailureID);
+        AudioManager.Instance.PlaySE(27);
     }
 
     protected override void GoodEffect()
@@ -49,6 +50,7 @@ public class NormalEnemy : EnemyBase
 
         AudioManager.Instance.PlayVoice(_voiceSuccessID);
         AudioManager.Instance.PlaySE(6, 0.7f);
+        AudioManager.Instance.PlaySE(29);
     }
 
     protected override void PerfactEffect()
@@ -62,6 +64,7 @@ public class NormalEnemy : EnemyBase
 
         AudioManager.Instance.PlayVoice(_voiceSuccessID);
         AudioManager.Instance.PlaySE(6, 0.7f);
+        AudioManager.Instance.PlaySE(28);
     }
 
     public override void Setup(IState currentGameState, EnemyInfo info)

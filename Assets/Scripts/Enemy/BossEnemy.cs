@@ -50,6 +50,7 @@ public class BossEnemy : EnemyBase
         .DOFade(endValue: 0, duration: 2.0f).OnComplete(GiveDamageRun));
 
            AudioManager.Instance.PlayVoice(8);
+        AudioManager.Instance.PlaySE(28);
     }
 
     protected override void GoodEffect()
@@ -63,7 +64,7 @@ public class BossEnemy : EnemyBase
 
         AudioManager.Instance.PlayVoice(1);
         AudioManager.Instance.PlaySE(9);
-
+        AudioManager.Instance.PlaySE(29);
     }
 
     protected override void PerfactEffect()
@@ -77,6 +78,7 @@ public class BossEnemy : EnemyBase
 
         AudioManager.Instance.PlayVoice(1);
         AudioManager.Instance.PlaySE(9);
+        AudioManager.Instance.PlaySE(28);
 
     }
 
