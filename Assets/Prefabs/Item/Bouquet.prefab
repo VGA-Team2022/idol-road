@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _getAmount: 10
   _duration: 3
-  _jumpPower: 3
+  _jumpPower: 4.4
 --- !u!212 &7703148911629082944
 SpriteRenderer:
   m_ObjectHideFlags: 0

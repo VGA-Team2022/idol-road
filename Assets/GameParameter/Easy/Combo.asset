@@ -12,4 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c43526369ad4cf64a99c676f55fb5f4d, type: 3}
   m_Name: Combo
   m_EditorClassIdentifier: 
-  _comboInfos: []
+  _comboInfos:
+  - _nextCombo: 5
+    _comboSprites: {fileID: 21300000, guid: 9a13379b838e58c41ae7cb0cb2bbbdb5, type: 3}
+  - _nextCombo: 10
+    _comboSprites: {fileID: 21300000, guid: d7c8e5fe9b16468459bc248c76ab3b5c, type: 3}
+  - _nextCombo: 15
+    _comboSprites: {fileID: 21300000, guid: 6482598b1898e594788bb26b84324ac3, type: 3}
+  - _nextCombo: 20
+    _comboSprites: {fileID: 21300000, guid: 57a72bfdcb4bc144e9490f6092b0667e, type: 3}
+  - _nextCombo: 25
+    _comboSprites: {fileID: 21300000, guid: 9a13379b838e58c41ae7cb0cb2bbbdb5, type: 3}
+  - _nextCombo: 30
+    _comboSprites: {fileID: 21300000, guid: 6482598b1898e594788bb26b84324ac3, type: 3}
+  - _nextCombo: 35
+    _comboSprites: {fileID: 21300000, guid: d7c8e5fe9b16468459bc248c76ab3b5c, type: 3}
+  - _nextCombo: 40
+    _comboSprites: {fileID: 21300000, guid: 57a72bfdcb4bc144e9490f6092b0667e, type: 3}
+  - _nextCombo: 45
+    _comboSprites: {fileID: 21300000, guid: 9a13379b838e58c41ae7cb0cb2bbbdb5, type: 3}
+  - _nextCombo: 50
+    _comboSprites: {fileID: 21300000, guid: 6482598b1898e594788bb26b84324ac3, type: 3}
