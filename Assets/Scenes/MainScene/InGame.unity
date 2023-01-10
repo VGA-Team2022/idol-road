@@ -9473,7 +9473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cecf9090f2a1a424b87a534b30fa6a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _flickMinRange: {x: 0, y: 0}
+  _flickMinRange: {x: 50, y: 50}
   _itemHitLayer:
     serializedVersion: 2
     m_Bits: 64
