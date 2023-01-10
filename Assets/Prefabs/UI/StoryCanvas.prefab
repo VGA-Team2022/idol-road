@@ -159,7 +159,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1520466611889922947}
   - {fileID: 1520466611928099362}
@@ -204,7 +204,7 @@ RectTransform:
   m_GameObject: {fileID: 1520466610407078636}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1520466610449576254}
@@ -324,6 +324,7 @@ MonoBehaviour:
   _closeButton: {fileID: 8369551377236951942}
   _skipButton: {fileID: 4229294408865047013}
   _nextText: {fileID: 4682544237327718806}
+  _storyTextParent: {fileID: 1520466610389779071}
 --- !u!1 &1520466610449576255
 GameObject:
   m_ObjectHideFlags: 0
