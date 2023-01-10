@@ -39,7 +39,10 @@ public class StoryPrinter : MonoBehaviour
     IEnumerator _showStroyEnumerator = default;
 
     Animator _anim => GetComponent<Animator>();
-   
+
+    /// <summary>表示モード </summary>
+    public ShowMode CurrentMode { get => _currentMode; set => _currentMode = value; }
+
     /// <summary>強制表示時にスキップする為の処理 </summary>
     public event Action StorySkip
     {
@@ -143,15 +146,15 @@ public class StoryPrinter : MonoBehaviour
             StroyOperator(false);
         }
     }
+}
 
-    /// <summary>表示させる場所によって表示の仕方を変える </summary>
-    enum ShowMode
-    {
-        /// <summary>タイトルで表示 </summary>
-        Title,
-        /// <summary>ゲーム内(強制表示) </summary>
-        InGame,
-    }
+/// <summary>表示させる場所によって表示の仕方を変える </summary>
+public enum ShowMode
+{
+    /// <summary>タイトルで表示 </summary>
+    Title,
+    /// <summary>ゲーム内(強制表示) </summary>
+    InGame,
 }
 
 

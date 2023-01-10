@@ -22,9 +22,20 @@ public class MenuController : MonoBehaviour
     FadeController _fadeController = default;
     [SerializeField, Tooltip("最初にストーリーと遊び方を表示している間の背景")]
     Image _firstBackGround = default;
+    /// <summary>初めてゲームをプレイしたかどうか </summary>
+    static bool _firstPlay = true;
 
     private IEnumerator Start()
     {
+        if (!_firstPlay)
+        {
+            AudioManager.Instance.PlayBGM(14, 0.5f);
+            _storyPrinter.CurrentMode = ShowMode.Title;
+            _fadeController.FadeIn();
+            yield break;
+        }
+
+        _firstBackGround.gameObject.SetActive(true);
         yield return new WaitForSeconds(_stroyWaitTime);
         _storyPrinter.StroyOperator(true);
 
@@ -39,6 +50,7 @@ public class MenuController : MonoBehaviour
         _tutorialManager.TutorialOperator(true);
         _tutorialManager.CloseButtonAddListener(() =>
         {
+            _firstPlay = false;
             _firstBackGround.gameObject.SetActive(false);
             _fadeController.FadeIn();
         });
