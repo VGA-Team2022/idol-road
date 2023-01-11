@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c66599a495ab747a5ecc7e5ba326cd, type: 3}
   m_Name: InGame
   m_EditorClassIdentifier: 
-  _gamePlayTime: 60
+  _gamePlayTime: 120
   _startBossTime: 30
   _playerHp: 5
   _idolPowerMaxValue: 200

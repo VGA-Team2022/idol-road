@@ -13,12 +13,22 @@ MonoBehaviour:
   m_Name: Boss
   m_EditorClassIdentifier: 
   _addDamageValue: 5
-  _addIdolPowerValue: 0
-  _moveSpeed: 30
+  _moveSpeed: 40
   _fadeSpeed: 0.5
+  _addIdolPowerValue: 0
   _rhythmTimes:
-  - 5
-  - 4
-  - 2
-  - 1
+  - 30
+  - 29
+  - 29
+  - 29
+  - 0
+  _addDamageValueBoss: 5
+  _moveSpeedBoss: 40
+  _fadeSpeedBoss: 0.5
+  _addIdolPowerValueBoss: 0
+  _rhythmTimesBoss:
+  - 30
+  - 29
+  - 29
+  - 29
   - 0
