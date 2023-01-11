@@ -1246,7 +1246,7 @@ MonoBehaviour:
   m_text: TAP TO START
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6839ba03273d12845a264a3551c20a67, type: 2}
-  m_sharedMaterial: {fileID: -4595168101725785674, guid: 6839ba03273d12845a264a3551c20a67, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 564abbfbc23dc9a4c882718e1d97cdd9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
