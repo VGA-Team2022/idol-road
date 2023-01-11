@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c75464e6cf306964ea1b70dd35214d35, type: 3}
   m_Name: Result
   m_EditorClassIdentifier: 
-  _superPerfectLine: 2000
-  _perfectLine: 500
-  _goodLine: 50
+  _superPerfectLine: 10000
+  _perfectLine: 55000
+  _goodLine: 3000
   _addBadScoreValue: 50
-  _addGoodScoreValue: 500
-  _addParfectScoreValue: 100
+  _addGoodScoreValue: 250
+  _addParfectScoreValue: 1000
   _comboValue: 1
   _fanScriptsBad:
   - "\u63A8\u3057\u5909\u3057\u307E\u3059..."
