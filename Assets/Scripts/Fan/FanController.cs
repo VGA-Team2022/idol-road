@@ -15,10 +15,10 @@ public class FanController : MonoBehaviour
 
     [SerializeField, Header("反転するかどうか")]
     bool _isReverse = default;
-    [ElementNames(new string[] { "地雷1", "地雷2", "JK", "イケメン", "メガネ", "壁1男", "壁2男", "壁1女", "壁2女", "強欲" })]
+    [ElementNames(new string[] { "地雷1", "地雷2", "JK", "イケメン", "メガネ", "壁1男", "壁2男", "壁1女", "壁2女" })]
     [SerializeField, Header("ファンイラスト")]
     Sprite[] _fanSprites = default;
-    [ElementNames(new string[] { "地雷1", "地雷2", "JK", "イケメン", "メガネ", "壁1男", "壁2男", "壁1女", "壁2女", "強欲" })]
+    [ElementNames(new string[] { "地雷1", "地雷2", "JK", "イケメン", "メガネ", "壁1男", "壁2男", "壁1女", "壁2女" })]
     [SerializeField, Header("ファンイラスト 反転")]
     Sprite[] _fanSpritesReverse = default;
 
