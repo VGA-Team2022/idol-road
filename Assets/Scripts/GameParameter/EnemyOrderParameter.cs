@@ -19,7 +19,7 @@ public class EnemyInfo
 {
     [SerializeField, Header("“G‚Ìí—Ş")]
     public EnemyType _enemyType = EnemyType.Nomal;
-    [SerializeField, Header("¶¬ŠÔŠu"), Tooltip("1=7.68•b, 2=5.76•b, 3=3.84•b, 4=1.92•b")]
+    [SerializeField, Header("¶¬ŠÔŠu"), Tooltip("’Êí 1=7.68•b, 2=5.76•b, 3=3.84•b, 4=1.92•b\n ƒ{ƒXí 1=6.72•b 2=4.8f 3=2.88f 4=0.96")]
     public GenerateInterval _generateInterval = GenerateInterval.Interval1;
     [SerializeField, Header("ƒtƒ@ƒ“ƒT—v‹")]
     public List<RequestType> requestTypes = new List<RequestType>();
