@@ -3717,6 +3717,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &224717820 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2036091369033456383, guid: 484bda7be6beb34409400aaed830226f, type: 3}
+  m_PrefabInstance: {fileID: 241909717}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &235398270
 GameObject:
   m_ObjectHideFlags: 0
@@ -3854,6 +3865,10 @@ PrefabInstance:
     - target: {fileID: 1776399484735913956, guid: 484bda7be6beb34409400aaed830226f, type: 3}
       propertyPath: m_Type
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2036091369033456383, guid: 484bda7be6beb34409400aaed830226f, type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2267314188744815351, guid: 484bda7be6beb34409400aaed830226f, type: 3}
       propertyPath: m_fontSize
@@ -4071,6 +4086,10 @@ PrefabInstance:
       propertyPath: m_fontColorGradient.bottomRight.g
       value: 0.81960785
       objectReference: {fileID: 0}
+    - target: {fileID: 3339475984470707032, guid: 484bda7be6beb34409400aaed830226f, type: 3}
+      propertyPath: _idolPowerBase
+      value: 
+      objectReference: {fileID: 224717820}
     - target: {fileID: 3339475984470707047, guid: 484bda7be6beb34409400aaed830226f, type: 3}
       propertyPath: m_Name
       value: InGameCanvas
@@ -33578,6 +33597,10 @@ PrefabInstance:
       propertyPath: _BackMiddleFans
       value: 
       objectReference: {fileID: 770795353}
+    - target: {fileID: 6742015527086477076, guid: 7c25c6a4cedf4a841842a1ba713ee0ef, type: 3}
+      propertyPath: _fadeController
+      value: 
+      objectReference: {fileID: 1494124742}
     - target: {fileID: 6742015527086477076, guid: 7c25c6a4cedf4a841842a1ba713ee0ef, type: 3}
       propertyPath: _imageExplosion
       value: 

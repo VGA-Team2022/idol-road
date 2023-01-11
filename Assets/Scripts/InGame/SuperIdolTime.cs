@@ -16,7 +16,8 @@ public class SuperIdolTime : MonoBehaviour
     PlayResult _result => PlayResult.Instance;
     [SerializeField, Header("GameManager")]
     GameManager _manager;
-
+    [SerializeField,Header("FadeController")]
+    FadeController _fadeController;
     [SerializeField, Header("スーパーアイドルタイムの経過時間")]
     private float _elapsed = 0;
     [SerializeField, Header("一タップで溜まるゲージの変化にかかる時間")]
@@ -166,7 +167,7 @@ public class SuperIdolTime : MonoBehaviour
         isUpEnemy = false; 
         _isGaugeMax = false;
     }
-    /// <summary>スーパーアイドルタイムの終了時に処理をは</summary>
+    /// <summary>スーパーアイドルタイムの終了時に処理を判断</summary>
     private void CheckGauge()
     {
         if (_isGaugeMax)
@@ -196,23 +197,30 @@ public class SuperIdolTime : MonoBehaviour
     {
         SwitchDisplayObject();
     }
+    /// <summary>終了時の切り替え処理</summary>
     private void SwitchDisplayObject()
     {
-        foreach (var obj in _normalObjects)
-        {
-            obj.SetActive(true);
-        }
         _superIdolTimeFrontUI.SetActive(false);
         _shiningParticle.gameObject.SetActive(false);
-        _fadePanel.DOFade(0, 0.5f)
-            .OnComplete(() => 
+        _fadeController.FadeOut(() => 
+        {
+            _superIdolTimeBackUI.SetActive(false);
+            _videoPlayer.gameObject.SetActive(true);
+            InitializationProcess();
+            this.gameObject.SetActive(false);
+            foreach (var obj in _normalObjects)
             {
-                _superIdolTimeBackUI.SetActive(false);
-                _videoPlayer.gameObject.SetActive(true);
-                InitializationProcess();
-                this.gameObject.SetActive(false);
-            });
+                obj.SetActive(true);
+                var enemies = FindObjectsOfType<EnemyBase>();
+                foreach (var enemy in enemies)
+                {
+                    enemy.GetComponent<EnemyBase>().Destroyed();
+                }
+            }
+            _fadeController.FadeIn();
+        });
     }
+    /// <summary>タップゲージの増加に関する処理</summary>
     private void GaugeIncrease()
     {
         _gaugeLength = (float)_gaugeCount / _paramater.GaugeCountMax;
@@ -244,6 +252,8 @@ public class SuperIdolTime : MonoBehaviour
             _isGaugeMax = true;
         }
     }
+    /// <summary>カットインビデオが終わった瞬間の処理</summary>
+    /// <param name="vp"></param>
     private void EndVideo(VideoPlayer vp)
     {
         _superIdolTimeFrontUI.SetActive(true);

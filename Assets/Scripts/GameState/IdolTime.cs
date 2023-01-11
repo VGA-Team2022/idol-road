@@ -12,6 +12,8 @@ public class IdolTime : IState
     public void OnExit(GameManager manager, IState nextState)
     {
         manager.ChangeTimeElapsing(true);
+        manager.UIController.UpdateIdolPowerGauge(0);
+        manager.UIController.DisactiveIdolPowerGauge();
     }
 
     public void OnUpdate(GameManager manager)

@@ -9,6 +9,8 @@ public class InGameUIController : MonoBehaviour
     Slider _goalSlider = default;
     [SerializeField, Tooltip("アイドルパワーを表示するImage")]
     Image _idolPowerGauge = default;
+    [SerializeField, Tooltip("アイドルパワーの背景Image")]
+    Image _idolPowerBase = default;
     [SerializeField, Tooltip("HPUIの親オブジェクト")]
     GridLayoutGroup _hpUIParent = default;
     [SerializeField, Tooltip("HPUIのプレハブ")]
@@ -69,7 +71,11 @@ public class InGameUIController : MonoBehaviour
     {
         _idolPowerGauge.fillAmount = value;
     }
-
+    public void DisactiveIdolPowerGauge()
+    {
+        _idolPowerBase.color = new Vector4(_idolPowerBase.color.r, _idolPowerBase.color.g, _idolPowerBase.color.b, 0.5f);
+        _idolPowerGauge.color = new Vector4(_idolPowerBase.color.r, _idolPowerBase.color.g, _idolPowerBase.color.b, 0.5f);
+    }
     /// <summary>ゴールまでの距離を表示するUIを更新する</summary>
     public void UpdateGoalDistanceUI(float elapsedTime)
     {

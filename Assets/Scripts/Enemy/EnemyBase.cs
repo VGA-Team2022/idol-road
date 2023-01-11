@@ -210,6 +210,12 @@ public abstract class EnemyBase : MonoBehaviour
         _bossMove?.Invoke();
     }
 
+    public void Destroyed()
+    {
+        Destroy(this.gameObject);
+        _disapperEnemies?.Invoke(this);
+    }
+
     /// <summary>bad”»’è‚Ì‰‰o </summary>
     protected abstract void BadEffect();
 
