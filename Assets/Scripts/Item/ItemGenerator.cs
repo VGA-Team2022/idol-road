@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.WSA;
 
 /// <summary>アイテムを生成するクラス</summary>
 public class ItemGenerator : MonoBehaviour

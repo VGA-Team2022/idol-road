@@ -109,22 +109,22 @@ public class ResultManager : MonoBehaviour
         {
             case Result.Bad:
                 AudioManager.Instance.PlayVoice(15);
-                AudioManager.Instance.PlayBGM(12);
+              //  AudioManager.Instance.PlayBGM(12);
                 _playBgmID = 12;
                 break;
             case Result.Good:
                 AudioManager.Instance.PlayVoice(19);
-                AudioManager.Instance.PlayBGM(13);
+             //   AudioManager.Instance.PlayBGM(13);
                 _playBgmID = 13;
                 break;
             case Result.Perfect:
                 AudioManager.Instance.PlayVoice(18);
-                AudioManager.Instance.PlayBGM(13);
+           //     AudioManager.Instance.PlayBGM(13);
                 _playBgmID = 13;
                 break;
             case Result.SuperPerfect:
                 AudioManager.Instance.PlayVoice(17);
-                AudioManager.Instance.PlayBGM(13);
+           //     AudioManager.Instance.PlayBGM(13);
                 _playBgmID = 13;
                 break;
         }
