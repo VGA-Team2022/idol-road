@@ -67,6 +67,8 @@ public class GameManager : MonoBehaviour
     bool _isElapsing = true;
     /// <summary>死亡したかどうか </summary>
     bool _isdead = false;
+    /// <summaryスーパーアイドルタイムを行ったかどうか</summary>
+    bool _isPlayedIdolTime = false;
     /// <summary>ボスの移動を開始する処理</summary>
     event Action _startBossMove = default;
 
@@ -83,6 +85,7 @@ public class GameManager : MonoBehaviour
     public PlayableDirector WarningTape { get => _warningTape; }
     public SpriteRenderer Taxi { get => _taxi; }
     public SuperIdolTime IdolTime { get => _superIdolTime; }
+    public InGameUIController UIController { get => _uiController; }
 
     /// <summary>ボスの移動を開始する処理</summary>
     public event Action StartBossMove
@@ -127,6 +130,12 @@ public class GameManager : MonoBehaviour
         if (_inGameParameter.StartBossTime >= Math.Abs(_inGameParameter.GamePlayTime - _elapsedTime) && _currentGameState is Playing)    //ボスステージを開始
         {
             ChangeGameState(_bossTimeState);
+            _itemGenerator.IsGenerate = false;
+            _uiController.DisactiveIdolPowerGauge();
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Debug.Log(_enemies.Count);
         }
     }
 
@@ -147,8 +156,12 @@ public class GameManager : MonoBehaviour
     /// <summary>アイドルパワーが増加する関数</summary>
     public void IncreseIdlePower(float power)
     {
-        _idlePower += (power / _inGameParameter.IdolPowerMaxValue);
-        _uiController.UpdateIdolPowerGauge(_idlePower);
+        //ゲームステートが通常かつアイドルタイムを一度もしていないなら
+        if (_currentGameState is Playing && !_isPlayedIdolTime)
+        {
+            _idlePower += (power / _inGameParameter.IdolPowerMaxValue);
+            _uiController.UpdateIdolPowerGauge(_idlePower);
+        }
         if (_enemies.Count <= 0)
         {
             EnterSuperIdolTime();
@@ -162,8 +175,11 @@ public class GameManager : MonoBehaviour
 
     public void EnterSuperIdolTime()
     {
-        if (_idlePower >= 1 && !BossTime.IsPlaying)
+        if (_idlePower >= 1 && !BossTime.IsPlaying && _currentGameState is not BossTime && !_isPlayedIdolTime)
         {
+            _idlePower = 0;
+            _isPlayedIdolTime = true;
+            _itemGenerator.IsGenerate = false;
             _fadeController.FadeOut(() =>
             {
                 _superIdolTime.gameObject.SetActive(true);
@@ -171,8 +187,8 @@ public class GameManager : MonoBehaviour
                 ChangeGameState(_idleTimeState);
                 _fadeController.FadeIn(() =>
                 {
-                    _idlePower = 0;
-                    _uiController.UpdateIdolPowerGauge(_idlePower);
+                    _uiController.UpdateIdolPowerGauge(0);
+                    _uiController.DisactiveIdolPowerGauge();
                 });
             });
         }
