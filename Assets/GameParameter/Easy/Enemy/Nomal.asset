@@ -12,12 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df1a1aa990d20c044ad298c45cd60e82, type: 3}
   m_Name: Nomal
   m_EditorClassIdentifier: 
-  _addDamageValue: 0
-  _moveSpeed: 0
-  _fadeSpeed: 0
+  _addDamageValue: 1
+  _moveSpeed: 15
+  _fadeSpeed: 0.5
+  _addIdolPowerValue: 10
   _rhythmTimes:
+  - 7.68
+  - 5.76
+  - 3.84
+  - 1.92
   - 0
-  - 0
-  - 0
-  - 0
+  _addDamageValueBoss: 1
+  _moveSpeedBoss: 15
+  _fadeSpeedBoss: 0.5
+  _addIdolPowerValueBoss: 0
+  _rhythmTimesBoss:
+  - 7.2
+  - 5.6
+  - 4
+  - 1.6
   - 0

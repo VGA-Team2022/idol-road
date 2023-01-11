@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3be385b19eeb44d99287024603772c, type: 3}
   m_Name: IdolTime
   m_EditorClassIdentifier: 
-  _gaugeCountMax: 10
+  _gaugeCountMax: 80
   _timeEndSuperIdolTime: 15
   _successScore: 5000

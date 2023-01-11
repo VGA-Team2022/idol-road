@@ -18,8 +18,32 @@ MonoBehaviour:
   - 4
   - 4
   - 4
-  _generatorInterval: 5
+  _generatorInterval: 0
   _items:
-  - _generatorInterval: 3
+  - _generatorInterval: 6
     _item: 0
-    _generateDirection: 0
+    _generateDirection: 2
+  - _generatorInterval: 10
+    _item: 2
+    _generateDirection: 2
+  - _generatorInterval: 10
+    _item: 1
+    _generateDirection: 2
+  - _generatorInterval: 10
+    _item: 3
+    _generateDirection: 2
+  - _generatorInterval: 10
+    _item: 1
+    _generateDirection: 2
+  - _generatorInterval: 10
+    _item: 0
+    _generateDirection: 2
+  - _generatorInterval: 10
+    _item: 3
+    _generateDirection: 2
+  - _generatorInterval: 10
+    _item: 0
+    _generateDirection: 2
+  - _generatorInterval: 10
+    _item: 0
+    _generateDirection: 2
