@@ -1415,7 +1415,7 @@ PrefabInstance:
     - target: {fileID: 2267314188744815351, guid: 484bda7be6beb34409400aaed830226f, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 1711288750902160585, guid: 6f555bf9c68c60245909def054caa90b, type: 2}
+      objectReference: {fileID: 2100000, guid: 31de1d9b4ac7bdf49bcf2deed1f8b8e7, type: 2}
     - target: {fileID: 2267314188744815351, guid: 484bda7be6beb34409400aaed830226f, type: 3}
       propertyPath: m_horizontalMapping
       value: 0
@@ -1575,7 +1575,7 @@ PrefabInstance:
     - target: {fileID: 3157607228429247771, guid: 484bda7be6beb34409400aaed830226f, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 1711288750902160585, guid: 6f555bf9c68c60245909def054caa90b, type: 2}
+      objectReference: {fileID: 2100000, guid: 31de1d9b4ac7bdf49bcf2deed1f8b8e7, type: 2}
     - target: {fileID: 3157607228429247771, guid: 484bda7be6beb34409400aaed830226f, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4294967295
@@ -1594,11 +1594,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3157607228429247771, guid: 484bda7be6beb34409400aaed830226f, type: 3}
       propertyPath: m_fontColorGradient.bottomRight.b
-      value: 0.25882354
+      value: 0.2584905
       objectReference: {fileID: 0}
     - target: {fileID: 3157607228429247771, guid: 484bda7be6beb34409400aaed830226f, type: 3}
       propertyPath: m_fontColorGradient.bottomRight.g
-      value: 0.81960785
+      value: 0.82129353
       objectReference: {fileID: 0}
     - target: {fileID: 3339475984470707032, guid: 484bda7be6beb34409400aaed830226f, type: 3}
       propertyPath: _idolPowerBase
