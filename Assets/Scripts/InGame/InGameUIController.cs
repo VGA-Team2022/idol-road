@@ -19,8 +19,8 @@ public class InGameUIController : MonoBehaviour
     TMP_Text _comboText = default;
     [SerializeField, Tooltip("コンボイラストを表示するImage")]
     Image _comboImage = default;
-    [SerializeField, Tooltip("コンボで使用するアニメーター"), ElementNames(new string[] {"背景", "イラスト"})]
-    Animator[] _comboAnimators = default;
+    [SerializeField, Tooltip("コンボで使用するアニメーター")]
+    Animator _comboAnimator = default;
 
     /// <summary>現在の表示しているHpUIの配列</summary>
     Image[] _currentHpUIArray = default;
@@ -92,10 +92,6 @@ public class InGameUIController : MonoBehaviour
     public void PlayComboAnimation(Sprite sprite)
     {
         _comboImage.sprite = sprite;
-
-        foreach (var anim in _comboAnimators)
-        {
-            anim.SetTrigger("Play");
-        }
+        _comboAnimator.SetTrigger("Play");
     }
 }
