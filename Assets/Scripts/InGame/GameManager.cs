@@ -309,7 +309,6 @@ public class GameManager : MonoBehaviour
     public void GameClear()
     {
         ChangeGameState(_gameEndState);
-        _itemGenerator.GeneratorOperation();
         _player.GameClearMove();
     }
 }
