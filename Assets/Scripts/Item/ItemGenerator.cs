@@ -36,6 +36,11 @@ public class ItemGenerator : MonoBehaviour
     /// <summary>次に生成するアイテムのindex</summary>
     int _generateIndex = 0;
 
+    public bool IsGenerate
+    {
+        get { return _isGenerate; }
+        set { _isGenerate = value; }   
+    }
     private void Start()
     {
         if (_itemParameter.RandomGenerator || _itemParameter.GeneratorItems.Count == 0) 

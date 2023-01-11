@@ -6,9 +6,9 @@ public class ResultManager : MonoBehaviour
 {
     #region
     /// <summary>画面に反映させるプレイ結果の数 </summary>
-    const int RESULT_COUNT = 4;
+    const int RESULT_COUNT = 5;
     /// <summary>合計スコアが格納されている添え字 </summary>
-    const int TOTAL_SCORE_INDEX = 3;
+    const int TOTAL_SCORE_INDEX = 4;
 
     [SerializeField, Header("リザルトUIを更新するクラス")]
     ResultUIController _resultUIController = default;
@@ -35,7 +35,7 @@ public class ResultManager : MonoBehaviour
     /// <summary>結果 </summary>
     public Result CurrentResult { get => _currentResult; }
 
-    /// <summary>各スコア 0=bad 1=good 2=perfect 3=合計スコア</summary>
+    /// <summary>各スコア 0=bad 1=good 2=perfect 3=ボーナス 4=合計スコア</summary>
     public int[] Scores { get => _scores; }
     #endregion
 
@@ -52,17 +52,18 @@ public class ResultManager : MonoBehaviour
     }
 
     /// <summary>スコアを計算する</summary>
-    /// <returns>計算結果 0=bad 1=good 2=perfect 3=合計スコア</returns>
+    /// <returns>計算結果 0=bad 1=good 2=perfect 3=ボーナス 4=合計スコア</returns>
     public int[] ScoreCalculation()
     {
         //判定それぞれのスコア値×判定した数
         var perfectValue = _resultParameter._addParfectScoreValue * _playResult.CountPerfect;
         var goodValue = _resultParameter._addGoodScoreValue * _playResult.CountGood;
         var badValue = _resultParameter._addBadScoreValue * _playResult.CountBad;
+        var bonusValue = _playResult.ValueSuperIdleTimePerfect+(int)_resultParameter._comboValue;
         var totalScore = 0;
 
-        totalScore += perfectValue + goodValue + badValue + _playResult.ValueSuperIdleTimePerfect;  //スコア計算
-        var result = new int[RESULT_COUNT] { badValue, goodValue, perfectValue, totalScore };  //画面に反映させる為の配列
+        totalScore += perfectValue + goodValue + badValue + bonusValue;  //スコア計算
+        var result = new int[RESULT_COUNT] { badValue, goodValue, perfectValue, bonusValue, totalScore };  //画面に反映させる為の配列
 
         return result;
     }

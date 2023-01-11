@@ -45,7 +45,7 @@ public class EnemySpawner : MonoBehaviour
     /// <summary>“G‚ğoŒ»‚³‚¹‚½‚¢•b” 0=7.68f 1=5.76f 2=3.84f 3=1.92f</summary>
     float[] _timeInterval = new float[4] { 7.68f, 5.76f, 3.84f, 1.92f };
     /// <summary>ƒ{ƒXí‚Å“G‚ğoŒ»‚³‚¹‚½‚¢•b” 0=7.6.4f 1=5.4.8f 2=3.2f 3=1.6f</summary>
-    float[] _bossTimeInterval = new float[4] { 6.4f, 4.8f, 3.2f, 1.6f };
+    float[] _bossTimeInterval = new float[4] { 6.72f, 4.8f, 2.88f, 0.96f };
 
     /// <summary>¶¬‡”Ô‚Ì‚Ç‚±‚Ü‚Å¶¬‚µ‚½‚©‚Ç‚¤‚©‚Ì“Y‚¦š </summary>
     int _infoIndex = 0;
@@ -151,7 +151,16 @@ public class EnemySpawner : MonoBehaviour
         }
 
         _nextEnemyInfo = _order.EnemyOrder[_infoIndex];
-        _nextGenerateTime = _timeInterval[(int)_nextEnemyInfo._generateInterval];
+
+        if (_manager.CurrentGameState is BossTime)
+        {
+            _nextGenerateTime = _bossTimeInterval[(int)_nextEnemyInfo._generateInterval];
+            Debug.Log(_nextGenerateTime);
+        }
+        else
+        {
+            _nextGenerateTime = _timeInterval[(int)_nextEnemyInfo._generateInterval];
+        }
     }
 
     /// <summary>ƒ{ƒX‚ğ¶¬‚·‚é </summary>
