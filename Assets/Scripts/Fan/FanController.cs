@@ -7,9 +7,11 @@ public class FanController : MonoBehaviour
     /// <summary>アニメーションの個数 </summary>
     const int ANIMATION_COUNT = 3;
     /// <summary>アニメーションを再生するまでの最小待ち時間 </summary>
-    const float MIN_NEXT_ANIMATION_TIME = 0f;
+    [SerializeField,Header("アニメーションを再生するまでの最小待ち時間")]
+    float _minNextAnimationTime = 5f;
     /// <summary>アニメーションを再生するまの最大待ち時間 </summary>
-    const float MAX_NEXT_ANIMATION_TIME = 5f;
+    [SerializeField,Header("アニメーションを再生するまの最大待ち時間")]
+    float _maxNextAnimationTime = 10f;
 
     [SerializeField, Header("反転するかどうか")]
     bool _isReverse = default;
@@ -32,7 +34,7 @@ public class FanController : MonoBehaviour
     {
         ChangeSprites();
 
-        _nextAnimationTime = Random.Range(MIN_NEXT_ANIMATION_TIME, MAX_NEXT_ANIMATION_TIME);
+        _nextAnimationTime = Random.Range(_minNextAnimationTime, _maxNextAnimationTime);
     }
 
     private void Update()
@@ -42,7 +44,7 @@ public class FanController : MonoBehaviour
         if (_nextAnimationTime <= _timer)
         {
             PlayRandomAnimation();
-            _nextAnimationTime = Random.Range(MIN_NEXT_ANIMATION_TIME, MAX_NEXT_ANIMATION_TIME);
+            _nextAnimationTime = Random.Range(_minNextAnimationTime, _maxNextAnimationTime);
             _timer = 0f;
         }
     }
@@ -70,7 +72,14 @@ public class FanController : MonoBehaviour
         switch ((AnimationType)rand)
         {
             case AnimationType.Jump:
-                _anim.SetTrigger("Jump");
+                if (_isReverse)
+                {
+                    _anim.SetTrigger("JumpRight");
+                }
+                else if(!_isReverse)
+                {
+                    _anim.SetTrigger("JumpLeft");
+                }
                 break;
             case AnimationType.Spin:
                 if (_isReverse)
