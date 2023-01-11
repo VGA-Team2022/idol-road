@@ -131,8 +131,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8025912129625385349}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5968483811882916910}
@@ -179,7 +179,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 1ceb6e801bc9d2243a94ba98b1e5b2d4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b7d987b45e29fd44091d1276ff4bbb9e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -267,7 +267,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2263534891915938484, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.429
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 2263534891915938484, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
       propertyPath: m_LocalPosition.z
@@ -311,6 +311,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2263534891915938486, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263534891915938487, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263534891915938487, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263534891915938487, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263534891915938487, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3044899270051006201, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
+      propertyPath: m_Size.x
+      value: 1.6666666
+      objectReference: {fileID: 0}
+    - target: {fileID: 3044899270051006201, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
+      propertyPath: m_Size.y
+      value: 1.6666666
+      objectReference: {fileID: 0}
+    - target: {fileID: 3044899270051006201, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3044899270051006201, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3044899270051006201, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3044899270051006201, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3044899270051006201, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
+      propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

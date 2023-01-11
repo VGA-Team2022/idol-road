@@ -287,8 +287,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 921, y: 80}
-  m_SizeDelta: {x: 600, y: 800}
+  m_AnchoredPosition: {x: 921, y: 0}
+  m_SizeDelta: {x: 800, y: 900}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &3962481632902200640
 CanvasRenderer:
@@ -469,6 +469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _goalSlider: {fileID: 2999327704820123146}
   _idolPowerGauge: {fileID: 6062077216993345427}
+  _idolPowerBase: {fileID: 0}
   _hpUIParent: {fileID: 4790784366399179565}
   _hpPrefab: {fileID: 8451664795510223368, guid: 25937646bde21ea4f8545197f391f84f, type: 3}
   _comboText: {fileID: 3157607228429247771}

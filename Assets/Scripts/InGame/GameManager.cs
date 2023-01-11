@@ -185,7 +185,8 @@ public class GameManager : MonoBehaviour
                 _superIdolTime.gameObject.SetActive(true);
                 _superIdolTime.CurrentState = _currentGameState;
                 ChangeGameState(_idleTimeState);
-                _fadeController.FadeIn(() =>
+                AudioManager.Instance.PlayVoice(20);
+                _fadeController.FadeIn(3f, () =>
                 {
                     _uiController.UpdateIdolPowerGauge(0);
                     _uiController.DisactiveIdolPowerGauge();
