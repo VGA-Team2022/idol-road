@@ -15,4 +15,4 @@ MonoBehaviour:
   _gamePlayTime: 120
   _startBossTime: 30
   _playerHp: 5
-  _idolPowerMaxValue: 60
+  _idolPowerMaxValue: 50
