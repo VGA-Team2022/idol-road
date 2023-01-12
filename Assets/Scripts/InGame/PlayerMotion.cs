@@ -9,7 +9,7 @@ using Unity.VisualScripting;
 /// </summary>
 public class PlayerMotion : MonoBehaviour
 {
-    [SerializeField, Tooltip("アイドルのモーション絵")]
+    [SerializeField, Tooltip("アイドルのモーション絵"),ElementNames(new string[] { "後ろ姿","ポーズ","投げキス", "ウィンク" ,"サイン"})]
     Sprite[] _sprites;
     [SerializeField, Tooltip("アイドルのファンサ吹き出し"), ElementNames(new string[] { "投げキス", "ウィンク" })]
     GameObject[] _IdleBlowing;

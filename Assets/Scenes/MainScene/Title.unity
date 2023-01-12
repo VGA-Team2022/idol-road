@@ -1729,6 +1729,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1520466610449576253, guid: 76e016eac153f35448a36028b88ef1c3, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76e016eac153f35448a36028b88ef1c3, type: 3}
 --- !u!1001 &7022600467990261116
@@ -1738,10 +1742,66 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 324179642908553132, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1059083416834046333, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2549753057966915361, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653462359659295295, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505476408882107721, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791481901953945348, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6938508184259046680, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022600468282093677, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022600468282093677, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022600468282093677, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022600468888547954, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022600469103941874, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7022600469103941874, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 363423391}
+    - target: {fileID: 7022600469103941874, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CreditClose
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022600469103941874, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TitleManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7022600469531980254, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
       propertyPath: m_Name
       value: CreditCanvas
@@ -1780,6 +1840,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7022600469531980255, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022600469531980255, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022600469531980255, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022600469531980255, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7022600469531980255, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
@@ -1828,6 +1900,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7022600469531980255, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7344636474224462711, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
