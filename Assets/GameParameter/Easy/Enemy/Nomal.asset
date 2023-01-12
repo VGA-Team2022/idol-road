@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Nomal
   m_EditorClassIdentifier: 
   _addDamageValue: 1
-  _moveSpeed: 15
+  _moveSpeed: 13
   _fadeSpeed: 0.5
   _addIdolPowerValue: 10
   _rhythmTimes:
@@ -23,7 +23,7 @@ MonoBehaviour:
   - 1.92
   - 0
   _addDamageValueBoss: 1
-  _moveSpeedBoss: 15
+  _moveSpeedBoss: 17
   _fadeSpeedBoss: 0.5
   _addIdolPowerValueBoss: 0
   _rhythmTimesBoss:
