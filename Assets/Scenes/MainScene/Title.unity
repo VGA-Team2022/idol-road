@@ -394,8 +394,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 262, y: -532.17}
-  m_SizeDelta: {x: 839.5237, y: 502.94}
+  m_AnchoredPosition: {x: 500, y: -861.9}
+  m_SizeDelta: {x: 1440, y: 810}
   m_Pivot: {x: 1, y: -1}
 --- !u!114 &153728400
 MonoBehaviour:
@@ -468,7 +468,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 310, y: 190, z: 310, w: 250}
+  m_RaycastPadding: {x: 500, y: 250, z: 310, w: 310}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1188,8 +1188,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -96, y: 150}
-  m_SizeDelta: {x: 800, y: 50}
+  m_AnchoredPosition: {x: 19.5609, y: 269}
+  m_SizeDelta: {x: 1176.9923, y: 195.8179}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1512976568
 MonoBehaviour:
@@ -1238,8 +1238,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 90
+  m_fontSizeBase: 90
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1274,7 +1274,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 233.36668, y: 0, z: 7.4835205, w: 0}
+  m_margin: {x: 2.1920624, y: 0, z: 7.4835205, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1380,8 +1380,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 257, y: -551}
-  m_SizeDelta: {x: 839.5237, y: 502.94}
+  m_AnchoredPosition: {x: 500, y: -905}
+  m_SizeDelta: {x: 1440, y: 810}
   m_Pivot: {x: 1, y: -1}
 --- !u!114 &1779528314
 MonoBehaviour:
@@ -1454,7 +1454,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 310, y: 100, z: 310, w: 350}
+  m_RaycastPadding: {x: 500, y: 100, z: 310, w: 500}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
