@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8979959088236456945}
   - component: {fileID: 336802384846892835}
   - component: {fileID: 1623760751}
+  - component: {fileID: 8593414711425299747}
   m_Layer: 0
   m_Name: NomalEnemy
   m_TagString: Untagged
@@ -104,6 +105,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!210 &8593414711425299747
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5968483811882916908}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &8025912129625385349
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,7 +128,7 @@ GameObject:
   - component: {fileID: 5143912652442734053}
   - component: {fileID: 1746651874851532797}
   - component: {fileID: 8881259881916464258}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +190,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b7d987b45e29fd44091d1276ff4bbb9e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -322,8 +334,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2263534891915938487, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263534891915938487, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
       propertyPath: m_SortingOrder
-      value: 5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263534891915938487, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2263534891915938487, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
       propertyPath: m_WasSpriteAssigned
@@ -350,8 +370,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3044899270051006201, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3044899270051006201, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
       propertyPath: m_SortingOrder
-      value: 6
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3044899270051006201, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3044899270051006201, guid: 95ff0aa57f155314f9815eb6c163d017, type: 3}
       propertyPath: m_WasSpriteAssigned
