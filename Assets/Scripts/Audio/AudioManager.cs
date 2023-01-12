@@ -177,20 +177,20 @@ public class AudioManager : MonoBehaviour
     }
 
     /// <summary>AISAC値を変更する（実行する） </summary>
-    public void AISACChangeRun(bool flag)
+    public void AISACChangeRun(bool flag, int index)
     {
-        AISACValueChange(flag);
+        AISACValueChange(flag, index);
     }
 
     /// <summary>AISAC値を変更する </summary>
-    IEnumerator AISACValueChange(bool flag)
+    IEnumerator AISACValueChange(bool flag, int index)
     {
         if (flag)
         {
             for (var i = 0f; i <= 1f; i += AISAC_CHANGE_VALUE)
             {
                 yield return new WaitForSeconds(AISAC_WAIT_TIME);
-                _sources[0].SetAisacControl("AisacControl_00", i);
+                _sources[index].SetAisacControl("AisacControl_00", i);
             }
         }
         else
@@ -198,7 +198,7 @@ public class AudioManager : MonoBehaviour
             for (var i = 1f; i <= 0f; i -= AISAC_CHANGE_VALUE)
             {
                 yield return new WaitForSeconds(AISAC_WAIT_TIME);
-                _sources[0].SetAisacControl("AisacControl_00", i);
+                _sources[index].SetAisacControl("AisacControl_00", i);
             }
         }
     }
