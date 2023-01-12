@@ -16,7 +16,7 @@ public class LevelManager
     GameParameter _Hard => Resources.Load<GameParameter>("HardLevel");
 
     /// <summary>現在のレベル </summary>
-    public GameParameter CurrentLevel { get => _nomal/*_currentLevel*/; }
+    public GameParameter CurrentLevel { get => _currentLevel; }
 
     /// <summary>レベルを変更する </summary>
     /// <param name="nextLevel">変更後のレベル</param>

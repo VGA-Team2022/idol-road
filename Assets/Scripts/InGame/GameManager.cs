@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour
         if (_debugMode)
         {
             LevelManager.Instance.SelectLevel(_currentLevel);
+            Debug.Log("ŒÄ‚Î‚ê‚é");
         }
     }
 
