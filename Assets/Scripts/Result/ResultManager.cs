@@ -65,7 +65,7 @@ public class ResultManager : MonoBehaviour
             bonusValue += _resultParameter._addFullComboScoreValue;
         }
         var totalScore = 0;
-        Debug.Log($"フルコンボ必要数:{_playResult.FullComboCount},最大コンボ:{_playResult.HighComboCount}");
+
         totalScore += perfectValue + goodValue + badValue + bonusValue;  //スコア計算
         var result = new int[RESULT_COUNT] { badValue, goodValue, perfectValue, bonusValue, totalScore };  //画面に反映させる為の配列
 
