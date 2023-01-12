@@ -16,6 +16,7 @@ public class PlayResult
     /// <summary>最高コンボ数 </summary>
     int _highComboCount = 0;
 
+    int _fullComboCount = 0;
 
     /// <summary>badを取得した回数 </summary>
     public int CountBad
@@ -51,7 +52,18 @@ public class PlayResult
         get => _valueSuperIdleTimePerfect;
         set => _valueSuperIdleTimePerfect = value;
     }
-
+    /// <summary>最大コンボ数のデータ</summary>
+    public int HighComboCount
+    {
+        get => _highComboCount;
+        set => _highComboCount = value;
+    }
+    /// <summary>フルコンボに必要なコンボ数</summary>
+    public int FullComboCount
+    {
+        get => _fullComboCount;
+        set => _fullComboCount = value;
+    }
     /// <summary>プレイデータを削除する</summary>
     public void ResetResult()
     {
@@ -61,5 +73,12 @@ public class PlayResult
         _valueSuperIdleTimePerfect = 0;
         _highComboCount = 0;
         _countMiss = 0;
+        foreach (var enemy in LevelManager.Instance.CurrentLevel.EnemyOrder.EnemyOrder)
+        {
+            if (enemy._enemyType != EnemyType.Wait) 
+            {
+                _fullComboCount++;
+            } 
+        }
     }
 }

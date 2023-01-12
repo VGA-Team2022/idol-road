@@ -28,6 +28,9 @@ public class ResultParameter : ScriptableObject
     [SerializeField, Header("コンボの倍率"), Range(1, 10)]
     public float _comboValue;
 
+    [SerializeField, Header("フルコンボで獲得できるスコア")]
+    public int _addFullComboScoreValue;
+
     [ElementNames(new string[] { "地雷", "男１", "壁女", "男２", "強欲" })]
     [SerializeField, Header("=========リザルト画面でのBad時のファンセリフ=========")]
     public string[] _fanScriptsBad = new string[FAN_SCRIPTS_SIZE];

@@ -211,6 +211,10 @@ public class GameManager : MonoBehaviour
         else
         {
             _comboAmount++;
+            if (_comboAmount > PlayResult.Instance.HighComboCount)
+            {
+                PlayResult.Instance.HighComboCount = _comboAmount;
+            }
         }
 
         _uiController.UpdateComboText(_comboAmount);    //UIを更新
@@ -220,6 +224,7 @@ public class GameManager : MonoBehaviour
 
         if (_comboAmount == _nextComboCount)    //コンボイラストを表示
         {
+            AudioManager.Instance.PlaySE(34);
             _uiController.PlayComboAnimation(_comboInfos[_comboIndex]._comboSprites);
             _comboIndex++;
             if (_nextComboCount > _comboIndex) 
