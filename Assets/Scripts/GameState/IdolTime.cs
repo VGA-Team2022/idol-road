@@ -7,6 +7,8 @@ public class IdolTime : IState
     {
         manager.IdolTime.StartSuperIdolTime();
         manager.ChangeTimeElapsing(false);
+        AudioManager.Instance.AISACChangeRun(true);
+        AudioManager.Instance.PlayBGM(11);
     }
 
     public void OnExit(GameManager manager, IState nextState)
@@ -14,6 +16,8 @@ public class IdolTime : IState
         manager.ChangeTimeElapsing(true);
         manager.UIController.UpdateIdolPowerGauge(0);
         manager.UIController.DisactiveIdolPowerGauge();
+        AudioManager.Instance.AISACChangeRun(true);
+        AudioManager.Instance.StopBGM(11);
     }
 
     public void OnUpdate(GameManager manager)

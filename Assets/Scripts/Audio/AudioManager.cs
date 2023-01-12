@@ -11,6 +11,10 @@ public class AudioManager : MonoBehaviour
 
     /// <summary>使用するCriAtomSourceの数 </summary>
     const int SOURCE_COUNT = 3;
+    /// <summary>AISAC値の増減値 </summary>
+    const float AISAC_CHANGE_VALUE = 0.1f;
+    /// <summary>AISAC変更の待ち時間 </summary>
+    const float AISAC_WAIT_TIME = 0.1f;
 
     [ElementNames(new string[] { "BGM", "SE", "VOICE" })]
     [SerializeField, Header("各サウンドソース"), Tooltip("0=BGM, 1=SE, 2=VOICE")]
@@ -94,6 +98,7 @@ public class AudioManager : MonoBehaviour
 
         StartCoroutine(SoundEndAfterExecution(endTime, action));
     }
+    
 
     /// <summary>SEを再生する </summary>
     /// <param name="cueID">再生したいSEのID</param>
@@ -168,6 +173,33 @@ public class AudioManager : MonoBehaviour
                 PlaySE(4, volum);
                 break;
 
+        }
+    }
+
+    /// <summary>AISAC値を変更する（実行する） </summary>
+    public void AISACChangeRun(bool flag)
+    {
+        AISACValueChange(flag);
+    }
+
+    /// <summary>AISAC値を変更する </summary>
+    IEnumerator AISACValueChange(bool flag)
+    {
+        if (flag)
+        {
+            for (var i = 0f; i <= 1f; i += AISAC_CHANGE_VALUE)
+            {
+                yield return new WaitForSeconds(AISAC_WAIT_TIME);
+                _sources[0].SetAisacControl("AisacControl_00", i);
+            }
+        }
+        else
+        {
+            for (var i = 1f; i <= 0f; i -= AISAC_CHANGE_VALUE)
+            {
+                yield return new WaitForSeconds(AISAC_WAIT_TIME);
+                _sources[0].SetAisacControl("AisacControl_00", i);
+            }
         }
     }
 
