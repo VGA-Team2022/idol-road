@@ -146,7 +146,7 @@ public class ScreenInput : MonoBehaviour
 
 
         //ƒ^ƒbƒv‚Ì‚Í”ò‚Î‚È‚¢
-        if (_manager.CurrentEnemy != null && _flickType != FlickType.Tap)
+        if (_manager.CurrentEnemy != null && _flickType != FlickType.Tap && _manager.CurrentGameState is not IdolTime)
         {
              _manager.CurrentEnemy.JugeTime(_flickType);//”ò‚ñ‚¾‚Æ‚«‚Ì•b”‚Æ”»’è‚ğŒˆ‚ß‚é‚à‚Ì
             AudioManager.Instance.PlayRequestSE(_flickType);
