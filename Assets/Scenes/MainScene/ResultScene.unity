@@ -968,5 +968,13 @@ PrefabInstance:
       propertyPath: _resultManager
       value: 
       objectReference: {fileID: 2106405866}
+    - target: {fileID: 4022957864178336937, guid: a3cb57c070ae2ce41adc8c685fe594d3, type: 3}
+      propertyPath: _showResultSpan
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4022957864178336937, guid: a3cb57c070ae2ce41adc8c685fe594d3, type: 3}
+      propertyPath: _commentAnimWaitTime
+      value: 0.44
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3cb57c070ae2ce41adc8c685fe594d3, type: 3}
