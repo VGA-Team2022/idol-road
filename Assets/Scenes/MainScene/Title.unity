@@ -1729,6 +1729,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1520466610449576253, guid: 76e016eac153f35448a36028b88ef1c3, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76e016eac153f35448a36028b88ef1c3, type: 3}
 --- !u!1001 &7022600467990261116
@@ -1768,15 +1772,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7022600468282093677, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7022600468282093677, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7022600468282093677, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022600468888547954, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7022600469103941874, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
