@@ -236,7 +236,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &1520466610407078673
 MonoBehaviour:
@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f12ae729aae17b24d8fc7b94d14de40e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentMode: 0
+  _currentMode: 1
   _showTextTime: 2
   _textWaitTime: 2
   _fadeWaitTime: 2
@@ -1463,8 +1463,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 704, y: -21}
-  m_SizeDelta: {x: 1800, y: 1300}
+  m_AnchoredPosition: {x: 675, y: 88}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &615366684982492967
 CanvasRenderer:
@@ -1489,7 +1489,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 1181.3, y: 1008.6, z: 502.3, w: 133.1}
+  m_RaycastPadding: {x: 1177.1, y: 996.3, z: 490, w: 304.1}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
