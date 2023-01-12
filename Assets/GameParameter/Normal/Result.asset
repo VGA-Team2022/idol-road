@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Result
   m_EditorClassIdentifier: 
   _superPerfectLine: 1000000
-  _perfectLine: 55000
+  _perfectLine: 58000
   _goodLine: 3000
   _addBadScoreValue: 50
   _addGoodScoreValue: 250
