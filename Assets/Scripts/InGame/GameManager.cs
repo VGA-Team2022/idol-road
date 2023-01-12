@@ -69,6 +69,8 @@ public class GameManager : MonoBehaviour
     bool _isdead = false;
     /// <summaryスーパーアイドルタイムを行ったかどうか</summary>
     bool _isPlayedIdolTime = false;
+    /// <summary>クリアした</summary>
+    bool _isClear = false;
     /// <summary>ボスの移動を開始する処理</summary>
     event Action _startBossMove = default;
 
@@ -86,6 +88,7 @@ public class GameManager : MonoBehaviour
     public SpriteRenderer Taxi { get => _taxi; }
     public SuperIdolTime IdolTime { get => _superIdolTime; }
     public InGameUIController UIController { get => _uiController; }
+    public bool IsClear { get => _isClear; }
 
     /// <summary>ボスの移動を開始する処理</summary>
     public event Action StartBossMove
@@ -252,6 +255,7 @@ public class GameManager : MonoBehaviour
 
             if (_idleHp <= 0 && !_isdead)   //ゲームオーバー
             {
+                AudioManager.Instance.PlaySE(39);
                 ChangeGameState(_gameEndState); //ゲーム終了状態に遷移
                 _isdead = true;
                 return;
@@ -315,6 +319,7 @@ public class GameManager : MonoBehaviour
     /// <summary>ゲームクリア時の処理</summary>
     public void GameClear()
     {
+        _isClear = true;
         ChangeGameState(_gameEndState);
         _player.GameClearMove();
     }

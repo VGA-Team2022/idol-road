@@ -9,6 +9,12 @@ public class GameEnd : IState
         //TODO:‘«‰¹‚ðŽ~‚ß‚é
         manager.RunStopBGM();
         AudioManager.Instance.PlaySE(33);
+
+        if (manager.IsClear)
+        {
+            AudioManager.Instance.PlaySE(38);
+        }
+
         manager.FadeCanvas.FadeOut(2f, () =>
         {
             AudioManager.Instance.PlaySoundAfterExecution(Sources.SE, 31, () => SceneManager.LoadScene("ResultScene"));
