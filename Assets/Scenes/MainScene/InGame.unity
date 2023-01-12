@@ -1461,6 +1461,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3157607228429247771, guid: 484bda7be6beb34409400aaed830226f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 3157607228429247771, guid: 484bda7be6beb34409400aaed830226f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 3157607228429247771, guid: 484bda7be6beb34409400aaed830226f, type: 3}
+      propertyPath: m_fontColorGradient.bottomRight.b
+      value: 0.25882354
+      objectReference: {fileID: 0}
+    - target: {fileID: 3157607228429247771, guid: 484bda7be6beb34409400aaed830226f, type: 3}
+      propertyPath: m_fontColorGradient.bottomRight.g
+      value: 0.81960785
+      objectReference: {fileID: 0}
     - target: {fileID: 3339475984470707047, guid: 484bda7be6beb34409400aaed830226f, type: 3}
       propertyPath: m_Name
       value: InGameCanvas
