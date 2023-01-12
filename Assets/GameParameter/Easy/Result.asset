@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Result
   m_EditorClassIdentifier: 
   _superPerfectLine: 1000000
-  _perfectLine: 10000
-  _goodLine: 1000
-  _addBadScoreValue: 0
-  _addGoodScoreValue: 90
-  _addParfectScoreValue: 100
-  _comboValue: 10
+  _perfectLine: 7000
+  _goodLine: 1
+  _addBadScoreValue: 50
+  _addGoodScoreValue: 100
+  _addParfectScoreValue: 300
+  _comboValue: 1
   _addFullComboScoreValue: 1000000
   _fanScriptsBad:
   - "\u63A8\u3057\u5909\u3057\u307E\u3059\u2026"
@@ -50,5 +50,5 @@ MonoBehaviour:
   - "\u304B\u307F\u3063\uFF01"
   - "\u795E\u3043\u3043\u3043\u3043\u3043\uFF01"
   - God of idol
-  _idolResultScriptPerfect: Perfect!!!
+  _idolResultScriptPerfect: God
   _idolScriptPerfect: "\u5168\u3066\u306E\u30D5\u30A1\u30F3\u306B\u611B\u3092\u2026"

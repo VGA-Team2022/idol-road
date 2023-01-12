@@ -30,7 +30,7 @@ MonoBehaviour:
     _item: 1
     _generateDirection: 2
   - _generatorInterval: 10
-    _item: 3
+    _item: 0
     _generateDirection: 2
   - _generatorInterval: 10
     _item: 1
@@ -42,7 +42,7 @@ MonoBehaviour:
     _item: 3
     _generateDirection: 2
   - _generatorInterval: 10
-    _item: 0
+    _item: 2
     _generateDirection: 2
   - _generatorInterval: 10
     _item: 0
