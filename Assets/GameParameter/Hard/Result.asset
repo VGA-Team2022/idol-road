@@ -19,35 +19,36 @@ MonoBehaviour:
   _addGoodScoreValue: 250
   _addParfectScoreValue: 1000
   _comboValue: 1
+  _addFullComboScoreValue: 0
   _fanScriptsBad:
   - 
   - 
   - 
   - 
   - 
-  _idolResultScriptBad: 
-  _idolScriptBad: 
+  _idolResultScriptBad: Bad...
+  _idolScriptBad: "\u623B\u3063\u3066\u304D\u3066\uFF5E\u7F6E\u3044\u3066\u304B\u306A\u3044\u3067\uFF5E"
   _fanScriptsGood:
   - 
   - 
   - 
   - 
   - 
-  _idolResultScriptGood: 
-  _idolScriptGood: 
+  _idolResultScriptGood: Good!
+  _idolScriptGood: "\u4ECA\u65E5\u3082\u9811\u5F35\u3063\u305F\uFF01\uFF01"
   _fanScriptsExcellent:
   - 
   - 
   - 
   - 
   - 
-  _idolResultScriptExcellent: 
-  _idolScriptExcellent: 
+  _idolResultScriptExcellent: Excellent!!
+  _idolScriptExcellent: "\u3084\u3063\u3071\u4FFA\u3063\u3066\u6700\u9AD8\u3060\u305C\uFF01\uFF01"
   _fanScriptsPerfect:
   - 
   - 
   - 
   - 
   - 
-  _idolResultScriptPerfect: 
-  _idolScriptPerfect: 
+  _idolResultScriptPerfect: "GOD\u203C"
+  _idolScriptPerfect: "\u5168\u3066\u306E\u30D5\u30A1\u30F3\u306B\u611B\u3092"

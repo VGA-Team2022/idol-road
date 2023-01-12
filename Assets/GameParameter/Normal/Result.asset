@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c75464e6cf306964ea1b70dd35214d35, type: 3}
   m_Name: Result
   m_EditorClassIdentifier: 
-  _superPerfectLine: 10000
+  _superPerfectLine: 1000000
   _perfectLine: 55000
   _goodLine: 3000
   _addBadScoreValue: 50
@@ -27,7 +27,7 @@ MonoBehaviour:
   - "\u3082\u3046\u30D5\u30A1\u30F3\u3084\u3081\u308B\u308F..."
   - "\u5931\u6557\u3057\u3066\u3044\u308B\u685C\u4EBA\u3082\u7D20\u6575!"
   _idolResultScriptBad: Bad...
-  _idolScriptBad: "\u7F6E\u3044\u3066\u304B\u306A\u3044\u3067\uFF5E"
+  _idolScriptBad: "\u623B\u3063\u3066\u304D\u3066\uFF5E\u7F6E\u3044\u3066\u304B\u306A\u3044\u3067\uFF5E"
   _fanScriptsGood:
   - "\u4ECA\u591C\u3082\u63A8\u3057\u306B\u4E7E\u676F!"
   - "\u3042\u3053\u304C\u308C\u308B\u3045\u3045\u3045\uFF5E"
