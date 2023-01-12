@@ -59,9 +59,13 @@ public class ResultManager : MonoBehaviour
         var perfectValue = _resultParameter._addParfectScoreValue * _playResult.CountPerfect;
         var goodValue = _resultParameter._addGoodScoreValue * _playResult.CountGood;
         var badValue = _resultParameter._addBadScoreValue * _playResult.CountBad;
-        var bonusValue = _playResult.ValueSuperIdleTimePerfect+(int)_resultParameter._comboValue;
+        var bonusValue = _playResult.ValueSuperIdleTimePerfect + ((int)_resultParameter._comboValue*_playResult.HighComboCount);
+        if(_playResult.HighComboCount == _playResult.FullComboCount)
+        {
+            bonusValue += _resultParameter._addFullComboScoreValue;
+        }
         var totalScore = 0;
-
+        Debug.Log($"フルコンボ必要数:{_playResult.FullComboCount},最大コンボ:{_playResult.HighComboCount}");
         totalScore += perfectValue + goodValue + badValue + bonusValue;  //スコア計算
         var result = new int[RESULT_COUNT] { badValue, goodValue, perfectValue, bonusValue, totalScore };  //画面に反映させる為の配列
 

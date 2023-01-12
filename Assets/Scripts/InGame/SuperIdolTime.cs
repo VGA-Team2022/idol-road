@@ -212,11 +212,13 @@ public class SuperIdolTime : MonoBehaviour
             foreach (var obj in _normalObjects)
             {
                 obj.SetActive(true);
-                var enemies = FindObjectsOfType<EnemyBase>();
-                foreach (var enemy in enemies)
-                {
-                    enemy.GetComponent<EnemyBase>().Destroyed();
-                }
+            }
+            var enemies = FindObjectsOfType<EnemyBase>();
+            foreach (var enemy in enemies)
+            {
+                enemy.GetComponent<EnemyBase>().Destroyed();
+                PlayResult.Instance.FullComboCount--;
+                Debug.Log($"{enemy.name}Disapeer");
             }
             _fadeController.FadeIn();
         });

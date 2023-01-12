@@ -2845,7 +2845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cecf9090f2a1a424b87a534b30fa6a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _flickMinRange: {x: 50, y: 50}
+  _flickMinRange: {x: 150, y: 100}
   _itemHitLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -4248,7 +4248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1735335aea5c2694e8465a5297b7f329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debugMode: 1
+  _debugMode: 0
   _currentLevel: 0
   _stageScroller: {fileID: 957882129}
   _fadeController: {fileID: 1494124742}
