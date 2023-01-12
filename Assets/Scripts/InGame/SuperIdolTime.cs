@@ -149,6 +149,7 @@ public class SuperIdolTime : MonoBehaviour
         _imageGauge.fillAmount = 0;
         _superIdolTimeBackUI.SetActive(true);
         _videoPlayer.Play();
+        AudioManager.Instance.PlaySE(24);
         foreach (var obj in _normalObjects)
         {
             obj.SetActive(false);
