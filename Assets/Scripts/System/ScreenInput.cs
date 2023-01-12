@@ -52,7 +52,7 @@ public class ScreenInput : MonoBehaviour
                 if (_manager.CurrentGameState is IdolTime && _superIdolTime.IsSuperIdolTime)
                 {
                     _superIdolTime.GaugeCount++;
-                    AudioManager.Instance.PlaySE(25);
+                    AudioManager.Instance.PlaySE(25, 0.6f);
                 }
             }//ƒXƒƒCƒv‚µ‚½êŠ‚ğ•Û‘¶
             else if (Input.GetMouseButton(0))
@@ -87,7 +87,7 @@ public class ScreenInput : MonoBehaviour
                         if (_manager.CurrentGameState is IdolTime)
                         {
                             _superIdolTime.GaugeCount++;
-                            AudioManager.Instance.PlaySE(25);
+                            AudioManager.Instance.PlaySE(25, 0.6f);
                         }
                         break;
                     case TouchPhase.Moved:

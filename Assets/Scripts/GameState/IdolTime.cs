@@ -17,6 +17,7 @@ public class IdolTime : IState
         manager.UIController.UpdateIdolPowerGauge(0);
         manager.UIController.DisactiveIdolPowerGauge();
         AudioManager.Instance.AISACChangeRun(true, 0);
+        AudioManager.Instance.PlaySE(11);
         AudioManager.Instance.StopBGM(11);
     }
 

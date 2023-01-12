@@ -20,6 +20,8 @@ public class ResultUIController : MonoBehaviour
     float _textShowSpan = 2.0f;
     [SerializeField, Header("テキストのアニメーションにかかる時間")]
     float _increseTime = 1.0f;
+    [SerializeField, Header("コメントアニメーションの待ち時間")]
+    float _commentAnimWaitTime = 0.3f;
 
 
     [SerializeField, Header("背景(キャラクター)")]
@@ -168,6 +170,12 @@ public class ResultUIController : MonoBehaviour
         }
     }
 
+    IEnumerator WaitCommentAnimation()
+    {
+        yield return new WaitForSeconds(_commentAnimWaitTime);
+        AudioManager.Instance.PlaySE(12);
+    }
+
 
     /// <summary>結果のテキストを表示する関数</summary>
     /// <param name="result">0=bad 1=good 2=perfect 3=ボーナス 4=score</param>
@@ -233,6 +241,7 @@ public class ResultUIController : MonoBehaviour
             //共通UIの切り替え
             SetCommentUI(0);
             _commentAnim.Play("CommentAnimation");
+            StartCoroutine(WaitCommentAnimation());
             _isValue = false;
 
         }
