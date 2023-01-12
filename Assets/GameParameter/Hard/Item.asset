@@ -20,6 +20,24 @@ MonoBehaviour:
   - 4
   _generatorInterval: 5
   _items:
-  - _generatorInterval: 3
+  - _generatorInterval: 5
     _item: 0
-    _generateDirection: 0
+    _generateDirection: 2
+  - _generatorInterval: 10
+    _item: 3
+    _generateDirection: 2
+  - _generatorInterval: 15
+    _item: 1
+    _generateDirection: 2
+  - _generatorInterval: 20
+    _item: 3
+    _generateDirection: 2
+  - _generatorInterval: 30
+    _item: 2
+    _generateDirection: 2
+  - _generatorInterval: 35
+    _item: 3
+    _generateDirection: 2
+  - _generatorInterval: 40
+    _item: 0
+    _generateDirection: 2
