@@ -184,6 +184,7 @@ public class GameManager : MonoBehaviour
             _idlePower = 0;
             _isPlayedIdolTime = true;
             _itemGenerator.IsGenerate = false;
+            ScreenInput.IsInput = false;    //“ü—Í‚ðŽó‚¯Žæ‚ç‚È‚¢‚æ‚¤‚É‚·‚é
             _fadeController.FadeOut(() =>
             {
                 _superIdolTime.gameObject.SetActive(true);
