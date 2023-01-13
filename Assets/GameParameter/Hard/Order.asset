@@ -140,22 +140,22 @@ MonoBehaviour:
     _generateInterval: 1
     requestTypes: 020000000400000001000000
   - _enemyType: 0
-    _generateInterval: 3
+    _generateInterval: 2
     requestTypes: 01000000
   - _enemyType: 2
-    _generateInterval: 3
+    _generateInterval: 2
     requestTypes: 020000000300000001000000
   - _enemyType: 0
-    _generateInterval: 3
+    _generateInterval: 2
     requestTypes: 01000000
   - _enemyType: 2
-    _generateInterval: 3
+    _generateInterval: 2
     requestTypes: 040000000200000001000000
   - _enemyType: 1
     _generateInterval: 2
     requestTypes: 0100000003000000
   - _enemyType: 2
-    _generateInterval: 3
+    _generateInterval: 2
     requestTypes: 030000000200000001000000
   - _enemyType: 1
     _generateInterval: 2
