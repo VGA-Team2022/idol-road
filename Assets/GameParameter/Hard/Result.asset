@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c75464e6cf306964ea1b70dd35214d35, type: 3}
   m_Name: Result
   m_EditorClassIdentifier: 
-  _superPerfectLine: 100000
-  _perfectLine: 70000
+  _superPerfectLine: 1000000
+  _perfectLine: 100000
   _goodLine: 11500
   _addBadScoreValue: 50
   _addGoodScoreValue: 250
