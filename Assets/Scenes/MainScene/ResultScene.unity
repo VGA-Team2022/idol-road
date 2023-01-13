@@ -964,6 +964,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ResultUI
       objectReference: {fileID: 0}
+    - target: {fileID: 1951366073657511627, guid: a3cb57c070ae2ce41adc8c685fe594d3, type: 3}
+      propertyPath: m_text
+      value: "\u623B\u3063\u3066\u304D\u3066\uFF5E\u7F6E\u3044\u3066\u304B\u306A\u3044\u3067\uFF5E"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951366073657511627, guid: a3cb57c070ae2ce41adc8c685fe594d3, type: 3}
+      propertyPath: m_margin.x
+      value: 131.88144
+      objectReference: {fileID: 0}
     - target: {fileID: 4022957864178336937, guid: a3cb57c070ae2ce41adc8c685fe594d3, type: 3}
       propertyPath: _resultManager
       value: 
@@ -975,6 +983,14 @@ PrefabInstance:
     - target: {fileID: 4022957864178336937, guid: a3cb57c070ae2ce41adc8c685fe594d3, type: 3}
       propertyPath: _commentAnimWaitTime
       value: 0.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815744158629850203, guid: a3cb57c070ae2ce41adc8c685fe594d3, type: 3}
+      propertyPath: m_text
+      value: Bad...
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815744158629850203, guid: a3cb57c070ae2ce41adc8c685fe594d3, type: 3}
+      propertyPath: m_margin.z
+      value: -54.016052
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3cb57c070ae2ce41adc8c685fe594d3, type: 3}
