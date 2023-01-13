@@ -73,6 +73,28 @@ public class AudioManager : MonoBehaviour
         action?.Invoke();
     }
 
+
+    /// <summary>AISAC値を変更する </summary>
+    IEnumerator AISACValueChange(bool flag, int index)
+    {
+        if (flag)
+        {
+            for (var i = 0f; i <= 1f; i += AISAC_CHANGE_VALUE)
+            {
+                yield return new WaitForSeconds(AISAC_WAIT_TIME);
+                _sources[index].SetAisacControl("AisacControl_00", i);
+            }
+        }
+        else
+        {
+            for (var i = 1f; i <= 0f; i -= AISAC_CHANGE_VALUE)
+            {
+                yield return new WaitForSeconds(AISAC_WAIT_TIME);
+                _sources[index].SetAisacControl("AisacControl_00", i);
+            }
+        }
+    }
+
     /// <summary>サウンド再生後に処理を実行する為の関数 </summary>
     /// <param name="source">再生させるソース</param>
     /// <param name="cueID">再生するサウンドのID</param>
@@ -125,6 +147,12 @@ public class AudioManager : MonoBehaviour
     {
         ChangeBGMVolume(volume);
 
+        if (_playingBGMs.ContainsKey(cueID))    //タイトルBGMは再度最初から再生しないようにする
+        {
+            return;
+        }
+
+
         if (_playingBGMs.ContainsKey(cueID))    //既に再生中
         {
             StopBGM(cueID);            //一度再生を止める
@@ -176,33 +204,24 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>特定のBGMが再生されているか調べる</summary>
+    /// <param name="cueID">調べたいID</param>
+    /// <returns>true=再生中 false=再生していない</returns>
+    public bool CheckPlayingBGM(int cueID)
+    {
+        if (_playingBGMs.ContainsKey(cueID))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     /// <summary>AISAC値を変更する（実行する） </summary>
     public void AISACChangeRun(bool flag, int index)
     {
         AISACValueChange(flag, index);
     }
-
-    /// <summary>AISAC値を変更する </summary>
-    IEnumerator AISACValueChange(bool flag, int index)
-    {
-        if (flag)
-        {
-            for (var i = 0f; i <= 1f; i += AISAC_CHANGE_VALUE)
-            {
-                yield return new WaitForSeconds(AISAC_WAIT_TIME);
-                _sources[index].SetAisacControl("AisacControl_00", i);
-            }
-        }
-        else
-        {
-            for (var i = 1f; i <= 0f; i -= AISAC_CHANGE_VALUE)
-            {
-                yield return new WaitForSeconds(AISAC_WAIT_TIME);
-                _sources[index].SetAisacControl("AisacControl_00", i);
-            }
-        }
-    }
-
     /// <summary>全てのBGM音量を調整する</summary>
     /// <param name="volume">音量</param>
     public void ChangeBGMVolume(float volume)
