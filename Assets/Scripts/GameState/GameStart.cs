@@ -12,7 +12,7 @@ public class GameStart :  IState
     public void OnExit(GameManager manager, IState nextState)
     {
         manager.Scroller.ScrollOperation();
-        AudioManager.Instance.PlayBGM(10, 0.5f);
+        AudioManager.Instance.PlayBGM(10, 0.7f);
         AudioManager.Instance.PlaySE(21, 0.1f);
     }
 
