@@ -18,7 +18,7 @@ MonoBehaviour:
   _addBadScoreValue: 50
   _addGoodScoreValue: 100
   _addParfectScoreValue: 300
-  _comboValue: 1
+  _comboValue: 10
   _addFullComboScoreValue: 1000000
   _fanScriptsBad:
   - "\u63A8\u3057\u5909\u3057\u307E\u3059\u2026"
