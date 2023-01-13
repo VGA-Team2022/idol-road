@@ -15,6 +15,8 @@ public class ScreenInput : MonoBehaviour
     GameManager _manager = default;
     [SerializeField]
     SuperIdolTime _superIdolTime = default;
+
+    static bool _isInput = true;
  
     /// <summary>
     /// 現在のフリック方向などを保存する
@@ -30,6 +32,8 @@ public class ScreenInput : MonoBehaviour
     /// 指を離した場所を保存する
     /// </summary>
     Vector2 _EndPosition = new Vector2();
+
+    public static bool IsInput { get => _isInput; set => _isInput = value; }
 
     void Update()
     {
@@ -148,7 +152,7 @@ public class ScreenInput : MonoBehaviour
 
 
         //タップの時は飛ばない
-        if (_manager.CurrentEnemy != null && _flickType != FlickType.Tap && _manager.CurrentGameState is not IdolTime)
+        if (_manager.CurrentEnemy != null && _flickType != FlickType.Tap && _manager.CurrentGameState is not IdolTime && _isInput)
         {
              _manager.CurrentEnemy.JugeTime(_flickType);//飛んだときの秒数と判定を決めるもの
             AudioManager.Instance.PlayRequestSE(_flickType);

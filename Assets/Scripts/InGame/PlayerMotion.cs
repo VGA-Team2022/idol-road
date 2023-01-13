@@ -43,7 +43,7 @@ public class PlayerMotion : MonoBehaviour
 
     private void Update()
     {
-        if (_gameStop) { return; }
+        if (_gameStop || !ScreenInput.IsInput) { return; }
 
         FlickType flickType = _screenInput.GetFlickType();
 
