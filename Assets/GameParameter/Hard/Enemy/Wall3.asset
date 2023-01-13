@@ -27,8 +27,8 @@ MonoBehaviour:
   _fadeSpeedBoss: 1
   _addIdolPowerValueBoss: 0
   _rhythmTimesBoss:
-  - 2.56
-  - 2.56
-  - 1.792
-  - 0.896
+  - 2.91
+  - 1.94
+  - 0.97
+  - 0.6
   - 0
