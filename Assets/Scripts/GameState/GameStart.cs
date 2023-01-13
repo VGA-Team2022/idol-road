@@ -5,6 +5,7 @@ public class GameStart :  IState
 {
     public void OnEnter(GameManager manager, IState previousState)
     {
+        ScreenInput.IsInput = true;
         manager.FadeCanvas.FadeIn(() => manager.ChangeGameState(GameManager._playingState));
     }
 

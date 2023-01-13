@@ -7,6 +7,7 @@ public class GameEnd : IState
     public void OnEnter(GameManager manager, IState previousState)
     {
         //TODO:‘«‰¹‚ðŽ~‚ß‚é
+        ScreenInput.IsInput = false;
         manager.RunStopBGM();
         AudioManager.Instance.PlaySE(33);
 
