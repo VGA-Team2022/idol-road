@@ -241,7 +241,7 @@ public class ResultUIController : MonoBehaviour
             //共通UIの切り替え
             SetCommentUI(0);
             _commentAnim.Play("CommentAnimation");
-            StartCoroutine(WaitCommentAnimation());
+            StartCoroutine(WaitCommentAnimation());     //コメントアニメーションSE再生する
             _isValue = false;
 
         }
@@ -289,6 +289,7 @@ public class ResultUIController : MonoBehaviour
     {
         _commentAnim.gameObject.SetActive(true);
         _commentAnim.Play("CommentAnimation");
+        StartCoroutine(WaitCommentAnimation());     //コメントアニメーションSE再生する
         _fadeImageButton[0].gameObject.SetActive(true);
         _fadeImageButton[0].DOFade(1.0f, _buttonShowSpan);
     }

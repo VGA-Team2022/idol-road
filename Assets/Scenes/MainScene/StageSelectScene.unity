@@ -2570,7 +2570,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 844.8, y: 579.2, z: 362, w: 80.25}
+  m_RaycastPadding: {x: 1252.3, y: 829.7, z: 532.2, w: 108}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3929,6 +3929,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7022600469531980255, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022600469531980255, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022600469531980255, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022600469531980255, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7022600469531980255, guid: 51a40b8e424e6374b96b84d4a6f7760f, type: 3}
