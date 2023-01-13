@@ -5053,6 +5053,7 @@ GameObject:
   - component: {fileID: 5407991987446810338}
   - component: {fileID: 5407991987446810339}
   - component: {fileID: 5407991987446810336}
+  - component: {fileID: 5227001098507903890}
   m_Layer: 5
   m_Name: RightButton
   m_TagString: Untagged
@@ -5174,6 +5175,26 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!95 &5227001098507903890
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407991987446810366}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a99abcc5a3ec7ed4db8bb57d1d13969e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5407991987452304658
 GameObject:
   m_ObjectHideFlags: 0
@@ -6496,6 +6517,7 @@ GameObject:
   - component: {fileID: 5407991987741226003}
   - component: {fileID: 5407991987741226000}
   - component: {fileID: 5407991987741226001}
+  - component: {fileID: 8593965826368979153}
   m_Layer: 5
   m_Name: 'LeftButton '
   m_TagString: Untagged
@@ -6617,6 +6639,26 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!95 &8593965826368979153
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407991987741226095}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2bca5de222c367142a15c7fa9fb91e4a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5407991987745058069
 GameObject:
   m_ObjectHideFlags: 0
