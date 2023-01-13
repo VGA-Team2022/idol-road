@@ -15,6 +15,8 @@ public class AudioManager : MonoBehaviour
     const float AISAC_CHANGE_VALUE = 0.1f;
     /// <summary>AISAC変更の待ち時間 </summary>
     const float AISAC_WAIT_TIME = 0.1f;
+    /// <summary>アイドルタイムのゲージで使用するAISACの値を </summary>
+    const float AISAC_GAGW_VALUE = 0.0075f;
 
     [ElementNames(new string[] { "BGM", "SE", "VOICE" })]
     [SerializeField, Header("各サウンドソース"), Tooltip("0=BGM, 1=SE, 2=VOICE")]
@@ -95,6 +97,41 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>アイドルタイムのゲージのAISACの値を変更する </summary>
+    /// <param name="flag"></param>
+    /// <returns></returns>
+    IEnumerator AISACControllerIdolTimeGage(bool flag)
+    {
+        if (flag)
+        {
+            var aisacValue = 0f;
+
+            for (var i = 0f; i <= 15f; i += AISAC_CHANGE_VALUE)
+            {
+                yield return new WaitForSeconds(AISAC_WAIT_TIME);
+                aisacValue += AISAC_GAGW_VALUE;
+                _sources[1].SetAisacControl("AisacControl_01", aisacValue);
+            }
+        }
+        else
+        {
+            var aisacValue = 1f;
+
+            for (var i = 1f; i <= 15f; i -= AISAC_CHANGE_VALUE)
+            {
+                yield return new WaitForSeconds(AISAC_WAIT_TIME);
+                aisacValue -= AISAC_GAGW_VALUE;
+                _sources[1].SetAisacControl("AisacControl_01", i);
+            }
+        }
+    }
+
+    /// <summary>AISAC値を変更する（実行する） </summary>
+    public void AISACIdolGageRun(bool flag)
+    {
+        StartCoroutine(AISACControllerIdolTimeGage(flag));
+    }
+
     /// <summary>サウンド再生後に処理を実行する為の関数 </summary>
     /// <param name="source">再生させるソース</param>
     /// <param name="cueID">再生するサウンドのID</param>
@@ -120,7 +157,6 @@ public class AudioManager : MonoBehaviour
 
         StartCoroutine(SoundEndAfterExecution(endTime, action));
     }
-    
 
     /// <summary>SEを再生する </summary>
     /// <param name="cueID">再生したいSEのID</param>
@@ -220,7 +256,7 @@ public class AudioManager : MonoBehaviour
     /// <summary>AISAC値を変更する（実行する） </summary>
     public void AISACChangeRun(bool flag, int index)
     {
-        AISACValueChange(flag, index);
+        StartCoroutine(AISACValueChange(flag, index)); 
     }
     /// <summary>全てのBGM音量を調整する</summary>
     /// <param name="volume">音量</param>

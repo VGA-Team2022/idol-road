@@ -53,7 +53,7 @@ public class ScreenInput : MonoBehaviour
             {
                 ResetParameter();
                 _StartPosition = Input.mousePosition;
-                if (_manager.CurrentGameState is IdolTime && _superIdolTime.IsSuperIdolTime)
+                if (_manager.CurrentGameState is IdolTime && _superIdolTime.IsSuperIdolTime && SuperIdolTime.IsInput)
                 {
                     _superIdolTime.GaugeCount++;
                     AudioManager.Instance.PlaySE(25, 0.6f);
@@ -88,7 +88,7 @@ public class ScreenInput : MonoBehaviour
                     case TouchPhase.Began:
                         ResetParameter();
                         _StartPosition = touch.position;
-                        if (_manager.CurrentGameState is IdolTime)
+                        if (_manager.CurrentGameState is IdolTime && _superIdolTime.IsSuperIdolTime && SuperIdolTime.IsInput)
                         {
                             _superIdolTime.GaugeCount++;
                             AudioManager.Instance.PlaySE(25, 0.6f);

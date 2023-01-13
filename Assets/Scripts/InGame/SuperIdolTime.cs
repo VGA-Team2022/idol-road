@@ -76,6 +76,9 @@ public class SuperIdolTime : MonoBehaviour
     /// <summary> 入力受付判定</summary>
     private bool isSuperIdolTime = false;
     private IState _currentState = default;
+
+    /// <summary>入力を受け取る </summary>
+    static bool _isInput = false;
     /// <summary>ゲージを増加させる</summary>
     public int GaugeCount
     {
@@ -96,7 +99,9 @@ public class SuperIdolTime : MonoBehaviour
         }
     }
     public bool IsSuperIdolTime => isSuperIdolTime;
-    
+
+    public static bool IsInput { get => _isInput; }
+
     private void OnEnable()
     {
         _superIdolTimeBackUI.SetActive(true);
@@ -221,6 +226,8 @@ public class SuperIdolTime : MonoBehaviour
                 Debug.Log($"{enemy.name}Disapeer");
             }
             _fadeController.FadeIn();
+            AudioManager.Instance.AISACIdolGageRun(false);
+            _isInput = false;
         });
     }
     /// <summary>タップゲージの増加に関する処理</summary>
@@ -266,5 +273,7 @@ public class SuperIdolTime : MonoBehaviour
         _backGroundPanel.gameObject.SetActive(true);
         _shiningParticle.gameObject.SetActive(true);
         _shiningParticle.Play();
+        AudioManager.Instance.AISACIdolGageRun(true);
+        _isInput = true;
     }
 }
