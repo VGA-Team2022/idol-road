@@ -76,4 +76,10 @@ public class TitleManager : MonoBehaviour
         AudioManager.Instance.PlaySE(7);
         _fadeController.FadeOut(() => SceneManager.LoadScene(_nextSceneName));   //フェードを開始する
     }
+
+    /// <summaryアプリケーションを落とす </summary>
+    public void AppClose()
+    {
+        Application.Quit();
+    }
 }
