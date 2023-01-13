@@ -33,6 +33,11 @@ public class StageSelectManager : MonoBehaviour
 
     void Start()
     {
+        if (!AudioManager.Instance.CheckPlayingBGM(14))     //タイトルBGMが再生されていなければ再生する
+        {
+            AudioManager.Instance.PlayBGM(14);
+        }
+
         _fadeController.FadeIn();
         _stageImage.sprite = _stageSprites[0];              //初期イラストを設定
     }
