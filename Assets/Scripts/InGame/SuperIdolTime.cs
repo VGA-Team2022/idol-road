@@ -155,6 +155,7 @@ public class SuperIdolTime : MonoBehaviour
         _superIdolTimeBackUI.SetActive(true);
         _videoPlayer.Play();
         AudioManager.Instance.PlaySE(24);
+        _manager.StageScroller.ScrollOperation(true);
         foreach (var obj in _normalObjects)
         {
             obj.SetActive(false);

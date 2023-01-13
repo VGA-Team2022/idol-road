@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
     public SuperIdolTime IdolTime { get => _superIdolTime; }
     public InGameUIController UIController { get => _uiController; }
     public bool IsClear { get => _isClear; }
+    public StageScroller StageScroller { get => _stageScroller; set => _stageScroller = value; }
 
     /// <summary>ボスの移動を開始する処理</summary>
     public event Action StartBossMove
