@@ -195,6 +195,7 @@ public class SuperIdolTime : MonoBehaviour
         _BackMiddleFans.GetComponent<Animator>().Play("Burst");
         _BackUpFans.GetComponent<Animator>().Play("Burst");
         var sequence = DOTween.Sequence();
+        AudioManager.Instance.PlaySE(11, 0.7f);
         sequence.Append(_imageExplosion.transform.DOScale(new Vector3(_imageLange, _imageLange, _imageLange), 0.5f))
                 .Append(_imageExplosion.transform.DOScale(Vector3.zero, 1f))
                 .OnComplete(() => { SwitchDisplayObject(); });
